@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
+import Navigation from '../components/navigation/Navigation.astro'
 import '../styles/global.css'
 
 export interface Props {
@@ -53,7 +54,8 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <ViewTransitions />
   </head>
 
-  <body>
+  <body class="bg-darkBlue text-white font-mono p-4 max-w-screen-2xl m-auto">
+    <Navigation />
     <slot />
   </body>
 </html>
