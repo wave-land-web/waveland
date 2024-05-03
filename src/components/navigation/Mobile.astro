@@ -1,18 +1,19 @@
 ---
 import { Icon } from 'astro-icon/components'
 import TitleLogo from '../TitleLogo.astro'
+import ThemeToggle from '../ThemeToggle.astro'
 ---
 
 <!-- Mobile nav -->
 <button id="menu" class="flex items-center gap-2.5 z-20 md:hidden">
   <span class="pt-1">MENU</span>
-  <Icon name="menu" class="w-6 stroke-1" />
-  <Icon name="close" class="w-4 stroke-1 hidden" />
+  <Icon name="tabler:menu" class="site-icon" />
+  <Icon name="tabler:x" class="site-icon hidden" />
 </button>
 
 <ul
   id="mobile-nav-overlay"
-  class="absolute top-[var(--nav-height)] left-0 right-4 z-20 w-full hidden flex-col items-start justify-center bg-darkBlue"
+  class="absolute top-[var(--nav-height)] left-0 right-4 z-20 w-full hidden flex-col items-start justify-center bg-white dark:bg-darkBlue"
 >
   <TitleLogo />
   <li class="w-full py-6 border-y-[1px]">
@@ -22,27 +23,30 @@ import TitleLogo from '../TitleLogo.astro'
     <a href="/#contact" class="site-link" aria-label="Contact">→ CONTACT</a>
   </li>
   <li class="w-full flex gap-8 py-6 border-b-[1px]">
-    <button aria-label="Theme Toggle"> <Icon name="theme-toggle" class="w-6 stroke-1" /></button>
+    <ThemeToggle />
     <a
       href="https://www.instagram.com/wavelandweb/"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Instagram"
     >
-      <Icon name="instagram" class="w-6 stroke-1" /></a
+      <Icon name="tabler:brand-instagram" class="site-icon" /></a
     >
   </li>
 </ul>
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    /**
+     * @todo: COMMENT THIS SHIT
+     */
     const body = document.querySelector('body')
     const menu = document.querySelector('#menu')
-    const menuIconOpen = document.querySelector('[data-icon="menu"]')
-    const menuIconClose = document.querySelector('[data-icon="close"]')
+    const menuIconOpen = document.querySelector('[data-icon="tabler:menu"]')
+    const menuIconClose = document.querySelector('[data-icon="tabler:x"]')
     const menuText = document.querySelector('#menu span') as HTMLSpanElement
     const mobileNavOverlay = document.querySelector('#mobile-nav-overlay')
-    const mobileNavItems = document.querySelectorAll('#mobile-nav-overlay li')
+    const mobileNavItems = document.querySelectorAll('#mobile-nav-overlay a')
     let overlayDisplayed = false
 
     function handleContentUpdate() {

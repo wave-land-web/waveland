@@ -26,7 +26,11 @@
 
 @layer components {
   .site-link {
-    @apply transition text-white hover:text-purple;
+    @apply transition text-darkBlue dark:text-white hover:text-purple;
+  }
+
+  .site-icon {
+    @apply w-6 stroke-1;
   }
 }
 

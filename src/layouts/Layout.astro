@@ -10,11 +10,12 @@ export interface Props {
 }
 
 const { title, description, socialImage } = Astro.props
+const theme = Astro.cookies.get('theme')?.value ?? 'dark'
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalURL)
 ---
 
-<html lang="en" id="top">
+<html lang="en" class={theme}>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -52,7 +53,9 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <ViewTransitions />
   </head>
 
-  <body class="max-w-screen-2xl m-auto px-4 font-mono text-white bg-darkBlue">
+  <body
+    class="max-w-screen-2xl m-auto px-4 font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue"
+  >
     <Navigation />
     <slot />
   </body>

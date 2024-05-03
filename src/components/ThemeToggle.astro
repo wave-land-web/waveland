@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<button aria-label="Theme Toggle">
+  <Icon name="tabler:moon-stars" class="site-icon block dark:hidden" />
+  <Icon name="tabler:sun-high" class="site-icon hidden dark:block" />
+</button>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Grab elements
+    const html = document.querySelector('html')
+    const userThemePreference = localStorage.theme
+    const themeToggleBtns = document.querySelectorAll('button[aria-label="Theme Toggle"]')
+
+    // Set the theme based on the user's preference or the system preference
+    if (
+      userThemePreference === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      html?.classList.add('dark')
+    } else {
+      html?.classList.remove('dark')
+    }
+
+    /**
+     * On theme toggle, toggle the `dark` class on the `html` element and save the user's theme preference
+     */
+    function handleThemeToggle() {
+      html?.classList.toggle('dark')
+      saveUserThemePreference()
+    }
+
+    /**
+     * Save the user's theme preference in localStorage and a cookie
+     */
+    function saveUserThemePreference() {
+      const isDarkMode = html?.classList.contains('dark')
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+
+      // Save user theme preference in a cookie
+      const d = new Date()
+      d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000)
+      document.cookie = `theme=${html?.classList.contains('dark') ? 'dark' : 'light'}; expires=${d.toUTCString()}; path=/`
+    }
+
+    // Add theme toggle event listeners to all theme toggle buttons
+    themeToggleBtns.forEach((btn) => btn?.addEventListener('click', handleThemeToggle))
+  })
+</script>
