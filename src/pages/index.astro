@@ -1,10 +1,31 @@
 ---
-import { Icon } from 'astro-icon/components'
+import Pill from '../components/Pill.astro'
+import TitleLogo from '../components/TitleLogo.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Wave Land Web | Creative Web Design & Development">
-  <header>
-    <Icon name="title" class="relative z-20" />
+  <header
+    class="absolute top-[var(--nav-height)] left-4 right-4 bottom-0 z-0 max-w-screen-2xl h-[calc(100vh-var(--nav-height))] block mx-auto"
+  >
+    <div class="relative h-full">
+      <TitleLogo />
+
+      <div id="services" class="flex flex-wrap gap-4">
+        <Pill text="Custom Web Development" />
+        <Pill text="User-focused Web Design" backgroundColor="bg-orange" />
+        <Pill text="Digital Strategy" backgroundColor="bg-green" />
+      </div>
+
+      <div id="hook" class="absolute bottom-6 md:bottom-8 max-w-[575px] text-lg">
+        <p class="mb-6">Build meaningful connections with high-performance, modern websites</p>
+        <a
+          href="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition text-purple hover:text-white">Free Intro Call →</a
+        >
+      </div>
+    </div>
   </header>
 </Layout>

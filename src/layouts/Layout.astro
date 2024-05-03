@@ -46,15 +46,13 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
 
-    <!-- Fonts -->
-
     <!-- Favicon & Theme -->
 
     <!-- Animations -->
     <ViewTransitions />
   </head>
 
-  <body class="bg-darkBlue text-white font-mono p-4 max-w-screen-2xl m-auto">
+  <body class="max-w-screen-2xl m-auto px-4 font-mono text-white bg-darkBlue">
     <Navigation />
     <slot />
   </body>

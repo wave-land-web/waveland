@@ -5,7 +5,8 @@
 @layer base {
   @font-face {
     font-family: 'Monaspace Argon Var';
-    src: url('fonts/monaspace-argon-var-regular.woff2') format('woff2'),
+    src:
+      url('fonts/monaspace-argon-var-regular.woff2') format('woff2'),
       url('fonts/monaspace-argon-var-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -14,11 +15,27 @@
 
   @font-face {
     font-family: 'Poppins Regular';
-    src: url('fonts/poppins-regular.woff2') format('woff2'),
+    src:
+      url('fonts/poppins-regular.woff2') format('woff2'),
       url('fonts/poppins-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+  }
+}
+
+@layer components {
+  .site-link {
+    @apply transition text-white hover:text-purple;
+  }
+}
+
+/* Variables */
+:root {
+  --nav-height: 6rem;
+
+  @media (min-width: 768px) {
+    --nav-height: 8rem;
   }
 }
 
@@ -38,4 +55,8 @@ h3,
 h4,
 h5 {
   font-family: 'Poppins Regular', sans-serif;
+}
+
+p {
+  text-wrap: pretty;
 }
