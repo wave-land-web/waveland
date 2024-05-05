@@ -5,7 +5,7 @@ import ThemeToggle from '../ThemeToggle.astro'
 ---
 
 <!-- Mobile nav -->
-<button id="menu" class="flex items-center gap-2.5 z-20 md:hidden">
+<button id="menu" class="flex items-center gap-2.5 z-20 md:hidden site-link">
   <span class="pt-1">MENU</span>
   <Icon name="tabler:menu" class="site-icon" />
   <Icon name="tabler:x" class="site-icon hidden" />
@@ -28,6 +28,7 @@ import ThemeToggle from '../ThemeToggle.astro'
       href="https://www.instagram.com/wavelandweb/"
       target="_blank"
       rel="noopener noreferrer"
+      class="site-link"
       aria-label="Instagram"
     >
       <Icon name="tabler:brand-instagram" class="site-icon" /></a
@@ -93,6 +94,10 @@ import ThemeToggle from '../ThemeToggle.astro'
 
     menu?.addEventListener('click', handleMobileNavigationOnClick)
     window.addEventListener('resize', handleMobileNavigationOnResize)
-    mobileNavItems.forEach((item) => item.addEventListener('click', handleMobileNavigationOnClick))
+    mobileNavItems.forEach((item) => {
+      if (item.firstElementChild?.tagName !== 'svg') {
+        item.addEventListener('click', handleMobileNavigationOnClick)
+      }
+    })
   })
 </script>

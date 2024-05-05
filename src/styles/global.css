@@ -26,7 +26,7 @@
 
 @layer components {
   .site-link {
-    @apply transition text-darkBlue dark:text-white hover:text-purple;
+    @apply transition-colors text-darkBlue dark:text-white hover:text-purple;
   }
 
   .site-icon {
