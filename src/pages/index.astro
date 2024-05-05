@@ -1,5 +1,6 @@
 ---
 import Pill from '../components/Pill.astro'
+import TextAndImage from '../components/TextAndImage.astro'
 import TitleLogo from '../components/TitleLogo.astro'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -28,18 +29,28 @@ import Layout from '../layouts/Layout.astro'
       </div>
     </div>
   </header>
+
   <main>
-    <section id="carve-a-unique-path">
-      <div class="text-and-image">
-        <div class="text">
-          <h2>Carve a unique path</h2>
-          <p>
-            Your website should embody your creativity and enable more freedom to focus on the work
-            you love.
-          </p>
-        </div>
-        <div class="image"></div>
-      </div>
+    <section id="about" class="py-40">
+      <TextAndImage
+        title="Carve a unique path."
+        text="Your website should embody your creativity and enable more freedom to focus on the work you love."
+        variant={1}
+        class="py-28"
+      />
+      <TextAndImage
+        title="Feed your imagination."
+        text="Spend more time on what matters most and less on energetically draining technical tasks."
+        variant={2}
+        class="py-28"
+        isReversed={true}
+      />
+      <TextAndImage
+        title="Amplify your voice."
+        text="Bespoke web experiences that enhance your brand, prioritize user experience, and inspire action."
+        variant={3}
+        class="py-28"
+      />
     </section>
   </main>
 </Layout>

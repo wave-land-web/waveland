@@ -1,0 +1,49 @@
+---
+/**
+ * TODOs:
+ * - Add SVG backgrounds
+ * - Add mobile images
+ * - Add website links
+ * - Make 'image' this required
+ */
+export interface Props {
+  title: string
+  text: string
+  image?: ImageMetadata
+  variant?: number | 1 | 2 | 3
+  class?: string
+  isReversed?: boolean
+}
+
+const { title, text, image, variant, class: className, isReversed } = Astro.props
+
+const themeColors = {
+  text: {
+    'text-purple': variant === 1,
+    'text-orange': variant === 2,
+    'text-green': variant === 3,
+  },
+  bg: {
+    'bg-purple': variant === 1,
+    'bg-orange': variant === 2,
+    'bg-green': variant === 3,
+  },
+}
+---
+
+<div class:list={['grid lg:grid-cols-2 gap-8 lg:gap-16 place-items-center', className]}>
+  <div
+    class:list={[
+      'text-4xl lg:text-5xl font-body',
+      {
+        'lg:order-2': isReversed,
+      },
+    ]}
+  >
+    <h2 class:list={['inline leading-normal', themeColors.text]}>{title}</h2>
+    <p class="inline leading-normal">
+      {text}
+    </p>
+  </div>
+  <div class:list={['w-full h-96 rounded-2xl', themeColors.bg]}></div>
+</div>
