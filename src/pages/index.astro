@@ -5,9 +5,7 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Wave Land Web | Creative Web Design & Development">
-  <header
-    class="absolute top-[var(--nav-height)] left-4 right-4 bottom-0 z-0 max-w-screen-2xl h-[calc(100vh-var(--nav-height))] block mx-auto"
-  >
+  <header class="pt-[var(--nav-height)] max-w-screen-2xl h-screen block mx-auto">
     <div class="relative h-full">
       <TitleLogo />
 
@@ -18,7 +16,9 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <div id="hook" class="absolute bottom-6 md:bottom-8 max-w-[575px] text-lg">
-        <p class="mb-6">Build meaningful connections with high-performance, modern websites</p>
+        <p class="mb-6">
+          Helping creatives build meaningful connections with high-performance, modern websites
+        </p>
         <a
           href="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
           target="_blank"
@@ -28,4 +28,18 @@ import Layout from '../layouts/Layout.astro'
       </div>
     </div>
   </header>
+  <main>
+    <section id="carve-a-unique-path">
+      <div class="text-and-image">
+        <div class="text">
+          <h2>Carve a unique path</h2>
+          <p>
+            Your website should embody your creativity and enable more freedom to focus on the work
+            you love.
+          </p>
+        </div>
+        <div class="image"></div>
+      </div>
+    </section>
+  </main>
 </Layout>
