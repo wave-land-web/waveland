@@ -25,16 +25,20 @@
 }
 
 @layer components {
-  .site-section {
-    @apply py-16 md:py-24;
+  .site-text {
+    @apply text-lg;
   }
 
   .site-link {
-    @apply transition-colors text-darkBlue dark:text-white hover:text-purple;
+    @apply transition text-darkBlue dark:text-white hover:text-purple;
   }
 
   .site-icon {
     @apply w-6 stroke-1;
+  }
+
+  .h2 {
+    @apply text-4xl lg:text-5xl;
   }
 
   .absolute-center {
@@ -72,4 +76,12 @@ h5 {
 
 p {
   text-wrap: pretty;
+}
+
+a {
+  @apply transition;
+}
+
+section {
+  @apply py-16 md:py-24;
 }

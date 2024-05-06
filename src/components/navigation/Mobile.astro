@@ -16,12 +16,16 @@ import ThemeToggle from '../ThemeToggle.astro'
   class="absolute pt-[var(--nav-height)] top-0 left-0 z-20 h-screen w-full px-4 hidden flex-col items-start bg-white dark:bg-darkBlue"
 >
   <TitleLogo />
-  <ul class="w-full">
+  <ul id="mobile-nav-items" class="w-full">
     <li class="w-full py-6 border-y-[1px]">
-      <a href="/#about" class="site-link" aria-label="About">→ ABOUT</a>
+      <a href="/#about" class="site-link flex gap-2 items-center" aria-label="About"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />ABOUT</a
+      >
     </li>
     <li class="w-full py-6 border-b-[1px]">
-      <a href="/#contact" class="site-link" aria-label="Contact">→ CONTACT</a>
+      <a href="/#contact" class="site-link flex gap-2 items-center" aria-label="Contact"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />CONTACT</a
+      >
     </li>
     <li class="w-full flex gap-8 py-6 border-b-[1px]">
       <ThemeToggle />
@@ -49,7 +53,7 @@ import ThemeToggle from '../ThemeToggle.astro'
     const menuIconClose = document.querySelector('[data-icon="tabler:x"]')
     const menuText = document.querySelector('#menu span') as HTMLSpanElement
     const mobileNavOverlay = document.querySelector('#mobile-nav-overlay')
-    const mobileNavItems = document.querySelectorAll('#mobile-nav-overlay a')
+    const mobileNavItems = document.querySelectorAll('#mobile-nav-items a')
     let overlayDisplayed = false
 
     function handleContentUpdate() {
@@ -96,10 +100,6 @@ import ThemeToggle from '../ThemeToggle.astro'
 
     menu?.addEventListener('click', handleMobileNavigationOnClick)
     window.addEventListener('resize', handleMobileNavigationOnResize)
-    mobileNavItems.forEach((item) => {
-      if (item.firstElementChild?.tagName !== 'svg') {
-        item.addEventListener('click', handleMobileNavigationOnClick)
-      }
-    })
+    mobileNavItems.forEach((item) => item.addEventListener('click', handleMobileNavigationOnClick))
   })
 </script>
