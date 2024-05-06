@@ -15,6 +15,7 @@ export default {
       purple: '#c792e9',
       green: '#7fdbca',
       orange: '#ff757f',
+      grey: '#6b7a88',
     },
     fontFamily: {
       body: ['Poppins Regular', 'sans-serif'],

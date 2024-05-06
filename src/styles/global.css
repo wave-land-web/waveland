@@ -65,23 +65,34 @@ video {
   height: auto;
 }
 
+body {
+  @apply font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+}
+
+nav,
+header,
+main {
+  @apply max-w-screen-2xl m-auto px-4;
+}
+
+section {
+  @apply py-16 md:py-24;
+}
+
+/* Typography */
+
 h1,
 h2,
 h3,
 h4,
 h5 {
-  font-family: 'Poppins Regular', sans-serif;
-  text-wrap: balance;
+  @apply font-body text-balance;
 }
 
 p {
-  text-wrap: pretty;
+  @apply text-pretty;
 }
 
 a {
   @apply transition;
-}
-
-section {
-  @apply py-16 md:py-24;
 }

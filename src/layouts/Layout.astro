@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
+import Footer from '../components/Footer.astro'
 import Navigation from '../components/navigation/Navigation.astro'
 import '../styles/global.css'
 
@@ -53,10 +54,9 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <ViewTransitions />
   </head>
 
-  <body
-    class="max-w-screen-2xl m-auto px-4 font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue"
-  >
+  <body>
     <Navigation />
     <slot />
+    <Footer />
   </body>
 </html>

@@ -1,7 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components'
+
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
 ---
 
-<a href="/" class="block w-full mb-8 py-6" title="Wave Land Web" aria-label="Wave Land Web">
+<a
+  href="/"
+  class={`block w-full mb-8 py-6 ${className}`}
+  title="Wave Land Web"
+  aria-label="Wave Land Web"
+>
   <Icon name="title" class="site-link" />
 </a>
