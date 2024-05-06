@@ -25,12 +25,20 @@
 }
 
 @layer components {
+  .site-section {
+    @apply py-16 md:py-24;
+  }
+
   .site-link {
     @apply transition-colors text-darkBlue dark:text-white hover:text-purple;
   }
 
   .site-icon {
     @apply w-6 stroke-1;
+  }
+
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 }
 
@@ -59,6 +67,7 @@ h3,
 h4,
 h5 {
   font-family: 'Poppins Regular', sans-serif;
+  text-wrap: balance;
 }
 
 p {

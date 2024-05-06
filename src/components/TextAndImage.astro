@@ -1,23 +1,42 @@
 ---
-/**
- * TODOs:
- * - Add SVG backgrounds
- * - Add mobile images
- * - Add website links
- * - Make 'image' this required
- */
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
+
 export interface Props {
   title: string
   text: string
-  image?: ImageMetadata
-  variant?: number | 1 | 2 | 3
-  class?: string
+  link: string
+  image: ImageMetadata
+  imageAlt: string
+  variant?: 1 | 2 | 3
   isReversed?: boolean
+  class?: string
 }
 
-const { title, text, image, variant, class: className, isReversed } = Astro.props
+const { title, text, link, image, imageAlt, variant, class: className, isReversed } = Astro.props
 
-const themeColors = {
+// Format link text
+const linkText = link.replace(/(^\w+:|^)\/\//, '')
+
+// Determine which icon to use
+let icon = ''
+switch (variant) {
+  case 1:
+    icon = 'wave-1'
+    break
+  case 2:
+    icon = 'wave-2'
+    break
+  case 3:
+    icon = 'wave-3'
+    break
+  default:
+    icon = 'wave-1'
+    break
+}
+
+// Determine theme styles
+const themeStyles = {
   text: {
     'text-purple': variant === 1,
     'text-orange': variant === 2,
@@ -28,22 +47,41 @@ const themeColors = {
     'bg-orange': variant === 2,
     'bg-green': variant === 3,
   },
+  link: {
+    'left-4': variant === 1 || variant === 3,
+    'right-4': variant === 2,
+  },
 }
 ---
 
-<div class:list={['grid lg:grid-cols-2 gap-8 lg:gap-16 place-items-center', className]}>
+<div class:list={['grid gap-8 place-items-center lg:grid-cols-2 lg:gap-16', className]}>
   <div
     class:list={[
-      'text-4xl lg:text-5xl font-body',
+      'font-body text-4xl lg:text-5xl',
       {
         'lg:order-2': isReversed,
       },
     ]}
   >
-    <h2 class:list={['inline leading-normal', themeColors.text]}>{title}</h2>
-    <p class="inline leading-normal">
+    <h2 class:list={['leading-normal', themeStyles.text]}>{title}</h2>
+    <p class="leading-normal">
       {text}
     </p>
   </div>
-  <div class:list={['w-full h-96 rounded-2xl', themeColors.bg]}></div>
+  <div class:list={['relative w-full h-96 rounded-2xl', themeStyles.bg]}>
+    <Picture
+      src={image}
+      formats={['avif', 'webp', 'jpg']}
+      alt={imageAlt}
+      class="absolute-center w-full max-w-36 z-10 drop-shadow-lg"
+    />
+    <Icon name={icon} class="absolute-center h-5/6" />
+    <a
+      href={link}
+      class:list={['absolute bottom-4 text-darkBlue', themeStyles.link]}
+      target="_blank"
+      rel="noopener noreferrer"
+      ><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
+    >
+  </div>
 </div>

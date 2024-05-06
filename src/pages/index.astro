@@ -1,4 +1,7 @@
 ---
+import bornYesterdayBakeryImage from '../assets/born-yesterday-bakery.png'
+import moonbellyMakesImage from '../assets/moonbelly-makes.png'
+import supervoidImage from '../assets/supervoid.png'
 import Pill from '../components/Pill.astro'
 import TextAndImage from '../components/TextAndImage.astro'
 import TitleLogo from '../components/TitleLogo.astro'
@@ -6,7 +9,7 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Wave Land Web | Creative Web Design & Development">
-  <header class="pt-[var(--nav-height)] max-w-screen-2xl h-screen block mx-auto">
+  <header class="block max-w-screen-2xl h-screen mx-auto mb-24 pt-[var(--nav-height)]">
     <div class="relative h-full">
       <TitleLogo />
 
@@ -31,25 +34,34 @@ import Layout from '../layouts/Layout.astro'
   </header>
 
   <main>
-    <section id="about" class="py-40">
+    <section id="about" class="site-section">
       <TextAndImage
         title="Carve a unique path."
         text="Your website should embody your creativity and enable more freedom to focus on the work you love."
+        link="https://supervoid.tv"
+        image={supervoidImage}
+        imageAlt="Supervoid website on a mobile device"
         variant={1}
-        class="py-28"
+        class="py-32"
       />
       <TextAndImage
         title="Feed your imagination."
         text="Spend more time on what matters most and less on energetically draining technical tasks."
+        link="https://bornyesterdaybakery.com"
+        image={bornYesterdayBakeryImage}
+        imageAlt="Born Yesterday Bakery website on a mobile device"
         variant={2}
-        class="py-28"
         isReversed={true}
+        class="py-32"
       />
       <TextAndImage
         title="Amplify your voice."
         text="Bespoke web experiences that enhance your brand, prioritize user experience, and inspire action."
+        link="https://moonbellymakes.com"
+        image={moonbellyMakesImage}
+        imageAlt="Moonbelly Makes website on a mobile device"
         variant={3}
-        class="py-28"
+        class="py-32"
       />
     </section>
   </main>
