@@ -33,12 +33,20 @@
     @apply transition text-darkBlue dark:text-white hover:text-purple;
   }
 
+  .site-link-2 {
+    @apply text-purple hover:text-grey;
+  }
+
   .site-icon {
     @apply w-6 stroke-1;
   }
 
+  .site-button {
+    @apply px-4 py-2 border border-purple rounded-md p-2 shadow-sm text-purple hover:bg-purple hover:text-darkBlue transition;
+  }
+
   .h2 {
-    @apply text-4xl lg:text-5xl;
+    @apply text-4xl lg:text-5xl font-normal;
   }
 
   .absolute-center {
@@ -66,7 +74,7 @@ video {
 }
 
 body {
-  @apply font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+  @apply font-mono font-semibold text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
 }
 
 nav,
@@ -86,7 +94,7 @@ h2,
 h3,
 h4,
 h5 {
-  @apply font-body text-balance;
+  @apply font-body font-normal text-balance;
 }
 
 p {

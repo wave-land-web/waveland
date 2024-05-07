@@ -10,7 +10,8 @@ export default {
       '2xl': '1440px',
     },
     colors: {
-      white: '#d5deeb',
+      transparent: 'transparent',
+      white: '#f5faff',
       darkBlue: '#011627',
       purple: '#c792e9',
       green: '#7fdbca',

@@ -3,38 +3,33 @@ import { Icon } from 'astro-icon/components'
 import TitleLogo from './TitleLogo.astro'
 ---
 
-<footer class="w-full py-16 border-t">
+<footer class="w-full py-8 border-t-[1px] border-grey">
   <div id="wrapper" class="grid lg:grid-cols-2 gap-8 max-w-screen-2xl m-auto mb-8 px-4">
     <div id="newsletter">
       <h2 class="h2 mb-4 pt-5">Newsletter</h2>
-      <form action="" method="post" class="flex gap-2 max-w-96">
+      <form action="" method="post" class="flex gap-2 max-w-96 mb-4">
         <input
           id="email"
-          class="block w-full border rounded-md dark:border-white p-2 text-darkBlue dark:text-white bg-white dark:bg-darkBlue placeholder:text-grey"
+          class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition"
           name="email"
           type="email"
           autocomplete="email"
-          placeholder="name@email.com"
+          placeholder="Email Address"
           required
         />
-        <button class="border border-purple rounded-md p-2 text-purple">Subscribe</button>
+        <button class="site-button">Subscribe</button>
       </form>
+      <a href="mailto:hello@wavelandweb.com" class="inline-flex gap-2 items-center text-grey"
+        ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
+      </a>
     </div>
     <div id="info">
       <TitleLogo class="max-w-96 lg:ml-auto" />
-      <p class="site-text max-w-[530px] lg:ml-auto lg:text-end italic">
+      <p class="max-w-[530px] mb-4 lg:ml-auto lg:text-end italic">
         Wave Land is a creative web design studio run by lifelong musician and artist, Josh
         Nussbaum. Currently building in Madison, WI.
       </p>
+      <p class="lg:text-end text-grey">© {new Date().getFullYear()} Wave Land Web LLC</p>
     </div>
-  </div>
-  <div
-    id="extras"
-    class="flex flex-col lg:flex-row gap-2 lg:justify-between max-w-screen-2xl m-auto px-4 text-grey"
-  >
-    <a href="mailto:hello@wavelandweb.com" class="flex gap-2 items-center"
-      ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
-    </a>
-    <p>© {new Date().getFullYear()} Wave Land Web LLC</p>
   </div>
 </footer>
