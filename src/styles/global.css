@@ -24,20 +24,20 @@
   }
 
   :root {
-    --color-white: #d5deeb;
+    --color-white: #fffafa;
     --color-darkBlue: #011627;
-    --color-purple: #7316c5;
+    --color-purple: #8619e6;
     --color-green: #52e0c6;
     --color-orange: #ff757e;
-    --color-grey: #6b7a88;
+    --color-grey: #7c7979;
   }
   :root[class~='dark'] {
-    --color-white: #d5deeb;
+    --color-white: #fffafa;
     --color-darkBlue: #0e1726;
-    --color-purple: #c38cf2;
+    --color-purple: #b775f0;
     --color-green: #80dbca;
     --color-orange: #ff757e;
-    --color-grey: #6b7a88;
+    --color-grey: #6c7b89;
   }
 }
 

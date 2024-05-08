@@ -7,18 +7,24 @@ import TitleLogo from './TitleLogo.astro'
   <div id="wrapper" class="grid lg:grid-cols-2 gap-8 max-w-screen-2xl m-auto mb-8 px-4">
     <div id="newsletter">
       <h2 class="h2 mb-4 pt-5">Newsletter</h2>
-      <form action="/api/subscribe" method="post" class="flex gap-2 max-w-96 mb-4">
-        <label for="email" class="sr-only">Email Address</label>
-        <input
-          id="email"
-          class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition"
-          name="email"
-          type="email"
-          autocomplete="email"
-          placeholder="Email Address"
-          required
-        />
-        <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
+      <form action="/api/subscribe" method="post" class="max-w-96">
+        <div class="flex gap-2 mb-2">
+          <label for="email" class="sr-only">Email Address</label>
+          <input
+            id="email"
+            class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Email Address"
+            required
+          />
+          <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
+        </div>
+        <!-- TODO: handle errors on form submission -->
+        <span id="error" class="hidden text-orange text-xs">
+          There was an error submitting the form. Please try again.
+        </span>
       </form>
     </div>
     <div id="info">
