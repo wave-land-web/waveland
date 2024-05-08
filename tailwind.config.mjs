@@ -11,12 +11,12 @@ export default {
     },
     colors: {
       transparent: 'transparent',
-      white: '#f5faff',
-      darkBlue: '#011627',
-      purple: '#c792e9',
-      green: '#7fdbca',
-      orange: '#ff757f',
-      grey: '#6b7a88',
+      white: 'var(--color-white)',
+      purple: 'var(--color-purple)',
+      darkBlue: 'var(--color-darkBlue)',
+      green: 'var(--color-green)',
+      orange: 'var(--color-orange)',
+      grey: 'var(--color-grey)',
     },
     fontFamily: {
       body: ['Poppins Regular', 'sans-serif'],

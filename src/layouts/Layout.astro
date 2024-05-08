@@ -16,7 +16,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalURL)
 ---
 
-<html lang="en" class={theme}>
+<html lang="en" class={`${theme} scroll-smooth`}>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,10 +26,6 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="Web Develepment, Web Design, Web Developer, Web Designer, Frontend Developer, Frontend Designer, Frontend, Frontend Design, Frontend Engineer, Frontend Engineering, Frontend Development, Creative Developer, Creative Engineer, Creative Engineering, Creative Development, Creative Design, Creative Designer, Art, Artist, Artistic, Freelance, Freelancer, Freelancing, Freelance Developer, Freelance Designer, Freelance Engineer, Freelance Engineering, Freelance Development, Freelance Design"
-    />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
 

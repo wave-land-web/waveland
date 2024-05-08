@@ -7,7 +7,8 @@ import TitleLogo from './TitleLogo.astro'
   <div id="wrapper" class="grid lg:grid-cols-2 gap-8 max-w-screen-2xl m-auto mb-8 px-4">
     <div id="newsletter">
       <h2 class="h2 mb-4 pt-5">Newsletter</h2>
-      <form action="" method="post" class="flex gap-2 max-w-96 mb-4">
+      <form action="/api/subscribe" method="post" class="flex gap-2 max-w-96 mb-4">
+        <label for="email" class="sr-only">Email Address</label>
         <input
           id="email"
           class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition"
@@ -17,11 +18,8 @@ import TitleLogo from './TitleLogo.astro'
           placeholder="Email Address"
           required
         />
-        <button class="site-button">Subscribe</button>
+        <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
       </form>
-      <a href="mailto:hello@wavelandweb.com" class="inline-flex gap-2 items-center text-grey"
-        ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
-      </a>
     </div>
     <div id="info">
       <TitleLogo class="max-w-96 lg:ml-auto" />
@@ -29,7 +27,12 @@ import TitleLogo from './TitleLogo.astro'
         Wave Land is a creative web design studio run by lifelong musician and artist, Josh
         Nussbaum. Currently building in Madison, WI.
       </p>
-      <p class="lg:text-end text-grey">© {new Date().getFullYear()} Wave Land Web LLC</p>
     </div>
+  </div>
+  <div class="flex flex-col md:flex-row justify-between gap-2 max-w-screen-2xl m-auto px-4">
+    <a href="mailto:hello@wavelandweb.com" class="inline-flex gap-2 items-center text-grey"
+      ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
+    </a>
+    <p class="text-grey lg:text-end">wavelandweb.com © {new Date().getFullYear()}</p>
   </div>
 </footer>

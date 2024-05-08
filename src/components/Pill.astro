@@ -2,7 +2,7 @@
 export interface Props {
   text: string
   backgroundColor?: string | 'bg-purple' | 'bg-orange' | 'bg-green'
-  textColor?: string | 'text-darkBlue' | 'text-white'
+  textColor?: string
 }
 
 const { text, backgroundColor = 'bg-purple', textColor = 'text-darkBlue' } = Astro.props
