@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components'
 import bornYesterdayBakeryImage from '../assets/born-yesterday-bakery.png'
 import moonbellyMakesImage from '../assets/moonbelly-makes.png'
 import supervoidImage from '../assets/supervoid.png'
+import CTA from '../components/CTA.astro'
 import Pill from '../components/Pill.astro'
 import TextAndImage from '../components/TextAndImage.astro'
 import TitleLogo from '../components/TitleLogo.astro'
@@ -68,20 +69,12 @@ import Layout from '../layouts/Layout.astro'
     </section>
 
     <section id="contact">
-      <div class="grid gap-2 md:gap-4 md:grid-cols-2 mb-40 py-16">
-        <h2 class="h2">Get Started</h2>
-        <div>
-          <a
-            href="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
-            class="flex justify-between items-center mb-2 md:mb-4 font-body h2 site-link-2"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Free Intro Call
-            <Icon name="tabler:arrow-narrow-right" class="w-12" /></a
-          >
-          <p class="site-text">Ready for the next step? Let's chat.</p>
-        </div>
-      </div>
+      <CTA
+        title="Get Started"
+        description="Ready for the next step? Let's chat."
+        linkText="Free Intro Call"
+        linkSrc="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
+      />
     </section>
   </main>
 </Layout>

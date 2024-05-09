@@ -1,3 +1,4 @@
+import db from '@astrojs/db'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
@@ -17,6 +18,7 @@ export default defineConfig({
     tailwind({
       nesting: true,
     }),
+    db(),
   ],
   adapter: netlify(),
 })

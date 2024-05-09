@@ -1,0 +1,37 @@
+---
+import { db, Email } from 'astro:db'
+
+if (Astro.request.method === 'POST') {
+  // parse form data
+  const formData = await Astro.request.formData()
+  const email = formData.get('email')
+  if (typeof email === 'string') {
+    // insert form data into the Email table
+    await db.insert(Email).values({ email })
+  }
+}
+
+// render the new list of emails on each request
+const emails = await db.select().from(Email)
+console.log(emails)
+---
+
+<form method="POST" class="max-w-96">
+  <div class="flex gap-2 mb-2">
+    <label for="email" class="sr-only">Email Address</label>
+    <input
+      id="email"
+      class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition"
+      name="email"
+      type="email"
+      autocomplete="email"
+      placeholder="Email Address"
+      required
+    />
+    <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
+  </div>
+  <!-- TODO: handle errors on form submission -->
+  <span id="error" class="hidden text-orange text-xs">
+    There was an error submitting the form. Please try again.
+  </span>
+</form>
