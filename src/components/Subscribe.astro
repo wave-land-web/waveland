@@ -1,21 +1,3 @@
----
-import { db, Email } from 'astro:db'
-
-if (Astro.request.method === 'POST') {
-  // parse form data
-  const formData = await Astro.request.formData()
-  const email = formData.get('email')
-  if (typeof email === 'string') {
-    // insert form data into the Email table
-    await db.insert(Email).values({ email })
-  }
-}
-
-// render the new list of emails on each request
-const emails = await db.select().from(Email)
-console.log(emails)
----
-
 <form id="subscribe" method="POST" class="max-w-96">
   <div class="flex gap-2 mb-2">
     <label for="email" class="sr-only">Email Address</label>
@@ -58,8 +40,6 @@ console.log(emails)
       })
 
       const data = await response.json()
-
-      console.log(data)
 
       // Error subscribing
       if (data.error) {
