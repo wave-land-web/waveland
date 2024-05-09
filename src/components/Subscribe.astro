@@ -12,8 +12,9 @@
     />
     <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
   </div>
-  <!-- TODO: handle response on form submission -->
-  <span id="response" class="hidden text-xs"> </span>
+  <span id="response" class="hidden text-xs">
+    <!-- Form submission response handled via JS -->
+  </span>
 </form>
 
 <script>
@@ -21,40 +22,54 @@
     const form = document.querySelector('#subscribe') as HTMLFormElement
     const responseMessage = form?.querySelector('#response') as HTMLSpanElement
 
-    // Submit handler
+    /**
+     * Handle UI messages based on submission state
+     * @param {String} state - 'loading', 'error', 'success'
+     * @param {String} message - Message to display
+     */
+    function handleMessageUI(state: string, message: string) {
+      // Reset styles
+      responseMessage.classList.remove('hidden')
+      responseMessage.classList.remove('text-orange')
+      responseMessage.classList.remove('text-green')
+
+      // Set message text based on API response
+      responseMessage.textContent = message
+
+      // Set message color based on state
+      if (state === 'error') {
+        responseMessage.classList.add('text-orange')
+      } else if (state === 'success') {
+        responseMessage.classList.add('text-green')
+      }
+    }
+
+    /**
+     * Handle email subscription form submission
+     * @param e - Event
+     */
     async function submit(e: Event) {
       e.preventDefault()
 
-      // Get form data
-      const formData = new FormData(e.target as HTMLFormElement)
-
       // Show loading message
-      responseMessage.classList.remove('success')
-      responseMessage.classList.remove('error')
-      responseMessage.textContent = 'Loading...'
+      handleMessageUI('loading', 'Subscribing...')
 
-      // Send form data to API
+      // Get form data and send to API
+      const formData = new FormData(e.target as HTMLFormElement)
       const response = await fetch('/api/subscribe/', {
         method: 'POST',
         body: formData,
       })
-
       const data = await response.json()
 
-      // Error subscribing
+      // Error
       if (data.error) {
-        responseMessage.classList.remove('hidden')
-        responseMessage.classList.remove('text-green')
-        responseMessage.classList.add('text-orange')
-        responseMessage.textContent = data.error
+        handleMessageUI('error', data.error)
       }
 
-      // Successful subscription
+      // Success
       if (data.message) {
-        responseMessage.classList.remove('hidden')
-        responseMessage.classList.remove('text-orange')
-        responseMessage.classList.add('text-green')
-        responseMessage.innerHTML = `${data.message} 🌊`
+        handleMessageUI('success', data.message)
       }
 
       form?.reset()
