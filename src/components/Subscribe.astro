@@ -16,7 +16,7 @@ const emails = await db.select().from(Email)
 console.log(emails)
 ---
 
-<form method="POST" class="max-w-96">
+<form id="subscribe" method="POST" class="max-w-96">
   <div class="flex gap-2 mb-2">
     <label for="email" class="sr-only">Email Address</label>
     <input
@@ -30,8 +30,57 @@ console.log(emails)
     />
     <button class="site-button hover:text-white dark:hover:text-darkBlue">Subscribe</button>
   </div>
-  <!-- TODO: handle errors on form submission -->
-  <span id="error" class="hidden text-orange text-xs">
-    There was an error submitting the form. Please try again.
-  </span>
+  <!-- TODO: handle response on form submission -->
+  <span id="response" class="hidden text-xs"> </span>
 </form>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.querySelector('#subscribe') as HTMLFormElement
+    const responseMessage = form?.querySelector('#response') as HTMLSpanElement
+
+    // Submit handler
+    async function submit(e: Event) {
+      e.preventDefault()
+
+      // Get form data
+      const formData = new FormData(e.target as HTMLFormElement)
+
+      // Show loading message
+      responseMessage.classList.remove('success')
+      responseMessage.classList.remove('error')
+      responseMessage.textContent = 'Loading...'
+
+      // Send form data to API
+      const response = await fetch('/api/subscribe/', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      console.log(data)
+
+      // Error subscribing
+      if (data.error) {
+        responseMessage.classList.remove('hidden')
+        responseMessage.classList.remove('text-green')
+        responseMessage.classList.add('text-orange')
+        responseMessage.textContent = data.error
+      }
+
+      // Successful subscription
+      if (data.message) {
+        responseMessage.classList.remove('hidden')
+        responseMessage.classList.remove('text-orange')
+        responseMessage.classList.add('text-green')
+        responseMessage.innerHTML = `${data.message} 🌊`
+      }
+
+      form?.reset()
+    }
+
+    // Submit event listener
+    form?.addEventListener('submit', submit)
+  })
+</script>
