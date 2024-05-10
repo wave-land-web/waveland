@@ -28,6 +28,7 @@
     --color-green: #52e0c6;
     --color-orange: #ff757e;
     --color-grey: #7c7979;
+    --color-scrim: #fffafae6;
   }
   :root[class~='dark'] {
     --color-white: #fffafa;
@@ -36,6 +37,7 @@
     --color-green: #80dbca;
     --color-orange: #ff757e;
     --color-grey: #6c7b89;
+    --color-scrim: #0e1726e6;
   }
 }
 
@@ -99,7 +101,7 @@ video {
 }
 
 body {
-  @apply font-mono font-semibold text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+  @apply font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
 }
 
 nav,
@@ -119,7 +121,7 @@ h2,
 h3,
 h4,
 h5 {
-  @apply font-body font-normal text-balance;
+  @apply font-body text-balance;
 }
 
 p {

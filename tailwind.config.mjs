@@ -17,6 +17,7 @@ export default {
       green: 'var(--color-green)',
       orange: 'var(--color-orange)',
       grey: 'var(--color-grey)',
+      scrim: 'var(--color-scrim)',
     },
     fontFamily: {
       body: ['Poppins Regular', 'sans-serif'],

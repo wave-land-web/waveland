@@ -20,114 +20,40 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
 ---
 
 <Layout title="Wave Land Web | Blog">
-  <header class="h-5/6 pt-[var(--nav-height)]">
-    <div>
-      <h1>Blog</h1>
-      <p>We've Been Thinking</p>
-      <p>
-        Musings on web development and the broader creative landscape. Follow along for news on our
-        latest projects, insights, and more.
-      </p>
-    </div>
+  <header
+    class="flex flex-col gap-4 max-w-3xl justify-center pt-[calc(2rem+var(--nav-height))] pb-8 text-center"
+  >
+    <h1 class="text-purple text-lg">Blog</h1>
+    <p class="text-7xl font-body">We've Been Thinking</p>
+    <p class="text-lg">
+      Musings on web development and the broader creative landscape. Follow along for news on our
+      latest projects, insights, and more.
+    </p>
   </header>
 
   <main>
-    <section id="blog-container">
-      <article>
-        <a href={`/blog/${newestPost?.slug}`}>
+    <section id="blog-container" class="max-w-6xl m-auto">
+      <article class="relative flex flex-col gap-4 mb-12">
+        <a href={`/blog/${newestPost?.slug}`} class="shadow-sm rounded-b-lg">
           <Picture
             src={newestPost!.data.image}
+            class="rounded-lg"
             formats={['avif', 'webp']}
             alt={newestPost!.data.imageAlt}
             loading="eager"
           />
         </a>
-        <div>
-          <p>{newestPost?.data.published}</p>
-          <h2>
-            <a href={`/blog/${newestPost?.slug}`}>{newestPost?.data.title}</a>
+        <div
+          class="w-full flex flex-col gap-2 rounded-b-lg md:absolute md:bottom-0 md:left-0 md:p-4 md:bg-scrim md:bg-opacity-60 md:backdrop-blur-sm"
+        >
+          <p class="text-grey">{newestPost?.data.published}</p>
+          <h2 class="text-2xl">
+            <a href={`/blog/${newestPost?.slug}`} class="site-link">{newestPost?.data.title}</a>
           </h2>
-          <p>{truncatedDescriptionText}</p>
+          <p class="text-grey">{truncatedDescriptionText}</p>
         </div>
       </article>
       <RecentPostsContainer posts={recentPosts} />
     </section>
   </main>
 </Layout>
-
-<!-- <style>
-   .blog-container {
-    max-width: var(--max-width-medium);
-
-    & a {
-      transition: all var(--transition-normal);
-
-      &:hover {
-        color: var(--color-primary-200);
-      }
-    }
-
-    a:has(img) {
-      display: block;
-      max-height: 350px;
-      border-radius: var(--border-radius-image);
-      overflow: hidden;
-    }
-
-    & img {
-      height: 100%;
-      object-fit: cover;
-      border-radius: var(--border-radius-image);
-      transition: all var(--transition-normal);
-
-      &:hover {
-        transform: scale(1.01);
-      }
-    }
-  }
-
-  .newest-post-container {
-    display: grid;
-    gap: 2rem;
-    width: 100%;
-    margin: 0 auto 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px dashed var(--color-grey-200);
-
-    @media (min-width: 1024px) {
-      & {
-        grid-template-columns: 1fr 350px;
-        gap: 3rem;
-      }
-    }
-  }
-
-  .newest-post-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    text-align: center;
-
-    @media (min-width: 1024px) {
-      & {
-        text-align: left;
-      }
-    }
-
-    & h2 {
-      font-size: var(--size-sm);
-    }
-
-    @media (min-width: 768px) {
-      & h2 {
-        font-size: var(--size-base);
-      }
-    }
-
-    & p {
-      color: var(--color-grey-200);
-      font-size: var(--size-xs);
-    }
-  }
-</style> -->

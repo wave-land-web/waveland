@@ -9,7 +9,9 @@ export interface Props {
 const { posts } = Astro.props
 ---
 
-<div class="grid gap-[clamp(2rem,5vw,3rem)] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<div
+  class="grid gap-[clamp(2rem,5vw,3rem)] md:grid-cols-2 lg:grid-cols-3 pt-12 border-t-[1px] border-grey"
+>
   {
     posts.map((post) => (
       <BlogCard

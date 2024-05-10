@@ -13,7 +13,7 @@ const { slug, title, published, image, imageAlt } = Astro.props
 ---
 
 <article class="flex flex-col items-start gap-4">
-  <a href={slug} class="w-full overflow-hidden rounded">
+  <a href={slug} class="w-full overflow-hidden rounded-lg shadow-sm">
     <Picture
       src={image}
       formats={['avif', 'webp']}
@@ -21,8 +21,8 @@ const { slug, title, published, image, imageAlt } = Astro.props
       class="h-52 object-cover transition hover:scale-[1.01]"
     />
   </a>
-  <div class="card-info">
-    <p class="mb-2">{published}</p>
-    <h2><a href={slug}>{title}</a></h2>
+  <div>
+    <p class="mb-2 text-grey text-sm">{published}</p>
+    <h2 class="text-xl"><a href={slug} class="site-link">{title}</a></h2>
   </div>
 </article>
