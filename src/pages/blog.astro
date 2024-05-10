@@ -23,21 +23,24 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
   <header
     class="flex flex-col gap-4 max-w-3xl justify-center pt-[calc(2rem+var(--nav-height))] pb-8 text-center"
   >
-    <h1 class="text-purple text-lg">Blog</h1>
-    <p class="text-7xl font-body">We've Been Thinking</p>
-    <p class="text-lg">
+    <h1 class="text-purple md:text-lg">Blog</h1>
+    <p class="font-body text-5xl md:text-7xl">We've Been Thinking</p>
+    <p class="md:text-lg">
       Musings on web development and the broader creative landscape. Follow along for news on our
       latest projects, insights, and more.
     </p>
   </header>
 
   <main>
-    <section id="blog-container" class="max-w-6xl m-auto">
-      <article class="relative flex flex-col gap-4 mb-12">
-        <a href={`/blog/${newestPost?.slug}`} class="shadow-sm rounded-b-lg">
+    <section id="blog-container" class="max-w-6xl mx-auto mb-8">
+      <article class="relative flex flex-col gap-4 mb-12 group cursor-pointer">
+        <a
+          href={`/blog/${newestPost?.slug}`}
+          class="block h-[clamp(250px,50vw,500px)] overflow-hidden shadow-sm rounded-lg"
+        >
           <Picture
             src={newestPost!.data.image}
-            class="rounded-lg"
+            class="w-full h-full mb-4 object-cover transition group-hover:scale-[1.01]"
             formats={['avif', 'webp']}
             alt={newestPost!.data.imageAlt}
             loading="eager"
@@ -46,11 +49,11 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
         <div
           class="w-full flex flex-col gap-2 rounded-b-lg md:absolute md:bottom-0 md:left-0 md:p-4 md:bg-scrim md:bg-opacity-60 md:backdrop-blur-sm"
         >
-          <p class="text-grey">{newestPost?.data.published}</p>
+          <p class="text-grey text-sm">{newestPost?.data.published}</p>
           <h2 class="text-2xl">
             <a href={`/blog/${newestPost?.slug}`} class="site-link">{newestPost?.data.title}</a>
           </h2>
-          <p class="text-grey">{truncatedDescriptionText}</p>
+          <p class="text-grey text-sm">{truncatedDescriptionText}</p>
         </div>
       </article>
       <RecentPostsContainer posts={recentPosts} />

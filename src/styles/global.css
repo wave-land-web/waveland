@@ -47,7 +47,7 @@
   }
 
   .site-link {
-    @apply transition text-darkBlue dark:text-white hover:text-purple;
+    @apply transition text-darkBlue dark:text-white hover:text-purple group-hover:text-purple;
   }
 
   .site-link-2 {
