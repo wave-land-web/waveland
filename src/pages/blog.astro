@@ -1,0 +1,133 @@
+---
+import { Picture } from 'astro:assets'
+import { getCollection } from 'astro:content'
+import RecentPostsContainer from '../components/blog/RecentPostsContainer.astro'
+import Layout from '../layouts/Layout.astro'
+
+const allPosts = await getCollection('blog')
+
+const sortedPosts = allPosts.sort((a, b) => +b.data.id - +a.data.id)
+const newestPost = sortedPosts.at(0)
+const recentPosts = sortedPosts.slice(1, allPosts.length)
+
+function createEllipsisText(text: string, maxLength: number) {
+  const subText = text.substring(0, maxLength)
+  const lastChar = subText[maxLength - 1]
+  return lastChar !== ' ' ? `${subText}...` : `${subText.substring(0, maxLength - 1)}...`
+}
+
+const truncatedDescriptionText = createEllipsisText(newestPost!.data.description, 100)
+---
+
+<Layout title="Wave Land Web | Blog">
+  <header class="h-5/6 pt-[var(--nav-height)]">
+    <div>
+      <h1>Blog</h1>
+      <p>We've Been Thinking</p>
+      <p>
+        Musings on web development and the broader creative landscape. Follow along for news on our
+        latest projects, insights, and more.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section id="blog-container">
+      <article>
+        <a href={`/blog/${newestPost?.slug}`}>
+          <Picture
+            src={newestPost!.data.image}
+            formats={['avif', 'webp']}
+            alt={newestPost!.data.imageAlt}
+            loading="eager"
+          />
+        </a>
+        <div>
+          <p>{newestPost?.data.published}</p>
+          <h2>
+            <a href={`/blog/${newestPost?.slug}`}>{newestPost?.data.title}</a>
+          </h2>
+          <p>{truncatedDescriptionText}</p>
+        </div>
+      </article>
+      <RecentPostsContainer posts={recentPosts} />
+    </section>
+  </main>
+</Layout>
+
+<!-- <style>
+   .blog-container {
+    max-width: var(--max-width-medium);
+
+    & a {
+      transition: all var(--transition-normal);
+
+      &:hover {
+        color: var(--color-primary-200);
+      }
+    }
+
+    a:has(img) {
+      display: block;
+      max-height: 350px;
+      border-radius: var(--border-radius-image);
+      overflow: hidden;
+    }
+
+    & img {
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--border-radius-image);
+      transition: all var(--transition-normal);
+
+      &:hover {
+        transform: scale(1.01);
+      }
+    }
+  }
+
+  .newest-post-container {
+    display: grid;
+    gap: 2rem;
+    width: 100%;
+    margin: 0 auto 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px dashed var(--color-grey-200);
+
+    @media (min-width: 1024px) {
+      & {
+        grid-template-columns: 1fr 350px;
+        gap: 3rem;
+      }
+    }
+  }
+
+  .newest-post-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+
+    @media (min-width: 1024px) {
+      & {
+        text-align: left;
+      }
+    }
+
+    & h2 {
+      font-size: var(--size-sm);
+    }
+
+    @media (min-width: 768px) {
+      & h2 {
+        font-size: var(--size-base);
+      }
+    }
+
+    & p {
+      color: var(--color-grey-200);
+      font-size: var(--size-xs);
+    }
+  }
+</style> -->

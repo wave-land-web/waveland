@@ -1,0 +1,89 @@
+---
+id: '4'
+title: 'Using Technology to Help Musicians'
+description: 'My journey as a musician and how I plan to use technology to help the next generation of musicians.'
+published: '02-05-2024'
+image: './images/using-technology-to-help-humans.webp'
+imageAlt: 'A smartphone with music app icons on screen, surrounded by various musical instruments and glowing musical notes.'
+socialImage: '/images/using-technology-to-help-humans.webp'
+layout: '../../layouts/Layout.astro'
+---
+
+import { Picture } from 'astro:assets'
+import headerImage from './images/using-technology-to-help-humans.webp'
+import Link from '../../components/text/Link.astro'
+
+<header>
+  <div class="header-info">
+    <h1>{frontmatter.title}</h1>
+    <p>
+      <em>
+        {new Date(frontmatter.published).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </em>
+    </p>
+    <Picture
+      src={headerImage}
+      formats={['avif', 'webp']}
+      alt={frontmatter.imageAlt}
+      loading="eager"
+    />
+  </div>
+</header>
+
+## My Musical Journey
+
+If you have been here a while, you know that I have been a lifelong musician. I spent most of my childhood, teen years, and early adulthood playing guitar, piano, bass, and drums, writing and recording music, and performing live.
+
+### Early Years
+
+In my early years, I played with people constantly, passionately wailing my heart out in punk and emo bands. Later, I discovered instrumental music, jam bands, fusion, and progressive rock.
+
+To my delight, I found that it was possible to study music seriously in a university setting.
+
+Realizing that I could study guitar _and_ pursue a professional career made me feel like my rebelliousness had paid off. It was decided - this was my path.
+
+I went to the <Link href="https://www.uarts.edu/" text="University of the Arts" newWindow={true} /> and studied jazz performance. There, I spent on average practicing 6-8 hours a day and got the opportunity to play with and learn from the most incredible musicians. I won't name-drop, but it was life-changing for me.
+
+## Technological Awakening
+
+This was around the time when smartphones and social media were gaining in popularity and several apps were released that made practicing music more accessible and fun. One in particular that I used daily was the <Link href="https://apps.apple.com/us/app/ireal-pro/id298206806?ign-itscg=30200&ign-itsct=apps_box" text="iRealBook app" newWindow={true} />, which I guess is now called iReal Pro.
+
+Was it ever called iRealBook? Is this like <Link href="https://screenrant.com/berenstain-bears-berenstain-name-wrong-controversy-peacemaker/" text="the Berenstain Bears" newWindow={true} /> thing?
+
+I remember being amazed that in my pocket, my iPhone had a metronome, a tuner, sheet music, backing tracks, rehearsal recordings, song ideas, and pretty much anything else I needed to improve my skills.
+
+As I got older, I started learning more about myself and discovered areas of interest that I had ignored for a long time.
+
+It turns out, technology was more than just a hobby. It was something that I wanted to pursue more seriously, and it allowed music to become my passion again, instead of something that paid the bills.
+
+## Innovating for the Future
+
+I'm kind of having a full-circle moment here. I want to build an app for the new generation of musicians that can improve what I believe are the most important skills for any musician to have, mainly ear training and sight reading. More on that soon.
+
+### Embracing AI
+
+Last week, <Link href="/blog/in-a-world-of-ai-be-a-human" text="I wrote about AI" />, and how important it is to navigate these waters with a human perspective.
+
+It feels oddly similar to when I was in music school, amazed by the glowing rectangle that had all these amazing tools I could use and benefit from.
+
+### Community
+
+I want to leverage this new era of technology to help a community that I love deeply.
+
+I also want to dive deeper into the world of AI and discover more ways that I can be an asset in this ever-changing world.
+
+## Future Plans
+
+What I'm proposing is using this blog as a way to communicate what I am learning and building, in real time.
+
+Next week I will share more details on specific goals I hope to achieve with this project, features that I plan to build, and communities that I believe will benefit most from a tool like this.
+
+## Conclusion
+
+Thank you endlessly for joining. You can follow along here, or <Link href="/subscribe" text="subscribe" /> to the Wave Land newsletter to get this sent straight to your inbox.
+
+❤️

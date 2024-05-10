@@ -1,0 +1,123 @@
+---
+id: '2'
+title: 'Our 2024 Plans To Help You Succeed'
+description: 'Wave Land officially launched in September of 2023, and while we may be a young company, we have big aspirations.'
+published: '01-22-2024'
+image: './images/our-2024-plans-to-help-you-succeed.png'
+imageAlt: 'Futuristic scientists in a space station, brainstorming and planning their projects for the new year.'
+socialImage: '/images/our-2024-plans-to-help-you-succeed.png'
+layout: '../../layouts/Layout.astro'
+---
+
+import { Picture } from 'astro:assets'
+import headerImage from './images/our-2024-plans-to-help-you-succeed.png'
+import Link from '../../components/text/Link.astro'
+import moonbellyImage from './images/moonbelly-devices.png'
+import supervoidImage from './images/supervoid-devices.png'
+import bornYesterdayBakeryImage from './images/born-yesterday-bakery-devices.png'
+
+<header>
+  <div class="header-info">
+    <h1>{frontmatter.title}</h1>
+    <p>
+      <em>
+        {new Date(frontmatter.published).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </em>
+    </p>
+    <Picture
+      src={headerImage}
+      formats={['avif', 'webp']}
+      alt={frontmatter.imageAlt}
+      loading="eager"
+    />
+  </div>
+</header>
+
+## Introduction
+
+Wave Land officially launched in September of 2023, and while we may be a young company, we have big aspirations.
+
+Building websites for everyone from individual entrepreneurs to Fortune 500 companies such as AAA, L'Oreal, and Church & Dwight has taught me that we all have similar problems that need to be solved.
+
+I have found my background as an artist and musician to be endlessly helpful in my pursuit of building a more empathic corner of the web, and I believe the folks who benefit the most from what Wave Land has to offer are creatives and small businesses.
+
+## Reflecting on Successes in 2023
+
+2023 was a big year for Wave Land. We launched our website, built some amazing websites for our clients, and learned a lot along the way.
+
+### Moonbelly Makes
+
+<Picture src={moonbellyImage} formats={['avif', 'webp']} alt="Moonbelly Makes Website" />
+
+We started the year off with a bang by launching <Link href="https://moonbellymakes.com" text="Moonbelly Makes" newWindow={true} />, a DIY and recipe blog with the goal of content generation and community building.
+
+Since then, they have published 25 blog posts and YouTube videos and counting. Congratulations Moonbelly!
+
+### Supervoid TV
+
+<Picture src={supervoidImage} formats={['avif', 'webp']} alt="Supervoid TV Website" />
+
+<Link href="https://supervoid.tv" text="Supervoid" newWindow={true} /> has trusted us in handling their
+artist portfolio for years now. 2023 proved to be a big year for them, and at this point, they're just
+making us look good.
+
+They specialize in live performance visuals and music videos and their client base is truly jaw-dropping. Some of my favorite artists such as <Link href="https://www.ratm.com/" text="Rage Against the Machine" newWindow={true} />, <Link href="https://underoath777.com/" text="Underoath" newWindow={true} />, and <Link href="https://takingbacksunday.com/" text="Taking Back Sunday" newWindow={true} /> (I'm an old emo-kid, what do you want from me?) are front and center on their landing page.
+
+### Born Yesterday Bakery
+
+<Picture
+  src={bornYesterdayBakeryImage}
+  formats={['avif', 'webp']}
+  alt="Born Yesterday Bakery Website"
+/>
+
+<Link href="https://bornyesterdaybakery.com" text="Born Yesterday Bakery" newWindow={true} /> is an amazing
+new sourdough-focused bakery that just opened up in Bethel, ME. I've had the goods and believe me, they're
+the real deal.
+
+Wave Land built them a lightning-fast marketing site and an online store where they can sell their baked goodies and provide multiple ways to fulfill orders. Together, we continue to find new ways to increase the value of bornyesterdaybakery.com and it's been rewarding every step of the way.
+
+## Our Vision for 2024
+
+We have a few exciting projects in the works for the new year and I'm looking forward to refining our process and expanding into some unique territory that will help our clients succeed.
+
+### Problem Solving
+
+We will continue to provide creative, custom solutions, but with a renewed focus on <Link href="https://wavelandweb.com/blog/empathy-first-web-design-and-development/" text="empathy" /> for users and maintainability for website owners.
+
+No matter how complex the website requirements are (e-commerce, content management), we will always find innovative ways to keep website performance and conversion rates high.
+
+### Client Empowerment
+
+Our focus has been, and will always be, building a great experience for our clients and their users.
+
+We embrace the weird and fun parts of the web and thrive on simplifying the hard stuff so that our clients have the mental space to focus on what is important for their business.
+
+What is your vision? What do you feel is vital to communicate to your users?
+
+We listen to _who_ you are and _what_ your primary goals are. This is key to building state-of-the-art solutions that get to the heart of what it is you are aiming to accomplish.
+
+No fluff, no BS, _just great websites_.
+
+## Looking Forward
+
+I'm becoming increasingly optimistic about the future of the web and the role Wave Land will play in it.
+
+Incorporating bleeding-edge tech is incredibly exciting and fun, as long as it aligns with our values of putting our clients and users first.
+
+The web platform (the browsers we use to visit websites) has improved dramatically in recent years making us web developers spoiled, and I am HERE for it.
+
+Native <Link href="https://scroll-driven-animations.style/" text="CSS animations" newWindow={true} />, <Link href="https://developer.chrome.com/docs/css-ui/high-definition-css-color-guide" text="better colors" newWindow={true} /> for newer monitor displays, and <Link href="https://www.cloudflare.com/learning/performance/what-is-http3/" text="network speeds" newWindow={true} /> that were once thought impossible have
+made modern websites feel like native apps.
+
+Pretty much anything you can imagine can be built on the web nowadays and so far, this has been a dream for clients. If there is a wall where creativity meets the limitations of the web platform, we have not found it.
+
+## Gratitude
+
+Thank you to our current and future clients for trusting Wave Land with your website needs. You inspire us to do better, build smarter, and we welcome all of your crazy website ideas in 2024!
+
+Reach out <Link href="/contact" text="here" /> to learn more about all the ways Wave Land can support your business.

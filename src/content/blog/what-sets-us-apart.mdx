@@ -1,0 +1,123 @@
+---
+id: '7'
+title: 'What Sets Us Apart'
+description: 'Why Wave Land is one of the better solutions out there to build your next website.'
+published: '03-04-2024'
+image: './images/what-sets-us-apart.webp'
+imageAlt: 'A person strides through a stylized cyber-punk landscape representing the digital universe within a website.'
+socialImage: '/images/what-sets-us-apart.webp'
+layout: '../../layouts/Layout.astro'
+---
+
+import { Picture } from 'astro:assets'
+import headerImage from './images/what-sets-us-apart.webp'
+import Link from '../../components/text/Link.astro'
+
+<header>
+  <div class="header-info">
+    <h1>{frontmatter.title}</h1>
+    <p>
+      <em>
+        {new Date(frontmatter.published).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </em>
+    </p>
+    <Picture
+      src={headerImage}
+      formats={['avif', 'webp']}
+      alt={frontmatter.imageAlt}
+      loading="eager"
+    />
+  </div>
+</header>
+
+## Introduction
+
+I've had a few people ask me recently, "What makes Wave Land unique," and wanted to take some time to share my thoughts. Here are a few reasons why I think Wave Land is one of the better solutions out there to build your next website.
+
+## Personalized Solutions
+
+We believe that your website should be as unique as your business. That's why everything we build is fully customized to your exact specifications.
+
+### Custom Code
+
+Platforms such as <Link href="https://www.wix.com/" text="Wix" newWindow={true} /> and <Link href="https://www.squarespace.com/" text="Squarespace" newWindow={true} /> are fantastic for building a website quickly. They help democratize the web and allow folks to get up and running with minimal technical knowledge.
+
+However, building a _quality_ website with these platforms is considerably more difficult and often requires professional help.
+
+The general problem that I see is that folks rely too much on website builders, frameworks, and libraries to do the heavy lifting, and not enough on their own creative intuition and architectural know-how to get the job done.
+
+We at Wave Land prefer to build with custom code instead of website builders because it gives us more control to actualize our client's vision to the fullest extent.
+
+```javascript
+// No bloated tool sets = lightweight, purpose-driven websites
+```
+
+### Passion & Your Voice
+
+Your passion is front and center with every website we build.
+
+What do you love? What are your goals? Who is your community? What problems are you trying to solve?
+
+Through efficient collaboration, built on years of creative expertise, we build the website you really want.
+
+## Performance
+
+To a certain extent, many people _expect_ websites to be slow. It's sad, mostly because building a fast website nowadays is pretty easy thanks to modern browsers and tools.
+
+### Site Speed and Functionality
+
+<Link href="/#portfolio" text="Our sites" /> are fast. Really, stupid fast.
+
+Lately, we have been building everything with the <Link href="https://astro.build" text="Astro" newWindow={true} /> framework, which helps us to build exceptional websites.
+
+It optimizes our code and images and bundles our files so that all you receive when you request a page is static HTML.
+
+In my view, much of the internet could simply be pre-built, static HTML pages, which would improve website speeds significantly.
+
+Instead, many websites are unnecessarily server-side rendered (SSR) meaning, the HTML is generated when a user requests a page at a URL (slower).
+
+Our websites serve optimized HTML that was built ahead of time. This provides a faster experience for our users and is especially useful where there is minimal dynamic data on the page, such as a blog, or a marketing website.
+
+For more complex use cases, such as dynamic applications that need more communication with the server, Astro is still a perfect fit.
+
+For example, we're using it to build our <Link href="/blog/musicianship-building-practice-companion/" text="Musicianship-Building Practice Companion app" />.
+
+### Usability
+
+While building front-end applications at a start-up a couple of years ago, our team was asked to read a book called _<Link href="https://sensible.com/dont-make-me-think/" text="Don't Make Me Think" newWindow={true} />_, by Steve Krug.
+
+I loved the book because of its emphasis on the human element of web development. We are making products for _people_ and it's our job to make these products easy and enjoyable to use.
+
+Ever since then, I have learned everything I can about usability, and to the best of my knowledge, making sure the products I build are accessible for those who want to use them.
+
+The basics go a long way, and the benefits are extensive.
+
+## Communication
+
+You might be surprised how many people have come to me saying that their web developer stopped answering emails, became unresponsive to their needs, or just simply let website maintenance get out of hand.
+
+Clear, open communication is the cornerstone of our partnership with you, and over time, our collaboration will grow exponentially more fruitful.
+
+### Onboarding
+
+Our onboarding process is designed to understand your vision, goals, and challenges, ensuring we're aligned every step of the way.
+
+After our initial introductory meeting, we go through a carefully laid out set of steps to ensure a successful build and launch of your new website.
+
+This is where we handle contracts, invoicing, education, gathering creative, building mockups, and providing any other support you need.
+
+### Ongoing
+
+Once we launch your new website, Wave Land provides 24/7 customer support at no additional cost. We remain available to answer any questions and do everything we can to ensure successful website ownership.
+
+We stay in touch, offering ongoing support, updates, and insights to ensure your web presence continues to evolve and succeed.
+
+## Conclusion
+
+By choosing Wave Land Web, you're not just getting a web development service; you're gaining a dedicated partner committed to your digital empowerment.
+
+Sound good? Reach out <Link href="/contact" text="here" /> to get started.

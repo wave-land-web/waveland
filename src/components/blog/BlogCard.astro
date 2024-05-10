@@ -1,0 +1,28 @@
+---
+import { Picture } from 'astro:assets'
+
+export interface Props {
+  slug: string
+  title: string
+  published: string
+  image: ImageMetadata
+  imageAlt: string
+}
+
+const { slug, title, published, image, imageAlt } = Astro.props
+---
+
+<article class="flex flex-col items-start gap-4">
+  <a href={slug} class="w-full overflow-hidden rounded">
+    <Picture
+      src={image}
+      formats={['avif', 'webp']}
+      alt={imageAlt}
+      class="h-52 object-cover transition hover:scale-[1.01]"
+    />
+  </a>
+  <div class="card-info">
+    <p class="mb-2">{published}</p>
+    <h2><a href={slug}>{title}</a></h2>
+  </div>
+</article>

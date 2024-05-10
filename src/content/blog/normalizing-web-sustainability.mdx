@@ -1,0 +1,167 @@
+---
+id: '6'
+title: 'Normalizing Web Sustainability'
+description: 'A deep dive into the topic of web sustainability and how we can all take steps to reduce our carbon footprint on the web.'
+published: '02-19-2024'
+image: './images/normalizing-web-sustainability.webp'
+imageAlt: 'A vibrant landscape showcasing Earth with digital and natural elements intertwined, symbolizing the positive impact of sustainable web development.'
+socialImage: '/images/normalizing-web-sustainability.webp'
+layout: '../../layouts/Layout.astro'
+---
+
+import { Picture } from 'astro:assets'
+import headerImage from './images/normalizing-web-sustainability.webp'
+import carbonCalculatorImage from './images/carbon-calculator.png'
+import greenWebCheckImage from './images/green-web-check.png'
+import Link from '../../components/text/Link.astro'
+
+<header>
+  <div class="header-info">
+    <h1>{frontmatter.title}</h1>
+    <p>
+      <em>
+        {new Date(frontmatter.published).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </em>
+    </p>
+    <Picture
+      src={headerImage}
+      formats={['avif', 'webp']}
+      alt={frontmatter.imageAlt}
+      loading="eager"
+    />
+  </div>
+</header>
+
+## Introduction: What is Web Sustainability?
+
+"Web Sustainability" refers to the implementation of environmentally conscious technical solutions as it relates to the websites and products we build on the web. It is a term that I hope to see more of as our global climate initiatives expand.
+
+The internet as a whole requires an overwhelming amount of energy to provide the futuristic luxuries we have grown accustomed to. The relentless desire to upgrade our devices, stream music and videos non-stop, run our businesses, or just simply browse websites are just a few examples of how our modern digital landscape accounts for "2-5% of global emissions, more than the aviation industry." <Link href="https://www.w3.org/blog/2023/introducing-web-sustainability-guidelines/" text="source" newWindow={true} />
+
+It's wild when you stop and think about it. Although it may seem like individuals couldn't possibly have a significant effect on the environment, the opposite is true.
+
+Additionally, building sustainably on the web usually results in improved performance, reduced costs, and better usability for our clients and users.
+
+I have been playing around with this idea for a while now - building lightweight websites, limiting server usage, statically building pages ahead of time - but this is the first deep dive I have taken into the topic of _web sustainability_ specifically.
+
+Let's do a deep-ish dive together. My hope for you after reading this post is that you feel empowered to take a few steps towards a cleaner web, while also reaping some very real benefits in the process.
+
+## Making a Difference with Sustainable Web Practices
+
+This topic is vast, and I will link some resources at the end of this post for those of you who are looking to take a closer look at things. However, here are a few areas to pay close attention to if you are looking to reduce your carbon footprint on the web.
+
+### Images, Videos, and Fonts
+
+Without images and videos, things would be pretty boring on the web. The internet is a wonderful place for many reasons, one of which is that it is ripe with cool stuff to look at.
+
+However, there is a lot we can do to be mindful of how we share resources on the web.
+
+For example, we can compress images and make sure they are properly sized for all user devices. Serving a 3,000-pixel-wide image on a phone that is 375 pixels wide is just silly and requires more energy for largely negligible quality gains.
+
+<Link
+  href="https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading"
+  text="Lazy-load"
+  newWindow={true}
+/> images and videos until a user interacts with the element and avoid auto-playing videos if you can
+help it.
+
+Use SVGs (scalable vector graphics) instead of photos where possible. SVGs tend to be much smaller than typical images and have incredible flexibility for styling and animations. They can also be scaled infinitely without loss of quality.
+
+Typically, SVGs are a great choice for logos and icons, but with some creativity can be used to create all sorts of amazing things.
+
+YouTube and other third-party embeds are prime offenders when it comes to page weight and data transfer. Tools such as <Link href="https://github.com/paulirish/lite-youtube-embed" text="Lite YouTube Embed" newWindow={true} /> can help you efficiently load YouTube embeds.
+
+Optimizing your fonts can have a huge effect on page load speeds and user experience. Use a <Link href="https://fonts.google.com/knowledge/glossary/variable_fonts" text="variable font" newWindow={true} /> if multiple font styles are required and make sure to utilize modern font formats such as WOFF2 (Web Open Font Format 2.0). WOFF2 fonts, compared to other font formats, generally reduce font sizes which results in big performance gains.
+
+### Design Choices
+
+Design choices are important and serve as an extension of our asset considerations.
+
+For example, we can use specific color schemes to save energy. Black pixels are effectively turned "off" on certain displays and can save significant energy when used effectively.
+
+Blue is more energy-intensive than red or green. So, by simply using more variations of red or green, you are guaranteed to sleep better at night.
+
+### Reduce JavaScript Usage
+
+I've <Link href="https://wavelandweb.com/blog/choosing-web-development-tools/" text="written" /> about this previously, and it's an area that I'm passionate about.
+
+The magic behind many modern JavaScript frameworks such as React, Angular, or Vue comes from the large amount of client-side JavaScript that needs to load before anything on your page becomes interactive.
+
+Extra client-side JavaScript means big network requests, and more energy required to get your website or product fully loaded.
+
+This is why we build mostly statically generated websites. By default, all of our websites are HTML and CSS, and JavaScript is only added when it is not possible to achieve what is needed with HTML and CSS alone.
+
+This results in incredibly fast page load speeds and generally more accessible websites as a lot of accessibility is built into the platform itself via <Link href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML" text="HTML elements and attributes" newWindow={true} />.
+
+It's usually when we leverage tons of extra JavaScript (to get that sweet JS framework magic) that things like accessibility, usability, and _sustainability_ take a back seat.
+
+### Leverage Tools
+
+Plenty of tools exist to assist in the process of cleaning up our websites and products.
+
+One tool (that we scored pretty high on, _thank you very much_) is this <Link href="https://www.websitecarbon.com/" text="carbon calculator" newWindow={true} />. Enter your URL and they will tell you how well you stack up against other web pages around the world.
+
+It illustrates how much carbon is emitted by your site by comparing to things like the amount of trees required to absorb those carbon emissions, or how many times that C02 would charge an average smartphone.
+
+<Picture
+  src={carbonCalculatorImage}
+  formats={['avif', 'webp']}
+  alt="A screenshot of the Website Carbon Calculator showing the carbon emissions of the wavelandweb.com website."
+/>
+
+Although, I'm not really all that happy with a "B" and will provide updates as I find more ways to improve.
+
+You can also check the Green Web Foundations's <Link href="https://www.thegreenwebfoundation.org/tools/directory/" text="Green Web Directory" newWindow={true} /> to see if your hosting provider is operating with web sustainability goals in mind.
+
+Or use their <Link href="https://www.thegreenwebfoundation.org/green-web-check/" text="Green Web Check" newWindow={true} /> tool to get insights into your web hosting.
+
+<Picture
+  src={greenWebCheckImage}
+  formats={['avif', 'webp']}
+  alt="A screenshot of the Green Web Check tool showing the sustainability of a website."
+/>
+
+## Our Part in Cleaning Up the Web
+
+Collectively, we have a lot of power to reduce carbon emissions when building for the web.
+
+Web sustainability is largely the result of implementing performance and usability optimizations that many of us are already actively pursuing.
+
+**Less** (server usage, image sizes, bloated code) = **More** (profitability, user satisfaction, trust)
+
+By optimizing our resources and designs, limiting unnecessary JavaScript, and leveraging tools to measure our progress, we are well on our way to a cleaner web.
+
+By the way, if you are feeling extra superhero-y, share what you are learning to inspire more action from others. The more awareness there is, the more chance we have to positively impact our planet for generations to come.
+
+## Conclusion
+
+Wave Land is committed to building websites and products that not only perform well and are a joy to use, but are sustainable and good for the future of the web.
+
+Think we're a good fit for your next website? Reach out <Link href="/contact" text="here" /> for a complimentary 1:1 brainstorming session to learn about all the ways we can help.
+
+## Resources
+
+- <Link
+    href="https://developer.mozilla.org/en-US/blog/introduction-to-web-sustainability/"
+    text="Introduction to Web Sustainability"
+    newWindow={true}
+  />
+- <Link
+    href="https://www.smashingmagazine.com/2022/10/sustainable-web-development-strategies-organization/"
+    text="Sustainable Web Development Strategies Within an Organization"
+    newWindow={true}
+  />
+- <Link
+    href="https://abookapart.com/products/sustainable-web-design"
+    text="Sustainable Web Design (book)"
+    newWindow={true}
+  />
+- <Link
+    href="https://w3c.github.io/sustyweb/"
+    text="Web Sustainability Guidelines 1.0"
+    newWindow={true}
+  />
