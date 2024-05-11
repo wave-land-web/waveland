@@ -3,19 +3,12 @@ import { Picture } from 'astro:assets'
 import { getCollection } from 'astro:content'
 import RecentPostsContainer from '../components/blog/RecentPostsContainer.astro'
 import Layout from '../layouts/Layout.astro'
+import { createEllipsisText } from '../util/text'
 
 const allPosts = await getCollection('blog')
-
 const sortedPosts = allPosts.sort((a, b) => +b.data.id - +a.data.id)
 const newestPost = sortedPosts.at(0)
 const recentPosts = sortedPosts.slice(1, allPosts.length)
-
-function createEllipsisText(text: string, maxLength: number) {
-  const subText = text.substring(0, maxLength)
-  const lastChar = subText[maxLength - 1]
-  return lastChar !== ' ' ? `${subText}...` : `${subText.substring(0, maxLength - 1)}...`
-}
-
 const truncatedDescriptionText = createEllipsisText(newestPost!.data.description, 100)
 ---
 
@@ -33,14 +26,14 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
 
   <main>
     <section id="blog-container" class="max-w-6xl mx-auto mb-8">
-      <article class="relative flex flex-col gap-4 mb-12 group cursor-pointer">
+      <article class="relative flex flex-col gap-4 mb-12">
         <a
           href={`/blog/${newestPost?.slug}`}
           class="block h-[clamp(250px,50vw,500px)] overflow-hidden shadow-sm rounded-lg"
         >
           <Picture
             src={newestPost!.data.image}
-            class="w-full h-full mb-4 object-cover transition group-hover:scale-[1.01]"
+            class="w-full h-full mb-4 object-cover site-transition-normal hover:scale-[1.01]"
             formats={['avif', 'webp']}
             alt={newestPost!.data.imageAlt}
             loading="eager"

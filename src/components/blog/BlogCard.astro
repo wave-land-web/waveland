@@ -12,13 +12,13 @@ export interface Props {
 const { slug, title, published, image, imageAlt } = Astro.props
 ---
 
-<article class="group cursor-pointer">
+<article>
   <a href={slug} class="block h-52 mb-4 overflow-hidden rounded-lg shadow-sm">
     <Picture
       src={image}
       formats={['avif', 'webp']}
       alt={imageAlt}
-      class="w-full h-full mb-4 object-cover rounded-lg transition group-hover:scale-[1.01]"
+      class="w-full h-full mb-4 object-cover rounded-lg site-transition-normal hover:scale-[1.01]"
     />
   </a>
   <div>
