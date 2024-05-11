@@ -11,6 +11,11 @@ export default defineConfig({
   site: 'https://wavelandweb.com',
   output: 'hybrid',
   scopedStyleStrategy: 'class',
+  vite: {
+    server: {
+      port: 3000,
+    },
+  },
   integrations: [
     sitemap({
       lastmod: new Date(),
