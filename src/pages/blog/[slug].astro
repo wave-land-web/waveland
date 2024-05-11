@@ -1,18 +1,18 @@
 ---
-export const prerender = false
-
 import { getCollection } from 'astro:content'
 
-// Match current slug from the URL to a post if it exists
-const { slug } = Astro.params
-const pages = await getCollection('blog')
-const post = pages.find((p) => p.slug === slug)
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
 
-// If the post doesn't exist, redirect to 404
-if (!post) {
-  return Astro.redirect('/404')
+  return posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+    props: { post },
+  }))
 }
 
+const { post } = Astro.props
 const { Content } = await post.render()
 ---
 
