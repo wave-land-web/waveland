@@ -13,7 +13,9 @@ export default defineConfig({
   scopedStyleStrategy: 'class',
   vite: {
     server: {
-      port: 3000,
+      hmr: {
+        port: 3000,
+      },
     },
   },
   integrations: [
