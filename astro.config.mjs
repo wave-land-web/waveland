@@ -11,7 +11,6 @@ export default defineConfig({
   site: 'https://wavelandweb.com',
   output: 'hybrid',
   scopedStyleStrategy: 'class',
-  server: { port: 3000 },
   integrations: [
     sitemap({
       lastmod: new Date(),
