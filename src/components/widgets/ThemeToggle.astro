@@ -28,11 +28,10 @@ import { Icon } from 'astro-icon/components'
       const isDarkMode = html?.classList.contains('dark')
       localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
 
-      // TODO: Save user theme preference in a cookie
-      // BUG: cookies don't work with SSG so preferences are lost on page navigation
-      // const date = new Date()
-      // date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
-      // document.cookie = `theme=${isDarkMode ? 'dark' : 'light'}; expires=${date.toUTCString()}; path=/`
+      // Save user theme preference in a cookie
+      const date = new Date()
+      date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
+      document.cookie = `theme=${isDarkMode ? 'dark' : 'light'}; expires=${date.toUTCString()}; path=/`
     }
 
     /**
