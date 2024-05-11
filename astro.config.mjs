@@ -22,5 +22,8 @@ export default defineConfig({
     db(),
     mdx(),
   ],
-  adapter: netlify(),
+  adapter: netlify({
+    imageCDN: false,
+    cacheOnDemandPages: true,
+  }),
 })
