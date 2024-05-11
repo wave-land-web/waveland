@@ -6,35 +6,17 @@ published: '02-19-2024'
 image: './images/normalizing-web-sustainability.webp'
 imageAlt: 'A vibrant landscape showcasing Earth with digital and natural elements intertwined, symbolizing the positive impact of sustainable web development.'
 socialImage: '/images/normalizing-web-sustainability.webp'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
-import headerImage from './images/normalizing-web-sustainability.webp'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import carbonCalculatorImage from './images/carbon-calculator.png'
 import greenWebCheckImage from './images/green-web-check.png'
-import Link from '../../components/text/Link.astro'
+import headerImage from './images/normalizing-web-sustainability.webp'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## Introduction: What is Web Sustainability?
 

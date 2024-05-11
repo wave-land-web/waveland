@@ -1,0 +1,29 @@
+---
+import { Picture } from 'astro:assets'
+
+const { frontmatter, image } = Astro.props
+---
+
+<header
+  class="flex flex-col gap-8 max-w-4xl justify-center pt-[calc(2rem+var(--nav-height))] pb-8 px-0 text-center border-b-[1px] border-grey"
+>
+  <h1 class="font-body text-5xl md:text-7xl">{frontmatter.title}</h1>
+  <p class="text-grey text-sm md:text-base">
+    <em>
+      {
+        new Date(frontmatter.published).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      }
+    </em>
+  </p>
+  <Picture
+    src={image}
+    class="block h-[clamp(250px,50vw,500px)] object-cover shadow-sm rounded-lg"
+    formats={['avif', 'webp']}
+    alt={frontmatter.imageAlt}
+    loading="eager"
+  />
+</header>

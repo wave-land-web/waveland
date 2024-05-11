@@ -6,33 +6,15 @@ published: '02-05-2024'
 image: './images/using-technology-to-help-humans.webp'
 imageAlt: 'A smartphone with music app icons on screen, surrounded by various musical instruments and glowing musical notes.'
 socialImage: '/images/using-technology-to-help-humans.webp'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import headerImage from './images/using-technology-to-help-humans.webp'
-import Link from '../../components/text/Link.astro'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## My Musical Journey
 

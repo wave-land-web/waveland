@@ -6,33 +6,15 @@ published: '01-15-2024'
 image: './images/empathy-first-web-design-and-development.png'
 imageAlt: 'A web developer with a big heart, sitting at his desk, working on a laptop, creating websites for his clients.'
 socialImage: '/images/empathy-first-web-design-and-development.png'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
-import Link from '../../components/text/Link.astro'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import headerImage from './images/empathy-first-web-design-and-development.png'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## Happy New Year!
 

@@ -6,33 +6,15 @@ published: '02-12-2024'
 image: './images/musicianship-building-practice-companion.webp'
 imageAlt: 'A dynamic illustration showing musicians surrounded by a swirl of musical instruments, animated sheet music, and a digital audio interface, symbolizing the blend of traditional music with modern technology.'
 socialImage: '/images/musicianship-building-practice-companion.webp'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import headerImage from './images/musicianship-building-practice-companion.webp'
-import Link from '../../components/text/Link.astro'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## Goals
 

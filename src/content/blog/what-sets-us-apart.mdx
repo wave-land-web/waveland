@@ -6,33 +6,15 @@ published: '03-04-2024'
 image: './images/what-sets-us-apart.webp'
 imageAlt: 'A person strides through a stylized cyber-punk landscape representing the digital universe within a website.'
 socialImage: '/images/what-sets-us-apart.webp'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import headerImage from './images/what-sets-us-apart.webp'
-import Link from '../../components/text/Link.astro'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## Introduction
 

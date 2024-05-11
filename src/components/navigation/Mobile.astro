@@ -1,12 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
-import TitleLogo from '../TitleLogo.astro'
-import ThemeToggle from '../ThemeToggle.astro'
+import TitleLogo from '../content/TitleLogo.astro'
+import ThemeToggle from '../widgets/ThemeToggle.astro'
 ---
 
 <!-- Mobile nav -->
 <button id="menu" class="flex items-center gap-2.5 z-30 md:hidden site-link">
-  <span class="pt-1">MENU</span>
+  <span class="pt-1 uppercase">Menu</span>
   <Icon name="tabler:menu" class="site-icon" />
   <Icon name="tabler:x" class="site-icon hidden" />
 </button>
@@ -18,18 +18,18 @@ import ThemeToggle from '../ThemeToggle.astro'
   <TitleLogo class="mb-8" />
   <ul id="mobile-nav-items" class="w-full">
     <li class="w-full py-6 border-y-[1px]">
-      <a href="/#about" class="site-link flex gap-2 items-center" aria-label="About"
-        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />ABOUT</a
+      <a href="/#about" class="site-link flex gap-2 items-center uppercase" aria-label="About"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />About</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px]">
-      <a href="/#contact" class="site-link flex gap-2 items-center" aria-label="Contact"
-        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />CONTACT</a
+      <a href="/#contact" class="site-link flex gap-2 items-center uppercase" aria-label="Contact"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Contact</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px]">
-      <a href="/blog" class="site-link flex gap-2 items-center" aria-label="Blog"
-        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />BLOG</a
+      <a href="/blog" class="site-link flex gap-2 items-center uppercase" aria-label="Blog"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Blog</a
       >
     </li>
     <li class="w-full flex gap-8 py-6 border-b-[1px]">

@@ -63,7 +63,7 @@
   }
 
   .site-button {
-    @apply px-4 py-2 border border-purple rounded-md p-2 shadow-sm text-purple hover:bg-purple hover:text-darkBlue site-transition-normal;
+    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple hover:text-white dark:hover:text-darkBlue hover:bg-purple site-transition-normal;
   }
 
   .h2 {
@@ -99,9 +99,7 @@ html[class~='dark'] {
 img,
 svg,
 video {
-  display: block;
-  width: 100%;
-  height: auto;
+  @apply block w-full h-auto;
 }
 
 body {

@@ -6,37 +6,19 @@ published: '10-09-2023'
 image: './images/choosing-web-development-tools.png'
 imageAlt: 'Three friends shopping in a store for web development tools.'
 socialImage: '/images/choosing-web-development-tools.png'
-layout: '../../layouts/Layout.astro'
+layout: '../../layouts/BlogLayout.astro'
 ---
 
 import { Picture } from 'astro:assets'
-import Link from '../../components/text/Link.astro'
+import PostHeader from '../../components/blog/PostHeader.astro'
+import Link from '../../components/content/Link.astro'
 import headerImage from './images/choosing-web-development-tools.png'
 import figmaImage from './images/figma.png'
 import johnSnowImage from './images/john-snow.gif'
 import typescriptErrorImage from './images/typescript-error.png'
 import typescriptImage from './images/typescript.png'
 
-<header>
-  <div class="header-info">
-    <h1>{frontmatter.title}</h1>
-    <p>
-      <em>
-        {new Date(frontmatter.published).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </em>
-    </p>
-    <Picture
-      src={headerImage}
-      formats={['avif', 'webp']}
-      alt={frontmatter.imageAlt}
-      loading="eager"
-    />
-  </div>
-</header>
+<PostHeader image={headerImage} frontmatter={frontmatter} />
 
 ## Background
 
