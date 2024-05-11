@@ -95,7 +95,14 @@ What I like most about Astro is its <Link href="https://docs.astro.build/en/conc
 
 {/* GIFs may cause build errors - see: https://docs.astro.build/en/reference/errors/unsupported-image-format/ */}
 
-<Picture class="small" src={johnSnowImage} formats={['webp', 'png']} alt="John Snow" />
+{/* <Picture src={johnSnowImage} formats={['webp', 'png']} alt="John Snow" /> */}
+
+<img
+  src={johnSnowImage.src}
+  width={johnSnowImage.width}
+  height={johnSnowImage.height}
+  alt="John Snow"
+/>
 
 My clients enjoy incredibly fast load times because every page is just HTML by default. No unnecessary client-side JavaScript has to load (like most front-end JS frameworks) just to display some static blog posts.
 
