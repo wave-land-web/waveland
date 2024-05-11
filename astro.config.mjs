@@ -14,7 +14,7 @@ export default defineConfig({
   vite: {
     server: {
       hmr: {
-        port: 3000,
+        port: 3005,
       },
     },
   },
