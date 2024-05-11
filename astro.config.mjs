@@ -11,13 +11,6 @@ export default defineConfig({
   site: 'https://wavelandweb.com',
   output: 'hybrid',
   scopedStyleStrategy: 'class',
-  vite: {
-    server: {
-      hmr: {
-        port: 3005,
-      },
-    },
-  },
   integrations: [
     sitemap({
       lastmod: new Date(),
