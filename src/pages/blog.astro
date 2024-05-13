@@ -14,7 +14,7 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
 
 <Layout title="Wave Land Web | Blog">
   <header
-    class="flex flex-col gap-4 max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] pb-4 md:text-center"
+    class="flex flex-col gap-4 max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] pb-4 text-center"
   >
     <h1 class="text-purple text-base md:text-lg leading-none">Blog</h1>
     <p class="font-body text-5xl md:text-6xl leading-tight">We've Been Thinking</p>
@@ -33,7 +33,7 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
         >
           <Picture
             src={newestPost!.data.image}
-            class="w-full h-full mb-4 object-cover site-transition-normal hover:scale-[1.01]"
+            class="w-full h-full mb-4 object-cover site-transition-normal md:hover:scale-[1.01]"
             formats={['avif', 'webp']}
             alt={newestPost!.data.imageAlt}
             loading="eager"

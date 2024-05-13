@@ -53,11 +53,11 @@
   }
 
   .site-link {
-    @apply site-transition-normal text-darkBlue dark:text-white hover:text-purple group-hover:text-purple;
+    @apply site-transition-normal text-darkBlue dark:text-white md:hover:text-purple md:group-hover:text-purple;
   }
 
   .site-link-2 {
-    @apply text-purple hover:text-grey;
+    @apply text-purple md:hover:text-grey;
   }
 
   .site-icon {
@@ -65,7 +65,7 @@
   }
 
   .site-button {
-    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple hover:text-white dark:hover:text-darkBlue hover:bg-purple site-transition-normal;
+    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple md:hover:text-white md:dark:hover:text-darkBlue md:hover:bg-purple site-transition-normal;
   }
 
   .h2 {
@@ -92,6 +92,9 @@ html {
   /* Scrollbar */
   scrollbar-color: var(--color-darkBlue) var(--color-white);
   scrollbar-width: thin;
+
+  /* Highlighted text */
+  @apply selection:bg-darkBlue selection:text-white dark:selection:bg-white dark:selection:text-darkBlue;
 }
 
 html[class~='dark'] {

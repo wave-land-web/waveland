@@ -6,10 +6,12 @@ const { title, published, minutesRead, imageAlt } = frontmatter
 ---
 
 <header
-  class="flex flex-col gap-4 w-full max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] pb-4 px-0 md:text-center border-b-[1px] border-grey"
+  class="flex flex-col gap-4 w-full max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] pb-4 px-0 text-center border-b-[1px] border-grey"
 >
-  <div class="flex gap-2 items-center justify-start md:justify-center">
-    <p class="font-body text-purple text-base md:text-lg">
+  <p
+    class="flex gap-2 items-center justify-center md:justify-center font-body text-purple text-base md:text-lg"
+  >
+    <span>
       {
         new Date(published).toLocaleDateString('en-US', {
           year: 'numeric',
@@ -17,10 +19,10 @@ const { title, published, minutesRead, imageAlt } = frontmatter
           day: 'numeric',
         })
       }
-    </p>
+    </span>
     <span class="text-purple">•</span>
-    <p class="font-body text-purple text-base md:text-lg">{minutesRead}</p>
-  </div>
+    <span>{minutesRead}</span>
+  </p>
   <h1>{title}</h1>
   <Picture
     src={image}
