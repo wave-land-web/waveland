@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components'
 import Layout from './Layout.astro'
 
 const { frontmatter } = Astro.props
@@ -11,7 +12,10 @@ const { frontmatter } = Astro.props
 >
   <main id="blog-layout" class="max-w-4xl flex flex-col gap-4 mb-16 md:mb-24">
     <slot />
-    <a class="site-button inline-block w-fit my-4" href="/blog">← Back to blog</a>
+    <a
+      class="site-button inline-flex items-center justify-center gap-2 w-fit my-4 site-text"
+      href="/blog"><Icon name="tabler:arrow-narrow-left" class="site-icon" />Back to blog</a
+    >
   </main>
 </Layout>
 
@@ -23,7 +27,7 @@ const { frontmatter } = Astro.props
     & h5,
     & h6,
     & img {
-      @apply mt-8;
+      @apply mt-8 leading-tight;
     }
 
     & h2 {
@@ -35,7 +39,20 @@ const { frontmatter } = Astro.props
     }
 
     & a:not(.site-button) {
-      @apply site-link-2;
+      /* 
+        Markdown bug because of remark-reading-time.mjs -- .site-link-2 isn't recognized 
+        Manually adding link styles here
+        See: https://docs.astro.build/en/reference/errors/csssyntax-error/
+      */
+      @apply text-purple hover:text-grey;
+    }
+
+    & p:not(header > p),
+    & ul,
+    & ol,
+    & pre,
+    & a:not(.site-button) {
+      @apply text-base md:text-lg;
     }
 
     & img,

@@ -2,28 +2,31 @@
 import { Picture } from 'astro:assets'
 
 const { frontmatter, image } = Astro.props
+const { title, published, minutesRead, imageAlt } = frontmatter
 ---
 
 <header
-  class="flex flex-col gap-8 max-w-4xl justify-center pt-[calc(2rem+var(--nav-height))] pb-8 px-0 text-center border-b-[1px] border-grey"
+  class="flex flex-col gap-4 w-full max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] pb-4 px-0 md:text-center border-b-[1px] border-grey"
 >
-  <h1 class="font-body text-5xl md:text-7xl">{frontmatter.title}</h1>
-  <p class="text-grey text-sm md:text-base">
-    <em>
+  <div class="flex gap-2 items-center justify-start md:justify-center">
+    <p class="font-body text-purple text-base md:text-lg">
       {
-        new Date(frontmatter.published).toLocaleDateString('en-US', {
+        new Date(published).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         })
       }
-    </em>
-  </p>
+    </p>
+    <span class="text-purple">•</span>
+    <p class="font-body text-purple text-base md:text-lg">{minutesRead}</p>
+  </div>
+  <h1>{title}</h1>
   <Picture
     src={image}
     class="block h-[clamp(250px,50vw,500px)] object-cover shadow-sm rounded-lg"
     formats={['avif', 'webp']}
-    alt={frontmatter.imageAlt}
+    alt={imageAlt}
     loading="eager"
   />
 </header>
