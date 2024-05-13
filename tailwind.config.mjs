@@ -19,6 +19,7 @@ export default {
       darkBlue: 'var(--color-darkBlue)',
       green: 'var(--color-green)',
       orange: 'var(--color-orange)',
+      blue: 'var(--color-blue)',
       grey: 'var(--color-grey)',
       scrim: 'var(--color-scrim)',
     },

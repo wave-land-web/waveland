@@ -25,8 +25,9 @@
     --color-white: #fffafa;
     --color-darkBlue: #011627;
     --color-purple: #8619e6;
-    --color-green: #52e0c6;
-    --color-orange: #ff757e;
+    --color-green: #22bfa2;
+    --color-orange: #ff616b;
+    --color-blue: #4d85ff;
     --color-grey: #7c7979;
     --color-scrim: #fffafae6;
   }
@@ -36,6 +37,7 @@
     --color-purple: #b775f0;
     --color-green: #80dbca;
     --color-orange: #ff757e;
+    --color-blue: #82aaff;
     --color-grey: #6c7b89;
     --color-scrim: #0e1726e6;
   }

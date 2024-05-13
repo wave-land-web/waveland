@@ -1,13 +1,15 @@
 ---
 export interface Props {
   text: string
-  backgroundColor?: string | 'bg-purple' | 'bg-orange' | 'bg-green'
+  backgroundColor?: string
   textColor?: string
 }
 
 const { text, backgroundColor = 'bg-purple', textColor = 'text-darkBlue' } = Astro.props
 ---
 
-<p class=`${backgroundColor} ${textColor} inline-block p-4 rounded-full uppercase`>
+<p
+  class=`${backgroundColor} ${textColor} inline-block px-4 pt-4 pb-3.5 rounded-full uppercase shadow-sm`
+>
   {text}
 </p>
