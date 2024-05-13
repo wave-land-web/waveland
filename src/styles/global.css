@@ -95,20 +95,18 @@ html {
 
   /* Highlighted text */
   @apply selection:bg-darkBlue selection:text-white dark:selection:bg-white dark:selection:text-darkBlue;
-}
 
-html[class~='dark'] {
-  scrollbar-color: var(--color-white) var(--color-darkBlue);
-}
-
-img,
-svg,
-video {
-  @apply block w-full h-auto;
+  &[class~='dark'] {
+    scrollbar-color: var(--color-white) var(--color-darkBlue);
+  }
 }
 
 body {
   @apply font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+}
+
+section {
+  @apply py-16 md:py-24;
 }
 
 nav,
@@ -117,8 +115,10 @@ main {
   @apply max-w-screen-2xl m-auto px-4;
 }
 
-section {
-  @apply py-16 md:py-24;
+img,
+svg,
+video {
+  @apply block w-full h-auto;
 }
 
 /* Typography */
@@ -141,4 +141,15 @@ p {
 
 a {
   @apply transition;
+}
+
+/* Animations */
+
+.aos-fade,
+.aol-fade {
+  @apply opacity-0 transition-opacity duration-700;
+
+  &.active {
+    @apply opacity-100;
+  }
 }
