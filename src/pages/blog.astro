@@ -42,11 +42,11 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
         <div
           class="w-full flex flex-col gap-2 rounded-b-lg md:absolute md:bottom-0 md:left-0 md:p-4 md:bg-scrim md:bg-opacity-60 md:backdrop-blur-sm"
         >
-          <p class="text-grey text-sm">{newestPost?.data.published}</p>
+          <p class="text-grey text-base">{newestPost?.data.published}</p>
           <h2 class="text-2xl">
             <a href={`/blog/${newestPost?.slug}`} class="site-link">{newestPost?.data.title}</a>
           </h2>
-          <p class="text-grey text-sm">{truncatedDescriptionText}</p>
+          <p class="text-grey text-base">{truncatedDescriptionText}</p>
         </div>
       </article>
       <RecentPostsContainer posts={recentPosts} />
