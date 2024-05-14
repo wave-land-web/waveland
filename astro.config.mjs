@@ -1,3 +1,4 @@
+// import { remarkReadingTime } from '@/util/remark-reading-time.mjs'
 import db from '@astrojs/db'
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
@@ -5,7 +6,6 @@ import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
-import { remarkReadingTime } from './remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,7 +27,7 @@ export default defineConfig({
     imageCDN: false,
     cacheOnDemandPages: true,
   }),
-  markdown: {
-    remarkPlugins: [remarkReadingTime],
-  },
+  // markdown: {
+  //   remarkPlugins: [remarkReadingTime],
+  // },
 })
