@@ -47,7 +47,7 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
   </ul>
 </div>
 
-<script>
+<script data-astro-rerun>
   // document.addEventListener('astro:page-load', () => {
   /**
    * @todo: COMMENT THIS SHIT
@@ -56,7 +56,7 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
   const menu = document.querySelector('#menu')
   const menuIconOpen = document.querySelector('[data-icon="tabler:menu"]')
   const menuIconClose = document.querySelector('[data-icon="tabler:x"]')
-  const menuText = document.querySelector('#menu span') as HTMLSpanElement
+  const menuText = document.querySelector('#menu span')
   const mobileNavOverlay = document.querySelector('#mobile-nav-overlay')
   const mobileNavItems = document.querySelectorAll('#mobile-nav-items a')
   let overlayDisplayed = false
