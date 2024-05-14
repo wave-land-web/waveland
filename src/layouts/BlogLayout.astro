@@ -14,7 +14,8 @@ const { frontmatter } = Astro.props
     <slot />
     <a
       class="site-button inline-flex items-center justify-center gap-2 w-fit my-4 site-text"
-      href="/blog"><Icon name="tabler:arrow-narrow-left" class="site-icon" />Back to blog</a
+      href="/blog"
+      data-astro-prefetch><Icon name="tabler:arrow-narrow-left" class="site-icon" />Back to blog</a
     >
   </main>
 </Layout>

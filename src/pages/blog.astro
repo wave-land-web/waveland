@@ -31,6 +31,7 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
         <a
           href={`/blog/${newestPost?.slug}`}
           class="block h-[clamp(250px,50vw,500px)] overflow-hidden shadow-sm rounded-lg"
+          data-astro-prefetch
         >
           <Picture
             src={newestPost!.data.image}
@@ -45,7 +46,9 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
         >
           <p class="text-grey text-base">{newestPost?.data.published}</p>
           <h2 class="text-2xl">
-            <a href={`/blog/${newestPost?.slug}`} class="site-link">{newestPost?.data.title}</a>
+            <a href={`/blog/${newestPost?.slug}`} class="site-link" data-astro-prefetch
+              >{newestPost?.data.title}</a
+            >
           </h2>
           <p class="text-grey text-base">{truncatedDescriptionText}</p>
         </div>

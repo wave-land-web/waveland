@@ -13,7 +13,7 @@ const { slug, title, published, image, imageAlt } = Astro.props
 ---
 
 <article class="aos-fade">
-  <a href={slug} class="block h-52 mb-4 overflow-hidden rounded-lg shadow-sm">
+  <a href={slug} class="block h-52 mb-4 overflow-hidden rounded-lg shadow-sm" data-astro-prefetch>
     <Picture
       src={image}
       formats={['avif', 'webp']}
@@ -24,7 +24,7 @@ const { slug, title, published, image, imageAlt } = Astro.props
   <div>
     <p class="mb-2 text-grey text-sm">{published}</p>
     <h2 class="text-lg">
-      <a href={slug} class="site-link">{title}</a>
+      <a href={slug} class="site-link" data-astro-prefetch>{title}</a>
     </h2>
   </div>
 </article>

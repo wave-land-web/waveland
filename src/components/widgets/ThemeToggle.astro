@@ -8,7 +8,6 @@ import { Icon } from 'astro-icon/components'
 </button>
 
 <script>
-  console.log('astro:page-load')
   const theme = (() => {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme')
@@ -43,12 +42,4 @@ import { Icon } from 'astro-icon/components'
   document
     .querySelectorAll('button[aria-label="Theme Toggle"]')
     .forEach((btn) => btn?.addEventListener('click', handleToggleClick))
-  // })
-
-  // document.addEventListener('astro:before-swap', () => {
-  //   console.log('astro:after-swap')
-  //   localStorage.theme === 'dark'
-  //     ? document.documentElement.classList.add('dark')
-  //     : document.documentElement.classList.remove('dark')
-  // })
 </script>

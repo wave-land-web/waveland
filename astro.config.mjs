@@ -11,7 +11,7 @@ import { remarkReadingTime } from './src/util/remark-reading-time.mjs'
 export default defineConfig({
   site: 'https://wavelandweb.com',
   output: 'hybrid',
-  scopedStyleStrategy: 'class',
+  prefetch: true,
   integrations: [
     sitemap({
       lastmod: new Date(),
@@ -24,7 +24,6 @@ export default defineConfig({
     mdx(),
   ],
   adapter: netlify({
-    // imageCDN: false,
     cacheOnDemandPages: true,
   }),
   markdown: {

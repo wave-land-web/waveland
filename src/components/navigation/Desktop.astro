@@ -6,13 +6,15 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
 <ul id="desktop-nav" class="hidden md:flex md:items-center md:gap-8">
   <div class="flex items-center gap-8">
     <li>
-      <a href="/#about" class="site-link uppercase" aria-label="About">About</a>
+      <a href="/#about" class="site-link uppercase" aria-label="About" data-astro-prefetch>About</a>
     </li>
     <li>
-      <a href="/#contact" class="site-link uppercase" aria-label="Contact">Contact</a>
+      <a href="/#contact" class="site-link uppercase" aria-label="Contact" data-astro-prefetch
+        >Contact</a
+      >
     </li>
     <li>
-      <a href="/blog" class="site-link uppercase" aria-label="Blog">Blog</a>
+      <a href="/blog" class="site-link uppercase" aria-label="Blog" data-astro-prefetch>Blog</a>
     </li>
   </div>
 
