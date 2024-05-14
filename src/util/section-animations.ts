@@ -37,7 +37,7 @@ function handleSectionFadeOnLoad() {
 }
 
 // On page load
-document.addEventListener('astro:page-load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   // Fade in sections on load
   handleSectionFadeOnLoad()
 
