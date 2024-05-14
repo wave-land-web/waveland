@@ -24,6 +24,7 @@ export default defineConfig({
     mdx(),
   ],
   adapter: netlify({
+    imageCDN: false,
     cacheOnDemandPages: true,
   }),
   markdown: {
