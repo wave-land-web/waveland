@@ -1,5 +1,5 @@
 ---
-// import { ViewTransitions } from 'astro:transitions'
+import { ViewTransitions } from 'astro:transitions'
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/navigation/Navigation.astro'
 import '../styles/global.css'
@@ -12,12 +12,12 @@ export interface Props {
 
 const { title, description, socialImage } = Astro.props
 
-const theme = Astro.cookies.get('theme')?.value ?? ''
+// const theme = Astro.cookies.get('theme')?.value ?? ''
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalURL)
 ---
 
-<html lang="en" class={`${theme}`}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -49,7 +49,7 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
 
     <!-- Animations -->
     <script src="../util/section-animations.ts"></script>
-    <!-- <ViewTransitions /> -->
+    <ViewTransitions />
   </head>
 
   <body>

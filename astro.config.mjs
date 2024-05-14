@@ -10,7 +10,7 @@ import { remarkReadingTime } from './src/util/remark-reading-time.mjs'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://wavelandweb.com',
-  output: 'server',
+  output: 'hybrid',
   scopedStyleStrategy: 'class',
   integrations: [
     sitemap({
