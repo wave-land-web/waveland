@@ -1,19 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
 
-// export async function getStaticPaths() {
-//   const posts = await getCollection('blog')
-
-//   return posts.map((post) => ({
-//     params: {
-//       slug: post.slug,
-//     },
-//     props: { post },
-//   }))
-// }
-
-// const { post } = Astro.props
-
 // Match current slug from the URL to a post if it exists
 const { slug } = Astro.params
 const pages = await getCollection('blog')
