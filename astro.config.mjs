@@ -10,7 +10,7 @@ import { remarkReadingTime } from './src/util/remark-reading-time.mjs'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://wavelandweb.com',
-  output: 'hybrid',
+  output: 'server',
   scopedStyleStrategy: 'class',
   integrations: [
     sitemap({
@@ -24,7 +24,6 @@ export default defineConfig({
     mdx(),
   ],
   adapter: netlify({
-    imageCDN: false,
     cacheOnDemandPages: true,
   }),
   markdown: {
