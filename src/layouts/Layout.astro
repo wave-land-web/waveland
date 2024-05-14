@@ -1,5 +1,5 @@
 ---
-// import { ViewTransitions } from 'astro:transitions'
+import { ViewTransitions } from 'astro:transitions'
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/navigation/Navigation.astro'
 import '../styles/global.css'
@@ -48,62 +48,60 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <!-- Favicon & Theme -->
 
     <!-- Animations -->
-    <!-- <ViewTransitions /> -->
-    <!-- <script src="../util/section-animations.ts"></script> -->
+    <ViewTransitions />
   </head>
 
   <body>
     <Navigation />
     <slot />
     <Footer />
-  </body>
-</html>
+    <script data-astro-rerun>
+      /**
+       * Fade in sections with the class `aos-fade` when they come into view
+       */
+      function handleSectionFadeOnScroll() {
+        if (!window.IntersectionObserver) {
+          return console.log('IntersectionObserver not supported')
+        }
 
-<script data-astro-rerun>
-  /**
-   * Fade in sections with the class `aos-fade` when they come into view
-   */
-  function handleSectionFadeOnScroll() {
-    if (!window.IntersectionObserver) {
-      return console.log('IntersectionObserver not supported')
-    }
+        const sections = document.querySelectorAll('.aos-fade')
 
-    const sections = document.querySelectorAll('.aos-fade')
+        if (sections.length !== 0) {
+          const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.25,
+          }
 
-    if (sections.length !== 0) {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.25,
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const section = entry.target
+                section.classList.add('active')
+              }
+            })
+          }, options)
+
+          sections.forEach((section) => observer.observe(section))
+        }
       }
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const section = entry.target
-            section.classList.add('active')
-          }
-        })
-      }, options)
+      /**
+       * When page loads, fade in sections with the class `aol-fade`
+       */
+      function handleSectionFadeOnLoad() {
+        const sections = document.querySelectorAll('.aol-fade')
+        sections.forEach((section) => section.classList.add('active'))
+      }
 
-      sections.forEach((section) => observer.observe(section))
-    }
-  }
+      // On page load
+      document.addEventListener('astro:page-load', () => {
+        // Fade in sections on load
+        handleSectionFadeOnLoad()
 
-  /**
-   * When page loads, fade in sections with the class `aol-fade`
-   */
-  function handleSectionFadeOnLoad() {
-    const sections = document.querySelectorAll('.aol-fade')
-    sections.forEach((section) => section.classList.add('active'))
-  }
-
-  // On page load
-  document.addEventListener('DOMContentLoaded', () => {
-    // Fade in sections on load
-    handleSectionFadeOnLoad()
-
-    // Fade in sections on scroll
-    document.addEventListener('scroll', handleSectionFadeOnScroll)
-  })
-</script>
+        // Fade in sections on scroll
+        document.addEventListener('scroll', handleSectionFadeOnScroll)
+      })
+    </script>
+  </body>
+</html>
