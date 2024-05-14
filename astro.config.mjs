@@ -1,3 +1,4 @@
+import db from '@astrojs/db'
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
@@ -19,6 +20,7 @@ export default defineConfig({
     tailwind({
       nesting: true,
     }),
+    db(),
     mdx(),
   ],
   adapter: netlify({
