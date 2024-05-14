@@ -23,3 +23,6 @@ pnpm-debug.log*
 # vscode things
 .vscode/
 NOTES.md
+
+# content
+/archive/
