@@ -1,5 +1,5 @@
 ---
-// import { ViewTransitions } from 'astro:transitions'
+import { ViewTransitions } from 'astro:transitions'
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/navigation/Navigation.astro'
 import '../styles/global.css'
@@ -48,18 +48,15 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <!-- Favicon & Theme -->
 
     <!-- Animations -->
-    <!-- <script src="../util/section-animations.ts" data-astro-rerun></script> -->
-    <!-- <ViewTransitions /> -->
+    <script src="../util/section-animations.ts"></script>
+    <ViewTransitions />
   </head>
 
   <body>
     <Navigation />
     <slot />
     <Footer />
-  </body>
-</html>
-
-<script data-astro-rerun>
+  </body><!-- <script data-astro-rerun>
   /**
    * Fade in sections with the class `aos-fade` when they come into view
    */
@@ -106,4 +103,5 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     // Fade in sections on scroll
     document.addEventListener('scroll', handleSectionFadeOnScroll)
   })
-</script>
+</script> -->
+</html>
