@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets'
 
 const { frontmatter, image } = Astro.props
-const { title, published, imageAlt } = frontmatter
+const { title, published, minutesRead, imageAlt } = frontmatter
 ---
 
 <header
@@ -21,7 +21,7 @@ const { title, published, imageAlt } = frontmatter
       }
     </span>
     <span class="text-purple">•</span>
-    <!-- <span>{minutesRead}</span> -->
+    <span>{minutesRead}</span>
   </p>
   <h1>{title}</h1>
   <Picture
