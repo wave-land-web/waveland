@@ -64,6 +64,7 @@ import { Icon } from 'astro-icon/components'
   const handleToggleClick = () => {
     // Toggle the theme
     rootElement.classList.toggle('dark')
+    rootElement.classList.toggle('light')
 
     // Check if the theme is dark or light
     const isDark = rootElement.classList.contains('dark')
