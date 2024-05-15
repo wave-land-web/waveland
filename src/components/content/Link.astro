@@ -4,9 +4,10 @@ export interface Props {
   text: string
   newWindow?: boolean
   ariaLabel?: string
+  [key: string]: any
 }
 
-const { href, text, newWindow, ariaLabel } = Astro.props
+const { href, text, newWindow, ariaLabel, ...props } = Astro.props
 ---
 
 <a
@@ -14,5 +15,6 @@ const { href, text, newWindow, ariaLabel } = Astro.props
   href={href}
   target={newWindow ? '_blank' : '_self'}
   rel="noopener noreferrer"
-  aria-label={ariaLabel}>{text}</a
+  aria-label={ariaLabel}
+  {...props}>{text}</a
 >
