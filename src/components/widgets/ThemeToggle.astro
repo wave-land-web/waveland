@@ -15,18 +15,40 @@ import { Icon } from 'astro-icon/components'
    * Set the theme based on the user's preferences
    */
   const theme = (() => {
+    // check if cookie exists and return the value
+    const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
+    if (cookie) {
+      console.log('cookie: ', cookie.split('=')[1])
+      return cookie.split('=')[1]
+    }
+
+    // If cookie doesn't exist for some reason, check if localStorage exists and return the value
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      console.log('localStorage: ', localStorage.getItem('theme'))
       return localStorage.getItem('theme')
     }
+
+    // If localStorage doesn't exist, check if the user display settings are dark or light
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      console.log('prefers-color-scheme: dark')
       return 'dark'
+    } else {
+      console.log('prefers-color-scheme: light')
+      return 'light'
     }
-    return 'light'
   })()
 
   if (theme === 'light') {
+    // set the theme to light
+    const date = new Date()
+    date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
+    document.cookie = `theme=light; expires=${date.toUTCString()}; path=/`
     rootElement.classList.remove('dark')
   } else {
+    // set the theme to dark
+    const date = new Date()
+    date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
+    document.cookie = `theme=dark; expires=${date.toUTCString()}; path=/`
     rootElement.classList.add('dark')
   }
 
@@ -36,10 +58,13 @@ import { Icon } from 'astro-icon/components'
    * Set the theme when the user clicks the theme toggle button
    */
   const handleToggleClick = () => {
+    // Toggle the theme
     rootElement.classList.toggle('dark')
 
-    // Save settings in local storage
+    // Check if the theme is dark or light
     const isDark = rootElement.classList.contains('dark')
+    
+    // Save settings in local storage
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
 
     // Save settings in a cookie
