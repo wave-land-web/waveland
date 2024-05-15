@@ -8,70 +8,56 @@ import { Icon } from 'astro-icon/components'
 </button>
 
 <script>
-  const rootElement = document.documentElement
-  const themeToggles = document.querySelectorAll('button[aria-label="Theme Toggle"]')
+  document.addEventListener('astro:page-load', () => {
+    const rootElement = document.documentElement
+    const themeToggles = document.querySelectorAll('button[aria-label="Theme Toggle"]')
 
-  /**
-   * Set the theme based on the user's preferences
-   */
-  const theme = (() => {
-    // If cookie doesn't exist, check if localStorage exists and return the value
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme')
+    /**
+     * Set the theme based on the user's preferences
+     */
+    const theme = (() => {
+      // If cookie doesn't exist, check if localStorage exists and return the value
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+        return localStorage.getItem('theme')
+      }
+
+      // Check if the user display settings are dark or light
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light'
+      }
+    })()
+
+    if (theme === 'light') {
+      // set the theme to light
+      rootElement.classList.add('light')
+      rootElement.classList.remove('dark')
+    } else if (theme === 'dark') {
+      // set the theme to dark
+      rootElement.classList.remove('light')
+      rootElement.classList.add('dark')
     }
 
-    // check if cookie exists and return the value
-    // const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
-    // if (cookie) {
-    //   return cookie.split('=')[1]
-    // }
+    // save the theme in localStorage
+    window.localStorage.setItem('theme', theme ?? '')
 
-    // Check if the user display settings are dark or light
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light'
+    /**
+     * Set the theme when the user clicks the theme toggle button
+     */
+    const handleToggleClick = () => {
+      // Toggle the theme
+      rootElement.classList.toggle('dark')
+      rootElement.classList.toggle('light')
+
+      // Check if the theme is dark or light
+      const isDark = rootElement.classList.contains('dark')
+
+      // Save settings in local storage
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
     }
-  })()
 
-  if (theme === 'light') {
-    // set the theme to light
-    rootElement.classList.add('light')
-    rootElement.classList.remove('dark')
-  } else if (theme === 'dark') {
-    // set the theme to dark
-    rootElement.classList.remove('light')
-    rootElement.classList.add('dark')
-  }
-
-  // save the theme in cookie
-  // const date = new Date()
-  // date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
-  // document.cookie = `theme=${theme}; expires=${date.toUTCString()}; path=/`
-
-  // save the theme in localStorage
-  window.localStorage.setItem('theme', theme ?? '')
-
-  /**
-   * Set the theme when the user clicks the theme toggle button
-   */
-  const handleToggleClick = () => {
-    // Toggle the theme
-    rootElement.classList.toggle('dark')
-    rootElement.classList.toggle('light')
-
-    // Check if the theme is dark or light
-    const isDark = rootElement.classList.contains('dark')
-
-    // Save settings in local storage
-    localStorage.setItem('theme', isDark ? 'dark' : 'light')
-
-    // Save settings in a cookie
-    // const date = new Date()
-    // date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
-    // document.cookie = `theme=${isDark ? 'dark' : 'light'}; expires=${date.toUTCString()}; path=/`
-  }
-
-  // Event listeners
-  themeToggles.forEach((btn) => btn?.addEventListener('click', handleToggleClick))
+    // Event listeners
+    themeToggles.forEach((btn) => btn?.addEventListener('click', handleToggleClick))
+  })
 </script>
