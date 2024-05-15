@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -23,14 +25,15 @@ export default {
       grey: 'var(--color-grey)',
       scrim: 'var(--color-scrim)',
     },
-    fontFamily: {
-      body: ['Poppins Regular', 'sans-serif'],
-      mono: ['Monaspace Argon Var', 'monospace'],
-    },
+
     extend: {
       strokeWidth: {
         1: '1rem',
         2: '2rem',
+      },
+      fontFamily: {
+        body: ['Poppins Regular', ...defaultTheme.fontFamily.sans],
+        mono: ['Monaspace Argon Var', ...defaultTheme.fontFamily.mono],
       },
     },
   },

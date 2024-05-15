@@ -9,7 +9,7 @@
       url('/fonts/monaspace-argon-var-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: block;
   }
 
   @font-face {
@@ -18,7 +18,7 @@
       url('/fonts/poppins-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: block;
   }
 
   :root {
@@ -93,6 +93,9 @@ html {
   scrollbar-color: var(--color-darkBlue) var(--color-white);
   scrollbar-width: thin;
 
+  /* Font */
+  @apply font-mono;
+
   /* Highlighted text */
   @apply selection:bg-darkBlue selection:text-white dark:selection:bg-white dark:selection:text-darkBlue;
 
@@ -102,7 +105,7 @@ html {
 }
 
 body {
-  @apply font-mono text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+  @apply text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
 }
 
 section {
