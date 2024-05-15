@@ -12,6 +12,9 @@ export default defineConfig({
   site: 'https://wavelandweb.com',
   output: 'server',
   prefetch: true,
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [
     sitemap({
       lastmod: new Date(),
