@@ -17,64 +17,62 @@
   </span>
 </form>
 
-<script>
-  document.addEventListener('astro:page-load', () => {
-    const form = document.querySelector('#subscribe') as HTMLFormElement
-    const responseMessage = form?.querySelector('#response') as HTMLSpanElement
-    /**
-     * Handle UI messages based on submission state
-     * @param {String} state - 'loading', 'error', 'success'
-     * @param {String} message - Message to display
-     */
-    function handleMessageUI(state: string, message: string) {
-      // Reset styles
-      responseMessage.classList.remove('hidden')
-      responseMessage.classList.remove('text-orange')
-      responseMessage.classList.remove('text-green')
+<script is:inline data-astro-rerun>
+  const form = document.querySelector('#subscribe')
+  const responseMessage = form?.querySelector('#response')
+  /**
+   * Handle UI messages based on submission state
+   * @param {String} state - 'loading', 'error', 'success'
+   * @param {String} message - Message to display
+   */
+  function handleMessageUI(state, message) {
+    // Reset styles
+    responseMessage.classList.remove('hidden')
+    responseMessage.classList.remove('text-orange')
+    responseMessage.classList.remove('text-green')
 
-      // Set message text based on API response
-      responseMessage.textContent = message
+    // Set message text based on API response
+    responseMessage.textContent = message
 
-      // Set message color based on state
-      if (state === 'error') {
-        responseMessage.classList.add('text-orange')
-      } else if (state === 'success') {
-        responseMessage.classList.add('text-green')
-      }
+    // Set message color based on state
+    if (state === 'error') {
+      responseMessage.classList.add('text-orange')
+    } else if (state === 'success') {
+      responseMessage.classList.add('text-green')
+    }
+  }
+
+  /**
+   * Handle email subscription form submission
+   * @param e - Event
+   */
+  async function submit(e) {
+    e.preventDefault()
+
+    // Show loading message
+    handleMessageUI('loading', 'Subscribing...')
+
+    // Get form data and send to API
+    const formData = new FormData(e.target)
+    const response = await fetch('/api/subscribe/', {
+      method: 'POST',
+      body: formData,
+    })
+    const data = await response.json()
+
+    // Error
+    if (data.error) {
+      handleMessageUI('error', data.error)
     }
 
-    /**
-     * Handle email subscription form submission
-     * @param e - Event
-     */
-    async function submit(e: Event) {
-      e.preventDefault()
-
-      // Show loading message
-      handleMessageUI('loading', 'Subscribing...')
-
-      // Get form data and send to API
-      const formData = new FormData(e.target as HTMLFormElement)
-      const response = await fetch('/api/subscribe/', {
-        method: 'POST',
-        body: formData,
-      })
-      const data = await response.json()
-
-      // Error
-      if (data.error) {
-        handleMessageUI('error', data.error)
-      }
-
-      // Success
-      if (data.message) {
-        handleMessageUI('success', data.message)
-      }
-
-      form?.reset()
+    // Success
+    if (data.message) {
+      handleMessageUI('success', data.message)
     }
 
-    // Submit event listener
-    form?.addEventListener('submit', submit)
-  })
+    form?.reset()
+  }
+
+  // Submit event listener
+  form?.addEventListener('submit', submit)
 </script>
