@@ -11,46 +11,46 @@ import { Icon } from 'astro-icon/components'
   const rootElement = document.documentElement
   const themeToggles = document.querySelectorAll('button[aria-label="Theme Toggle"]')
 
-  /**
-   * Set the theme based on the user's preferences
-   */
-  const theme = (() => {
-    // check if cookie exists and return the value
-    const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
-    if (cookie) {
-      return cookie.split('=')[1]
-    }
+  // /**
+  //  * Set the theme based on the user's preferences
+  //  */
+  // const theme = (() => {
+  //   // If cookie doesn't exist, check if localStorage exists and return the value
+  //   if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+  //     return localStorage.getItem('theme')
+  //   }
 
-    // If cookie doesn't exist, check if localStorage exists and return the value
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme')
-    }
+  //   // check if cookie exists and return the value
+  //   const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
+  //   if (cookie) {
+  //     return cookie.split('=')[1]
+  //   }
 
-    // Check if the user display settings are dark or light
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light'
-    }
-  })()
+  //   // Check if the user display settings are dark or light
+  //   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  //     return 'dark'
+  //   } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+  //     return 'light'
+  //   }
+  // })()
 
-  if (theme === 'light') {
-    // set the theme to light
-    rootElement.classList.add('light')
-    rootElement.classList.remove('dark')
-  } else if (theme === 'dark') {
-    // set the theme to dark
-    rootElement.classList.remove('light')
-    rootElement.classList.add('dark')
-  }
+  // if (theme === 'light') {
+  //   // set the theme to light
+  //   rootElement.classList.add('light')
+  //   rootElement.classList.remove('dark')
+  // } else if (theme === 'dark') {
+  //   // set the theme to dark
+  //   rootElement.classList.remove('light')
+  //   rootElement.classList.add('dark')
+  // }
 
-  // save the theme in cookie
-  const date = new Date()
-  date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
-  document.cookie = `theme=${theme}; expires=${date.toUTCString()}; path=/`
+  // // save the theme in cookie
+  // const date = new Date()
+  // date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
+  // document.cookie = `theme=${theme}; expires=${date.toUTCString()}; path=/`
 
-  // save the theme in localStorage
-  window.localStorage.setItem('theme', theme ?? '')
+  // // save the theme in localStorage
+  // window.localStorage.setItem('theme', theme ?? '')
 
   /**
    * Set the theme when the user clicks the theme toggle button
