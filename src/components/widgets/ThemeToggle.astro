@@ -18,22 +18,18 @@ import { Icon } from 'astro-icon/components'
     // check if cookie exists and return the value
     const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
     if (cookie) {
-      console.log('cookie: ', cookie.split('=')[1])
       return cookie.split('=')[1]
     }
 
     // If cookie doesn't exist, check if localStorage exists and return the value
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      console.log('localStorage: ', localStorage.getItem('theme'))
       return localStorage.getItem('theme')
     }
 
     // Check if the user display settings are dark or light
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      console.log('prefers-color-scheme: dark')
       return 'dark'
     } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      console.log('prefers-color-scheme: light')
       return 'light'
     }
   })()
@@ -47,8 +43,6 @@ import { Icon } from 'astro-icon/components'
     rootElement.classList.remove('light')
     rootElement.classList.add('dark')
   }
-
-  console.log('theme: ', theme)
 
   // save the theme in cookie
   const date = new Date()
