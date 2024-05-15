@@ -40,11 +40,15 @@ import { Icon } from 'astro-icon/components'
 
   if (theme === 'light') {
     // set the theme to light
+    rootElement.classList.add('light')
     rootElement.classList.remove('dark')
   } else {
     // set the theme to dark
+    rootElement.classList.remove('light')
     rootElement.classList.add('dark')
   }
+
+  console.log('theme: ', theme)
 
   // save the theme in cookie
   const date = new Date()
