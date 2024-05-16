@@ -13,9 +13,6 @@ export default defineConfig({
   site: 'https://waveland-redesign.netlify.app/',
   output: 'hybrid',
   prefetch: true,
-  build: {
-    inlineStylesheets: 'always',
-  },
   integrations: [
     sitemap({
       lastmod: new Date(),
