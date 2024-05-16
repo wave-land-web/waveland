@@ -107,7 +107,7 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
   window.localStorage.setItem('theme', theme ?? '')
 </script>
 
-<script>
+<script is:inline data-astro-rerun>
   /**
    * Fade in sections with the class `aos-fade` when they come into view
    */
