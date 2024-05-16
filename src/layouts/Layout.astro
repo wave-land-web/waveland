@@ -10,13 +10,11 @@ export interface Props {
 }
 
 const { title, description, socialImage } = Astro.props
-
-const theme = Astro.cookies.get('theme')?.value ?? ''
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalURL)
 ---
 
-<html lang="en" class={theme}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,15 +82,9 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
    * Set the theme based on the user's preferences
    */
   const theme = (() => {
-    // If cookie doesn't exist, check if localStorage exists and return the value
+    // Check if localStorage exists and return the value
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme')
-    }
-
-    // check if cookie exists and return the value
-    const cookie = document.cookie.split(';').find((cookie) => cookie.includes('theme'))
-    if (cookie) {
-      return cookie.split('=')[1]
     }
 
     // Check if the user display settings are dark or light
@@ -111,16 +103,11 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     document.documentElement.classList.add('dark')
   }
 
-  // save the theme in cookie
-  const date = new Date()
-  date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000)
-  document.cookie = `theme=${theme}; expires=${date.toUTCString()}; path=/`
-
   // save the theme in localStorage
   window.localStorage.setItem('theme', theme ?? '')
 </script>
 
-<script data-astro-rerun>
+<script>
   /**
    * Fade in sections with the class `aos-fade` when they come into view
    */

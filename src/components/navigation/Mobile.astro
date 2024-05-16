@@ -57,19 +57,20 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
   </ul>
 </div>
 
-<script data-astro-rerun>
-  /**
-   * @todo: COMMENT THIS SHIT
-   */
+<script>
+  // Grab elements
   const body = document.querySelector('body')
   const menu = document.querySelector('#menu')
   const menuIconOpen = document.querySelector('[data-icon="tabler:menu"]')
   const menuIconClose = document.querySelector('[data-icon="tabler:x"]')
-  const menuText = document.querySelector('#menu span')
+  const menuText = document.querySelector('#menu span') as HTMLSpanElement
   const mobileNavOverlay = document.querySelector('#mobile-nav-overlay')
   const mobileNavItems = document.querySelectorAll('#mobile-nav-items a')
   let overlayDisplayed = false
 
+  /**
+   * Update the menu text and icons based on the overlay state
+   */
   function handleContentUpdate() {
     if (overlayDisplayed) {
       menuText.textContent = 'CLOSE'
@@ -82,6 +83,9 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
     }
   }
 
+  /**
+   * Handle the mobile navigation click event
+   */
   function handleMobileNavigationOnClick() {
     overlayDisplayed = !overlayDisplayed
 
@@ -93,6 +97,9 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
     handleContentUpdate()
   }
 
+  /**
+   * Handle the mobile navigation resize event
+   */
   function handleMobileNavigationOnResize() {
     if (window.innerWidth >= 768) {
       overlayDisplayed = false
@@ -112,6 +119,7 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
     }
   })
 
+  // Event listeners
   menu?.addEventListener('click', handleMobileNavigationOnClick)
   window.addEventListener('resize', handleMobileNavigationOnResize)
   mobileNavItems.forEach((item) => item.addEventListener('click', handleMobileNavigationOnClick))

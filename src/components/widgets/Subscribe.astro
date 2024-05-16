@@ -17,15 +17,15 @@
   </span>
 </form>
 
-<script data-astro-rerun>
-  const form = document.querySelector('#subscribe')
-  const responseMessage = form?.querySelector('#response')
+<script>
+  const form = document.querySelector('#subscribe') as HTMLFormElement
+  const responseMessage = form?.querySelector('#response') as HTMLSpanElement
   /**
    * Handle UI messages based on submission state
    * @param {String} state - 'loading', 'error', 'success'
    * @param {String} message - Message to display
    */
-  function handleMessageUI(state, message) {
+  function handleMessageUI(state: string, message: string) {
     // Reset styles
     responseMessage.classList.remove('hidden')
     responseMessage.classList.remove('text-orange')
@@ -46,14 +46,14 @@
    * Handle email subscription form submission
    * @param e - Event
    */
-  async function submit(e) {
+  async function submit(e: Event) {
     e.preventDefault()
 
     // Show loading message
     handleMessageUI('loading', 'Subscribing...')
 
     // Get form data and send to API
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target as HTMLFormElement)
     const response = await fetch('/api/subscribe/', {
       method: 'POST',
       body: formData,
