@@ -30,5 +30,8 @@ export default defineConfig({
   }),
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    shikiConfig: {
+      theme: 'houston',
+    },
   },
 })

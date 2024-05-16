@@ -53,7 +53,7 @@
   }
 
   .site-link {
-    @apply site-transition-normal text-darkBlue dark:text-white md:hover:text-purple md:group-hover:text-purple;
+    @apply underline text-darkBlue dark:text-white md:hover:text-purple md:group-hover:text-purple site-transition-normal;
   }
 
   .site-link-2 {

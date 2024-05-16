@@ -24,7 +24,7 @@ const { slug, title, published, image, imageAlt } = Astro.props
   <div>
     <p class="mb-2 text-grey text-sm">{published}</p>
     <h2 class="text-lg">
-      <a href={slug} class="site-link" data-astro-prefetch>{title}</a>
+      <a href={slug} class="site-link no-underline" data-astro-prefetch>{title}</a>
     </h2>
   </div>
 </article>
