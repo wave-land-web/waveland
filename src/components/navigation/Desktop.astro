@@ -3,8 +3,8 @@ import { Icon } from 'astro-icon/components'
 import ThemeToggle from '../widgets/ThemeToggle.astro'
 ---
 
-<ul id="desktop-nav" class="hidden md:flex md:items-center md:gap-8">
-  <div class="flex items-center gap-8">
+<div id="desktop-nav" class="hidden md:flex md:items-center md:gap-8">
+  <ul class="flex items-center gap-8">
     <li>
       <a href="/#about" class="site-link uppercase" aria-label="About" data-astro-prefetch>About</a>
     </li>
@@ -16,11 +16,11 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
     <li>
       <a href="/blog" class="site-link uppercase" aria-label="Blog" data-astro-prefetch>Blog</a>
     </li>
-  </div>
+  </ul>
 
-  <li>•</li>
+  <span>•</span>
 
-  <div class="inline-flex items-center gap-8">
+  <ul class="inline-flex items-center gap-8">
     <li class="inline-flex">
       <ThemeToggle />
     </li>
@@ -35,5 +35,5 @@ import ThemeToggle from '../widgets/ThemeToggle.astro'
         <Icon name="tabler:brand-instagram" class="site-icon" /></a
       >
     </li>
-  </div>
-</ul>
+  </ul>
+</div>
