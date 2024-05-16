@@ -115,7 +115,7 @@ section {
 nav,
 header,
 main {
-  @apply max-w-screen-2xl m-auto px-4;
+  @apply max-w-screen-2xl mx-auto px-4;
 }
 
 img,
@@ -166,7 +166,7 @@ a {
   & h5,
   & h6,
   & img {
-    @apply mt-8 leading-tight;
+    @apply mt-[1lh] leading-tight;
   }
 
   & h2 {
@@ -196,7 +196,7 @@ a {
 
   & img,
   & pre {
-    @apply block my-8;
+    @apply block my-[1lh];
   }
 
   & img {
