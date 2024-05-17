@@ -9,8 +9,7 @@ import { remarkReadingTime } from './src/util/remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: Update this to your site's URL (https://wavelandweb.com/) before deploying
-  site: 'https://waveland-redesign.netlify.app/',
+  site: 'https://wavelandweb.com/',
   output: 'hybrid',
   prefetch: true,
   integrations: [
