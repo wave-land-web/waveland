@@ -109,14 +109,14 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
 
 <script is:inline data-astro-rerun>
   /**
-   * Fade in sections with the class `aos-fade` when they come into view
+   * Fade in sections with the class `aos` when they come into view
    */
   function handleSectionFadeOnScroll() {
     if (!window.IntersectionObserver) {
       return console.log('IntersectionObserver not supported')
     }
 
-    const sections = document.querySelectorAll('.aos-fade')
+    const sections = document.querySelectorAll('.aos')
 
     if (sections.length !== 0) {
       const options = {
@@ -138,18 +138,10 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     }
   }
 
-  /**
-   * When page loads, fade in sections with the class `aol-fade`
-   */
-  function handleSectionFadeOnLoad() {
-    const sections = document.querySelectorAll('.aol-fade')
-    sections.forEach((section) => section.classList.add('active'))
-  }
-
   // On page load
   document.addEventListener('DOMContentLoaded', () => {
     // Fade in sections on load
-    handleSectionFadeOnLoad()
+    handleSectionFadeOnScroll()
 
     // Fade in sections on scroll
     document.addEventListener('scroll', handleSectionFadeOnScroll)

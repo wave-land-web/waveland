@@ -149,18 +149,36 @@ a {
   @apply transition;
 }
 
-/* Animations */
+/**
+  * Animate on scroll (similar to AOS library)
+  * Default: fade-in (aos)
+  * Options: slide-up, slide-down, slide-left, slide-right (aos-slide-*)
+  */
 
-.aos-fade,
-.aol-fade {
-  @apply opacity-0 transition-opacity duration-700;
+.aos {
+  @apply opacity-0 transform transition-[opacity,transform] duration-700;
 
+  /* Slide animations */
+  &.aos-slide-up {
+    @apply translate-y-4;
+  }
+  &.aos-slide-down {
+    @apply -translate-y-4;
+  }
+  &.aos-slide-left {
+    @apply -translate-x-4;
+  }
+  &.aos-slide-right {
+    @apply translate-x-4;
+  }
+
+  /* Handle active state */
   &.active {
-    @apply opacity-100;
+    @apply opacity-100 translate-x-0 translate-y-0;
   }
 }
 
-/* BLOG */
+/* Blog */
 
 #blog-layout {
   & h2,
@@ -181,11 +199,11 @@ a {
   }
 
   & a:not(.site-button) {
-    /* 
-      Markdown bug because of remark-reading-time.mjs -- .site-link-2 isn't recognized 
-      Manually adding link styles here
-      See: https://docs.astro.build/en/reference/errors/csssyntax-error/
-    */
+    /** 
+      * Markdown bug because of remark-reading-time.mjs -- .site-link-2 isn't recognized 
+      * Manually adding link styles here
+      * See: https://docs.astro.build/en/reference/errors/csssyntax-error/
+      */
     @apply text-darkPurple dark:text-purple md:hover:text-grey;
   }
 
