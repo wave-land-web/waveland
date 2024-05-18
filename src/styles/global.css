@@ -24,9 +24,12 @@
   :root {
     --color-white: #fffafa;
     --color-darkBlue: #0e1726;
-    --color-purple: #8619e6;
-    --color-green: #227768;
-    --color-orange: #cf3f49;
+    --color-purple: #b775f0;
+    --color-green: #80dbca;
+    --color-orange: #ff757e;
+    --color-dark-purple: #8619e6;
+    --color-dark-green: #227768;
+    --color-dark-orange: #cf3f49;
     --color-blue: #4d85ff;
     --color-grey: #626060;
     --color-scrim: #fffafae6;
@@ -53,11 +56,11 @@
   }
 
   .site-link {
-    @apply underline text-darkBlue dark:text-white md:hover:text-purple md:group-hover:text-purple site-transition-normal;
+    @apply underline text-darkBlue dark:text-white md:hover:text-darkPurple md:hover:dark:text-purple md:group-hover:text-purple site-transition-normal;
   }
 
   .site-link-2 {
-    @apply text-purple md:hover:text-grey;
+    @apply text-darkPurple dark:text-purple md:hover:text-grey;
   }
 
   .site-icon {
@@ -65,7 +68,7 @@
   }
 
   .site-button {
-    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple md:hover:text-white md:dark:hover:text-darkBlue md:hover:bg-purple site-transition-normal;
+    @apply px-4 py-2 border border-darkPurple dark:border-purple rounded-md shadow-sm text-darkPurple dark:text-purple md:hover:text-white md:dark:hover:text-darkBlue md:hover:bg-darkPurple md:hover:dark:bg-purple site-transition-normal;
   }
 
   .h2 {
@@ -183,7 +186,7 @@ a {
       Manually adding link styles here
       See: https://docs.astro.build/en/reference/errors/csssyntax-error/
     */
-    @apply text-purple md:hover:text-grey;
+    @apply text-darkPurple dark:text-purple md:hover:text-grey;
   }
 
   & p:not(header > p),
@@ -221,7 +224,7 @@ a {
   }
 
   & p code {
-    @apply bg-purple text-white dark:text-darkBlue rounded-sm p-1 box-decoration-clone;
+    @apply bg-darkPurple dark:bg-purple text-white dark:text-darkBlue rounded-sm p-1 box-decoration-clone;
   }
 
   & em {

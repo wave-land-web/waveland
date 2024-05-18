@@ -3,7 +3,7 @@
     <label for="email" class="sr-only">Email Address</label>
     <input
       id="email"
-      class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm site-transition-normal"
+      class="block w-full border rounded-md border-grey p-2 text-darkBlue dark:text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-darkPurple focus:dark:ring-purple shadow-sm site-transition-normal"
       name="email"
       type="email"
       autocomplete="email"
@@ -20,25 +20,29 @@
 <script is:inline data-astro-rerun>
   const form = document.querySelector('#subscribe')
   const responseMessage = form?.querySelector('#response')
+
   /**
    * Handle UI messages based on submission state
    * @param {String} state - 'loading', 'error', 'success'
    * @param {String} message - Message to display
    */
   function handleMessageUI(state, message) {
+    const errorClasses = ['text-darkOrange', 'dark:text-orange']
+    const successClasses = ['text-darkGreen', 'dark:text-green']
+
     // Reset styles
     responseMessage.classList.remove('hidden')
-    responseMessage.classList.remove('text-orange')
-    responseMessage.classList.remove('text-green')
+    responseMessage.classList.remove(...errorClasses)
+    responseMessage.classList.remove(...successClasses)
 
     // Set message text based on API response
     responseMessage.textContent = message
 
     // Set message color based on state
     if (state === 'error') {
-      responseMessage.classList.add('text-orange')
+      responseMessage.classList.add(...errorClasses)
     } else if (state === 'success') {
-      responseMessage.classList.add('text-green')
+      responseMessage.classList.add(...successClasses)
     }
   }
 
