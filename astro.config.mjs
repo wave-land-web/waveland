@@ -11,7 +11,9 @@ import { remarkReadingTime } from './src/util/remark-reading-time.mjs'
 export default defineConfig({
   site: 'https://wavelandweb.com/',
   output: 'hybrid',
-  prefetch: true,
+  prefetch: {
+    prefetchAll: true,
+  },
   integrations: [
     sitemap({
       lastmod: new Date(),
