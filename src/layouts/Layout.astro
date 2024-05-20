@@ -69,6 +69,14 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
     <meta name="theme-color" content="#0e1726" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fffafa" media="(prefers-color-scheme: light)" />
 
+    <!-- RSS Feed -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed for Wave Land Web"
+      href={`${Astro.site}rss.xml`}
+    />
+
     <!-- Umami Analytics -->
     <script
       type="text/partytown"
