@@ -125,15 +125,17 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
 
 <script is:inline data-astro-rerun>
   /**
-   * Fade in sections with the class `aos` when they come into view
+   * Animate sections with the class `lsa` when they come into view
    */
-  function handleSectionFadeOnScroll() {
+  function handleAnimations() {
     if (!window.IntersectionObserver) {
       return console.log('IntersectionObserver not supported')
     }
 
-    const sections = document.querySelectorAll('.aos')
+    // Grab all sections to be animated
+    const sections = document.querySelectorAll('.lsa')
 
+    // Configure observer options
     if (sections.length !== 0) {
       const options = {
         root: null,
@@ -141,25 +143,30 @@ const socialImageURL = new URL(socialImage || '/images/gradient.jpg', canonicalU
         threshold: 0.25,
       }
 
+      // Initialize observer
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
+          const section = entry.target
+
+          // By default, animations repeat on scroll unless the section has the class `no-repeat`
           if (entry.isIntersecting) {
-            const section = entry.target
             section.classList.add('active')
+          } else if (!entry.isIntersecting && !section.classList.contains('no-repeat')) {
+            section.classList.remove('active')
           }
         })
       }, options)
 
+      // Observe each section with the class `lsa`
       sections.forEach((section) => observer.observe(section))
     }
   }
 
-  // On page load
+  // Handle animations on page load
   document.addEventListener('DOMContentLoaded', () => {
-    // Fade in sections on load
-    handleSectionFadeOnScroll()
+    handleAnimations()
 
-    // Fade in sections on scroll
-    document.addEventListener('scroll', handleSectionFadeOnScroll)
+    // Handle animations on scroll
+    document.addEventListener('scroll', handleAnimations)
   })
 </script>

@@ -17,7 +17,7 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
   description="Musings on web development and the broader creative landscape"
 >
   <header
-    class="max-w-2xl flex flex-col gap-2 md:gap-4 justify-center pt-[calc(4rem+var(--nav-height))] pb-4 text-center aos"
+    class="max-w-2xl flex flex-col gap-2 md:gap-4 justify-center pt-[calc(4rem+var(--nav-height))] pb-4 text-center lsa no-repeat"
   >
     <h1 class="text-darkPurple dark:text-purple text-base md:text-lg leading-none">Blog</h1>
     <p class="font-body text-5xl md:text-6xl leading-tight">We've Been Thinking</p>
@@ -28,7 +28,7 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
 
   <main>
     <section id="blog-container" class="max-w-6xl mx-auto mb-8">
-      <article class="relative flex flex-col gap-4 mb-12 aos">
+      <article class="relative flex flex-col gap-4 mb-12 lsa no-repeat">
         <a
           href={`/blog/${newestPost?.slug}`}
           class="block h-[clamp(250px,50vw,500px)] overflow-hidden shadow-sm rounded-lg"
