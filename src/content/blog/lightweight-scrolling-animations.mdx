@@ -27,17 +27,19 @@ That was the case for me recently as I was rewriting scrolling animations from s
 
 _LSA_, or "Lightweight Scrolling Animations", is intentionally bare bones so you can grab what you need and leave the rest. The benefit of writing this in vanilla CSS and JS is the ability to copy and paste the code directly into your web projects.
 
-I'll go over a couple cool examples here. If you're ready to dive in for yourself, head to the <Link href="https://github.com/wave-land-web/lsa" text="GitHub repo" newWindow={true} /> for full instructions on how to get started and you can check out the <Link href="https://lsa-lib.netlify.app/" text="demo site" newWindow={true} /> for all working examples.
+Once there is universal browser support, I plan to rewrite this using <Link href="https://scroll-driven-animations.style/" text="CSS-only scroll-driven animations" newWindow={true} />. For now, we just need a little JavaScript to handle the scroll events.
+
+I'll go over a couple of cool examples here. If you're ready to dive in for yourself, head to the <Link href="https://github.com/wave-land-web/lsa" text="GitHub repo" newWindow={true} /> for full instructions on how to get started and you can check out the <Link href="https://lsa-lib.netlify.app/" text="demo site" newWindow={true} /> for all working examples.
 
 ## Inspiration
 
 Scrolling animations are a great way to add a bit of liveliness to your websites or web apps. As the user scrolls down the page, elements can fade or slide in from any direction, making their experience more enjoyable and drawing attention to important content on the page.
 
-However, it's easy to overdo animations, which can have a negative effect on user-experience.
+However, it's easy to overdo animations, which can have a negative effect on user experience.
 
 _LSA_ defaults to very subtle transitions, but you can customize everything to your liking.
 
-For example, if we set an element to have a _slide up_ effect, the user will see it animate as it enters their viewport.
+For example, if we set an element to have a _slide-up_ effect, the user will see it animate as it enters their viewport.
 
 _(Note: these examples look a little different than the <Link href="https://lsa-lib.netlify.app/" text="demo site" newWindow={true} /> as I am using some fancy <Link href="https://tailwindcss.com" text="Tailwind" newWindow={true} /> styles here, but like I said, everything is customizable!)_
 
@@ -70,7 +72,7 @@ Or, maybe you have a list of blog post cards and would like to have them alterna
   <h3 class="!mt-0">Slide Right</h3>
 </Card>
 
-You can also animate elements diagonally. Here a couple examples with the `lsa-slide-up-left` and `lsa-slide-up-right` classes.
+You can also animate elements diagonally. Here are a couple of examples with the `lsa-slide-up-left` and `lsa-slide-up-right` classes.
 
 ```html
 <div class="lsa lsa-slide-up-left">
@@ -91,9 +93,9 @@ You can also animate elements diagonally. Here a couple examples with the `lsa-s
 
 ## Customization
 
-As you can imagine, there are plenty of other transitions we could extend this library with (scale, brightness, blur, etc.), so feel free to let you imagination run wild!
+As you can imagine, there are plenty of other transitions we could extend this library with (scale, brightness, blur, etc.), so feel free to let your imagination run wild!
 
-_LSA_ really shines as a simple drop-in for your projects but because this is code you own, you can add any amount of complexity you desire.
+_LSA_ shines as a simple drop-in for your projects but because this is code you own, you can add any amount of complexity you desire.
 
 ## Conclusion
 
