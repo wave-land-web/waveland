@@ -118,7 +118,7 @@ section {
 nav,
 header,
 main {
-  @apply max-w-screen-2xl mx-auto px-4;
+  @apply max-w-screen-4xl mx-auto px-4 md:px-8;
 }
 
 img,
