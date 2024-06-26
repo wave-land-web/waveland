@@ -149,6 +149,12 @@ a {
   @apply transition;
 }
 
+/* Animations */
+
+@view-transition {
+  navigation: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   /**
     * Required class: `lsa` (initializes animations and defaults to fade-in)
