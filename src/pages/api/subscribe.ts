@@ -45,7 +45,7 @@ export const POST: APIRoute = async ({ request }) => {
     subject: `Welcome to Wave Land, ${email} 🌊`,
     html: /* HTML */ `
       <body
-        style='font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #0E1726;'
+        style='font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #0E1726; margin-bottom: 36px;'
       >
         <img
           alt="Wave Land Logo"
@@ -59,11 +59,12 @@ export const POST: APIRoute = async ({ request }) => {
         </p>
         <p>Thanks so much being here.</p>
         <p>
-          Wave Land is special to me because I get to work with so many amazing people and solve
-          interesting and creative problems when building their websites.
+          Building websites allows me to work with so many amazing people, solving interesting and
+          creative problems.
         </p>
         <p>
-          I've learned a lot along the way, and I want to share as much value as possible with you.
+          I've learned a lot along the way, and I want to share these valuable nuggets whenever
+          possible.
         </p>
         <p>
           In the <a href="https://wavelandweb.com/blog" target="_blank">Wave Land blog</a>, and here
@@ -74,10 +75,18 @@ export const POST: APIRoute = async ({ request }) => {
           along with tips and tricks to help you in your creative journey.
         </p>
         <p>
-          I'm here to help, so if you have questions or need help, drop us a line at
+          I'm here to help, so if you have questions, drop us a line at
           <a href="mailto:hello@wavelandweb.com">hello@wavelandweb.com</a>.
         </p>
-        <p>Stay tuned for more, and thanks again for joining!</p>
+        <p>Thanks again for joining, <br />Josh</p>
+        <p>
+          <a href="https://www.linkedin.com/company/wave-land-web/" target="_blank">LinkedIn</a>
+          |
+          <a href="https://www.instagram.com/wavelandweb/" target="_blank">Instagram</a>
+        </p>
+        <p style="color:#626060;">
+          To unsubscribe, simply reply to this email with "Unsubscribe" in the subject line.
+        </p>
       </body>
     `,
   })
