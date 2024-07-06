@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
   const { data: resendData, error } = await resend.emails.send({
     from: 'Wave Land <josh@wavelandweb.com>',
     to: [email],
-    subject: 'Welcome to the Wave Land Newsletter 🌊',
+    subject: `Welcome to Wave Land, ${email} 🌊`,
     html: /* HTML */ `
       <body
         style='font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #0E1726;'
