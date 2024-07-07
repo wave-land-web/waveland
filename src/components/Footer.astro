@@ -4,7 +4,7 @@ import TitleLogo from './content/TitleLogo.astro'
 import Subscribe from './widgets/Subscribe.astro'
 ---
 
-<footer class="w-full py-4 border-t-[1px] border-grey lsa no-repeat">
+<footer class="w-full pt-4 pb-8 border-t-[1px] border-grey lsa no-repeat">
   <div id="wrapper" class="grid lg:grid-cols-2 gap-8 max-w-screen-4xl m-auto mb-8 px-4 md:px-8">
     <div id="newsletter">
       <h2 class="h2 mb-4 pt-5">Newsletter</h2>
@@ -18,10 +18,43 @@ import Subscribe from './widgets/Subscribe.astro'
       </p>
     </div>
   </div>
-  <div class="flex flex-col md:flex-row justify-between gap-2 max-w-screen-4xl m-auto px-4 md:px-8">
-    <a href="mailto:hello@wavelandweb.com" class="inline-flex gap-2 items-center text-grey"
-      ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
-    </a>
+  <div class="flex flex-col md:flex-row justify-between gap-4 max-w-screen-4xl m-auto px-4 md:px-8">
+    <ul class="inline-flex items-center gap-6">
+      <li>
+        <a
+          href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+          aria-label="Email"
+          title="Email"
+          class="items-center text-grey md:hover:text-purple"
+        >
+          <Icon name="tabler:mail" class="site-icon" /></a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.instagram.com/wavelandweb/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="items-center text-grey md:hover:text-purple"
+          aria-label="Instagram"
+          title="Instagram"
+        >
+          <Icon name="tabler:brand-instagram" class="site-icon" /></a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.linkedin.com/company/wave-land-web/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="items-center text-grey md:hover:text-purple"
+          aria-label="LinkedIn"
+          title="LinkedIn"
+        >
+          <Icon name="tabler:brand-linkedin" class="site-icon" /></a
+        >
+      </li>
+    </ul>
     <p class="text-grey lg:text-end">wavelandweb.com © {new Date().getFullYear()}</p>
   </div>
 </footer>

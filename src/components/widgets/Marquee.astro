@@ -1,0 +1,75 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<div class="marquee lsa no-repeat">
+  <div class="marquee-container">
+    <Icon name="moonbelly-makes" />
+    <Icon name="aaa" />
+    <Icon name="supervoid" />
+    <Icon name="church-dwight" />
+    <Icon name="born-yesterday-bakery" />
+    <Icon name="la-roche-posay" />
+    <Icon name="loreal" />
+    <Icon name="robby-webb" />
+    <Icon name="pmi" />
+  </div>
+
+  <div class="marquee-container">
+    <Icon name="moonbelly-makes" />
+    <Icon name="aaa" />
+    <Icon name="supervoid" />
+    <Icon name="church-dwight" />
+    <Icon name="born-yesterday-bakery" />
+    <Icon name="la-roche-posay" />
+    <Icon name="robby-webb" />
+    <Icon name="loreal" />
+    <Icon name="pmi" />
+  </div>
+</div>
+
+<style>
+  .marquee,
+  .marquee-container {
+    display: flex;
+    gap: clamp(4rem, 10vw, 6rem);
+  }
+
+  .marquee {
+    overflow-x: hidden;
+    mask-image: linear-gradient(
+      to right,
+      hsl(0 0% 0% / 0),
+      hsl(0 0% 0% / 1) 20%,
+      hsl(0 0% 0% / 1) 80%,
+      hsl(0 0% 0% / 0)
+    );
+    user-select: none;
+  }
+
+  .marquee-container {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 100%;
+    z-index: 1;
+    animation: marquee 30s linear 0s infinite;
+  }
+
+  .marquee-container [data-icon] {
+    display: inline-block;
+    width: clamp(75px, 10vw, 100px);
+    height: clamp(75px, 10vw, 100px);
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* This prevents "skipping" on animation reset */
+      transform: translateX(calc(-100% - clamp(4rem, 10vw, 6rem)));
+    }
+  }
+</style>

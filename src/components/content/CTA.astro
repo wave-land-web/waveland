@@ -12,7 +12,18 @@ const { title, description, linkText, linkSrc } = Astro.props
 ---
 
 <div class="grid gap-2 md:gap-4 md:grid-cols-2 mb-40 py-16 lsa lsa-slide-up no-repeat">
-  <h2 class="h2">{title}</h2>
+  <div>
+    <h2 class="h2 md:mb-4">{title}</h2>
+
+    <!-- Desktop Email -->
+    <a
+      href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+      aria-label="Email"
+      title="Email"
+      class="hidden md:inline-flex gap-2 items-center text-grey md:hover:text-purple"
+      ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
+    </a>
+  </div>
   <div>
     <a
       href={linkSrc}
@@ -24,4 +35,13 @@ const { title, description, linkText, linkSrc } = Astro.props
     >
     <p class="site-text">{description}</p>
   </div>
+
+  <!-- Mobile Email -->
+  <a
+    href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+    aria-label="Email"
+    title="Email"
+    class="inline-flex md:hidden gap-2 items-center mt-2 text-grey"
+    ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
+  </a>
 </div>
