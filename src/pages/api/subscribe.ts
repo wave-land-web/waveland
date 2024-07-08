@@ -39,16 +39,24 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Insert form data into the Email table if it doesn't already exist
     await db.insert(Email).values({ email })
+
+    // Add email to the Resend audience
+    await resend.contacts.create({
+      email,
+      unsubscribed: false,
+      audienceId: import.meta.env.RESEND_AUDIENCE_ID,
+    })
   }
 
-  // -------------------------
-  // ------ Send Emails ------
-  // -------------------------
+  // ------------------------
+  // ------ Send Email ------
+  // ------------------------
 
   // If there are no validation errors, send a welcome email to the subscriber
   const { data: welcomeData, error: welcomeError } = await resend.emails.send({
     from: 'Wave Land <josh@wavelandweb.com>',
     to: [email],
+    bcc: ['josh@wavelandweb.com'],
     subject: `Welcome to Wave Land, ${email} 🌊`,
     html: /* HTML */ `
       <body
@@ -98,55 +106,19 @@ export const POST: APIRoute = async ({ request }) => {
     `,
   })
 
-  // Send email to Wave Land to notify admin of new subscribers
-  const { data: notificationData, error: notificationError } = await resend.emails.send({
-    from: 'Wave Land Newsletter <josh@wavelandweb.com>',
-    to: ['josh@wavelandweb.com'],
-    subject: `New Subscriber: ${email}`,
-    html: /* HTML */ `
-      <body
-        style='font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #0E1726; margin-bottom: 36px;'
-      >
-        <img
-          alt="Wave Land Logo"
-          height="auto"
-          src="https://wavelandweb.com/images/title-logo.png"
-          style="display:block;outline:none;border:none;text-decoration:none;margin-top:24px;margin-bottom:24px;margin-right:auto;"
-          width="170"
-        />
-        <p>New subscriber: ${email} 🤘</p>
-        <p>
-          Click
-          <a href="https://studio.astro.build/joshnussbaum89/waveland/data/Email" target="_blank"
-            >here</a
-          >
-          to see all of your newsletter subscribers.
-        </p>
-        <p>
-          Click <a href="https://resend.com/emails" target="_blank">here</a> to manage your audience
-          with Resend.
-        </p>
-      </body>
-    `,
-  })
-
   // Log the response from Resend
   console.log({
     'Welcome Email': {
       data: welcomeData,
       error: welcomeError,
     },
-    'Notification Email': {
-      data: notificationData,
-      error: notificationError,
-    },
   })
 
   // If there was an error sending either email, return an error
-  if (welcomeError || notificationError) {
+  if (welcomeError) {
     return new Response(
       JSON.stringify({
-        error: `There was an error sending the email: ${welcomeError || notificationError}`,
+        error: `There was an error sending the email: ${welcomeError}`,
       }),
       { status: 500 }
     )
