@@ -9,6 +9,10 @@ export const POST: APIRoute = async ({ request }) => {
   const data = await request.formData()
   const email = data.get('email') as string
 
+  // ------------------------------------
+  // ------ Handle Form Validation ------
+  // ------------------------------------
+
   // If for whatever reason HTML form validation fails, return an error
   if (!email) {
     return new Response(
@@ -37,9 +41,12 @@ export const POST: APIRoute = async ({ request }) => {
     await db.insert(Email).values({ email })
   }
 
-  // Resend API
-  // Send a welcome email to the subscriber
-  const { data: resendData, error } = await resend.emails.send({
+  // -------------------------
+  // ------ Send Emails ------
+  // -------------------------
+
+  // If there are no validation errors, send a welcome email to the subscriber
+  const { data: welcomeData, error: welcomeError } = await resend.emails.send({
     from: 'Wave Land <josh@wavelandweb.com>',
     to: [email],
     subject: `Welcome to Wave Land, ${email} 🌊`,
@@ -75,7 +82,7 @@ export const POST: APIRoute = async ({ request }) => {
           along with tips and tricks to help you in your creative journey.
         </p>
         <p>
-          I'm here to help, so if you have questions, drop us a line at
+          Reach out anytime with questions, comments, or just to say hi -
           <a href="mailto:hello@wavelandweb.com">hello@wavelandweb.com</a>.
         </p>
         <p>Thanks again for joining, <br />Josh</p>
@@ -91,14 +98,55 @@ export const POST: APIRoute = async ({ request }) => {
     `,
   })
 
-  // TODO: do we need to log this?
-  console.log({ resendData, error })
+  // Send email to Wave Land to notify admin of new subscribers
+  const { data: notificationData, error: notificationError } = await resend.emails.send({
+    from: 'Wave Land Newsletter <josh@wavelandweb.com>',
+    to: ['josh@wavelandweb.com'],
+    subject: `New Subscriber: ${email}`,
+    html: /* HTML */ `
+      <body
+        style='font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #0E1726; margin-bottom: 36px;'
+      >
+        <img
+          alt="Wave Land Logo"
+          height="auto"
+          src="https://wavelandweb.com/images/title-logo.png"
+          style="display:block;outline:none;border:none;text-decoration:none;margin-top:24px;margin-bottom:24px;margin-right:auto;"
+          width="170"
+        />
+        <p>New subscriber: ${email} 🤘</p>
+        <p>
+          Click
+          <a href="https://studio.astro.build/joshnussbaum89/waveland/data/Email" target="_blank"
+            >here</a
+          >
+          to see all of your newsletter subscribers.
+        </p>
+        <p>
+          Click <a href="https://resend.com/emails" target="_blank">here</a> to manage your audience
+          with Resend.
+        </p>
+      </body>
+    `,
+  })
 
-  // If there was an error sending the email, return an error
-  if (error) {
+  // Log the response from Resend
+  console.log({
+    'Welcome Email': {
+      data: welcomeData,
+      error: welcomeError,
+    },
+    'Notification Email': {
+      data: notificationData,
+      error: notificationError,
+    },
+  })
+
+  // If there was an error sending either email, return an error
+  if (welcomeError || notificationError) {
     return new Response(
       JSON.stringify({
-        error: `There was an error sending the email: ${error}`,
+        error: `There was an error sending the email: ${welcomeError || notificationError}`,
       }),
       { status: 500 }
     )
