@@ -5,6 +5,7 @@ const Email = defineTable({
     id: column.number({ primaryKey: true }),
     email: column.text(),
     createdAt: column.date({ default: sql`CURRENT_TIMESTAMP` }),
+    unsubscribed: column.boolean({ default: false }),
   },
 })
 

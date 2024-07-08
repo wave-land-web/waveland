@@ -7,6 +7,7 @@ export default async function seed() {
       id: 1,
       email: 'josh@wavelandweb.com',
       createdAt: new Date(),
+      unsubscribed: false,
     },
   ])
 }
