@@ -115,7 +115,9 @@ export const POST: APIRoute = async ({ request }) => {
             click the link below.
           </p>
           <p>
-            <a href="http://localhost:4321/api/unsubscribe/${email}" target="_blank">Unsubscribe</a>
+            <a href="https://wavelandweb.com/api/unsubscribe/${email}" target="_blank"
+              >Unsubscribe</a
+            >
           </p>
         </body>
       `,
