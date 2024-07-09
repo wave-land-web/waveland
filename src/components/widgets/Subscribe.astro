@@ -58,7 +58,7 @@
 
     // Get form data and send to API
     const formData = new FormData(e.target)
-    const response = await fetch('/api/subscribe/', {
+    const response = await fetch('/api/subscribe.json/', {
       method: 'POST',
       body: formData,
     })
