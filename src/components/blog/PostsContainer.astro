@@ -4,22 +4,22 @@ import BlogCard from './BlogCard.astro'
 
 export interface Props {
   posts: CollectionEntry<'blog'>[]
+  title?: string
 }
 
-const { posts } = Astro.props
+const { posts, title } = Astro.props
 ---
 
-<div
-  class="grid gap-[clamp(2rem,5vw,3rem)] md:grid-cols-2 lg:grid-cols-3 pt-12 border-t-[1px] border-grey"
->
+<div class="flex flex-col gap-12">
+  <h2 class="lsa no-repeat">{title}</h2>
   {
     posts.map((post) => (
       <BlogCard
         title={post.data.title}
         published={post.data.published}
         slug={`/blog/${post.slug}`}
-        image={post.data.image}
-        imageAlt={post.data.imageAlt}
+        description={post.data.description}
+        tags={post.data.tags}
       />
     ))
   }

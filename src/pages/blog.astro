@@ -1,15 +1,24 @@
 ---
-import { Picture } from 'astro:assets'
 import { getCollection } from 'astro:content'
-import RecentPostsContainer from '../components/blog/RecentPostsContainer.astro'
+import PostsContainer from '../components/blog/PostsContainer.astro'
+import Tags from '../components/blog/Tags.astro'
+import Subscribe from '../components/widgets/Subscribe.astro'
 import Layout from '../layouts/Layout.astro'
-import { createEllipsisText } from '../lib/text'
 
 const allPosts = await getCollection('blog')
 const sortedPosts = allPosts.sort((a, b) => +b.data.id - +a.data.id)
-const newestPost = sortedPosts.at(0)
-const recentPosts = sortedPosts.slice(1, allPosts.length)
-const truncatedDescriptionText = createEllipsisText(newestPost!.data.description, 100)
+
+// Retrieve all unique tags
+// Remove extra spaces
+const tags = allPosts.reduce((acc: string[], post) => {
+  post.data.tags.forEach((tag) => {
+    if (!acc.includes(tag)) {
+      tag.replace(/\s/g, ' ')
+      acc.push(tag)
+    }
+  })
+  return acc
+}, [])
 ---
 
 <Layout
@@ -17,43 +26,25 @@ const truncatedDescriptionText = createEllipsisText(newestPost!.data.description
   description="Musings on web development and the broader creative landscape"
 >
   <header
-    class="max-w-2xl flex flex-col gap-2 md:gap-4 justify-center pt-[calc(4rem+var(--nav-height))] pb-4 text-center lsa no-repeat"
+    class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-24 border-b-[1px] border-grey"
   >
-    <h1 class="text-darkPurple dark:text-purple text-base md:text-lg leading-none">Blog</h1>
-    <p class="font-body text-5xl md:text-6xl leading-tight">We've Been Thinking</p>
-    <p class="max-w-lg m-auto site-text">
-      Musings on web development and the broader creative landscape
+    <div class="max-w-lg lg:max-w-none flex flex-col gap-2 lg:gap-4 lsa lsa-slide-left no-repeat">
+      <h1 class="text-darkPurple dark:text-purple text-base lg:text-lg leading-none">Blog</h1>
+      <p class="font-body text-5xl leading-tight lg:text-6xl lg:leading-tight">
+        Musings on technology and building for the web
+      </p>
+      <Subscribe formId="blog-subscribe" />
+    </div>
+    <p class="max-w-lg site-text lsa lsa-slide-right delay-200 no-repeat">
+      Subscribe to know what we've been up to, along with tips and tricks to help you in your
+      creative journey.
     </p>
   </header>
 
-  <main>
-    <section id="blog-container" class="max-w-6xl mx-auto mb-8">
-      <article class="relative flex flex-col gap-4 mb-12 lsa no-repeat">
-        <a
-          href={`/blog/${newestPost?.slug}`}
-          class="block h-[clamp(250px,50vw,500px)] overflow-hidden shadow-sm rounded-lg"
-        >
-          <Picture
-            src={newestPost!.data.image}
-            class="w-full h-full mb-4 object-cover site-transition-normal md:hover:scale-[1.01]"
-            formats={['avif', 'webp']}
-            alt={newestPost!.data.imageAlt}
-            loading="eager"
-          />
-        </a>
-        <div
-          class="w-full flex flex-col gap-2 rounded-b-lg md:absolute md:bottom-0 md:left-0 md:p-4 md:bg-scrim md:bg-opacity-60 md:backdrop-blur-sm"
-        >
-          <p class="text-grey text-base">{newestPost?.data.published}</p>
-          <h2 class="text-2xl">
-            <a href={`/blog/${newestPost?.slug}`} class="site-link no-underline"
-              >{newestPost?.data.title}</a
-            >
-          </h2>
-          <p class="text-grey text-base">{truncatedDescriptionText}</p>
-        </div>
-      </article>
-      <RecentPostsContainer posts={recentPosts} />
+  <main class="max-w-screen-3xl">
+    <section id="blog-container" class="grid lg:grid-cols-2 gap-12 lg:gap-40 mb-8">
+      <PostsContainer posts={sortedPosts} title="Recent Posts" />
+      <Tags tags={tags} />
     </section>
   </main>
 </Layout>

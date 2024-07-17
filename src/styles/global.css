@@ -5,7 +5,8 @@
 @layer base {
   @font-face {
     font-family: 'Monaspace Argon Var';
-    src: url('/fonts/monaspace-argon-var-regular.woff2') format('woff2'),
+    src:
+      url('/fonts/monaspace-argon-var-regular.woff2') format('woff2'),
       url('/fonts/monaspace-argon-var-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -14,7 +15,8 @@
 
   @font-face {
     font-family: 'Poppins Regular';
-    src: url('/fonts/poppins-regular.woff2') format('woff2'),
+    src:
+      url('/fonts/poppins-regular.woff2') format('woff2'),
       url('/fonts/poppins-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -60,7 +62,7 @@
   }
 
   .site-link-2 {
-    @apply text-darkPurple dark:text-purple md:hover:text-grey;
+    @apply text-darkPurple dark:text-purple md:hover:text-grey site-transition-normal;
   }
 
   .site-icon {
@@ -69,10 +71,6 @@
 
   .site-button {
     @apply px-4 py-2 border border-darkPurple dark:border-purple rounded-md shadow-sm text-darkPurple dark:text-purple md:hover:text-white md:dark:hover:text-darkBlue md:hover:bg-darkPurple md:hover:dark:bg-purple site-transition-normal;
-  }
-
-  .h2 {
-    @apply text-4xl lg:text-5xl font-normal;
   }
 
   .absolute-center {
@@ -98,9 +96,6 @@ html {
 
   /* Font */
   @apply font-mono;
-
-  /* Highlighted text */
-  @apply selection:bg-darkBlue selection:text-white dark:selection:bg-white dark:selection:text-darkBlue;
 
   &[class~='dark'] {
     scrollbar-color: var(--color-white) var(--color-darkBlue);
@@ -134,11 +129,19 @@ h2,
 h3,
 h4,
 h5 {
-  @apply font-body text-balance;
+  @apply font-body text-balance leading-tight md:leading-tight;
 }
 
 h1 {
-  @apply font-body text-5xl md:text-6xl leading-tight;
+  @apply text-5xl md:text-6xl;
+}
+
+h2 {
+  @apply text-4xl lg:text-5xl;
+}
+
+h3 {
+  @apply text-3xl md:text-4xl;
 }
 
 p {
@@ -146,7 +149,7 @@ p {
 }
 
 a {
-  @apply transition;
+  @apply site-transition-normal;
 }
 
 /* Animations */
@@ -205,7 +208,7 @@ a {
   & h5,
   & h6,
   & img {
-    @apply mt-[1lh] leading-tight;
+    @apply mt-[1lh];
   }
 
   & h2 {

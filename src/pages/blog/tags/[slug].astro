@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content'
+import PostsContainer from '../../../components/blog/PostsContainer.astro'
+import Tags from '../../../components/blog/Tags.astro'
+import Layout from '../../../layouts/Layout.astro'
+import { createSlug } from '../../../lib/text'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+
+  // Retrieve all unique tags
+  const allTags = posts.reduce((acc: string[], post) => {
+    post.data.tags.forEach((tag) => {
+      if (!acc.includes(tag)) {
+        acc.push(tag)
+      }
+    })
+    return acc
+  }, [])
+
+  const retrievePostsWithGivenTag = (tag: string) => {
+    return posts.filter((post) => post.data.tags.includes(tag))
+  }
+
+  return allTags.map((tag) => ({
+    params: {
+      slug: createSlug(tag),
+    },
+    props: { tag, allTags, retrievePostsWithGivenTag },
+  }))
+}
+
+const { tag, allTags, retrievePostsWithGivenTag } = Astro.props
+---
+
+<Layout title={`Wave Land Web | ${tag}`}>
+  <header
+    class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-24 border-b-[1px] border-grey lsa no-repeat"
+  >
+    <div class="max-w-lg lg:max-w-none flex flex-col gap-2 lg:gap-4">
+      <h1 class="text-darkPurple dark:text-purple text-base lg:text-lg leading-none">Tag</h1>
+      <p class="font-body text-5xl leading-tight lg:text-6xl lg:leading-tight">
+        {tag.toUpperCase()}
+      </p>
+      <PostsContainer posts={retrievePostsWithGivenTag(tag)} />
+    </div>
+    <Tags tags={allTags} />
+  </header>
+</Layout>

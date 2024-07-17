@@ -1,4 +1,12 @@
-<form id="subscribe" method="POST" class="max-w-96">
+---
+export interface Props {
+  formId: string
+}
+
+const { formId } = Astro.props
+---
+
+<form id={formId} method="POST" class="max-w-96">
   <div class="flex gap-2 mb-2">
     <label for="email" class="sr-only">Email Address</label>
     <input
@@ -17,8 +25,8 @@
   </span>
 </form>
 
-<script is:inline data-astro-rerun>
-  const form = document.querySelector('#subscribe')
+<script is:inline define:vars={{ formId }}>
+  const form = document.querySelector(`#${formId}`)
   const responseMessage = form?.querySelector('#response')
 
   /**
@@ -48,7 +56,7 @@
 
   /**
    * Handle email subscription form submission
-   * @param e - Event
+   * @param e Form submission event
    */
   async function submit(e) {
     e.preventDefault()

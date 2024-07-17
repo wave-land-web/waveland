@@ -66,14 +66,14 @@ const themeStyles = {
 >
   <div
     class:list={[
-      'font-body h2',
+      'font-body text-4xl lg:text-5xl',
       {
         'lg:order-2': isReversed,
       },
     ]}
   >
     <h2 class:list={['inline leading-normal', themeStyles.text]}>{title}</h2>
-    <p class="inline leading-normal font-normal">
+    <p class="inline leading-normal">
       {text}
     </p>
   </div>

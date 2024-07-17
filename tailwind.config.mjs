@@ -30,7 +30,6 @@ export default {
       grey: 'var(--color-grey)',
       scrim: 'var(--color-scrim)',
     },
-
     extend: {
       strokeWidth: {
         1: '1rem',

@@ -1,30 +1,34 @@
 ---
-import { Picture } from 'astro:assets'
+import { createEllipsisText, createSlug, removeSpecialCharactersFromSlug } from '../../lib/text'
 
 export interface Props {
   slug: string
   title: string
   published: string
-  image: ImageMetadata
-  imageAlt: string
+  description: string
+  tags: string[]
 }
 
-const { slug, title, published, image, imageAlt } = Astro.props
+const { slug, title, published, description, tags } = Astro.props
+const truncatedDescriptionText = createEllipsisText(description, 100)
 ---
 
-<article class="lsa lsa-slide-up no-repeat">
-  <a href={slug} class="block h-52 mb-4 overflow-hidden rounded-lg shadow-sm">
-    <Picture
-      src={image}
-      formats={['avif', 'webp']}
-      alt={imageAlt}
-      class="w-full h-full mb-4 object-cover rounded-lg site-transition-normal md:hover:scale-[1.01]"
-    />
-  </a>
-  <div>
-    <p class="mb-2 text-grey text-sm">{published}</p>
-    <h2 class="text-lg">
-      <a href={slug} class="site-link no-underline">{title}</a>
-    </h2>
+<article class="flex flex-col gap-4 lsa lsa-slide-up no-repeat">
+  <!-- Info -->
+  <p class="mb-2 text-grey text-sm">{published}</p>
+  <h3>
+    <a href={slug} class="site-link no-underline">{title}</a>
+  </h3>
+  <p class="text-grey">{truncatedDescriptionText}</p>
+
+  <!-- Tags -->
+  <div class="pb-4 border-b-[1px] border-dashed border-grey">
+    {
+      tags.map((tag) => (
+        <a href={`/blog/tags/${createSlug(tag)}`} class="site-link-2">
+          #{removeSpecialCharactersFromSlug(tag)}
+        </a>
+      ))
+    }
   </div>
 </article>
