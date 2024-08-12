@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content'
-import PostsContainer from '../components/blog/PostsContainer.astro'
-import Tags from '../components/blog/Tags.astro'
-import Subscribe from '../components/widgets/Subscribe.astro'
+import TagContainer from '../components/ui/TagContainer.astro'
+import PostsContainer from '../components/ui/PostsContainer.astro'
+import Subscribe from '../components/ui/Subscribe.astro'
 import Layout from '../layouts/Layout.astro'
 
 const allPosts = await getCollection('blog')
@@ -44,7 +44,7 @@ const tags = allPosts.reduce((acc: string[], post) => {
   <main class="max-w-screen-3xl">
     <section id="blog-container" class="grid lg:grid-cols-2 gap-12 lg:gap-40 mb-8">
       <PostsContainer posts={sortedPosts} title="Recent Posts" />
-      <Tags tags={tags} />
+      <TagContainer tags={tags} />
     </section>
   </main>
 </Layout>
