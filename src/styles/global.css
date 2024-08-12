@@ -24,10 +24,14 @@
   :root {
     --color-white: #fffafa;
     --color-darkBlue: #0e1726;
-    --color-purple: #b775f0;
-    --color-green: #80dbca;
-    --color-orange: #ff757e;
-    --color-blue: #82aaff;
+    --color-purple: #c26dff;
+    --color-purple: oklch(69.7% 0.2235 306.97);
+    --color-green: #65e0cb;
+    --color-green: oklch(82.97% 0.1144 180.59);
+    --color-orange: #ff757f;
+    --color-orange: oklch(74.18% 0.1782 18.25);
+    --color-blue: #7ea9ff;
+    --color-blue: oklch(74.41% 0.1423 264.28);
     --color-grey: #8794a1;
     --color-scrim: #0e1726e6;
   }
