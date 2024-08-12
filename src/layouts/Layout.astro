@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/ui/Footer.astro'
+import Marquee from '../components/ui/Marquee.astro'
 import Navigation from '../components/ui/navigation/Navigation.astro'
 import '../styles/global.css'
 
@@ -89,6 +90,7 @@ const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalU
   <body>
     <Navigation />
     <slot />
+    <Marquee />
     <Footer />
   </body>
 </html>
