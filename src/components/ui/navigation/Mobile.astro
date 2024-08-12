@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
 import TitleLogo from '../../text/TitleLogo.astro'
-import ThemeToggle from '../../ui/ThemeToggle.astro'
 ---
 
 <!-- Mobile nav -->
@@ -13,7 +12,7 @@ import ThemeToggle from '../../ui/ThemeToggle.astro'
 
 <div
   id="mobile-nav-overlay"
-  class="absolute pt-[var(--nav-height)] top-0 left-0 z-20 h-screen w-full px-4 hidden flex-col items-start bg-white dark:bg-darkBlue"
+  class="absolute pt-[var(--nav-height)] top-0 left-0 z-20 h-screen w-full px-4 hidden flex-col items-start bg-darkBlue"
 >
   <TitleLogo class="mb-8" />
   <ul id="mobile-nav-items" class="w-full">
@@ -39,7 +38,6 @@ import ThemeToggle from '../../ui/ThemeToggle.astro'
       >
     </li>
     <li class="w-full flex gap-8 py-6 border-b-[1px] border-dashed border-grey">
-      <ThemeToggle />
       <a href="/rss.xml" class="site-link" aria-label="RSS" title="RSS Feed">
         <Icon name="tabler:rss" class="site-icon" /></a
       >

@@ -27,19 +27,6 @@
     --color-purple: #b775f0;
     --color-green: #80dbca;
     --color-orange: #ff757e;
-    --color-dark-purple: #8619e6;
-    --color-dark-green: #227768;
-    --color-dark-orange: #cf3f49;
-    --color-blue: #4d85ff;
-    --color-grey: #626060;
-    --color-scrim: #fffafae6;
-  }
-  :root[class~='dark'] {
-    --color-white: #fffafa;
-    --color-darkBlue: #0e1726;
-    --color-purple: #b775f0;
-    --color-green: #80dbca;
-    --color-orange: #ff757e;
     --color-blue: #82aaff;
     --color-grey: #8794a1;
     --color-scrim: #0e1726e6;
@@ -56,11 +43,11 @@
   }
 
   .site-link {
-    @apply underline text-darkBlue dark:text-white md:hover:text-darkPurple md:hover:dark:text-purple md:group-hover:text-purple site-transition-normal;
+    @apply underline text-white md:hover:text-purple md:group-hover:text-purple site-transition-normal;
   }
 
   .site-link-2 {
-    @apply text-darkPurple dark:text-purple md:hover:text-grey site-transition-normal;
+    @apply text-purple md:hover:text-grey site-transition-normal;
   }
 
   .site-icon {
@@ -68,7 +55,7 @@
   }
 
   .site-button {
-    @apply px-4 py-2 border border-darkPurple dark:border-purple rounded-md shadow-sm text-darkPurple dark:text-purple md:hover:text-white md:dark:hover:text-darkBlue md:hover:bg-darkPurple md:hover:dark:bg-purple site-transition-normal;
+    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple md:hover:text-darkBlue md:hover:bg-purple site-transition-normal;
   }
 
   .absolute-center {
@@ -89,19 +76,15 @@
 
 html {
   /* Scrollbar */
-  scrollbar-color: var(--color-darkBlue) var(--color-white);
+  scrollbar-color: var(--color-white) var(--color-darkBlue);
   scrollbar-width: thin;
 
   /* Font */
   @apply font-mono;
-
-  &[class~='dark'] {
-    scrollbar-color: var(--color-white) var(--color-darkBlue);
-  }
 }
 
 body {
-  @apply text-darkBlue bg-white dark:text-white dark:bg-darkBlue;
+  @apply text-white bg-darkBlue;
 }
 
 section {
@@ -223,7 +206,7 @@ a {
       * Manually adding link styles here
       * See: https://docs.astro.build/en/reference/errors/csssyntax-error/
       */
-    @apply text-darkPurple dark:text-purple md:hover:text-grey;
+    @apply text-purple md:hover:text-grey;
   }
 
   & p:not(header > p),
@@ -261,7 +244,7 @@ a {
   }
 
   & p code {
-    @apply bg-darkPurple dark:bg-purple text-white dark:text-darkBlue rounded-sm p-1 box-decoration-clone;
+    @apply bg-purple text-darkBlue rounded-sm p-1 box-decoration-clone;
   }
 
   & em {

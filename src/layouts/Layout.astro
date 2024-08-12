@@ -95,36 +95,6 @@ const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalU
   </body>
 </html>
 
-<script is:inline>
-  /**
-   * Set the theme based on the user's preferences
-   */
-  const theme = (() => {
-    // Check if localStorage exists and return the value
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme')
-    }
-
-    // Check if the user display settings are dark or light
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light'
-    }
-  })()
-
-  if (theme === 'light') {
-    // set the theme to light
-    document.documentElement.classList.remove('dark')
-  } else {
-    // set the theme to dark
-    document.documentElement.classList.add('dark')
-  }
-
-  // save the theme in localStorage
-  window.localStorage.setItem('theme', theme ?? '')
-</script>
-
 <script is:inline data-astro-rerun>
   /**
    * Animate sections with the class `lsa` when they come into view

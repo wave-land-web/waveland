@@ -1,14 +1,22 @@
 ---
+import { Icon } from 'astro-icon/components'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Wave Land Web | Unsubscribed" description="asdf">
   <header
-    class="max-w-2xl flex flex-col gap-4 justify-center pt-[calc(4rem+var(--nav-height))] mb-24 text-center lsa no-repeat"
+    class="max-w-2xl flex flex-col gap-4 justify-center items-center pt-[calc(4rem+var(--nav-height))] mb-24 text-center lsa no-repeat"
   >
-    <h1 class="text-darkPurple dark:text-purple text-base md:text-lg leading-none">Unsubscribed</h1>
-    <p class="font-body text-5xl md:text-6xl leading-tight">You have successfully unsubscribed</p>
+    <h1 class="text-purple text-base md:text-lg leading-none">Unsubscribed</h1>
+    <p class="font-body text-5xl md:text-6xl leading-tight lg:leading-tight">
+      You have successfully unsubscribed
+    </p>
     <p class="max-w-lg m-auto site-text">You will no longer receive emails from us.</p>
-    <a href="/" class="site-button">Return to the home page</a>
+    <a
+      class="site-button inline-flex items-center justify-center gap-2 w-fit my-4 site-text"
+      href="/"
+      aria-label="Back to site"
+      ><Icon name="tabler:arrow-narrow-left" class="site-icon" />Return home</a
+    >
   </header>
 </Layout>
