@@ -10,7 +10,7 @@ const { tag } = Astro.props
 
 <a
   href={`/blog/tags/${createSlug(tag)}`}
-  class="inline-block px-2 py-1 bg-green text-darkBlue lowercase rounded-full lg:hover:scale-[1.01] lg:hover:shadow-md"
+  class="inline-block px-2 py-1 bg-green text-darkBlue lowercase rounded-full hover:scale-[1.01] hover:shadow-md"
 >
   #{removeSpecialCharactersFromSlug(tag)}
 </a>

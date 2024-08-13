@@ -42,7 +42,7 @@ const { tag, allTags, retrievePostsWithGivenTag } = Astro.props
   >
     <div class="max-w-lg lg:max-w-none flex flex-col gap-2 lg:gap-4">
       <h1 class="text-purple text-base lg:text-lg leading-none">Tag</h1>
-      <p class="mb-12 font-body text-5xl leading-tight lg:text-6xl lg:leading-tight">
+      <p class="mb-12 font-header text-5xl leading-tight lg:text-6xl lg:leading-tight">
         {tag.toUpperCase()}
       </p>
       <PostsContainer posts={retrievePostsWithGivenTag(tag)} />

@@ -28,6 +28,7 @@ export default {
       darkOrange: 'var(--color-dark-orange)',
       blue: 'var(--color-blue)',
       grey: 'var(--color-grey)',
+      darkGrey: 'var(--color-darkGrey)',
       scrim: 'var(--color-scrim)',
     },
     extend: {
@@ -36,8 +37,8 @@ export default {
         2: '2rem',
       },
       fontFamily: {
-        body: ['Poppins Regular', ...defaultTheme.fontFamily.sans],
-        mono: ['Monaspace Argon Var', ...defaultTheme.fontFamily.mono],
+        header: ['Poppins Regular', ...defaultTheme.fontFamily.sans],
+        body: ['Monaspace Argon Var', ...defaultTheme.fontFamily.mono],
       },
     },
   },

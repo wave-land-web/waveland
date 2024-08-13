@@ -33,6 +33,7 @@
     --color-blue: #7ea9ff;
     --color-blue: oklch(74.41% 0.1423 264.28);
     --color-grey: #8794a1;
+    --color-darkGrey: #3e4c59;
     --color-scrim: #0e1726e6;
   }
 }
@@ -47,11 +48,11 @@
   }
 
   .site-link {
-    @apply underline text-white md:hover:text-purple md:group-hover:text-purple site-transition-normal;
+    @apply underline text-white hover:text-purple group-hover:text-purple site-transition-normal;
   }
 
   .site-link-2 {
-    @apply text-purple md:hover:text-grey site-transition-normal;
+    @apply text-purple hover:text-grey site-transition-normal;
   }
 
   .site-icon {
@@ -59,7 +60,7 @@
   }
 
   .site-button {
-    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple md:hover:text-darkBlue md:hover:bg-purple site-transition-normal;
+    @apply px-4 py-2 border border-purple rounded-md shadow-sm text-purple hover:text-darkBlue hover:bg-purple site-transition-normal;
   }
 
   .absolute-center {
@@ -84,7 +85,7 @@ html {
   scrollbar-width: thin;
 
   /* Font */
-  @apply font-mono;
+  @apply font-body;
 }
 
 body {
@@ -114,7 +115,7 @@ h2,
 h3,
 h4,
 h5 {
-  @apply font-body text-balance leading-tight md:leading-tight;
+  @apply font-header text-balance leading-tight md:leading-tight;
 }
 
 h1 {
@@ -210,7 +211,7 @@ a {
       * Manually adding link styles here
       * See: https://docs.astro.build/en/reference/errors/csssyntax-error/
       */
-    @apply text-purple md:hover:text-grey;
+    @apply text-purple hover:text-grey;
   }
 
   & p:not(header > p),

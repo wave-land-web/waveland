@@ -20,14 +20,14 @@ const { title, description, linkText, linkSrc } = Astro.props
       href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
       aria-label="Email"
       title="Email"
-      class="hidden md:inline-flex gap-2 items-center text-grey md:hover:text-purple"
+      class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple"
       ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
     </a>
   </div>
   <div>
     <a
       href={linkSrc}
-      class="flex justify-between items-center mb-2 md:mb-4 font-body text-4xl lg:text-5xl site-link-2"
+      class="flex justify-between items-center mb-2 md:mb-4 font-header text-4xl lg:text-5xl site-link-2"
       target="_blank"
       rel="noopener noreferrer"
       >{linkText}
