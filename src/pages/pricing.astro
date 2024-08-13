@@ -1,94 +1,39 @@
 ---
-import { Icon } from 'astro-icon/components'
-import Card from '../components/ui/Card.astro'
+// TODO: Clean this up
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
+import PricingCard from '../components/ui/PricingCard.astro'
 
-const pricingOptionData = [
+const websiteDetails = [
   {
-    title: 'Foundation',
-    monthlyPrice: '$300',
-    yearlyPrice: '$255',
-    features: [
-      {
-        title: 'Build a Solid Foundation',
-        description: 'Custom design & development for up to 5 pages.',
-      },
-      {
-        title: 'Worry-Free Maintenance',
-        description: '3 hours of monthly maintenance to keep everything running smoothly.',
-      },
-      {
-        title: 'Strategic Guidance',
-        description: 'One monthly strategy call.',
-      },
-      {
-        title: 'Insightful Analytics',
-        description: 'First-party analytics.',
-      },
-      {
-        title: 'Need More Time?',
-        description: 'Additional hours billed at our standard hourly rate.',
-      },
-    ],
-    buttonText: 'Get Started',
+    summary: 'High Performance',
+    description:
+      'Expect fast load times and seamless performance across all devices, ensuring your visitors have a smooth and satisfying experience.',
   },
   {
-    title: 'Pro',
-    monthlyPrice: '$500',
-    yearlyPrice: '$425',
-    features: [
-      {
-        title: 'Grow Your Business',
-        description: 'Custom design & development for up to 10 pages.',
-      },
-      {
-        title: 'Enhanced Maintenance',
-        description: '5 hours of monthly maintenance for those who want a little extra care.',
-      },
-      {
-        title: 'Weekly Check-Ins',
-        description: 'One weekly strategy call.',
-      },
-      {
-        title: 'Insightful Analytics',
-        description: 'First-party analytics.',
-      },
-      {
-        title: 'Need More Time?',
-        description: 'Additional hours billed at our standard hourly rate.',
-      },
-    ],
-    buttonText: 'Get Started',
+    summary: 'Custom Design & Branding',
+    description:
+      'We create one-of-a-kind designs that capture the essence of your brand, making sure your website stands out in a crowded digital landscape.',
   },
   {
-    title: 'Enterprise',
-    price: 'Custom Pricing',
-    features: [
-      {
-        title: 'Scalable Solutions',
-        description: 'Custom design & development for large-scale projects.',
-      },
-      {
-        title: 'Dedicated Support',
-        description: '24/7 priority care and customer support.',
-      },
-      {
-        title: 'Advanced Integrations',
-        description:
-          'Seamlessly integrate advanced APIs, content management systems, and e-commerce solutions.',
-      },
-      {
-        title: 'Custom Strategy & Analytics',
-        description:
-          'Ongoing brainstorming and analytics to develop a strategy that drives results.',
-      },
-      {
-        title: 'Flexible Add-Ons',
-        description: 'Optional add-ons for specialized services.',
-      },
-    ],
-    buttonText: 'Get Started',
+    summary: 'Ongoing Partnership',
+    description:
+      "Our relationship doesn't end once your site is live. We offer continuous digital strategy, mentorship, and partnership to help your business grow and adapt.",
+  },
+  {
+    summary: 'SEO Optimizations',
+    description:
+      'Benefit from on-site and technical SEO optimizations that make your website easier to find and rank higher in search engines.',
+  },
+  {
+    summary: 'Sustainable & Accessible',
+    description:
+      'We design with sustainability in mind, focusing on accessibility and user experience to ensure your site is inclusive and user-friendly.',
+  },
+  {
+    summary: 'User-Centric Approach',
+    description:
+      'We prioritize empathy for your users, leading to increased trust, stronger connections, and higher conversion rates.',
   },
 ]
 ---
@@ -119,107 +64,130 @@ const pricingOptionData = [
 
       <div class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- 1 -->
-        <Card
-          class="flex flex-col h-auto gap-8 p-8 border border-dashed border-darkGrey hover:border-purple transition duration-300"
-        >
-          <h3 class="text-purple text-base md:text-lg leading-none">
-            {pricingOptionData[0].title}
-          </h3>
-          <p id="monthly-pricing">
-            <span class="text-3xl">{pricingOptionData[0].monthlyPrice}</span> /month
-          </p>
-          <p id="yearly-pricing" class="hidden">
-            <span class="text-3xl">{pricingOptionData[0].yearlyPrice}</span> /month <span
-              class="text-grey text-sm">(save 15%)</span
-            >
-          </p>
-          <a href="/#contact" class="site-button text-center text-xl">
-            {pricingOptionData[0].buttonText}
-          </a>
-          <ul>
+        <PricingCard
+          title="Foundation"
+          monthlyPrice="$300"
+          yearlyPrice="$255"
+          features={[
             {
-              pricingOptionData[0].features.map((feature) => (
-                <li class="flex gap-4 items-center mb-4 text-grey">
-                  <Icon name="tabler:check" class="site-icon text-purple flex-shrink-0" />
-                  <div>
-                    <span class="text-white">{feature.title}: </span>
-                    <span>{feature.description}</span>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </Card>
+              title: 'Build a Solid Foundation',
+              description: 'Custom design & development for up to 5 pages.',
+            },
+            {
+              title: 'Worry-Free Maintenance',
+              description: '3 hours of monthly maintenance to keep everything running smoothly.',
+            },
+            {
+              title: 'Strategic Guidance',
+              description: 'One monthly strategy call.',
+            },
+            {
+              title: 'Insightful Analytics',
+              description: 'First-party analytics.',
+            },
+            {
+              title: 'Need More Time?',
+              description: 'Additional hours billed at our standard hourly rate.',
+            },
+          ]}
+          buttonText="Get Started"
+        />
 
         <!-- 2 -->
-        <Card
-          class="flex flex-col h-auto gap-8 p-8 border border-dashed border-purple transition duration-300"
-        >
-          <div class="flex items-center justify-between">
-            <h3 class="text-purple text-base md:text-lg leading-none">
-              {pricingOptionData[1].title}
-            </h3>
-            <span class="bg-purple text-darkBlue text-xs p-2 uppercase rounded-full shadow-lg"
-              >Most Popular</span
-            >
-          </div>
-          <p id="monthly-pricing">
-            <span class="text-3xl">{pricingOptionData[1].monthlyPrice}</span> /month
-          </p>
-          <p id="yearly-pricing" class="hidden">
-            <span class="text-3xl">{pricingOptionData[1].yearlyPrice}</span> /month <span
-              class="text-grey text-sm">(save 15%)</span
-            >
-          </p>
-          <a href="/#contact" class="site-button text-center text-xl">
-            {pricingOptionData[1].buttonText}
-          </a>
-          <ul>
+        <PricingCard
+          title="Pro"
+          monthlyPrice="$500"
+          yearlyPrice="$425"
+          features={[
             {
-              pricingOptionData[1].features.map((feature) => (
-                <li class="flex gap-4 items-center mb-4 text-grey">
-                  <Icon name="tabler:check" class="site-icon text-purple flex-shrink-0" />
-                  <div>
-                    <span class="text-white">{feature.title}: </span>
-                    <span>{feature.description}</span>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </Card>
+              title: 'Grow Your Business',
+              description: 'Custom design & development for up to 10 pages.',
+            },
+            {
+              title: 'Enhanced Maintenance',
+              description: '5 hours of monthly maintenance for those who want a little extra care.',
+            },
+            {
+              title: 'Weekly Check-Ins',
+              description: 'One weekly strategy call.',
+            },
+            {
+              title: 'Insightful Analytics',
+              description: 'First-party analytics.',
+            },
+            {
+              title: 'Need More Time?',
+              description: 'Additional hours billed at our standard hourly rate.',
+            },
+          ]}
+          buttonText="Get Started"
+          class="border-purple"
+        />
 
         <!-- 3 -->
-        <Card
-          class="flex flex-col h-auto gap-8 p-8 border border-dashed border-darkGrey hover:border-purple transition duration-300"
-        >
-          <h3 class="text-purple text-base md:text-lg leading-none">
-            {pricingOptionData[2].title}
-          </h3>
-          <p class="text-3xl">
-            {pricingOptionData[2].price}
-          </p>
-          <a href="/#contact" class="site-button text-center text-xl">
-            {pricingOptionData[2].buttonText}
-          </a>
-          <ul>
+        <PricingCard
+          title="Enterprise"
+          price="Custom Pricing"
+          dynamicPrice={false}
+          features={[
             {
-              pricingOptionData[2].features.map((feature) => (
-                <li class="flex gap-4 items-center mb-4 text-grey">
-                  <Icon name="tabler:check" class="site-icon text-purple flex-shrink-0" />
-                  <div>
-                    <span class="text-white">{feature.title}: </span>
-                    <span>{feature.description}</span>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </Card>
+              title: 'Scalable Solutions',
+              description: 'Custom design & development for large-scale projects.',
+            },
+            {
+              title: 'Dedicated Support',
+              description: '24/7 priority care and customer support.',
+            },
+            {
+              title: 'Advanced Integrations',
+              description:
+                'Seamlessly integrate advanced APIs, content management systems, and e-commerce solutions.',
+            },
+            {
+              title: 'Custom Strategy & Analytics',
+              description:
+                'Ongoing brainstorming and analytics to develop a strategy that drives results.',
+            },
+            {
+              title: 'Flexible Add-Ons',
+              description: 'Optional add-ons for specialized services.',
+            },
+          ]}
+          buttonText="Get Started"
+        />
+      </div>
+    </section>
+
+    <section id="faq" class="pb-0">
+      <div class="grid gap-8 md:gap-16 md:grid-cols-2 mb-40 py-16 lsa no-repeat">
+        <h2>Every Website Includes:</h2>
+
+        <div>
+          {
+            websiteDetails.map((detail) => (
+              <details class="mb-4 group">
+                <summary class="text-xl flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-300 cursor-pointer">
+                  {detail.summary}
+                </summary>
+                <p class="text-grey py-4">{detail.description}</p>
+              </details>
+            ))
+          }
+        </div>
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  summary::after {
+    content: '＋';
+  }
+
+  details[open] summary::after {
+    content: '－';
+  }
+</style>
 
 <script>
   const toggle = document.getElementById('toggle') as HTMLInputElement
@@ -228,6 +196,19 @@ const pricingOptionData = [
   const yearly = document.getElementById('yearly')
   const monthlyPricing = document.querySelectorAll('#monthly-pricing')
   const yearlyPricing = document.querySelectorAll('#yearly-pricing')
+  const details = document.querySelectorAll('details')
+
+  // Add onclick listeners
+  details.forEach((targetDetail) => {
+    targetDetail.addEventListener('click', () => {
+      // Close all details that are not targetDetail
+      details.forEach((detail) => {
+        if (detail !== targetDetail) {
+          detail.removeAttribute('open')
+        }
+      })
+    })
+  })
 
   toggle.addEventListener('change', () => {
     if (toggle.checked) {

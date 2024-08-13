@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components'
+import Card from './Card.astro'
+
+export interface Props {
+  title: string
+  monthlyPrice?: string
+  yearlyPrice?: string
+  price?: string
+  dynamicPrice?: boolean
+  features: {
+    title: string
+    description: string
+  }[]
+  buttonText: string
+  class?: string
+}
+
+const { title, monthlyPrice, yearlyPrice, price, dynamicPrice = true, features, buttonText, class: className } = Astro.props
+---
+
+<Card
+  class={`${className} flex flex-col h-auto gap-8 p-8 border border-dashed border-darkGrey hover:border-purple transition duration-300`}
+>
+  <h3 class="text-purple text-base md:text-lg leading-none">
+    {title}
+  </h3>
+  
+  {
+    dynamicPrice ? (
+      <p id="monthly-pricing">
+        <span class="text-3xl">{monthlyPrice}</span> /month
+      </p>
+      <p id="yearly-pricing" class="hidden">
+        <span class="text-3xl">{yearlyPrice}</span> /month <span class="text-grey text-sm">(save 15%)</span>
+      </p> 
+    ) : (
+      <p class="text-3xl">{price}</p>
+    )
+  }
+
+  <a href="/#contact" class="site-button text-center text-xl">
+    {buttonText}
+  </a>
+  <ul>
+    {
+      features.map((feature) => (
+        <li class="flex gap-4 items-center mb-4 text-grey">
+          <Icon name="tabler:check" class="site-icon text-purple flex-shrink-0" />
+          <div>
+            <span class="text-white">{feature.title}: </span>
+            <span>{feature.description}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Card>
