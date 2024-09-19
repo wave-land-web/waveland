@@ -1,5 +1,4 @@
 ---
-// TODO: Clean this up
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import PricingCard from '../components/ui/PricingCard.astro'
@@ -202,19 +201,7 @@ const websiteDetails = [
   const yearlyPricing = document.querySelectorAll('#yearly-pricing')
   const details = document.querySelectorAll('details')
 
-  // Add onclick listeners
-  details.forEach((targetDetail) => {
-    targetDetail.addEventListener('click', () => {
-      // Close all details that are not targetDetail
-      details.forEach((detail) => {
-        if (detail !== targetDetail) {
-          detail.removeAttribute('open')
-        }
-      })
-    })
-  })
-
-  toggle.addEventListener('change', () => {
+  function handlePricingToggle() {
     if (toggle.checked) {
       // Move the dot to the right
       dot?.classList.add('translate-x-6')
@@ -246,5 +233,17 @@ const websiteDetails = [
       monthlyPricing.forEach((price) => price.classList.remove('hidden'))
       yearlyPricing.forEach((price) => price.classList.add('hidden'))
     }
+  }
+
+  toggle.addEventListener('change', handlePricingToggle)
+  details.forEach((targetDetail) => {
+    // Close all details that are not targetDetail
+    targetDetail.addEventListener('click', () => {
+      details.forEach((detail) => {
+        if (detail !== targetDetail) {
+          detail.removeAttribute('open')
+        }
+      })
+    })
   })
 </script>
