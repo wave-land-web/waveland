@@ -1,0 +1,77 @@
+<div class="swiper">
+  <div class="swiper-wrapper mb-8 site-text">
+    <blockquote class="swiper-slide flex flex-col gap-4">
+      <p>
+        "We reached out to Wave Land to help us develop a custom website that couldn't be made with
+        even the most advanced templates. Their ability to guide us towards achieving our vision
+        with both creative and technical expertise made creating our site a breeze. We had a very
+        unique vision for the site that wasn't something we'd seen done before, and Wave Land made
+        it look easy."
+      </p>
+      <cite
+        ><a
+          class="site-link-2"
+          href="https://supervoid.tv"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          - Drew Mercedante, Supervoid
+        </a></cite
+      >
+    </blockquote>
+    <blockquote class="swiper-slide flex flex-col gap-4">
+      <p>
+        "I loved thinking and collaborating with Josh at Wave Land. He got me excited about my
+        website, which not only affected how I branded myself for my online presence, but also
+        influenced some of the ideas in my own research. Our work together connected so deeply to
+        how I understand what I do, communicate it to others, and how I fundamentally do this work
+        daily. I can't thank Josh and Wave Land enough!"
+      </p>
+      <cite
+        ><a
+          class="site-link-2"
+          href="https://laurenvogelstein.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          - Lauren Vogelstein, PhD
+        </a></cite
+      >
+    </blockquote>
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<style is:inline>
+  :root {
+    --swiper-theme-color: var(--color-purple);
+    --swiper-pagination-bullet-inactive-color: var(--color-grey);
+    --swiper-pagination-bullet-size: 0.75rem;
+    --swiper-pagination-bullet-horizontal-gap: 0.5rem;
+  }
+
+  .swiper-pagination {
+    position: static;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper'
+  import 'swiper/css'
+  import 'swiper/css/pagination'
+  import { Autoplay, Pagination } from 'swiper/modules'
+
+  const swiper = new Swiper('.swiper', {
+    modules: [Pagination, Autoplay],
+    grabCursor: true,
+    loop: true,
+    autoplay: {
+      delay: 10000,
+      pauseOnMouseEnter: true,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  })
+</script>
