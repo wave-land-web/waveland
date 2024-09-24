@@ -1,0 +1,96 @@
+---
+import { Icon } from 'astro-icon/components'
+import PageHeader from '../components/ui/PageHeader.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Wave Land Web | Pricing">
+  <PageHeader
+    title="Contact"
+    subtitle="Get in touch with us"
+    bodyText="Ready to start your project? Fill out the form below and we'll get back to you as soon as possible."
+  />
+
+  <main>
+    <section class="pt-0 text-center lsa lsa-slide-up no-repeat delay-300">
+      <form
+        method="POST"
+        name="contactForm"
+        action="/success/"
+        class="max-w-2xl m-auto flex flex-col gap-8"
+        data-netlify="true"
+      >
+        <div class="w-full flex flex-col md:flex-row gap-8 justify-between">
+          <div class="w-full">
+            <label for="first-name" class="sr-only">First Name</label>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              autocomplete="given-name"
+              placeholder="First Name"
+              required
+              class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm site-transition-normal"
+            />
+          </div>
+
+          <div class="w-full">
+            <label for="last-name" class="sr-only">Last Name</label>
+            <input
+              type="text"
+              name="last-name"
+              id="last-name"
+              autocomplete="family-name"
+              placeholder="Last Name (Optional)"
+              class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm site-transition-normal"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="email" class="sr-only">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autocomplete="email"
+            placeholder="Email"
+            required
+            class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm site-transition-normal"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="sr-only">Describe Your Project</label>
+          <textarea
+            name="message"
+            id="message"
+            rows="4"
+            placeholder="Describe your project"
+            required
+            class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm site-transition-normal"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="site-button w-fit-content m-auto site-text"
+          aria-label="Send Message"
+          title="Send Message">Send Message</button
+        >
+      </form>
+    </section>
+
+    <section class="lsa lsa-slide-up no-repeat delay-300">
+      <div class="max-w-2xl m-auto text-center">
+        <h2 class="mb-4">Or reach out directly</h2>
+        <a
+          href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+          aria-label="Email"
+          title="Email"
+          class="inline-flex gap-2 items-center text-grey hover:text-purple"
+          ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
