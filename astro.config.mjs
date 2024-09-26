@@ -1,10 +1,8 @@
-import db from '@astrojs/db'
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import partytown from '@astrojs/partytown'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import webVitals from '@astrojs/web-vitals'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 import { remarkReadingTime } from './src/lib/remark-reading-time.mjs'
@@ -24,10 +22,8 @@ export default defineConfig({
     tailwind({
       nesting: true,
     }),
-    db(),
     mdx(),
     partytown(),
-    webVitals(),
   ],
   adapter: netlify({
     imageCDN: false,

@@ -1,8 +1,6 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
-import { db, Email, like } from 'astro:db'
-import { createNewUser, resubscribeUser } from '../../lib/newsletter'
 import { resend } from '../../lib/resend'
 
 /**
@@ -27,40 +25,24 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   // -------------------------
-  // ------ DB + Resend ------
+  // ------ Create User ------
   // -------------------------
 
-  // Check if the user already exists in the database and is subscribed
-  const existingUser = await db.select().from(Email).where(like(Email.email, email))
-  const userExistsAndIsSubscribed = existingUser.length && !existingUser[0].unsubscribed
-  const userExistsAndIsUnsubscribed = existingUser.length && existingUser[0].unsubscribed
+  // Subscribe the user to the Resend audience
+  const { data: subscribeData, error: subscribeError } = await resend.contacts.create({
+    email,
+    audienceId: import.meta.env.RESEND_AUDIENCE_ID,
+  })
 
-  // If the user doesn't exist >> create a new user
-  if (!existingUser.length) {
-    await createNewUser(email)
-  }
-
-  // If user is not subscribed >> resubscribe them
-  if (userExistsAndIsUnsubscribed) {
-    await resubscribeUser(email)
-  }
-
-  // If user is already subscribed >> return an error
-  if (userExistsAndIsSubscribed) {
-    return new Response(
-      JSON.stringify({
-        error: `Email address ${email} is already subscribed`,
-      }),
-      { status: 400 }
-    )
-  }
+  // Log the response from Resend
+  console.log(subscribeData, subscribeError)
 
   // ------------------------
   // ------ Send Email ------
   // ------------------------
 
   // Send an email to the user confirming their subscription
-  const { data: welcomeData, error: welcomeError } = await resend.emails.send({
+  const { data: welcomeEmailData, error: welcomeEmailError } = await resend.emails.send({
     from: 'Wave Land <josh@wavelandweb.com>',
     to: [email],
     bcc: ['josh@wavelandweb.com'],
@@ -119,13 +101,23 @@ export const POST: APIRoute = async ({ request }) => {
   })
 
   // Log the response from Resend
-  console.log(welcomeData, welcomeError)
+  console.log(welcomeEmailData, welcomeEmailError)
 
-  // If there was an error sending the email >> return an error
-  if (welcomeError) {
+  // If there was an error subscribing the email address >> return an error
+  if (subscribeError) {
     return new Response(
       JSON.stringify({
-        error: `There was an error sending the email: ${welcomeError}`,
+        error: `There was an error subscribing the email address: ${subscribeError?.message}`,
+      }),
+      { status: 500 }
+    )
+  }
+
+  // If there was an error sending the email >> return an error
+  if (welcomeEmailError) {
+    return new Response(
+      JSON.stringify({
+        error: `There was an error sending the email: ${welcomeEmailError}`,
       }),
       { status: 500 }
     )

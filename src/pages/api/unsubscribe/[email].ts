@@ -1,7 +1,6 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
-import { unsubscribeUser } from '../../../lib/newsletter'
 import { resend } from '../../../lib/resend'
 
 /**
@@ -23,11 +22,17 @@ export const GET: APIRoute = async ({ params, redirect }) => {
     })
   }
 
-  // Handle unsubscription
-  await unsubscribeUser(email)
+  // Handle unsubscription from the Resend audience
+  const { data: unsubscribeData, error: unsubscribeError } = await resend.contacts.remove({
+    email,
+    audienceId: import.meta.env.RESEND_AUDIENCE_ID,
+  })
+
+  // Log the response from Resend
+  console.log(unsubscribeData, unsubscribeError)
 
   // Send an email to the user confirming their unsubscription
-  const { data: unsubscribedData, error: unsubscribedError } = await resend.emails.send({
+  const { data: unsubscribeEmailData, error: unsubscribeEmailError } = await resend.emails.send({
     from: 'Wave Land <hello@wavelandweb.com>',
     to: email,
     bcc: ['josh@wavelandweb.com'],
@@ -53,13 +58,23 @@ export const GET: APIRoute = async ({ params, redirect }) => {
   })
 
   // Log the response from Resend
-  console.log(unsubscribedData, unsubscribedError)
+  console.log(unsubscribeEmailData, unsubscribeEmailError)
 
-  // If there was an error sending the email >> return an error
-  if (unsubscribedError) {
+  // If there was an error unsubscribing the user  >> return an error
+  if (unsubscribeError?.message) {
     return new Response(
       JSON.stringify({
-        error: `There was an error sending the email: ${unsubscribedError}`,
+        error: `There was an error unsubscribing ${email}. Please try again later. Error: ${unsubscribeError.message}`,
+      }),
+      { status: 500 }
+    )
+  }
+
+  // If there was an error sending the unsubscription email >> return an error
+  if (unsubscribeEmailError?.message) {
+    return new Response(
+      JSON.stringify({
+        error: `There was an error sending the unsubscription email to ${email}. Please try again later. Error: ${unsubscribeEmailError.message}`,
       }),
       { status: 500 }
     )
