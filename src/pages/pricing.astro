@@ -2,6 +2,7 @@
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import PricingCard from '../components/ui/PricingCard.astro'
+import CTA from '../components/text/CTA.astro'
 
 const websiteDetails = [
   {
@@ -160,8 +161,8 @@ const websiteDetails = [
       </div>
     </section>
 
-    <section id="faq" class="pb-0">
-      <div class="grid gap-8 md:gap-16 md:grid-cols-2 mb-40 py-16 lsa no-repeat">
+    <section id="faq" class="lsa lsa-slide-up no-repeat">
+      <div class="grid gap-8 md:gap-16 md:grid-cols-2">
         <h2><span class="text-green">Every Website</span> Includes:</h2>
 
         <div>
@@ -177,6 +178,15 @@ const websiteDetails = [
           }
         </div>
       </div>
+    </section>
+
+    <section id="get-started" class="lsa lsa-slide-up no-repeat">
+      <CTA
+        title="Get Started"
+        description="Ready for the next step? Schedule a complimentary strategy session or send us an email to discuss your project."
+        linkText="Free Intro Call"
+        linkSrc="https://calendly.com/wavelandweb/15-min-meeting"
+      />
     </section>
   </main>
 </Layout>
