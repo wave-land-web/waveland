@@ -1,8 +1,10 @@
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import partytown from '@astrojs/partytown'
+import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import sanity from '@sanity/astro'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 import { remarkReadingTime } from './src/lib/remark-reading-time.mjs'
@@ -24,6 +26,15 @@ export default defineConfig({
     }),
     mdx(),
     partytown(),
+    sanity({
+      projectId: 'uuas57um',
+      dataset: 'production',
+      apiVersion: '2024-10-20',
+      // Set useCdn to false if you're building statically.
+      useCdn: false,
+      studioBasePath: '/admin',
+    }),
+    react(),
   ],
   adapter: netlify({
     imageCDN: false,
