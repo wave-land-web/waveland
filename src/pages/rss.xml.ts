@@ -1,19 +1,29 @@
 import rss from '@astrojs/rss'
+import type { SanityDocument } from '@sanity/client'
 import type { APIRoute } from 'astro'
-import { getCollection } from 'astro:content'
+import { sanityClient } from 'sanity:client'
 
 export const GET: APIRoute = async (context) => {
-  const blog = await getCollection('blog')
+  // Fetch all posts
+  const posts = (await sanityClient.fetch(
+    `*[_type == "post"] | order(publishedAt desc) {
+      title,
+      slug,
+      publishedAt,
+      description,
+    }`
+  )) as SanityDocument[]
 
   return rss({
-    title: "Wave Land Web's Blog",
-    description: 'Musings on web development and the broader creative landscape',
+    title: 'Wave Land Web | Blog',
+    description:
+      "Musings on technology and building for the web. Subscribe to know what we've been up to, along with tips and tricks to help you in your creative journey.",
     site: context.site || '',
-    items: blog.map((post) => ({
-      title: post.data.title,
-      pubDate: new Date(post.data.published),
-      description: post.data.description,
-      link: `/blog/${post.slug}/`,
+    items: posts.map((post) => ({
+      title: post.title,
+      pubDate: new Date(post.publishedAt),
+      description: post.description,
+      link: `/blog/${post.slug.current}/`,
     })),
   })
 }
