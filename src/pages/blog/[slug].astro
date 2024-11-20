@@ -62,7 +62,7 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
       <div class="flex flex-wrap gap-8 justify-between mt-[1lh]">
         {
           previousPost && (
-            <a href={previousPost.slug.current} class="mr-auto">
+            <a href={`/blog/${previousPost.slug.current}`} class="mr-auto">
               Previous Post
             </a>
           )
@@ -70,7 +70,7 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
 
         {
           nextPost && (
-            <a href={nextPost.slug.current} class="ml-auto">
+            <a href={`/blog/${nextPost.slug.current}`} class="ml-auto">
               Next Post
             </a>
           )
