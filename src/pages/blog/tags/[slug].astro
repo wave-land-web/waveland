@@ -1,41 +1,41 @@
 ---
-import { getCollection } from 'astro:content'
+import type { SanityDocument } from '@sanity/client'
 import PostsContainer from '../../../components/ui/PostsContainer.astro'
 import TagContainer from '../../../components/ui/TagContainer.astro'
 import Layout from '../../../layouts/Layout.astro'
-import { createSlug } from '../../../lib/text'
+import { loadQuery } from '../../../sanity/lib/load-query'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog')
+  const { data: allTags } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "tag"]`,
+  })
 
-  // Retrieve all unique tags
-  const allTags = posts.reduce((acc: string[], post) => {
-    post.data.tags.forEach((tag) => {
-      if (!acc.includes(tag)) {
-        acc.push(tag)
-      }
-    })
-    return acc
-  }, [])
-
-  const retrievePostsWithGivenTag = (tag: string) => {
-    return posts.filter((post) => post.data.tags.includes(tag))
-  }
-
-  return allTags.map((tag) => ({
-    params: {
-      slug: createSlug(tag),
-    },
-    props: { tag, allTags, retrievePostsWithGivenTag },
-  }))
+  return allTags.map((tag) => {
+    return {
+      params: {
+        slug: tag.slug.current,
+      },
+      props: {
+        allTags,
+      },
+    }
+  })
 }
 
-const { tag, allTags, retrievePostsWithGivenTag } = Astro.props
+const { params, props } = Astro
+
+// Load the posts with the given tag
+const { data: postsWithGivenTag } = await loadQuery<SanityDocument[]>({
+  query: `*[_type == "post" && "${params.slug.toLowerCase().replace(/-/g, ' ')}" in tag[]->title]`,
+})
+
+// Find the tag with the given slug
+const currentTag = props.allTags.find((tag) => tag.slug.current === params.slug)
 ---
 
 <Layout
-  title={`Wave Land Web | ${tag}`}
-  description={`Wave Land Web blog posts tagged with "${tag}"`}
+  title={`Wave Land Web | ${currentTag?.title}`}
+  description={`Wave Land Web blog posts tagged with "${currentTag?.title}"`}
 >
   <header
     class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-24 lsa no-repeat"
@@ -43,10 +43,10 @@ const { tag, allTags, retrievePostsWithGivenTag } = Astro.props
     <div class="max-w-lg lg:max-w-none flex flex-col gap-2 lg:gap-4">
       <h1 class="text-purple text-base lg:text-lg leading-none">Tag</h1>
       <p class="mb-12 font-header text-5xl leading-tight lg:text-6xl lg:leading-tight">
-        {tag.toUpperCase()}
+        {currentTag?.title.toUpperCase()}
       </p>
-      <PostsContainer posts={retrievePostsWithGivenTag(tag)} />
+      <PostsContainer posts={postsWithGivenTag} />
     </div>
-    <TagContainer tags={allTags} />
+    <TagContainer tags={props.allTags} />
   </header>
 </Layout>

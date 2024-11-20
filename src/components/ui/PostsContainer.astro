@@ -1,9 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content'
+import type { SanityDocument } from '@sanity/client'
 import BlogCard from './BlogCard.astro'
 
 export interface Props {
-  posts: CollectionEntry<'blog'>[]
+  posts: SanityDocument[]
   title?: string
 }
 
@@ -12,15 +12,5 @@ const { posts, title } = Astro.props
 
 <div class="flex flex-col gap-12">
   {title && <h2 class="lsa no-repeat">{title}</h2>}
-  {
-    posts.map((post) => (
-      <BlogCard
-        title={post.data.title}
-        published={post.data.published}
-        slug={`/blog/${post.slug}`}
-        description={post.data.description}
-        tags={post.data.tags}
-      />
-    ))
-  }
+  {posts.map((post) => <BlogCard post={post} />)}
 </div>

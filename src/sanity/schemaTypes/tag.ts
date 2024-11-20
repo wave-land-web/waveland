@@ -26,5 +26,18 @@ export default defineType({
           }
         }),
     }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      description:
+        'The "slug" will be the URL path for your post - ex/ www.wavelandweb.com/blog/tags/web-development',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) =>
+        Rule.required().error('Please create your own, or click "generate" to add a slug'),
+    }),
   ],
 })

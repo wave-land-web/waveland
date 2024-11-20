@@ -28,7 +28,7 @@ function createSlug(title: string) {
  * @returns The slug without special characters.
  */
 function removeSpecialCharactersFromSlug(slug: string) {
-  return slug.replace(/[^a-zA-Z0-9-]/g, '') // 'hello-world!' -> 'helloworld'
+  return slug.replace(/[^a-zA-Z0-9]/g, '') // 'hello-world!' -> 'helloworld'
 }
 
 export { createEllipsisText, createSlug, removeSpecialCharactersFromSlug }

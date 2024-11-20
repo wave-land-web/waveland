@@ -7,7 +7,6 @@ import tailwind from '@astrojs/tailwind'
 import sanity from '@sanity/astro'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
-import { remarkReadingTime } from './src/lib/remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,7 +31,7 @@ export default defineConfig({
       apiVersion: '2024-10-20',
       // Set useCdn to false if you're building statically.
       useCdn: false,
-      studioBasePath: '/admin',
+      studioBasePath: '/studio',
     }),
     react(),
   ],
@@ -40,10 +39,4 @@ export default defineConfig({
     imageCDN: false,
     cacheOnDemandPages: true,
   }),
-  markdown: {
-    remarkPlugins: [remarkReadingTime],
-    shikiConfig: {
-      theme: 'houston',
-    },
-  },
 })

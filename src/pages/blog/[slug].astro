@@ -1,18 +1,85 @@
 ---
-import { getCollection } from 'astro:content'
+import type { SanityDocument } from '@sanity/client'
+import { Icon } from 'astro-icon/components'
+import PortableText from '../../components/text/PortableText.astro'
+import PostHeader from '../../components/ui/PostHeader.astro'
+import Layout from '../../layouts/Layout.astro'
+import { loadQuery } from '../../sanity/lib/load-query'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog')
-  return posts.map((post) => ({
-    params: {
-      slug: post.slug,
-    },
-    props: { post },
-  }))
+  const { data: allPosts } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "post"] | order(publishedAt asc)`,
+  })
+
+  return allPosts.map((post) => {
+    return {
+      params: {
+        slug: post.slug.current,
+      },
+      props: {
+        allPosts,
+      },
+    }
+  })
 }
 
-const { post } = Astro.props
-const { Content } = await post.render()
+// Get page data and props
+const { params, props } = Astro
+
+// Load the current post
+const { data: currentPost } = await loadQuery<SanityDocument>({
+  query: `*[_type == "post" && slug.current == $slug][0] {
+    title,
+    publishedAt,
+    description,
+    mainImage,
+    body,
+    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
+  }`,
+  params,
+})
+
+// Pagination: previous and next post
+const currentPostIndex = props.allPosts.findIndex((p) => p.slug.current === params.slug)
+const previousPost = props.allPosts[currentPostIndex - 1] || null
+const nextPost = props.allPosts[currentPostIndex + 1] || null
 ---
 
-<Content />
+<Layout title={currentPost.title} description={currentPost.description}>
+  <main id="blog-layout" class="max-w-4xl flex flex-col gap-[1lh] mb-16 md:mb-24">
+    <PostHeader
+      image={currentPost.mainImage}
+      imageAlt={currentPost.mainImage.alt}
+      title={currentPost.title}
+      published={currentPost.publishedAt}
+      minutesRead={currentPost.estimatedReadingTime}
+    />
+
+    <section id="post" class="container-sm flex flex-col gap-[1lh] py-0">
+      <PortableText portableText={currentPost.body} />
+
+      <!-- Pagination -->
+      <div class="flex flex-wrap gap-8 justify-between mt-[1lh]">
+        {
+          previousPost && (
+            <a href={previousPost.slug.current} class="mr-auto">
+              Previous Post
+            </a>
+          )
+        }
+
+        {
+          nextPost && (
+            <a href={nextPost.slug.current} class="ml-auto">
+              Next Post
+            </a>
+          )
+        }
+      </div>
+    </section>
+    <a
+      class="site-button inline-flex items-center justify-center gap-2 w-fit my-4 site-text"
+      href="/blog"><Icon name="tabler:arrow-narrow-left" class="site-icon" />Back to blog</a
+    >
+  </main>
+</Layout>

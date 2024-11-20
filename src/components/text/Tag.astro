@@ -1,16 +1,17 @@
 ---
-import { createSlug, removeSpecialCharactersFromSlug } from '../../lib/text'
+import type { SanityDocument } from '@sanity/client'
+import { removeSpecialCharactersFromSlug } from '../../lib/text'
 
 export interface Props {
-  tag: string
+  tag: SanityDocument
 }
 
 const { tag } = Astro.props
 ---
 
 <a
-  href={`/blog/tags/${createSlug(tag)}`}
-  class="inline-block px-2 py-1 bg-green text-darkBlue lowercase rounded-full hover:scale-[1.01] hover:shadow-md"
+  href={`/blog/tags/${tag.slug.current}`}
+  class="inline-block px-2 py-1 bg-green text-darkBlue lowercase rounded-full hover:scale-[1.02] hover:shadow-md"
 >
-  #{removeSpecialCharactersFromSlug(tag)}
+  #{removeSpecialCharactersFromSlug(tag.slug.current)}
 </a>

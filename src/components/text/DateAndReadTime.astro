@@ -1,0 +1,23 @@
+---
+export interface Props {
+  published: string
+  minutesRead: number
+  class?: string
+}
+
+const { published, minutesRead, class: className } = Astro.props
+---
+
+<p class={`${className} flex gap-2 font-header text-purple text-base md:text-lg`}>
+  <time
+    >{
+      new Date(published).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    }</time
+  >
+  <span class="text-purple">•</span>
+  <time datetime={`PT${minutesRead}M`}>{minutesRead} min</time> read
+</p>

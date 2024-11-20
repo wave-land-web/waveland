@@ -1,0 +1,7 @@
+---
+import { Code } from 'astro:components'
+
+const { language, code } = Astro.props.node // `.node` is the current node in the PortableText
+---
+
+<Code lang={language} code={code} theme="houston" />

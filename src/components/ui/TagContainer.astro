@@ -1,8 +1,9 @@
 ---
+import type { SanityDocument } from '@sanity/client'
 import Tag from '../text/Tag.astro'
 
 export interface Props {
-  tags: string[]
+  tags: SanityDocument[]
 }
 
 const { tags } = Astro.props

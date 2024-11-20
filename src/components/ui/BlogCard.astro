@@ -1,34 +1,29 @@
 ---
-import { createEllipsisText, createSlug, removeSpecialCharactersFromSlug } from '../../lib/text'
+import type { SanityDocument } from '@sanity/client'
+import { createEllipsisText } from '../../lib/text'
+import DateAndReadTime from '../text/DateAndReadTime.astro'
 
 export interface Props {
-  slug: string
-  title: string
-  published: string
-  description: string
-  tags: string[]
+  post: SanityDocument
 }
 
-const { slug, title, published, description, tags } = Astro.props
-const truncatedDescriptionText = createEllipsisText(description, 100)
+const { post } = Astro.props
+
+// Create ellipsis text for description
+const truncatedDescriptionText = createEllipsisText(post.description, 100)
 ---
 
-<article class="flex flex-col gap-4 lsa lsa-slide-up no-repeat">
+<article
+  class="flex flex-col gap-4 pb-4 border-b-[1px] border-dashed border-grey lsa lsa-slide-up no-repeat"
+>
   <!-- Info -->
-  <p class="mb-2 text-grey text-sm">{published}</p>
+  <DateAndReadTime
+    class="justify-start"
+    published={post.publishedAt}
+    minutesRead={post.estimatedReadingTime}
+  />
   <h3>
-    <a href={slug} class="site-link no-underline">{title}</a>
+    <a href={`/blog/${post.slug.current}`} class="site-link no-underline">{post.title}</a>
   </h3>
   <p class="text-grey">{truncatedDescriptionText}</p>
-
-  <!-- Tags -->
-  <div class="pb-4 border-b-[1px] border-dashed border-grey">
-    {
-      tags.map((tag) => (
-        <a href={`/blog/tags/${createSlug(tag)}`} class="site-link-2">
-          #{removeSpecialCharactersFromSlug(tag)}
-        </a>
-      ))
-    }
-  </div>
 </article>

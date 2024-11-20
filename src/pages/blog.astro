@@ -1,24 +1,24 @@
 ---
-import { getCollection } from 'astro:content'
+import type { SanityDocument } from '@sanity/client'
+import { sanityClient } from 'sanity:client'
 import PostsContainer from '../components/ui/PostsContainer.astro'
 import Subscribe from '../components/ui/Subscribe.astro'
 import TagContainer from '../components/ui/TagContainer.astro'
 import Layout from '../layouts/Layout.astro'
 
-const allPosts = await getCollection('blog')
-const sortedPosts = allPosts.sort((a, b) => +b.data.id - +a.data.id)
+// Fetch all posts
+const posts = (await sanityClient.fetch(
+  `*[_type == "post"] | order(publishedAt desc) {
+    title,
+    slug,
+    publishedAt,
+    description,
+    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)
+  }`
+)) as SanityDocument[]
 
-// Retrieve all unique tags
-// Remove extra spaces
-const tags = allPosts.reduce((acc: string[], post) => {
-  post.data.tags.forEach((tag) => {
-    if (!acc.includes(tag)) {
-      tag.replace(/\s/g, ' ')
-      acc.push(tag)
-    }
-  })
-  return acc
-}, [])
+// Fetch all tags
+const tags = (await sanityClient.fetch(`*[_type == "tag"]`)) as SanityDocument[]
 ---
 
 <Layout
@@ -43,7 +43,7 @@ const tags = allPosts.reduce((acc: string[], post) => {
 
   <main class="max-w-screen-3xl">
     <section id="blog-container" class="grid lg:grid-cols-2 gap-12 lg:gap-40 mb-8">
-      <PostsContainer posts={sortedPosts} title="Recent Posts" />
+      <PostsContainer posts={posts} title="Recent Posts" />
       <TagContainer tags={tags} />
     </section>
   </main>
