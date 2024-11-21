@@ -1,4 +1,3 @@
-import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import partytown from '@astrojs/partytown'
 import react from '@astrojs/react'
@@ -23,7 +22,6 @@ export default defineConfig({
     tailwind({
       nesting: true,
     }),
-    mdx(),
     partytown(),
     sanity({
       projectId: 'uuas57um',
