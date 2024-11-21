@@ -40,6 +40,12 @@
   }
 }
 
+/* TODO: Get rid of this 
+  1. Create components where possible
+  2. Use CSS variables
+  3. Update Tailwind config
+*/
+
 @layer components {
   .site-transition-normal {
     @apply transition duration-200 ease-in-out;
