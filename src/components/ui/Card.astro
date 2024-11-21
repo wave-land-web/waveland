@@ -6,6 +6,6 @@ export interface Props {
 const { class: className } = Astro.props
 ---
 
-<div class:list={['relative w-full h-96 rounded-2xl shadow-lg', className]}>
+<article class:list={[`${className} relative w-full rounded-2xl shadow-lg`, className]}>
   <slot />
-</div>
+</article>

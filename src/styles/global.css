@@ -92,8 +92,7 @@ html {
   scrollbar-color: var(--color-white) var(--color-darkBlue);
   scrollbar-width: thin;
 
-  /* Font */
-  @apply font-body;
+  @apply font-body scroll-pt-8 scroll-smooth;
 }
 
 body {
@@ -101,7 +100,7 @@ body {
 }
 
 section {
-  @apply py-16 md:py-24;
+  @apply py-20 md:py-28;
 }
 
 nav,

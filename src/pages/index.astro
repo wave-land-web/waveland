@@ -7,6 +7,7 @@ import CTA from '../components/text/CTA.astro'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
 import TitleLogo from '../components/text/TitleLogo.astro'
+import Card from '../components/ui/Card.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
 
@@ -41,12 +42,8 @@ const testimonialData = [
   >
     <div>
       <TitleLogo class="mb-6 lsa lsa-slide-left no-repeat" />
-      <div id="services" class="flex flex-wrap gap-4">
-        <Pill
-          text="Digital Strategy"
-          textColor="text-darkBlue"
-          class="lsa delay-100 no-repeat"
-        />
+      <div class="flex flex-wrap gap-4">
+        <Pill text="Digital Strategy" textColor="text-darkBlue" class="lsa delay-100 no-repeat" />
         <Pill
           text="User-focused Web Design"
           backgroundColor="bg-orange"
@@ -84,7 +81,7 @@ const testimonialData = [
         image={supervoidImage}
         imageAlt="Supervoid website on a mobile device"
         variant={1}
-        class="py-16 md:py-32 xl:pb-48"
+        class="py-16 md:py-24"
       />
       <TextAndImage
         title="Feed your imagination."
@@ -94,7 +91,7 @@ const testimonialData = [
         imageAlt="Born Yesterday Bakery website on a mobile device"
         variant={2}
         isReversed={true}
-        class="py-16 md:py-32 xl:pb-48"
+        class="py-16 md:py-24"
       />
       <TextAndImage
         title="Amplify your voice."
@@ -103,13 +100,51 @@ const testimonialData = [
         image={robbyWebbImage}
         imageAlt="Robby Webb website on a mobile device"
         variant={3}
-        class="py-16 md:py-32 xl:pb-48"
+        class="py-16 md:py-24"
       />
+    </section>
+
+    <section id="services">
+      <h2 class="mb-8 lsa no-repeat">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 text-darkBlue">
+        <Card
+          class="p-8 md:row-span-2 flex flex-col justify-end gap-4 bg-purple lsa lsa-slide-up no-repeat"
+        >
+          <span>01</span>
+          <h3>Digital Strategy</h3>
+          <p>
+            We help you define clear, actionable goals for your online presence, ensuring every
+            decision supports your vision and drives results.
+          </p>
+        </Card>
+
+        <Card
+          class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100 no-repeat"
+        >
+          <span>02</span>
+          <h3>User-focused Web Design</h3>
+          <p>
+            Our designs prioritize your audience's needs, creating intuitive, accessible, and
+            visually stunning experiences that build trust and boost conversions.
+          </p>
+        </Card>
+
+        <Card
+          class="p-8 flex flex-col justify-end gap-4 bg-green lsa lsa-slide-up delay-200 no-repeat"
+        >
+          <span>03</span>
+          <h3>Custom Web Development</h3>
+          <p>
+            We craft fast, reliable, and scalable websites tailored to your unique goals, leveraging
+            the latest technologies to bring your ideas to life.
+          </p>
+        </Card>
+      </div>
     </section>
 
     <section
       id="testimonials"
-      class="max-w-screen-md m-auto pt-0 text-center lsa lsa-slide-up no-repeat"
+      class="max-w-screen-md m-auto text-center lsa lsa-slide-up no-repeat"
     >
       <h2 class="mb-8">Testimonials</h2>
       <Testimonials data={testimonialData} />
