@@ -51,10 +51,6 @@
     @apply transition duration-200 ease-in-out;
   }
 
-  .site-text {
-    @apply text-lg md:text-xl;
-  }
-
   .site-link {
     @apply underline text-white hover:text-purple group-hover:text-purple site-transition-normal;
   }
@@ -129,7 +125,8 @@ h1 {
   @apply text-5xl md:text-6xl;
 }
 
-h2 {
+h2,
+.h2 {
   @apply text-4xl lg:text-5xl;
 }
 
@@ -138,11 +135,17 @@ h3 {
 }
 
 p {
-  @apply text-pretty;
+  @apply text-pretty leading-normal;
 }
 
 a {
   @apply site-transition-normal;
+}
+
+p,
+a,
+button {
+  @apply text-lg md:text-xl;
 }
 
 /* Animations */

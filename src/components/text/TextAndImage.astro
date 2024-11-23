@@ -66,14 +66,14 @@ const themeStyles = {
 >
   <div
     class:list={[
-      'font-header text-4xl lg:text-5xl',
+      'font-header text-4xl lg:text-5xl leading-normal lg:leading-normal',
       {
         'lg:order-2': isReversed,
       },
     ]}
   >
-    <h2 class:list={['inline leading-normal', themeStyles.text]}>{title}</h2>
-    <p class="inline leading-normal">
+    <h2 class:list={['inline', themeStyles.text]}>{title}</h2>
+    <p class="inline h2">
       {text}
     </p>
   </div>
@@ -87,7 +87,10 @@ const themeStyles = {
     <Icon name={icon} class="absolute-center h-4/5" />
     <a
       href={link}
-      class:list={['absolute bottom-4 text-darkBlue', themeStyles.link]}
+      class:list={[
+        'absolute bottom-4 text-base text-darkBlue hover:text-darkGrey',
+        themeStyles.link,
+      ]}
       target="_blank"
       rel="noopener noreferrer"
       ><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
