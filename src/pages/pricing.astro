@@ -6,6 +6,11 @@ import CTA from '../components/text/CTA.astro'
 
 const websiteDetails = [
   {
+    summary: 'Ongoing Partnership',
+    description:
+      "Our relationship doesn't end once your site is live. We offer continuous digital strategy, mentorship, and partnership to help your business grow and adapt. All packages include 24/7 customer support via email and optional video calls.",
+  },
+  {
     summary: 'High Performance',
     description:
       'Expect fast load times and seamless performance across all devices, ensuring your visitors have a smooth and satisfying experience.',
@@ -14,11 +19,6 @@ const websiteDetails = [
     summary: 'Custom Design & Branding',
     description:
       'We create one-of-a-kind designs that capture the essence of your brand, making sure your website stands out in a crowded digital landscape.',
-  },
-  {
-    summary: 'Ongoing Partnership',
-    description:
-      "Our relationship doesn't end once your site is live. We offer continuous digital strategy, mentorship, and partnership to help your business grow and adapt.",
   },
   {
     summary: 'SEO Optimizations',
@@ -51,46 +51,53 @@ const websiteDetails = [
   <main>
     <section id="pricing-options" class="pt-4">
       <!-- Payment toggle -->
-      <label for="toggle" class="flex items-center justify-center mb-8 gap-4 cursor-pointer">
-        <span id="monthly" class="text-white transition duration-300">Monthly</span>
-        <div class="relative">
-          <input id="toggle" type="checkbox" class="sr-only" />
-          <div class="block bg-purple w-14 h-8 rounded-full"></div>
-          <div
-            id="dot"
-            class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition duration-300"
-          >
+      <div class="flex flex-col items-center gap-4 mb-8">
+        <label for="toggle" class="flex items-center gap-4 cursor-pointer">
+          <span id="monthly" class="text-white transition duration-300">Monthly</span>
+          <div class="relative">
+            <input id="toggle" type="checkbox" class="sr-only" />
+            <div class="block bg-purple w-14 h-8 rounded-full"></div>
+            <div
+              id="dot"
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition duration-300"
+            >
+            </div>
           </div>
-        </div>
-        <span id="yearly" class="text-grey transition duration-300">Yearly</span>
-      </label>
+          <span id="yearly" class="text-grey transition duration-300">Yearly</span>
+        </label>
+        <p class="text-sm text-grey text-center max-w-md">
+          <em
+            >* After 12 months of on-time payments, your website is paid in full, and the hosting
+            price is reduced to $25/month. Ask us about our flexible add-ons!</em
+          >
+        </p>
+      </div>
 
       <div class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- 1 -->
         <PricingCard
           title="Foundation"
-          monthlyPrice="$300"
-          yearlyPrice="$255"
+          monthlyPrice="$100"
+          yearlyPrice="$85"
           features={[
             {
               title: 'Build a Solid Foundation',
-              description: 'Custom design & development for up to 5 pages.',
+              description:
+                'Create a custom, high-performing landing page in less time. For those who want to focus on the essentials now and get fancy later.',
             },
             {
-              title: 'Worry-Free Maintenance',
-              description: '3 hours of monthly maintenance to keep everything running smoothly.',
+              title: 'Generate Business',
+              description:
+                'Tell your story, build an email list, and covert users into paying customers with a unique single-page website.',
             },
             {
-              title: 'Strategic Guidance',
-              description: 'One monthly strategy call.',
+              title: 'Flexible Add-Ons',
+              description:
+                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
             },
             {
-              title: 'Insightful Analytics',
-              description: 'First-party analytics.',
-            },
-            {
-              title: 'Need More Time?',
-              description: 'Additional hours billed at our standard hourly rate.',
+              title: 'Need Extras?',
+              description: 'Additional development is billed at our standard hourly rate.',
             },
           ]}
           buttonText="Get Started"
@@ -99,38 +106,35 @@ const websiteDetails = [
         <!-- 2 -->
         <PricingCard
           title="Pro"
-          monthlyPrice="$500"
-          yearlyPrice="$425"
+          monthlyPrice="$300"
+          yearlyPrice="$255"
           features={[
             {
               title: 'Grow Your Business',
-              description: 'Custom design & development for up to 10 pages.',
+              description: 'Custom design & development for up to 5 pages.',
             },
             {
-              title: 'Enhanced Maintenance',
-              description: '5 hours of monthly maintenance for those who want a little extra care.',
+              title: 'Express Yourself',
+              description:
+                'More real estate for blogging, images and stories about your team, or detailed product and service descriptions.',
             },
             {
-              title: 'Weekly Check-Ins',
-              description: 'One weekly strategy call.',
+              title: 'Flexible Add-Ons',
+              description:
+                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
             },
             {
-              title: 'Insightful Analytics',
-              description: 'First-party analytics.',
-            },
-            {
-              title: 'Need More Time?',
-              description: 'Additional hours billed at our standard hourly rate.',
+              title: 'Need Extras?',
+              description: 'Additional development is billed at our standard hourly rate.',
             },
           ]}
           buttonText="Get Started"
-          class="border-purple"
         />
 
         <!-- 3 -->
         <PricingCard
           title="Enterprise"
-          price="Custom Pricing"
+          price="Need More?"
           dynamicPrice={false}
           features={[
             {
@@ -138,22 +142,14 @@ const websiteDetails = [
               description: 'Custom design & development for large-scale projects.',
             },
             {
-              title: 'Dedicated Support',
-              description: '24/7 priority care and customer support.',
-            },
-            {
-              title: 'Advanced Integrations',
+              title: 'Solve Unique Business Needs',
               description:
-                'Seamlessly integrate advanced APIs, content management systems, and e-commerce solutions.',
-            },
-            {
-              title: 'Custom Strategy & Analytics',
-              description:
-                'Ongoing brainstorming and analytics to develop a strategy that drives results.',
+                'Add more pages, a content management system (CMS), e-commerce, expressive animations, email marketing, analytics, social media management, and more.',
             },
             {
               title: 'Flexible Add-Ons',
-              description: 'Optional add-ons for specialized services.',
+              description:
+                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
             },
           ]}
           buttonText="Get Started"
@@ -172,7 +168,7 @@ const websiteDetails = [
                 <summary class="text-xl flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-300 cursor-pointer">
                   {detail.summary}
                 </summary>
-                <p class="text-grey py-4">{detail.description}</p>
+                <p class="py-4 text-grey text-base">{detail.description}</p>
               </details>
             ))
           }
