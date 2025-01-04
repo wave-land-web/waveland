@@ -43,19 +43,13 @@ const testimonialData = [
     <div>
       <TitleLogo class="mb-6 lsa lsa-slide-left no-repeat" />
       <div class="flex flex-wrap gap-4">
-        <Pill text="Digital Strategy" textColor="text-darkBlue" class="lsa delay-100 no-repeat" />
         <Pill
           text="Web Design & Development"
-          backgroundColor="bg-orange"
-          textColor="text-darkBlue"
-          class="lsa delay-200 no-repeat"
+          href="#services"
+          class="bg-purple lsa delay-100 no-repeat"
         />
-        <Pill
-          text="Education & Community Support"
-          backgroundColor="bg-green"
-          textColor="text-darkBlue"
-          class="lsa delay-300 no-repeat"
-        />
+        <Pill text="Digital Strategy" href="#services" class="bg-orange lsa delay-200 no-repeat" />
+        <Pill text="UX/UI" href="#services" class="bg-green lsa delay-300 no-repeat" />
       </div>
     </div>
     <div class="max-w-[575px]">
@@ -111,17 +105,6 @@ const testimonialData = [
           class="p-8 md:row-span-2 flex flex-col justify-end gap-4 bg-purple lsa lsa-slide-up no-repeat"
         >
           <span>01</span>
-          <h3>Digital Strategy</h3>
-          <p class="text-base">
-            We help you define clear, actionable goals for your online presence, ensuring every
-            decision supports your vision and drives results.
-          </p>
-        </Card>
-
-        <Card
-          class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100 no-repeat"
-        >
-          <span>02</span>
           <h3>Web Design & Development</h3>
           <p class="text-base">
             Our custom websites combine striking design with cutting-edge technology, delivering
@@ -130,14 +113,25 @@ const testimonialData = [
         </Card>
 
         <Card
+          class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100 no-repeat"
+        >
+          <span>02</span>
+          <h3>Digital Strategy</h3>
+          <p class="text-base">
+            We help you define clear, actionable goals for your online presence, ensuring every
+            decision supports your vision and drives results.
+          </p>
+        </Card>
+
+        <Card
           class="p-8 flex flex-col justify-end gap-4 bg-green lsa lsa-slide-up delay-200 no-repeat"
         >
           <span>03</span>
-          <h3>Education & Community Support</h3>
+          <h3>UX/UI</h3>
           <p class="text-base">
-            We support our fellow creatives and web professionals with tips and guidance for
-            building outstanding websites and products that delight clients, captivate audiences,
-            and serve users seamlessly.
+            Transform your website into a powerful tool for generating leads, increasing traffic,
+            and achieving measurable results with thoughtfully designed digital experiences that are
+            a joy to use.
           </p>
         </Card>
       </div>
