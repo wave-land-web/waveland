@@ -2,11 +2,14 @@
 import { Icon } from 'astro-icon/components'
 import Desktop from './Desktop.astro'
 import Mobile from './Mobile.astro'
+
+const currentUrlPath = Astro.url.pathname
 ---
 
 <nav
   class="fixed left-0 right-0 w-full min-h-[var(--nav-height)] z-20 flex items-center justify-between gap-4 bg-darkBlue"
   aria-label="Site Menu"
+  data-current-url-path={currentUrlPath}
 >
   <a
     href="/"

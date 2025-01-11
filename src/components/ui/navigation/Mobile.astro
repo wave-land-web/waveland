@@ -15,7 +15,7 @@ import TitleLogo from '../../text/TitleLogo.astro'
 
 <div
   id="mobile-nav-overlay"
-  class="absolute pt-[var(--nav-height)] top-0 left-0 z-20 h-screen w-full px-4 hidden flex-col items-start bg-darkBlue"
+  class="absolute pt-[var(--nav-height)] top-0 left-0 z-20 overflow-y-auto h-screen w-full px-4 hidden flex-col items-start bg-darkBlue"
 >
   <TitleLogo class="mb-8" />
   <ul id="mobile-nav-items" class="w-full">
@@ -39,6 +39,13 @@ import TitleLogo from '../../text/TitleLogo.astro'
         href="/pricing"
         class="site-link no-underline flex gap-2 items-center text-base uppercase"
         aria-label="Pricing"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Pricing</a
+      >
+    </li>
+    <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
+      <a
+        href="/blog"
+        class="site-link no-underline flex gap-2 items-center text-base uppercase"
+        aria-label="Blog"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Blog</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
