@@ -1,7 +1,7 @@
 ---
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 import DateAndReadTime from '../text/DateAndReadTime.astro'
-import SanityHeaderImage from './SanityHeaderImage.astro'
+import SanityImage from './SanityImage.astro'
 
 export interface Props {
   title: string
@@ -19,5 +19,5 @@ const { title, published, minutesRead, image, imageAlt } = Astro.props
 >
   <DateAndReadTime class="justify-center" published={published} minutesRead={minutesRead} />
   <h1 class="leading-tight lg:leading-tight">{title}</h1>
-  <SanityHeaderImage image={image} alt={imageAlt} />
+  <SanityImage image={image} alt={imageAlt} class="h-[clamp(250px,50vw,500px)]" />
 </header>

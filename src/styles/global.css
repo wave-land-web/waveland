@@ -34,7 +34,8 @@
     --color-orange: oklch(74.18% 0.1782 18.25);
     --color-blue: #7ea9ff;
     --color-blue: oklch(74.41% 0.1423 264.28);
-    --color-grey: #8794a1;
+    --color-lightGrey: #cfd1d4;
+    --color-grey: #878b93;
     --color-darkGrey: #3e4c59;
     --color-scrim: #0e1726e6;
   }
@@ -121,7 +122,8 @@ h5 {
   @apply font-header text-balance leading-tight md:leading-tight;
 }
 
-h1 {
+h1,
+.h1 {
   @apply text-5xl md:text-6xl;
 }
 
@@ -130,7 +132,8 @@ h2,
   @apply text-4xl lg:text-5xl;
 }
 
-h3 {
+h3,
+.h3 {
   @apply text-3xl md:text-4xl;
 }
 
@@ -146,6 +149,11 @@ p,
 a,
 button {
   @apply text-lg md:text-xl;
+}
+
+input,
+textarea {
+  @apply text-lightGrey;
 }
 
 /* Animations */
@@ -197,7 +205,8 @@ button {
 
 /* Blog */
 
-#blog-layout {
+#blog-layout,
+#case-study-layout {
   & h2,
   & h3,
   & h4,
@@ -230,6 +239,13 @@ button {
   & pre,
   & a:not(.site-button) {
     @apply text-base md:text-lg;
+  }
+
+  & p:not(header > p),
+  & ul,
+  & ol,
+  & pre {
+    @apply text-lightGrey;
   }
 
   & img,

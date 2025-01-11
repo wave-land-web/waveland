@@ -1,0 +1,96 @@
+---
+import type { SanityDocument } from '@sanity/client'
+import { Icon } from 'astro-icon/components'
+import PortableText from '../../components/text/PortableText.astro'
+import PostHeader from '../../components/ui/PostHeader.astro'
+import Layout from '../../layouts/Layout.astro'
+import { loadQuery } from '../../sanity/lib/load-query'
+
+export async function getStaticPaths() {
+  const { data: allCaseStudies } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "case-study"] | order(publishedAt asc)`,
+  })
+
+  return allCaseStudies.map((caseStudy) => {
+    return {
+      params: {
+        slug: caseStudy.slug.current,
+      },
+      props: {
+        allCaseStudies,
+      },
+    }
+  })
+}
+
+// Get page data and props
+const { params, props } = Astro
+
+// Load the current post
+const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
+  query: `*[_type == "case-study" && slug.current == $slug][0] {
+    title,
+    publishedAt,
+    description,
+    mainImage,
+    body,
+    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
+  }`,
+  params,
+})
+
+// Pagination: previous and next post
+const currentPostIndex = props.allCaseStudies.findIndex((p) => p.slug.current === params.slug)
+const previousPost = props.allCaseStudies[currentPostIndex - 1] || null
+const nextPost = props.allCaseStudies[currentPostIndex + 1] || null
+---
+
+<Layout title={currentCaseStudy.title} description={currentCaseStudy.description}>
+  <main id="case-study-layout" class="max-w-4xl flex flex-col gap-[1lh] mb-16 md:mb-24">
+    <PostHeader
+      image={currentCaseStudy.mainImage}
+      imageAlt={currentCaseStudy.mainImage.alt}
+      title={currentCaseStudy.title}
+      published={currentCaseStudy.publishedAt}
+      minutesRead={currentCaseStudy.estimatedReadingTime}
+    />
+
+    <section id="case-study" class="container-sm flex flex-col gap-[1lh] py-0">
+      <PortableText portableText={currentCaseStudy.body} />
+
+      <!-- Pagination -->
+      <div class="flex flex-wrap gap-8 justify-between mt-[1lh]">
+        {
+          previousPost && (
+            <a
+              class="mr-auto"
+              href={`/blog/${previousPost.slug.current}`}
+              title={previousPost.title}
+            >
+              Previous Post
+            </a>
+          )
+        }
+
+        {
+          nextPost && (
+            <a class="ml-auto" href={`/blog/${nextPost.slug.current}`} title={nextPost.title}>
+              Next Post
+            </a>
+          )
+        }
+      </div>
+    </section>
+    <a class="site-link-2 inline-flex items-center justify-center gap-2 w-fit" href="/case-studies"
+      ><Icon name="tabler:arrow-narrow-left" class="site-icon" />View All Case Studies</a
+    >
+  </main>
+</Layout>
+
+<!-- <nav aria-label="Case Study Menu">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#challenges-and-solutions">Challenges & Solutions</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+  </ul>
+</nav> -->

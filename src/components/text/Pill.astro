@@ -1,16 +1,35 @@
 ---
 export interface Props {
   text: string
+  size?: 'big' | 'small'
   href?: string
   class?: string
 }
 
-const { text, href, class: className } = Astro.props
+const { text, size = 'big', href, class: className } = Astro.props
 ---
 
-<a
-  href={href}
-  class=`${className} inline-block px-4 pt-4 pb-3.5 rounded-full text-darkBlue text-base uppercase shadow-sm`
->
-  {text}
-</a>
+{
+  href ? (
+    <a
+      href={href}
+      class:list={[
+        `${className} inline-block rounded-full text-darkBlue text-base uppercase shadow-sm`,
+        { 'px-2 pt-2 pb-1.5': size === 'small' },
+        { 'px-4 pt-4 pb-3.5': size === 'big' },
+      ]}
+    >
+      {text}
+    </a>
+  ) : (
+    <span
+      class:list={[
+        `${className} inline-block rounded-full text-darkBlue text-base uppercase shadow-sm`,
+        { 'px-2 pt-2 pb-1.5': size === 'small' },
+        { 'px-4 pt-4 pb-3.5': size === 'big' },
+      ]}
+    >
+      {text}
+    </span>
+  )
+}

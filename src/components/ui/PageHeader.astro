@@ -17,7 +17,7 @@ const { title, subtitle, bodyText, linkText, linkUrl } = Astro.props
 >
   <h1 class="text-purple text-base md:text-lg leading-none">{title}</h1>
   <p class="font-header text-5xl md:text-6xl leading-tight lg:leading-tight">{subtitle}</p>
-  {bodyText && <p class="max-w-xl mb-4">{bodyText}</p>}
+  {bodyText && <p class="max-w-xl mb-4 text-lightGrey">{bodyText}</p>}
   {
     linkText && linkUrl && (
       <a
