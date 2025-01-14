@@ -45,7 +45,7 @@ const previousPost = props.allPosts[currentPostIndex - 1] || null
 const nextPost = props.allPosts[currentPostIndex + 1] || null
 ---
 
-<Layout title={currentPost.title} description={currentPost.description}>
+<Layout title={`Wave Land Web | ${currentPost.title}`} description={currentPost.description}>
   <main id="blog-layout" class="max-w-4xl flex flex-col gap-[1lh] mb-16 md:mb-24">
     <PostHeader
       image={currentPost.mainImage}
@@ -55,7 +55,7 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
       minutesRead={currentPost.estimatedReadingTime}
     />
 
-    <section id="post" class="container-sm flex flex-col gap-[1lh] py-0">
+    <section id="post" class="flex flex-col gap-[1lh] py-0">
       <PortableText portableText={currentPost.body} />
 
       <!-- Pagination -->

@@ -2,6 +2,7 @@
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
 import PortableTextCode from '../ui/PortableTextCode.astro'
 import PortableTextImage from '../ui/PortableTextImage.astro'
+import PortableTextH2 from './PortableTextH2.astro'
 
 const { portableText } = Astro.props
 
@@ -9,6 +10,9 @@ const components = {
   type: {
     code: PortableTextCode,
     image: PortableTextImage,
+  },
+  block: {
+    h2: PortableTextH2,
   },
 }
 ---

@@ -9,7 +9,6 @@ export interface Props {
 
 const { post } = Astro.props
 
-// Create ellipsis text for description
 const truncatedDescriptionText = createEllipsisText(post.description, 100)
 ---
 

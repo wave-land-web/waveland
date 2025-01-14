@@ -1,11 +1,8 @@
 ---
 import type { SanityDocument } from '@sanity/client'
-import { Icon } from 'astro-icon/components'
 import { sanityClient } from 'sanity:client'
-import Pill from '../components/text/Pill.astro'
-import SanityImage from '../components/ui/SanityImage.astro'
+import CaseStudyCard from '../components/ui/CaseStudyCard.astro'
 import Layout from '../layouts/Layout.astro'
-import { createEllipsisText } from '../lib/text'
 
 // Fetch all case studies
 const caseStudies = (await sanityClient.fetch(
@@ -25,7 +22,7 @@ const caseStudies = (await sanityClient.fetch(
   description="Musings on technology and building for the web. Subscribe to know what we've been up to, along with tips and tricks to help you in your creative journey."
 >
   <header
-    class="max-w-screen-3xl pt-[calc(4rem+var(--nav-height))] pb-20 md:pb-28 border-b-[1px] border-dashed border-grey"
+    class="max-w-screen-3xl pt-[calc(3rem+var(--nav-height))] pb-16 md:pb-24 border-b-[1px] border-dashed border-grey"
   >
     <h1
       class="text-6xl leading-tight md:text-7xl lg:text-8xl lg:leading-tight lsa lsa-slide-left no-repeat"
@@ -37,47 +34,7 @@ const caseStudies = (await sanityClient.fetch(
   <main class="max-w-screen-3xl">
     <section id="case-studies" class="grid lg:grid-cols-2 gap-12 lg:gap-40 mb-8">
       <h2 class="sr-only">Recent Work</h2>
-      {
-        caseStudies.map((caseStudy) => (
-          // TODO: Make this a component
-          <article class="lsa lsa-slide-up no-repeat">
-            <SanityImage image={caseStudy.mainImage} alt={caseStudy.mainImage.alt} class="mb-4" />
-            <div class="flex flex-col gap-8 p-4 md:p-8">
-              <div class="flex flex-wrap gap-4">
-                {caseStudy.services.map((service: string) => (
-                  <Pill
-                    text={`${service}`}
-                    size="small"
-                    class:list={[
-                      { 'bg-purple': service === 'Web Design & Development' },
-                      { 'bg-orange': service === 'Digital Strategy' },
-                      { 'bg-green': service === 'UX/UI' },
-                    ]}
-                  />
-                ))}
-              </div>
-              <h3>
-                <a
-                  href={`/case-studies/${caseStudy.slug.current}`}
-                  class="site-link text-3xl md:text-4xl no-underline"
-                >
-                  {caseStudy.title}
-                </a>
-              </h3>
-              <p class="text-base text-lightGrey">
-                {createEllipsisText(caseStudy.description, 100)}
-              </p>
-              <a
-                href={`/case-studies/${caseStudy.slug.current}`}
-                class="site-link-2 inline-flex items-center justify-center gap-2 w-fit self-end"
-              >
-                Read More
-                <Icon name="tabler:arrow-narrow-right" class="site-icon" />
-              </a>
-            </div>
-          </article>
-        ))
-      }
+      {caseStudies.map((caseStudy) => <CaseStudyCard caseStudy={caseStudy} />)}
     </section>
   </main>
 </Layout>

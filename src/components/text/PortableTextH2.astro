@@ -1,0 +1,8 @@
+---
+const { node } = Astro.props // `.node` is the current node in the PortableText
+
+const headerText = node.children[0].text
+const headerId = headerText.replace(/\s+/g, '-').toLowerCase()
+---
+
+<h2 id={headerId}>{headerText}</h2>
