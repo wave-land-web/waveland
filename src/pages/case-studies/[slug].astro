@@ -1,6 +1,7 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import { Icon } from 'astro-icon/components'
+import CTA from '../../components/text/CTA.astro'
 import Pill from '../../components/text/Pill.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import SanityImage from '../../components/ui/SanityImage.astro'
@@ -92,7 +93,7 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
     />
   </header>
 
-  <main id="case-study-layout" class="max-w-screen-3xl flex flex-col gap-[1lh] mb-16 md:mb-24">
+  <main class="max-w-screen-3xl flex flex-col gap-[1lh]">
     <section id="case-study" class="lg:flex w-full">
       <nav
         aria-label="Case Study Menu"
@@ -122,6 +123,15 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
           ><Icon name="tabler:arrow-narrow-left" class="site-icon" />View All Case Studies</a
         >
       </div>
+    </section>
+
+    <section id="get-started">
+      <CTA
+        title="Get Started"
+        description="Ready for the next step? Schedule a complimentary strategy session or send us an email to discuss your project."
+        linkText="Free Intro Call"
+        linkSrc="https://calendly.com/wavelandweb/15-min-meeting"
+      />
     </section>
   </main>
 </Layout>
