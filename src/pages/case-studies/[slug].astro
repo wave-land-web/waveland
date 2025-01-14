@@ -96,16 +96,16 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   <main class="max-w-screen-3xl flex flex-col gap-[1lh]">
     <section id="case-study" class="lg:flex w-full">
       <nav
-        aria-label="Case Study Menu"
+        aria-label="Case Study Table of Contents"
         class="lg:w-1/2 p-0 hidden lg:block lg:sticky lg:top-[var(--nav-height)] lg:self-start"
       >
         <ul>
           {
             headings.map((heading: { id: string; text: string }) => (
-              <li class="font-header">
-                <a href={`#${heading.id}`} class="group flex items-center">
-                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green rounded transition-all duration-200 ease-in-out" />
-                  <span class="text-grey group-hover:text-green group-focus-visible:text-green transition-all duration-200 ease-in-out">
+              <li class="font-header group" data-section-id={heading.id}>
+                <a href={`#${heading.id}`} class="inline-flex items-center">
+                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-200 ease-in-out" />
+                  <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-200 ease-in-out">
                     {heading.text}
                   </span>
                 </a>
@@ -135,3 +135,50 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
     </section>
   </main>
 </Layout>
+
+<script is:inline define:vars={{ headings }}>
+  /**
+   * Animate table of contents menu items when the corresponding section comes into view
+   */
+  function handleAnimations() {
+    if (!window.IntersectionObserver) {
+      return console.log('IntersectionObserver not supported')
+    }
+
+    const headingSections = headings.map((heading) => document.getElementById(heading.id))
+
+    if (headingSections.length !== 0) {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+      }
+
+      // Initialize observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const section = entry.target
+          const activeMenuItem = document.querySelector(`nav li[data-section-id="${section.id}"]`)
+
+          // By default, animations repeat on scroll
+          if (entry.isIntersecting) {
+            activeMenuItem.classList.add('active')
+          } else if (!entry.isIntersecting) {
+            activeMenuItem.classList.remove('active')
+          }
+        })
+      }, options)
+
+      // Observe each section starting with an h2
+      headingSections.forEach((section) => observer.observe(section))
+    }
+  }
+
+  // Handle animations on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    handleAnimations()
+
+    // Handle animations on scroll
+    document.addEventListener('scroll', handleAnimations)
+  })
+</script>
