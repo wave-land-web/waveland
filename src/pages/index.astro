@@ -1,9 +1,9 @@
 ---
-import { Icon } from 'astro-icon/components'
 import powerPassengerPassageImage from '../assets/power-passenger-passage.png'
 import robbyWebbImage from '../assets/robby-webb.png'
 import supervoidImage from '../assets/supervoid.png'
 import CTA from '../components/text/CTA.astro'
+import IntroCallCTA from '../components/text/IntroCallCTA.astro'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
 import TitleLogo from '../components/text/TitleLogo.astro'
@@ -56,13 +56,14 @@ const testimonialData = [
       <p class="mb-6 lsa delay-500 no-repeat">
         Helping creatives build meaningful connections with high-performance, modern websites
       </p>
-      <a
-        href="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex gap-2 items-center site-link-2 lsa delay-700 no-repeat"
-        >Free Intro Call <Icon name="tabler:arrow-narrow-right" class="site-icon" /></a
-      >
+
+      <div class="lsa delay-700 no-repeat">
+        <CTA
+          text="Free Intro Call"
+          url="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
+          newWindow={true}
+        />
+      </div>
     </div>
   </header>
 
@@ -71,7 +72,8 @@ const testimonialData = [
       <TextAndImage
         title="Carve a unique path."
         text="Your website should embody your creativity and enable more freedom to focus on the work you love."
-        link="https://supervoid.tv"
+        url="/case-studies/supervoid"
+        linkText="supervoid"
         image={supervoidImage}
         imageAlt="Supervoid website on a mobile device"
         variant={1}
@@ -80,7 +82,8 @@ const testimonialData = [
       <TextAndImage
         title="Feed your imagination."
         text="Spend more time on what matters most and less on energetically draining technical tasks."
-        link="https://powerpassengerpassage.com/"
+        url="/case-studies/power-passenger-passage"
+        linkText="power passenger passage"
         image={powerPassengerPassageImage}
         imageAlt="Power Passenger Passage website on a mobile device"
         variant={2}
@@ -90,12 +93,22 @@ const testimonialData = [
       <TextAndImage
         title="Amplify your voice."
         text="Bespoke web experiences that enhance your brand, prioritize user experience, and inspire action."
-        link="https://www.robbywebb.com/"
+        url="/case-studies/robby-webb"
+        linkText="robby webb"
         image={robbyWebbImage}
         imageAlt="Robby Webb website on a mobile device"
         variant={3}
         class="py-16 md:py-24"
       />
+
+      <div class="lsa lsa-slide-up no-repeat">
+        <CTA
+          text="View Our Case Studies"
+          url="/case-studies"
+          linkClass="font-header text-4xl lg:text-5xl site-link-2"
+          iconClass="w-12"
+        />
+      </div>
     </section>
 
     <section id="services">
@@ -146,7 +159,7 @@ const testimonialData = [
     </section>
 
     <section id="get-started">
-      <CTA
+      <IntroCallCTA
         title="Get Started"
         description="Ready for the next step? Schedule a complimentary strategy session or send us an email to discuss your project."
         linkText="Free Intro Call"

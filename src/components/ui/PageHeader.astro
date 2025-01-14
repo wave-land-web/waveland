@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
+import CTA from '../text/CTA.astro'
 
 export interface Props {
   title: string
@@ -18,16 +18,5 @@ const { title, subtitle, bodyText, linkText, linkUrl } = Astro.props
   <h1 class="text-purple text-base md:text-lg leading-none">{title}</h1>
   <p class="font-header text-5xl md:text-6xl leading-tight lg:leading-tight">{subtitle}</p>
   {bodyText && <p class="max-w-xl mb-4 text-lightGrey">{bodyText}</p>}
-  {
-    linkText && linkUrl && (
-      <a
-        class="site-button inline-flex items-center justify-center gap-2 w-fit"
-        href={linkUrl}
-        aria-label={linkText}
-      >
-        <Icon name="tabler:arrow-narrow-left" class="site-icon" />
-        {linkText}
-      </a>
-    )
-  }
+  {linkText && linkUrl && <CTA text={linkText} url={linkUrl} arrowLeft={true} />}
 </header>

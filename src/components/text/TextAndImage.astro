@@ -6,7 +6,8 @@ import Card from '../ui/Card.astro'
 export interface Props {
   title: string
   text: string
-  link: string
+  url: string
+  linkText: string
   image: ImageMetadata
   imageAlt: string
   variant?: 1 | 2 | 3
@@ -14,13 +15,17 @@ export interface Props {
   class?: string
 }
 
-const { title, text, link, image, imageAlt, variant, class: className, isReversed } = Astro.props
-
-// Format link text (remove www., http://, https://, trailing /, etc.)
-const linkText = link
-  .replace(/(^\w+:|^)\/\//, '')
-  .replace(/\/$/, '')
-  .replace('www.', '')
+const {
+  title,
+  text,
+  url,
+  linkText,
+  image,
+  imageAlt,
+  variant,
+  class: className,
+  isReversed,
+} = Astro.props
 
 // Determine which icon to use
 let icon = ''
@@ -87,14 +92,11 @@ const themeStyles = {
     />
     <Icon name={icon} class="absolute-center h-4/5" />
     <a
-      href={link}
+      href={url}
       class:list={[
         'absolute bottom-4 text-base text-darkBlue hover:text-darkGrey',
         themeStyles.link,
-      ]}
-      target="_blank"
-      rel="noopener noreferrer"
-      ><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
+      ]}><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
     >
   </Card>
 </div>

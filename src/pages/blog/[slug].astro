@@ -1,6 +1,6 @@
 ---
 import type { SanityDocument } from '@sanity/client'
-import { Icon } from 'astro-icon/components'
+import CTA from '../../components/text/CTA.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import PostHeader from '../../components/ui/PostHeader.astro'
 import Layout from '../../layouts/Layout.astro'
@@ -58,12 +58,12 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
     <section id="post" class="flex flex-col gap-[1lh] py-0">
       <PortableText portableText={currentPost.body} />
 
-      <!-- Pagination -->
+      <!-- Pagination + Nav to blog link -->
       <div class="flex flex-wrap gap-8 justify-between mt-[1lh]">
         {
           previousPost && (
             <a
-              class="mr-auto"
+              class="mr-auto site-button"
               href={`/blog/${previousPost.slug.current}`}
               title={previousPost.title}
             >
@@ -71,18 +71,19 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
             </a>
           )
         }
-
         {
           nextPost && (
-            <a class="ml-auto" href={`/blog/${nextPost.slug.current}`} title={nextPost.title}>
+            <a
+              class="ml-auto site-button"
+              href={`/blog/${nextPost.slug.current}`}
+              title={nextPost.title}
+            >
               Next Post
             </a>
           )
         }
       </div>
+      <CTA text="Back to blog" url="/blog" arrowLeft={true} linkClass="my-4" />
     </section>
-    <a class="site-button inline-flex items-center justify-center gap-2 w-fit my-4" href="/blog"
-      ><Icon name="tabler:arrow-narrow-left" class="site-icon" />Back to blog</a
-    >
   </main>
 </Layout>

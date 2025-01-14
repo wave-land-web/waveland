@@ -1,12 +1,12 @@
 ---
 import type { SanityDocument } from '@sanity/client'
-import { Icon } from 'astro-icon/components'
-import CTA from '../../components/text/CTA.astro'
+import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
 import Pill from '../../components/text/Pill.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import SanityImage from '../../components/ui/SanityImage.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
+import CTA from '../../components/text/CTA.astro'
 
 export async function getStaticPaths() {
   const { data: allCaseStudies } = await loadQuery<SanityDocument[]>({
@@ -117,16 +117,12 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
 
       <div class="flex flex-col gap-[1lh] lg:w-1/2">
         <PortableText portableText={currentCaseStudy.body} />
-        <a
-          class="site-link-2 inline-flex items-center justify-center gap-2 w-fit"
-          href="/case-studies"
-          ><Icon name="tabler:arrow-narrow-left" class="site-icon" />View All Case Studies</a
-        >
+        <CTA text="View All Case Studies" url="/case-studies" arrowLeft={true} />
       </div>
     </section>
 
     <section id="get-started">
-      <CTA
+      <IntroCallCTA
         title="Get Started"
         description="Ready for the next step? Schedule a complimentary strategy session or send us an email to discuss your project."
         linkText="Free Intro Call"

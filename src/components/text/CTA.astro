@@ -2,46 +2,41 @@
 import { Icon } from 'astro-icon/components'
 
 export interface Props {
-  title: string
-  description?: string
-  linkText: string
-  linkSrc: string
+  text: string
+  url: string
+  arrowLeft?: boolean
+  newWindow?: boolean
+  linkClass?: string
+  iconClass?: string
 }
 
-const { title, description, linkText, linkSrc } = Astro.props
+const { text, url, arrowLeft, newWindow, linkClass, iconClass } = Astro.props
 ---
 
-<div class="grid gap-2 md:gap-4 md:grid-cols-2 mb-40 lsa lsa-slide-up no-repeat">
-  <div>
-    <h2 class="h2 md:mb-4">{title}</h2>
-
-    <!-- Desktop Email -->
-    <a
-      href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
-      aria-label="Email"
-      title="Email"
-      class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple"
-      ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
-    </a>
-  </div>
-  <div>
-    <a
-      href={linkSrc}
-      class="flex justify-between items-center mb-2 md:mb-4 font-header text-4xl lg:text-5xl site-link-2"
-      target="_blank"
-      rel="noopener noreferrer"
-      >{linkText}
-      <Icon name="tabler:arrow-narrow-right" class="w-12" /></a
-    >
-    <p class="text-lightGrey">{description}</p>
-  </div>
-
-  <!-- Mobile Email -->
-  <a
-    href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
-    aria-label="Email"
-    title="Email"
-    class="inline-flex md:hidden gap-2 items-center mt-2 text-grey"
-    ><Icon name="tabler:mail" class="site-icon" />hello@wavelandweb.com
-  </a>
-</div>
+<a
+  href={url}
+  target={newWindow ? '_blank' : '_self'}
+  rel={newWindow ? 'noopener noreferrer' : ''}
+  class={`${linkClass} flex gap-2 items-center site-link-2 group`}
+  aria-label={text}
+>
+  {
+    arrowLeft ? (
+      <>
+        <Icon
+          name="tabler:arrow-narrow-left"
+          class={`${iconClass} site-icon group-hover:-translate-x-1 transition-transform duration-200 ease-in-out`}
+        />
+        {text}
+      </>
+    ) : (
+      <>
+        {text}
+        <Icon
+          name="tabler:arrow-narrow-right"
+          class={`${iconClass} site-icon group-hover:translate-x-1 transition-transform duration-200 ease-in-out`}
+        />
+      </>
+    )
+  }
+</a>
