@@ -94,12 +94,12 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   </header>
 
   <main class="max-w-screen-3xl flex flex-col gap-[1lh]">
-    <section id="case-study" class="lg:flex w-full">
+    <section id="case-study" class="w-full grid gap-2 md:gap-4 md:grid-cols-2">
       <nav
         aria-label="Case Study Table of Contents"
-        class="lg:w-1/2 p-0 hidden lg:block lg:sticky lg:top-[var(--nav-height)] lg:self-start"
+        class="w-full hidden lg:block lg:sticky lg:top-[var(--nav-height)] lg:self-start p-0"
       >
-        <ul>
+        <ul class="w-fit">
           {
             headings.map((heading: { id: string; text: string }) => (
               <li class="font-header group" data-section-id={heading.id}>
@@ -115,7 +115,7 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
         </ul>
       </nav>
 
-      <div class="flex flex-col gap-[1lh] lg:w-1/2">
+      <div class="flex flex-col gap-[1lh]">
         <PortableText portableText={currentCaseStudy.body} />
         <CTA text="View All Case Studies" url="/case-studies" arrowLeft={true} />
       </div>
