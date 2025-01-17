@@ -6,7 +6,8 @@ import Card from '../ui/Card.astro'
 export interface Props {
   title: string
   text: string
-  url: string
+  caseStudyUrl: string
+  externalUrl: string
   linkText: string
   image: ImageMetadata
   imageAlt: string
@@ -18,7 +19,8 @@ export interface Props {
 const {
   title,
   text,
-  url,
+  caseStudyUrl,
+  externalUrl,
   linkText,
   image,
   imageAlt,
@@ -56,10 +58,6 @@ const themeStyles = {
     'h-96 bg-orange': variant === 2,
     'h-96 bg-green': variant === 3,
   },
-  link: {
-    'left-4 text-darkBlue': variant === 1 || variant === 3,
-    'right-4 text-darkBlue': variant === 2,
-  },
 }
 ---
 
@@ -91,12 +89,18 @@ const themeStyles = {
       class="absolute-center w-full max-w-36 z-10 drop-shadow-lg"
     />
     <Icon name={icon} class="absolute-center h-4/5" />
-    <a
-      href={url}
-      class:list={[
-        'absolute bottom-4 text-base text-darkBlue hover:text-darkGrey',
-        themeStyles.link,
-      ]}><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
-    >
+
+    <div class="absolute bottom-0 w-full flex justify-between p-4">
+      <a href={caseStudyUrl} class:list={['text-base text-darkBlue hover:text-darkGrey']}
+        >Case Study</a
+      >
+      <a
+        href={externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={['bottom-4 text-base text-darkBlue hover:text-darkGrey']}
+        ><Icon name="tabler:link" class="inline mr-2 site-icon" />{linkText}</a
+      >
+    </div>
   </Card>
 </div>
