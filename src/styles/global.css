@@ -290,6 +290,6 @@ textarea {
   }
 
   & strong {
-    @apply font-bold;
+    @apply font-black text-white;
   }
 }
