@@ -85,7 +85,7 @@ export const POST: APIRoute = async ({ request }) => {
         </p>
         <p>Thanks again for joining, <br />Josh</p>
         <p>
-          <a href="https://www.linkedin.com/company/wave-land-web/" target="_blank">LinkedIn</a>
+          <a href="https://www.linkedin.com/company/wave-land/" target="_blank">LinkedIn</a>
           |
           <a href="https://www.instagram.com/wavelandweb/" target="_blank">Instagram</a>
         </p>
