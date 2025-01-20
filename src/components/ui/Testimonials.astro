@@ -20,12 +20,7 @@ const { data } = Astro.props
               <em>"{testimonial.quote}"</em>
             </p>
             <cite>
-              <a
-                class="site-link-2"
-                href={testimonial.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a class="site-link-2" href={testimonial.href}>
                 - {testimonial.citation}
               </a>
             </cite>
@@ -68,6 +63,8 @@ const { data } = Astro.props
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
+      // TODO: Enable this when you have lots of testimonials
+      // dynamicBullets: true,
     },
   })
 </script>
