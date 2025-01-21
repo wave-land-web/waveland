@@ -12,9 +12,6 @@ export default {
       '2xl': '1440px',
       '3xl': '1600px',
       '4xl': '1920px',
-      'custom-height-mq': {
-        raw: '(max-height: 680px)',
-      },
     },
     colors: {
       transparent: 'transparent',
