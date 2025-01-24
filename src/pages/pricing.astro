@@ -51,7 +51,7 @@ const websiteDetails = [
   <main>
     <section id="pricing-options" class="pt-4">
       <!-- Payment toggle -->
-      <div class="flex flex-col items-center gap-4 mb-8">
+      <div class="flex flex-col items-center gap-4 mb-8 lsa no-repeat">
         <label for="toggle" class="flex items-center gap-4 cursor-pointer">
           <span id="monthly" class="text-white transition duration-300">Monthly</span>
           <div class="relative">
@@ -75,85 +75,92 @@ const websiteDetails = [
 
       <div class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- 1 -->
-        <PricingCard
-          title="Foundation"
-          monthlyPrice="$100"
-          yearlyPrice="$85"
-          features={[
-            {
-              title: 'Build a Solid Foundation',
-              description:
-                'Create a custom, high-performing landing page in less time. For those who want to focus on the essentials now and get fancy later.',
-            },
-            {
-              title: 'Generate Business',
-              description:
-                'Tell your story, build an email list, and covert users into paying customers with a unique single-page website.',
-            },
-            {
-              title: 'Flexible Add-Ons',
-              description:
-                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
-            },
-            {
-              title: 'Need Extras?',
-              description: 'Additional development is billed at our standard hourly rate.',
-            },
-          ]}
-          buttonText="Get Started"
-        />
+        <div class="lsa lsa-slide-up no-repeat">
+          <PricingCard
+            title="Foundation"
+            monthlyPrice="$100"
+            yearlyPrice="$85"
+            features={[
+              {
+                title: 'Build a Solid Foundation',
+                description:
+                  'Create a custom, high-performing landing page in less time. For those who want to focus on the essentials now and get fancy later.',
+              },
+              {
+                title: 'Generate Business',
+                description:
+                  'Tell your story, build an email list, and covert users into paying customers with a unique single-page website.',
+              },
+              {
+                title: 'Flexible Add-Ons',
+                description:
+                  'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
+              },
+              {
+                title: 'Need Extras?',
+                description: 'Additional development is billed at our standard hourly rate.',
+              },
+            ]}
+            buttonText="Get Started"
+          />
+        </div>
 
         <!-- 2 -->
-        <PricingCard
-          title="Pro"
-          monthlyPrice="$300"
-          yearlyPrice="$255"
-          features={[
-            {
-              title: 'Grow Your Business',
-              description: 'Custom design & development for up to 5 pages.',
-            },
-            {
-              title: 'Express Yourself',
-              description:
-                'More real estate for blogging, images and stories about your team, or detailed product and service descriptions.',
-            },
-            {
-              title: 'Flexible Add-Ons',
-              description:
-                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
-            },
-            {
-              title: 'Need Extras?',
-              description: 'Additional development is billed at our standard hourly rate.',
-            },
-          ]}
-          buttonText="Get Started"
-        />
+        <div class="lsa lsa-slide-up lg:delay-100 no-repeat">
+          <PricingCard
+            title="Pro"
+            monthlyPrice="$300"
+            yearlyPrice="$255"
+            features={[
+              {
+                title: 'Grow Your Business',
+                description: 'Custom design & development for up to 5 pages.',
+              },
+              {
+                title: 'Express Yourself',
+                description:
+                  'More real estate for blogging, images and stories about your team, or detailed product and service descriptions.',
+              },
+              {
+                title: 'Flexible Add-Ons',
+                description:
+                  'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
+              },
+              {
+                title: 'Need Extras?',
+                description: 'Additional development is billed at our standard hourly rate.',
+              },
+            ]}
+            buttonText="Get Started"
+            class="border-purple"
+          />
+        </div>
 
         <!-- 3 -->
-        <PricingCard
-          title="Enterprise"
-          price="Need More?"
-          dynamicPrice={false}
-          features={[
-            {
-              title: 'Scalable Solutions',
-              description: 'Custom design & development for large-scale projects.',
-            },
-            {
-              title: 'Solve Unique Business Needs',
-              description:
-                'Add more pages, a content management system (CMS), e-commerce, expressive animations, email marketing, analytics, social media management, and more.',
-            },
-            {
-              title: 'Flexible Add-Ons',
-              description:
-                'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
-            },
-          ]}
-          buttonText="Get Started"
-        />
+        <div class="lsa lsa-slide-up lg:delay-200 no-repeat">
+          <PricingCard
+            title="Enterprise"
+            price="Need More?"
+            dynamicPrice={false}
+            features={[
+              {
+                title: 'Scalable Solutions',
+                description: 'Custom design & development for large-scale projects.',
+              },
+              {
+                title: 'Solve Unique Business Needs',
+                description:
+                  'Add more pages, a content management system (CMS), e-commerce, expressive animations, email marketing, analytics, social media management, and more.',
+              },
+              {
+                title: 'Flexible Add-Ons',
+                description:
+                  'Optional add-ons for specialized services such as monthly maintenenace and strategy sessions.',
+              },
+            ]}
+            buttonText="Get Started"
+          />
+        </div>
       </div>
     </section>
 
