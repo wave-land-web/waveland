@@ -281,7 +281,8 @@ textarea {
     @apply list-decimal;
   }
 
-  & p code {
+  & p code,
+  & li code {
     @apply bg-purple text-darkBlue rounded-sm p-1 box-decoration-clone;
   }
 
