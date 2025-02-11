@@ -11,7 +11,7 @@ const { data } = Astro.props
 ---
 
 <div class="swiper">
-  <div class="swiper-wrapper mb-8">
+  <div class="swiper-wrapper mb-16">
     {
       data.map((testimonial) => {
         return (
@@ -39,10 +39,6 @@ const { data } = Astro.props
     --swiper-pagination-bullet-size: 0.75rem;
     --swiper-pagination-bullet-horizontal-gap: 0.5rem;
   }
-
-  .swiper-pagination {
-    position: static;
-  }
 </style>
 
 <script>
@@ -63,8 +59,7 @@ const { data } = Astro.props
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
-      // TODO: Enable this when you have lots of testimonials
-      // dynamicBullets: true,
+      dynamicBullets: true,
     },
   })
 </script>
