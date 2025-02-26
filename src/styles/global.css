@@ -135,7 +135,7 @@
   nav,
   header,
   main {
-    @apply max-w-screen-4xl mx-auto px-4 md:px-8; /* max-w-screen-4xl */
+    @apply max-w-screen-4xl mx-auto px-4 md:px-8;
   }
 
   nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
