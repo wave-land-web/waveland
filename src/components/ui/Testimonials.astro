@@ -15,8 +15,8 @@ const { data } = Astro.props
     {
       data.map((testimonial) => {
         return (
-          <blockquote class="swiper-slide flex flex-col gap-4">
-            <p class="text-lightGrey">
+          <blockquote class="swiper-slide">
+            <p class="mb-4 text-lightGrey">
               <em>"{testimonial.quote}"</em>
             </p>
             <cite>

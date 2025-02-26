@@ -55,17 +55,13 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   description={currentCaseStudy.description}
 >
   <header
-    class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(3rem+var(--nav-height))] pb-16 md:pb-24 border-b-[1px] border-dashed border-grey"
+    class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-28 border-b-[1px] border-dashed border-grey"
   >
     <div class="flex flex-col gap-4 lg:gap-6">
-      <p
-        class="font-header text-purple text-base lg:text-lg leading-none lsa lsa-slide-left no-repeat"
-      >
+      <p class="font-header text-purple text-base lg:text-lg lsa lsa-slide-left no-repeat">
         Case Study
       </p>
-      <h1
-        class="text-6xl leading-tight md:text-7xl lg:text-8xl lsa lsa-slide-left delay-100 no-repeat"
-      >
+      <h1 class="lsa lsa-slide-left delay-100 no-repeat">
         {currentCaseStudy.title}
       </h1>
       <div class="flex flex-wrap gap-2">

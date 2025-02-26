@@ -2,8 +2,8 @@ import netlify from '@astrojs/netlify'
 import partytown from '@astrojs/partytown'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
 import sanity from '@sanity/astro'
+import tailwindcss from '@tailwindcss/vite'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 
@@ -18,9 +18,6 @@ export default defineConfig({
       lastmod: new Date(),
     }),
     icon(),
-    tailwind({
-      nesting: true,
-    }),
     partytown(),
     sanity({
       projectId: 'uuas57um',
@@ -36,4 +33,7 @@ export default defineConfig({
     imageCDN: false,
     cacheOnDemandPages: true,
   }),
+  vite: {
+    plugins: [tailwindcss()],
+  },
 })

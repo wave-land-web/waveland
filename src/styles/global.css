@@ -1,81 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer base {
-  @font-face {
-    font-family: 'Monaspace Argon Var';
-    src:
-      url('/fonts/monaspace-argon-var-regular.woff2') format('woff2'),
-      url('/fonts/monaspace-argon-var-regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-  }
-
-  @font-face {
-    font-family: 'Poppins Regular';
-    src:
-      url('/fonts/poppins-regular.woff2') format('woff2'),
-      url('/fonts/poppins-regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-  }
-
-  :root {
-    --color-white: #fffafa;
-    --color-darkBlue: #0e1726;
-    --color-purple: #c26dff;
-    --color-purple: oklch(69.7% 0.2235 306.97);
-    --color-green: #65e0cb;
-    --color-green: oklch(82.97% 0.1144 180.59);
-    --color-orange: #ff757f;
-    --color-orange: oklch(74.18% 0.1782 18.25);
-    --color-blue: #7ea9ff;
-    --color-blue: oklch(74.41% 0.1423 264.28);
-    --color-lightGrey: #cfd1d4;
-    --color-grey: #878b93;
-    --color-darkGrey: #3e4c59;
-    --color-scrim: #0e1726e6;
-  }
+@font-face {
+  font-family: 'Monaspace Argon Var';
+  src:
+    url('/fonts/monaspace-argon-var-regular.woff2') format('woff2'),
+    url('/fonts/monaspace-argon-var-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
-/* TODO: Get rid of this 
-  1. Create components where possible
-  2. Use CSS variables
-  3. Update Tailwind config
-*/
-
-@layer components {
-  .site-link {
-    @apply underline text-white hover:text-purple group-hover:text-purple transition-all duration-200 ease-in-out;
-  }
-
-  .site-link-2 {
-    @apply text-purple hover:text-grey transition-all duration-200 ease-in-out;
-  }
-
-  .site-icon {
-    @apply w-6 stroke-1;
-  }
-
-  .site-button {
-    @apply px-4 py-3 border border-purple rounded-md shadow-sm text-purple hover:text-darkBlue hover:bg-purple transition-all duration-200 ease-in-out;
-  }
-
-  .absolute-center {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-  }
+@font-face {
+  font-family: 'Poppins Regular';
+  src:
+    url('/fonts/poppins-regular.woff2') format('woff2'),
+    url('/fonts/poppins-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
-/* Variables */
-:root {
-  --nav-height: 6rem;
+@theme {
+  --color-white: #fffafa;
+  --color-darkBlue: #0e1726;
+  --color-purple: #c26dff;
+  --color-purple: oklch(69.7% 0.2235 306.97);
+  --color-green: #65e0cb;
+  --color-green: oklch(82.97% 0.1144 180.59);
+  --color-orange: #ff757f;
+  --color-orange: oklch(74.18% 0.1782 18.25);
+  --color-blue: #7ea9ff;
+  --color-blue: oklch(74.41% 0.1423 264.28);
+  --color-lightGrey: #cfd1d4;
+  --color-grey: #878b93;
+  --color-darkGrey: #3e4c59;
+  --color-scrim: #0e1726e6;
 
-  @media (min-width: 768px) {
-    --nav-height: 8rem;
-  }
+  --font-header: 'Poppins Regular', sans-serif;
+  --font-body: 'Monaspace Argon Var', monospace;
+
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1600px;
+  --breakpoint-4xl: 1920px;
+
+  --nav-height: clamp(6rem, 20vw, 8rem);
 }
 
 /* Animations */
@@ -86,11 +54,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   /**
-    * Required class: `lsa` (initializes animations and defaults to fade-in)
-    * Note: Add `no-repeat` class to prevent animations from repeating on scroll
-    */
+  * Required class: `lsa` (initializes animations and defaults to fade-in)
+  * Note: Add `no-repeat` class to prevent animations from repeating on scroll
+  */
   .lsa {
-    @apply opacity-0 transform transition-[opacity,transform] duration-700;
+    @apply opacity-0 transform transition duration-700;
 
     /* Slide animations */
     &.lsa-slide-up {
@@ -125,172 +93,194 @@
   }
 }
 
-/* General */
+@layer base {
+  /* TODO: Get rid of these classes where possible */
 
-html {
-  /* Scrollbar */
-  scrollbar-color: var(--color-white) var(--color-darkBlue);
-  scrollbar-width: thin;
-
-  @apply font-body scroll-pt-[var(--nav-height)] scroll-smooth;
-}
-
-body {
-  @apply text-white bg-darkBlue;
-}
-
-section {
-  @apply py-20 md:py-28;
-}
-
-nav,
-header,
-main {
-  @apply max-w-screen-4xl mx-auto px-4 md:px-8;
-}
-
-nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
-nav[data-current-url-path^='/pricing'] [aria-label='Pricing'],
-nav[data-current-url-path^='/blog'] [aria-label='Blog'],
-nav[data-current-url-path^='/contact'] [aria-label='Contact'] {
-  @apply text-purple;
-}
-
-img,
-svg,
-video {
-  @apply block w-full h-auto;
-}
-
-/* Typography */
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  @apply font-header text-balance leading-tight md:leading-tight;
-}
-
-h1,
-.h1 {
-  @apply text-5xl md:text-6xl;
-}
-
-h2,
-.h2 {
-  @apply text-4xl lg:text-5xl;
-}
-
-h3,
-.h3 {
-  @apply text-3xl md:text-4xl;
-}
-
-p {
-  @apply text-pretty leading-normal;
-}
-
-a {
-  @apply transition-all duration-200 ease-in-out;
-}
-
-p,
-a,
-button {
-  @apply text-lg md:text-xl;
-}
-
-input,
-textarea {
-  @apply text-lightGrey;
-}
-
-/* Blog + Case Studies */
-
-#blog-layout h2,
-#case-study h2:not(:first-of-type) {
-  @apply mt-[1lh];
-}
-
-#blog-layout,
-#case-study {
-  & h3,
-  & h4,
-  & h5,
-  & h6,
-  & img {
-    @apply mt-[1lh];
+  .site-link {
+    @apply underline text-white hover:text-purple group-hover:text-purple transition-all duration-200 ease-in-out;
   }
 
-  & h2 {
+  .site-link-2 {
+    @apply text-purple hover:text-grey transition-all duration-200 ease-in-out;
+  }
+
+  .site-icon {
+    @apply w-6 stroke-1;
+  }
+
+  .site-button {
+    @apply px-4 py-3 border border-purple rounded-md shadow-sm text-purple hover:text-darkBlue hover:bg-purple transition-all duration-200 ease-in-out;
+  }
+
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  html {
+    /* Scrollbar */
+    scrollbar-color: var(--color-white) var(--color-darkBlue);
+    scrollbar-width: thin;
+
+    @apply font-body scroll-pt-[var(--nav-height)] scroll-smooth;
+  }
+
+  body {
+    @apply text-white bg-darkBlue;
+  }
+
+  section {
+    @apply py-20 md:py-28;
+  }
+
+  nav,
+  header,
+  main {
+    @apply max-w-screen-4xl mx-auto px-4 md:px-8; /* max-w-screen-4xl */
+  }
+
+  nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
+  nav[data-current-url-path^='/pricing'] [aria-label='Pricing'],
+  nav[data-current-url-path^='/blog'] [aria-label='Blog'],
+  nav[data-current-url-path^='/contact'] [aria-label='Contact'] {
+    @apply text-purple;
+  }
+
+  img,
+  svg,
+  video {
+    @apply block w-full h-auto;
+  }
+
+  /* Typography */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-header text-balance;
+  }
+
+  h1,
+  .h1 {
+    @apply text-5xl md:text-6xl leading-tight;
+  }
+
+  h2,
+  .h2 {
+    @apply text-4xl lg:text-5xl leading-normal;
+  }
+
+  h3,
+  .h3 {
     @apply text-3xl md:text-4xl;
   }
 
-  & h3 {
-    @apply text-2xl md:text-3xl;
+  p {
+    @apply text-pretty text-base md:text-lg;
   }
 
-  & a:not(.site-button):not(nav a) {
-    /** 
+  a {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  p,
+  a,
+  button {
+    @apply text-lg md:text-xl;
+  }
+
+  input,
+  textarea {
+    @apply text-lightGrey;
+  }
+
+  /* Blog + Case Studies */
+
+  #blog-layout h2,
+  #case-study h2:not(:first-of-type) {
+    @apply mt-[1lh];
+  }
+
+  #blog-layout,
+  #case-study {
+    & h3,
+    & h4,
+    & h5,
+    & h6,
+    & img {
+      @apply mt-[1lh];
+    }
+
+    & h2 {
+      @apply text-3xl md:text-4xl;
+    }
+
+    & h3 {
+      @apply text-2xl md:text-3xl;
+    }
+
+    & a:not(.site-button):not(nav a) {
+      /** 
       * Markdown bug because of remark-reading-time.mjs -- .site-link-2 isn't recognized 
       * Manually adding link styles here
       * See: https://docs.astro.build/en/reference/errors/csssyntax-error/
       */
-    @apply text-purple hover:text-grey;
-  }
+      @apply text-purple hover:text-grey;
+    }
 
-  & p:not(header > p),
-  & ul,
-  & ol,
-  & pre,
-  & a:not(.site-button) {
-    @apply text-base md:text-lg;
-  }
+    & p:not(header > p),
+    & ul,
+    & ol,
+    & pre,
+    & a:not(.site-button) {
+      @apply text-base md:text-lg;
+    }
 
-  & p:not(header > p),
-  & ul,
-  & ol,
-  & pre {
-    @apply text-lightGrey;
-  }
+    & p:not(header > p),
+    & ul,
+    & ol,
+    & pre {
+      @apply text-lightGrey;
+    }
 
-  & img,
-  & pre {
-    @apply block my-[1lh];
-  }
+    & img,
+    & pre {
+      @apply block my-[1lh];
+    }
 
-  & img {
-    @apply block rounded-lg;
-  }
+    & img {
+      @apply block rounded-lg;
+    }
 
-  & pre {
-    @apply p-4 rounded-lg;
-  }
+    & pre {
+      @apply p-4 rounded-lg;
+    }
 
-  & ul:not(nav ul),
-  & ol {
-    padding-inline-start: 3rem;
-  }
+    & ul:not(nav ul),
+    & ol {
+      padding-inline-start: 3rem;
+    }
 
-  & ul li:not(nav ul li) {
-    @apply list-disc;
-  }
+    & ul li:not(nav ul li) {
+      @apply list-disc;
+    }
 
-  & ol li {
-    @apply list-decimal;
-  }
+    & ol li {
+      @apply list-decimal;
+    }
 
-  & p code,
-  & li code {
-    @apply bg-purple text-darkBlue rounded-sm p-1 box-decoration-clone;
-  }
+    & p code,
+    & li code {
+      @apply bg-purple text-darkBlue rounded-sm p-1 box-decoration-clone;
+    }
 
-  & em {
-    @apply italic;
-  }
+    & em {
+      @apply italic;
+    }
 
-  & strong {
-    @apply font-black text-white;
+    & strong {
+      @apply font-black text-white;
+    }
   }
 }
