@@ -21,7 +21,7 @@
 }
 
 @theme {
-  --color-white: #fffafa;
+  /* --color-white: #fffafa;
   --color-darkBlue: #0e1726;
   --color-purple: #c26dff;
   --color-purple: oklch(69.7% 0.2235 306.97);
@@ -29,12 +29,19 @@
   --color-green: oklch(82.97% 0.1144 180.59);
   --color-orange: #ff757f;
   --color-orange: oklch(74.18% 0.1782 18.25);
-  --color-blue: #7ea9ff;
-  --color-blue: oklch(74.41% 0.1423 264.28);
   --color-lightGrey: #cfd1d4;
   --color-grey: #878b93;
   --color-darkGrey: #3e4c59;
-  --color-scrim: #0e1726e6;
+  */
+
+  --color-white: #fffafa;
+  --color-darkBlue: var(--color-gray-900);
+  --color-purple: var(--color-purple-500);
+  --color-green: var(--color-teal-300);
+  --color-orange: var(--color-red-400);
+  --color-lightGrey: var(--color-gray-300);
+  --color-grey: var(--color-gray-500);
+  --color-darkGrey: var(--color-gray-700);
 
   --font-header: 'Poppins Regular', sans-serif;
   --font-body: 'Monaspace Argon Var', monospace;
