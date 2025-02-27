@@ -14,7 +14,7 @@ const { text, size = 'big', href, class: className } = Astro.props
     <a
       href={href}
       class:list={[
-        `${className} inline-block rounded-full text-darkBlue text-base uppercase shadow-sm`,
+        `${className} inline-block rounded-full text-black text-base uppercase shadow-sm`,
         { 'px-2 pt-2 pb-1.5': size === 'small' },
         { 'px-4 pt-4 pb-3.5': size === 'big' },
       ]}
@@ -24,7 +24,7 @@ const { text, size = 'big', href, class: className } = Astro.props
   ) : (
     <span
       class:list={[
-        `${className} inline-block rounded-full text-darkBlue text-base uppercase shadow-sm`,
+        `${className} inline-block rounded-full text-black text-base uppercase shadow-sm`,
         { 'px-2 pt-2 pb-1.5': size === 'small' },
         { 'px-4 pt-4 pb-3.5': size === 'big' },
       ]}
