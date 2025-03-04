@@ -10,7 +10,11 @@ export interface Props {
   socialImage?: string
 }
 
-const { title, description, socialImage } = Astro.props
+const {
+  title,
+  description = 'Helping freelancers and creatives grow online with expert web design, community resources, and a partnership you can trust.',
+  socialImage,
+} = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalURL)
 ---

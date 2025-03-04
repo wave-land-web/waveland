@@ -21,19 +21,6 @@
 }
 
 @theme {
-  /* --color-white: #fffafa;
-  --color-darkBlue: #0e1726;
-  --color-purple: #c26dff;
-  --color-purple: oklch(69.7% 0.2235 306.97);
-  --color-green: #65e0cb;
-  --color-green: oklch(82.97% 0.1144 180.59);
-  --color-orange: #ff757f;
-  --color-orange: oklch(74.18% 0.1782 18.25);
-  --color-lightGrey: #cfd1d4;
-  --color-grey: #878b93;
-  --color-darkGrey: #3e4c59;
-  */
-
   --color-white: #fffafa;
   --color-black: var(--color-gray-950);
   --color-darkBlue: var(--color-gray-900);
