@@ -116,7 +116,7 @@
     scrollbar-color: var(--color-white) var(--color-darkBlue);
     scrollbar-width: thin;
 
-    @apply font-body scroll-pt-[var(--nav-height)] scroll-smooth;
+    @apply font-body scroll-pt-8 scroll-smooth;
   }
 
   body {
@@ -183,6 +183,10 @@
   a,
   button {
     @apply text-lg md:text-xl;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 
   input,
