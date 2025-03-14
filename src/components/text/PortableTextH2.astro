@@ -1,7 +1,12 @@
 ---
 const { node } = Astro.props // `.node` is the current node in the PortableText
 
-const headerText = node.children[0].text
+// Check if the node is of type 'h2' and has children
+if (!node.children[0].children) {
+  return null
+}
+
+const headerText = node.children[0].children[0].text
 const headerId = headerText.replace(/\s+/g, '-').toLowerCase()
 ---
 
