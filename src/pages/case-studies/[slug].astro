@@ -7,6 +7,7 @@ import SanityImage from '../../components/ui/SanityImage.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
 import CTA from '../../components/text/CTA.astro'
+import { urlForImage } from '../../sanity/lib/urlForImage'
 
 export async function getStaticPaths() {
   const { data: allCaseStudies } = await loadQuery<SanityDocument[]>({
@@ -39,6 +40,9 @@ const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
   params,
 })
 
+// Generate OG image URL for the case study
+const imageUrl = urlForImage(currentCaseStudy.mainImage).format('jpg').url()
+
 // Retrieve + format heading data for anchor links and table of contents
 const headings: { id: string; text: string }[] = currentCaseStudy.body
   .filter((block: SanityDocument) => block.style === 'h2')
@@ -53,6 +57,7 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
 <Layout
   title={`Wave Land Web | ${currentCaseStudy.title}`}
   description={currentCaseStudy.description}
+  socialImage={imageUrl}
 >
   <header
     class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-28 border-b-[1px] border-dashed border-grey"
