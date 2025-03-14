@@ -40,9 +40,8 @@ export const GET: APIRoute = async (context) => {
 
   // Return RSS feed
   return rss({
-    title: 'Wave Land Web | Blog',
-    description:
-      "Musings on technology and building for the web. Subscribe to know what we've been up to, along with tips and tricks to help you in your creative journey.",
+    title: 'Wave Land Web | Blog & Case Studies',
+    description: 'Latest posts and case studies from Wave Land Web',
     site: context.site || '',
     items: [...postItems, ...caseStudyItems],
   })
