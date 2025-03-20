@@ -30,6 +30,7 @@ export default defineConfig({
     react(),
   ],
   adapter: netlify({
+    // Netlify image CDN must be disabled as of 01/25/2024 so the build doesn't break - see: <https://docs.astro.build/en/guides/integrations-guide/netlify/#netlify-image-cdn-support>
     imageCDN: false,
     cacheOnDemandPages: true,
   }),
