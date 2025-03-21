@@ -1,11 +1,10 @@
 ---
-const { node } = Astro.props // `.node` is the current node in the PortableText
+// Creates a custom H2 component with an id that can be used for linking
 
-// Check if the node is of type 'h2' and has children
-if (!node.children[0].children) {
-  return null
-}
+// The current node received from the PortableText component
+const { node } = Astro.props
 
+// Extract text and create an id
 const headerText = node.children[0].children[0].text
 const headerId = headerText.replace(/\s+/g, '-').toLowerCase()
 ---

@@ -5,15 +5,27 @@ import PortableTextImage from '../ui/PortableTextImage.astro'
 import PortableTextH2 from './PortableTextH2.astro'
 
 const { portableText } = Astro.props
+let components = {}
 
-const components = {
-  type: {
-    code: PortableTextCode,
-    image: PortableTextImage,
-  },
-  block: {
-    h2: PortableTextH2,
-  },
+// IF we are on a case study page, only use the custom h2 component 
+// ELSE use the default h2 rendering
+if (Astro.url.pathname.startsWith('/case-studies')) {
+  components = {
+    type: {
+      code: PortableTextCode,
+      image: PortableTextImage,
+    },
+    block: {
+      h2: PortableTextH2,
+    },
+  }
+} else {
+  components = {
+    type: {
+      code: PortableTextCode,
+      image: PortableTextImage,
+    },
+  }
 }
 ---
 
