@@ -5,7 +5,10 @@
 const { node } = Astro.props
 
 // Extract text and create an id
-const headerText = node.children[0].children[0].text
+// TODO: figure out why content is displayed differently for Lauren's case study
+const headerText = node.children[0].children
+  ? node.children[0].children[0].text
+  : node.children[0].text
 const headerId = headerText.replace(/\s+/g, '-').toLowerCase()
 ---
 
