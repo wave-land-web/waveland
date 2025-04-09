@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
+import SocialIcons from '../SocialIcons.astro'
 ---
 
 <div id="desktop-nav" class="hidden md:flex md:items-center md:gap-8">
@@ -33,23 +33,5 @@ import { Icon } from 'astro-icon/components'
 
   <span>•</span>
 
-  <ul class="inline-flex items-center gap-8">
-    <li>
-      <a href="/rss.xml" class="site-link" aria-label="RSS" title="RSS Feed">
-        <Icon name="tabler:rss" class="site-icon" /></a
-      >
-    </li>
-    <li>
-      <a
-        href="https://www.instagram.com/wavelandweb/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="site-link"
-        aria-label="Instagram"
-        title="Instagram"
-      >
-        <Icon name="tabler:brand-instagram" class="site-icon" /></a
-      >
-    </li>
-  </ul>
+  <SocialIcons color="text-white" />
 </div>

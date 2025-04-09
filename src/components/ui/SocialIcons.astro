@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  color?: string
+}
+
+const { color = 'text-white' } = Astro.props
+---
+
+<ul class="inline-flex items-center gap-6">
+  <li>
+    <a
+      href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+      aria-label="Email"
+      title="Email"
+      class={`items-center ${color} hover:text-purple`}
+    >
+      <Icon name="tabler:mail" class="site-icon" />
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://www.instagram.com/wavelandweb/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class={`items-center ${color} hover:text-purple`}
+      aria-label="Instagram"
+      title="Instagram"
+    >
+      <Icon name="tabler:brand-instagram" class="site-icon" />
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://www.linkedin.com/company/wave-land/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class={`items-center ${color} hover:text-purple`}
+      aria-label="LinkedIn"
+      title="LinkedIn"
+    >
+      <Icon name="tabler:brand-linkedin" class="site-icon" />
+    </a>
+  </li>
+</ul>

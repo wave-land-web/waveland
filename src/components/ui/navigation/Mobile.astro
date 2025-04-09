@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components'
 import TitleLogo from '../../text/TitleLogo.astro'
+import SocialIcons from '../SocialIcons.astro'
 ---
 
 <!-- Mobile nav -->
@@ -55,20 +56,8 @@ import TitleLogo from '../../text/TitleLogo.astro'
         aria-label="Contact"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Contact</a
       >
     </li>
-    <li class="w-full flex gap-8 py-6 border-b-[1px] border-dashed border-grey">
-      <a href="/rss.xml" class="site-link" aria-label="RSS" title="RSS Feed">
-        <Icon name="tabler:rss" class="site-icon" /></a
-      >
-      <a
-        href="https://www.instagram.com/wavelandweb/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="site-link"
-        aria-label="Instagram"
-        title="Instagram"
-      >
-        <Icon name="tabler:brand-instagram" class="site-icon" /></a
-      >
+    <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
+      <SocialIcons color="text-white" />
     </li>
   </ul>
 </div>

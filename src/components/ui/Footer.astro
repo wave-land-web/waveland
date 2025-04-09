@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components'
 import TitleLogo from '../text/TitleLogo.astro'
+import SocialIcons from './SocialIcons.astro'
 import Subscribe from './Subscribe.astro'
 ---
 
@@ -21,42 +21,7 @@ import Subscribe from './Subscribe.astro'
     </div>
   </div>
   <div class="flex flex-col md:flex-row justify-between gap-4 max-w-screen-4xl m-auto px-4 md:px-8">
-    <ul class="inline-flex items-center gap-6">
-      <li>
-        <a
-          href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
-          aria-label="Email"
-          title="Email"
-          class="items-center text-grey hover:text-purple"
-        >
-          <Icon name="tabler:mail" class="site-icon" /></a
-        >
-      </li>
-      <li>
-        <a
-          href="https://www.instagram.com/wavelandweb/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="items-center text-grey hover:text-purple"
-          aria-label="Instagram"
-          title="Instagram"
-        >
-          <Icon name="tabler:brand-instagram" class="site-icon" /></a
-        >
-      </li>
-      <li>
-        <a
-          href="https://www.linkedin.com/company/wave-land/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="items-center text-grey hover:text-purple"
-          aria-label="LinkedIn"
-          title="LinkedIn"
-        >
-          <Icon name="tabler:brand-linkedin" class="site-icon" /></a
-        >
-      </li>
-    </ul>
+    <SocialIcons color="text-grey" />
     <p class="text-grey lg:text-end text-base">wavelandweb.com © {new Date().getFullYear()}</p>
   </div>
 </footer>
