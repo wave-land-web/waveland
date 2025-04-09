@@ -25,7 +25,7 @@ const { text, url, arrowLeft, newWindow, linkClass, iconClass } = Astro.props
       <>
         <Icon
           name="tabler:arrow-narrow-left"
-          class={`${iconClass} site-icon group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out`}
+          class={`${iconClass} group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out`}
         />
         {text}
       </>
@@ -34,7 +34,7 @@ const { text, url, arrowLeft, newWindow, linkClass, iconClass } = Astro.props
         {text}
         <Icon
           name="tabler:arrow-narrow-right"
-          class={`${iconClass} site-icon group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out`}
+          class={`${iconClass} group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out`}
         />
       </>
     )
