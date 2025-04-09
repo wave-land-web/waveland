@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components'
 import Card from './Card.astro'
+import CTA from '../text/CTA.astro'
 
 export interface Props {
   title: string
@@ -20,7 +21,7 @@ const { title, monthlyPrice, yearlyPrice, price, dynamicPrice = true, features, 
 ---
 
 <Card
-  class={`${className} flex flex-col h-auto gap-8 p-8 border border-dashed border-darkGrey hover:border-purple transition duration-300`}
+  class={`${className} flex flex-col h-auto gap-8 p-8 border border-dashed border-darkGrey hover:border-purple transition duration-(--transition)`}
 >
   <h3 class="text-purple text-base md:text-lg leading-none">
     {title}
@@ -39,9 +40,7 @@ const { title, monthlyPrice, yearlyPrice, price, dynamicPrice = true, features, 
     )
   }
 
-  <a href="/contact" class="site-button text-center text-xl">
-    {buttonText}
-  </a>
+  <CTA tag="link" href="/contact" text={buttonText} />
   <ul>
     {
       features.map((feature) => (

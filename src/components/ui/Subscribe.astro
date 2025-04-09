@@ -1,4 +1,6 @@
 ---
+import CTA from '../text/CTA.astro'
+
 export interface Props {
   formId: string
 }
@@ -11,14 +13,14 @@ const { formId } = Astro.props
     <label for="email" class="sr-only">Email Address</label>
     <input
       id="email"
-      class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition-all duration-200 ease-in-out"
+      class="block w-full border rounded-md border-grey px-4 py-3 text-white bg-transparent placeholder:text-grey focus:outline-none focus:ring-2 focus:ring-purple shadow-sm transition-all duration-(--transition) ease-in-out"
       name="email"
       type="email"
       autocomplete="email"
       placeholder="Email Address"
       required
     />
-    <button class="site-button text-base">Subscribe</button>
+    <CTA tag="button" text="Subscribe" aria-label="Subscribe" title="Subscribe" class="text-base" />
   </div>
   <span id="response" class="hidden text-xs">
     <!-- Form submission response handled via JS -->

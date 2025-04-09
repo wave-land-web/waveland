@@ -39,6 +39,8 @@
   --breakpoint-4xl: 1920px;
 
   --nav-height: clamp(6rem, 20vw, 8rem);
+
+  --transition: 300ms;
 }
 
 /* Animations */
@@ -49,9 +51,9 @@
 
 @media (prefers-reduced-motion: no-preference) {
   /**
-  * Required class: `lsa` (initializes animations and defaults to fade-in)
-  * Note: Add `no-repeat` class to prevent animations from repeating on scroll
-  */
+    * Required class: `lsa` (initializes animations and defaults to fade-in)
+    * Note: Add `no-repeat` class to prevent animations from repeating on scroll
+    */
   .lsa {
     @apply opacity-0 transform transition duration-700;
 
@@ -91,20 +93,8 @@
 @layer base {
   /* TODO: Get rid of these classes where possible */
 
-  .site-link {
-    @apply underline text-white hover:text-purple group-hover:text-purple transition-all duration-200 ease-in-out;
-  }
-
-  .site-link-2 {
-    @apply text-purple hover:text-grey transition-all duration-200 ease-in-out;
-  }
-
   .site-icon {
     @apply w-6 stroke-1;
-  }
-
-  .site-button {
-    @apply px-4 py-3 border border-purple rounded-md shadow-sm text-purple hover:text-black hover:bg-purple transition-all duration-200 ease-in-out;
   }
 
   .absolute-center {
@@ -176,7 +166,7 @@
   }
 
   a {
-    @apply transition-all duration-200 ease-in-out;
+    @apply hover:text-purple transition-all duration-(--transition) ease-in-out;
   }
 
   p,
@@ -219,12 +209,7 @@
       @apply text-2xl md:text-3xl;
     }
 
-    & a:not(.site-button):not(nav a) {
-      /** 
-      * Markdown bug because of remark-reading-time.mjs -- .site-link-2 isn't recognized 
-      * Manually adding link styles here
-      * See: https://docs.astro.build/en/reference/errors/csssyntax-error/
-      */
+    & a {
       @apply text-purple hover:text-grey;
     }
 
@@ -232,7 +217,7 @@
     & ul,
     & ol,
     & pre,
-    & a:not(.site-button) {
+    & a {
       @apply text-base md:text-lg;
     }
 

@@ -1,7 +1,7 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import { createEllipsisText } from '../../lib/text'
-import CTA from '../text/CTA.astro'
+import Link from '../text/Link.astro'
 import Pill from '../text/Pill.astro'
 import SanityImage from './SanityImage.astro'
 
@@ -35,16 +35,13 @@ const { caseStudy } = Astro.props
       }
     </div>
     <h3>
-      <a
-        href={`/case-studies/${caseStudy.slug.current}`}
-        class="site-link text-3xl md:text-4xl no-underline"
-      >
+      <a href={`/case-studies/${caseStudy.slug.current}`} class="text-3xl md:text-4xl">
         {caseStudy.title}
       </a>
     </h3>
     <p class="text-base text-lightGrey">
       {createEllipsisText(caseStudy.description, 100)}
     </p>
-    <CTA text="Read More" url={`/case-studies/${caseStudy.slug.current}`} linkClass="self-end" />
+    <Link text="Read More" url={`/case-studies/${caseStudy.slug.current}`} linkClass="self-end" />
   </div>
 </article>

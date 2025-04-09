@@ -53,17 +53,17 @@ const websiteDetails = [
       <!-- Payment toggle -->
       <div class="flex flex-col items-center gap-4 mb-8 lsa no-repeat">
         <label for="toggle" class="flex items-center gap-4 cursor-pointer">
-          <span id="monthly" class="text-white transition duration-300">Monthly</span>
+          <span id="monthly" class="text-white transition duration-(--transition)">Monthly</span>
           <div class="relative">
             <input id="toggle" type="checkbox" class="sr-only" />
             <div class="block bg-purple w-14 h-8 rounded-full"></div>
             <div
               id="dot"
-              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition duration-300"
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition duration-(--transition)"
             >
             </div>
           </div>
-          <span id="yearly" class="text-grey transition duration-300">Yearly</span>
+          <span id="yearly" class="text-grey transition duration-(--transition)">Yearly</span>
         </label>
         <p class="text-sm text-grey text-center max-w-md">
           <em
@@ -172,7 +172,7 @@ const websiteDetails = [
           {
             websiteDetails.map((detail) => (
               <details class="mb-4 group">
-                <summary class="text-xl flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-300 cursor-pointer">
+                <summary class="text-xl flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-(--transition) cursor-pointer">
                   {detail.summary}
                 </summary>
                 <p class="py-4 text-lightGrey text-base">{detail.description}</p>

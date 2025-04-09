@@ -13,6 +13,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
   },
+  scopedStyleStrategy: 'class',
   integrations: [
     sitemap({
       lastmod: new Date(),

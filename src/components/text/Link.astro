@@ -1,20 +1,42 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 export interface Props {
-  href: string
   text: string
+  url: string
+  arrowLeft?: boolean
   newWindow?: boolean
-  ariaLabel?: string
-  [key: string]: any
+  linkClass?: string
+  iconClass?: string
 }
 
-const { href, text, newWindow, ariaLabel, ...props } = Astro.props
+const { text, url, arrowLeft, newWindow, linkClass, iconClass } = Astro.props
 ---
 
 <a
-  class="site-link"
-  href={href}
+  href={url}
   target={newWindow ? '_blank' : '_self'}
-  rel="noopener noreferrer"
-  aria-label={ariaLabel}
-  {...props}>{text}</a
+  rel={newWindow ? 'noopener noreferrer' : ''}
+  class={`${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
+  aria-label={text}
 >
+  {
+    arrowLeft ? (
+      <>
+        <Icon
+          name="tabler:arrow-narrow-left"
+          class={`${iconClass} site-icon group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out`}
+        />
+        {text}
+      </>
+    ) : (
+      <>
+        {text}
+        <Icon
+          name="tabler:arrow-narrow-right"
+          class={`${iconClass} site-icon group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out`}
+        />
+      </>
+    )
+  }
+</a>

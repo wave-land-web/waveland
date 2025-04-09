@@ -22,9 +22,7 @@ const truncatedDescriptionText = createEllipsisText(post.description, 100)
     minutesRead={post.estimatedReadingTime}
   />
   <h3>
-    <a href={`/blog/${post.slug.current}`} class="site-link text-3xl md:text-4xl no-underline"
-      >{post.title}</a
-    >
+    <a href={`/blog/${post.slug.current}`} class="text-3xl md:text-4xl">{post.title}</a>
   </h3>
   <p class="text-base text-lightGrey">{truncatedDescriptionText}</p>
 </article>

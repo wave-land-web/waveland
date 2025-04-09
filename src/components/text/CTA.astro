@@ -1,42 +1,26 @@
 ---
-import { Icon } from 'astro-icon/components'
-
-export interface Props {
+interface Props {
+  tag: 'link' | 'button'
+  href?: string
   text: string
-  url: string
-  arrowLeft?: boolean
-  newWindow?: boolean
-  linkClass?: string
-  iconClass?: string
+  class?: string
+  [key: string]: any
 }
 
-const { text, url, arrowLeft, newWindow, linkClass, iconClass } = Astro.props
+const { tag, href, text, class: className, ...rest } = Astro.props
+
+const baseClasses =
+  'px-4 py-3 border border-purple rounded-md shadow-sm text-purple hover:text-black hover:bg-purple transition-all duration-(--transition) ease-in-out text-center'
 ---
 
-<a
-  href={url}
-  target={newWindow ? '_blank' : '_self'}
-  rel={newWindow ? 'noopener noreferrer' : ''}
-  class={`${linkClass} flex gap-2 items-center site-link-2 group`}
-  aria-label={text}
->
-  {
-    arrowLeft ? (
-      <>
-        <Icon
-          name="tabler:arrow-narrow-left"
-          class={`${iconClass} site-icon group-hover:-translate-x-1 transition-transform duration-200 ease-in-out`}
-        />
-        {text}
-      </>
-    ) : (
-      <>
-        {text}
-        <Icon
-          name="tabler:arrow-narrow-right"
-          class={`${iconClass} site-icon group-hover:translate-x-1 transition-transform duration-200 ease-in-out`}
-        />
-      </>
-    )
-  }
-</a>
+{
+  tag === 'link' ? (
+    <a href={href} class={`${className || ''} ${baseClasses}`} {...rest}>
+      {text}
+    </a>
+  ) : (
+    <button class={`${className || ''} ${baseClasses}`} {...rest}>
+      {text}
+    </button>
+  )
+}

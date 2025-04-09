@@ -6,7 +6,7 @@ import PortableText from '../../components/text/PortableText.astro'
 import SanityImage from '../../components/ui/SanityImage.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
-import CTA from '../../components/text/CTA.astro'
+import Link from '../../components/text/Link.astro'
 import { urlForImage } from '../../sanity/lib/urlForImage'
 
 export async function getStaticPaths() {
@@ -105,8 +105,8 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
             headings.map((heading: { id: string; text: string }) => (
               <li class="font-header group" data-section-id={heading.id}>
                 <a href={`#${heading.id}`} class="inline-flex items-center">
-                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-200 ease-in-out" />
-                  <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-200 ease-in-out">
+                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-(--transition) ease-in-out" />
+                  <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-(--transition) ease-in-out">
                     {heading.text}
                   </span>
                 </a>
@@ -118,7 +118,7 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
 
       <div class="flex flex-col gap-[1lh]">
         <PortableText portableText={currentCaseStudy.body} />
-        <CTA text="View All Case Studies" url="/case-studies" arrowLeft={true} />
+        <Link text="View All Case Studies" url="/case-studies" arrowLeft={true} />
       </div>
     </section>
 

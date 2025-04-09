@@ -1,6 +1,7 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import CTA from '../../components/text/CTA.astro'
+import Link from '../../components/text/Link.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import PostHeader from '../../components/ui/PostHeader.astro'
 import Layout from '../../layouts/Layout.astro'
@@ -70,28 +71,28 @@ const nextPost = props.allPosts[currentPostIndex + 1] || null
       <div class="flex flex-wrap gap-8 justify-between mt-[1lh]">
         {
           previousPost && (
-            <a
-              class="mr-auto site-button"
+            <CTA
+              tag="link"
+              text="Previous Post"
               href={`/blog/${previousPost.slug.current}`}
               title={previousPost.title}
-            >
-              Previous Post
-            </a>
+              class="mr-auto"
+            />
           )
         }
         {
           nextPost && (
-            <a
-              class="ml-auto site-button"
+            <CTA
+              tag="link"
+              text="Next Post"
               href={`/blog/${nextPost.slug.current}`}
               title={nextPost.title}
-            >
-              Next Post
-            </a>
+              class="ml-auto"
+            />
           )
         }
       </div>
-      <CTA text="Back to blog" url="/blog" arrowLeft={true} linkClass="my-4" />
+      <Link text="Back to blog" url="/blog" arrowLeft={true} linkClass="my-4" />
     </section>
   </main>
 </Layout>

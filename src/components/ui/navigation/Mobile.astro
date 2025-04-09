@@ -7,7 +7,7 @@ import SocialIcons from '../SocialIcons.astro'
 <!-- Mobile nav -->
 <button
   id="menu"
-  class="flex items-center gap-2.5 z-30 md:hidden site-link hover:text-white no-underline cursor-pointer"
+  class="flex items-center gap-2.5 z-30 md:hidden hover:text-purple transition-all duration-(--transition) ease-in-out cursor-pointer"
 >
   <span class="pt-1 text-base uppercase">Menu</span>
   <Icon name="tabler:menu" class="site-icon" />
@@ -21,39 +21,31 @@ import SocialIcons from '../SocialIcons.astro'
   <TitleLogo class="mb-8" />
   <ul id="mobile-nav-items" class="w-full">
     <li class="w-full py-6 border-y-[1px] border-dashed border-grey">
-      <a
-        href="/#services"
-        class="site-link no-underline flex gap-2 items-center text-base uppercase"
-        aria-label="Services"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Services</a
+      <a href="/#services" class="flex gap-2 items-center text-base uppercase" aria-label="Services"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Services</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
       <a
         href="/case-studies"
-        class="site-link no-underline flex gap-2 items-center text-base uppercase"
+        class="flex gap-2 items-center text-base uppercase"
         aria-label="Case Studies"
         ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Case Studies</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
-      <a
-        href="/pricing"
-        class="site-link no-underline flex gap-2 items-center text-base uppercase"
-        aria-label="Pricing"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Pricing</a
+      <a href="/pricing" class="flex gap-2 items-center text-base uppercase" aria-label="Pricing"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Pricing</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
-      <a
-        href="/blog"
-        class="site-link no-underline flex gap-2 items-center text-base uppercase"
-        aria-label="Blog"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Blog</a
+      <a href="/blog" class="flex gap-2 items-center text-base uppercase" aria-label="Blog"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Blog</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">
-      <a
-        href="/contact"
-        class="site-link no-underline flex gap-2 items-center text-base uppercase"
-        aria-label="Contact"><Icon name="tabler:arrow-narrow-right" class="site-icon" />Contact</a
+      <a href="/contact" class="flex gap-2 items-center text-base uppercase" aria-label="Contact"
+        ><Icon name="tabler:arrow-narrow-right" class="site-icon" />Contact</a
       >
     </li>
     <li class="w-full py-6 border-b-[1px] border-dashed border-grey">

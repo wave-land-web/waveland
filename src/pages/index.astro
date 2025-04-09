@@ -2,8 +2,8 @@
 import powerPassengerPassageImage from '../assets/power-passenger-passage.png'
 import robbyWebbImage from '../assets/robby-webb.png'
 import supervoidImage from '../assets/supervoid.png'
-import CTA from '../components/text/CTA.astro'
 import IntroCallCTA from '../components/text/IntroCallCTA.astro'
+import Link from '../components/text/Link.astro'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
 import TitleLogo from '../components/text/TitleLogo.astro'
@@ -50,7 +50,10 @@ const testimonialData = [
     class="h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
   >
     <div>
-      <TitleLogo class="mb-6 lsa lsa-slide-left no-repeat" />
+      <div class="mb-6 lsa lsa-slide-left no-repeat">
+        <TitleLogo />
+      </div>
+
       <div class="flex flex-wrap gap-4">
         <Pill
           text="Web Design & Development"
@@ -72,7 +75,7 @@ const testimonialData = [
       </p>
 
       <div class="lsa delay-700 no-repeat">
-        <CTA
+        <Link
           text="Free Strategy Call"
           url="https://calendly.com/wavelandweb/15-min-meeting?month=2024-05"
           newWindow={true}
@@ -119,10 +122,10 @@ const testimonialData = [
       />
 
       <div class="lsa lsa-slide-up no-repeat">
-        <CTA
+        <Link
           text="View Case Studies"
           url="/case-studies"
-          linkClass="font-header text-4xl lg:text-5xl site-link-2"
+          linkClass="font-header text-4xl lg:text-5xl"
           iconClass="w-12"
         />
       </div>
