@@ -20,7 +20,7 @@ import { quizQuestions, quizResults } from '../lib/data/quiz'
   <main>
     <section id="quiz" class="pt-0 lsa lsa-slide-up no-repeat">
       <div class="max-w-3xl mx-auto">
-        <QuizApp client:only="react" questions={quizQuestions} results={quizResults} />
+        <QuizApp client:load questions={quizQuestions} results={quizResults} />
       </div>
     </section>
   </main>
