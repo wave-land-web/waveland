@@ -5,18 +5,13 @@ import CTA from '../text/CTA'
 
 interface QuestionProps {
   question: QuizQuestion
-  onAnswer: (archetype: Archetype) => void
   selectedAnswer: number | null
-  setSelectedAnswer: (index: number | null) => void
+  onAnswerSelected: (data: { questionId: number; archetype: Archetype }) => void
 }
 
-export default function Question({
-  question,
-  onAnswer,
-  selectedAnswer,
-  setSelectedAnswer,
-}: QuestionProps) {
+export default function Question({ question, selectedAnswer, onAnswerSelected }: QuestionProps) {
   const [shuffledAnswers, setShuffledAnswers] = useState(question.answers)
+  const [localSelectedAnswer, setLocalSelectedAnswer] = useState<number | null>(null)
 
   // Shuffle answers when the question changes
   useEffect(() => {
@@ -27,7 +22,8 @@ export default function Question({
       shuffledAnswers: shuffledAnswers.map((a) => a.text),
     })
     setShuffledAnswers(shuffleArray(question.answers))
-  }, [question])
+    setLocalSelectedAnswer(selectedAnswer)
+  }, [question, selectedAnswer])
 
   const handleAnswer = (index: number, archetype: Archetype) => {
     console.log('Answer selected:', {
@@ -36,8 +32,8 @@ export default function Question({
       archetype,
       answerText: shuffledAnswers[index].text,
     })
-    setSelectedAnswer(index)
-    onAnswer(archetype)
+    setLocalSelectedAnswer(index)
+    onAnswerSelected({ questionId: question.id, archetype })
   }
 
   return (
@@ -55,16 +51,24 @@ export default function Question({
               tag="button"
               text={answer.text}
               className="w-full text-left"
+              data-question-id={question.id}
+              data-answer-index={index}
+              data-archetype={answer.archetype}
               onClick={(e) => {
                 e.preventDefault()
+                const target = e.currentTarget as HTMLElement
+                const questionId = parseInt(target.dataset.questionId || '0')
+                const answerIndex = parseInt(target.dataset.answerIndex || '0')
+                const archetype = target.dataset.archetype as Archetype
+
                 console.log('Button clicked:', {
-                  questionId: question.id,
-                  answerIndex: index,
+                  questionId,
+                  answerIndex,
                   answerText: answer.text,
                 })
-                handleAnswer(index, answer.archetype)
+                handleAnswer(answerIndex, archetype)
               }}
-              isActive={selectedAnswer === index}
+              isActive={localSelectedAnswer === index}
             />
           </div>
         ))}

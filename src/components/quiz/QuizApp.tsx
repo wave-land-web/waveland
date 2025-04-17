@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
-import Link from '../text/Link'
 import Subscribe from '../ui/Subscribe.tsx'
 import Question from './Question'
 import Results from './Results'
@@ -51,9 +50,7 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
 
   const handleNextQuestion = () => {
     if (state.currentQuestion < questions.length) {
-      // Only allow navigation if the next question has been answered
       const nextQuestionId = state.currentQuestion + 1
-      // Also make sure the first question is answered
       if (state.answers[nextQuestionId] || state.currentQuestion === 1) {
         setIsTransitioning(true)
         setTimeout(() => {
@@ -68,19 +65,19 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     }
   }
 
-  const handleAnswer = (archetype: Archetype) => {
+  const handleAnswerSelected = (data: { questionId: number; archetype: Archetype }) => {
     console.log('QuizApp: Answer received', {
       currentQuestion: state.currentQuestion,
-      archetype,
+      archetype: data.archetype,
       previousAnswers: state.answers,
     })
 
     const newAnswers = {
       ...state.answers,
-      [state.currentQuestion]: archetype,
+      [data.questionId]: data.archetype,
     }
 
-    const isComplete = state.currentQuestion === questions.length
+    const isComplete = data.questionId === questions.length
 
     console.log('QuizApp: Updating state', {
       newAnswers,
@@ -88,11 +85,8 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
       nextQuestion: isComplete ? state.currentQuestion : state.currentQuestion + 1,
     })
 
-    // Wait for user to see their selection before starting transition
     setTimeout(() => {
       setIsTransitioning(true)
-
-      // Wait for fade out animation to complete before updating state
       setTimeout(() => {
         setState({
           currentQuestion: isComplete ? state.currentQuestion : state.currentQuestion + 1,
@@ -107,8 +101,8 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
           })
           setShowResults(true)
         }
-      }, TRANSITION_DURATION) // Fade out duration
-    }, TRANSITION_DURATION) // Initial delay to see selection
+      }, TRANSITION_DURATION)
+    }, TRANSITION_DURATION)
   }
 
   useEffect(() => {
@@ -179,27 +173,57 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
       </div>
       <Question
         question={currentQuestion}
-        onAnswer={handleAnswer}
         selectedAnswer={selectedAnswer}
-        setSelectedAnswer={setSelectedAnswer}
+        onAnswerSelected={handleAnswerSelected}
       />
       <div className="flex justify-between">
         {state.currentQuestion > 1 && (
-          <Link
-            text="prev"
-            url="#"
-            arrowLeft
+          <button
             onClick={handlePreviousQuestion}
-            linkClass="mr-auto"
-          />
+            className="mr-auto flex gap-2 items-center text-purple hover:text-grey group"
+            aria-label="Previous question"
+          >
+            <svg
+              width="1em"
+              height="1em"
+              data-icon="tabler:arrow-narrow-left"
+              className="group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out"
+            >
+              <symbol id="ai:tabler:arrow-narrow-left" viewBox="0 0 24 24">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 12h14M5 12l4 4m-4-4l4-4"
+                ></path>
+              </symbol>
+              <use href="#ai:tabler:arrow-narrow-left"></use>
+            </svg>
+            prev
+          </button>
         )}
         {state.currentQuestion < questions.length && state.currentQuestion !== 1 && (
-          <Link
-            text="next"
-            url="#"
+          <button
             onClick={handleNextQuestion}
-            linkClass={`ml-auto ${!state.answers[state.currentQuestion + 1] ? 'opacity-50 cursor-not-allowed' : ''}`}
-          />
+            className={`ml-auto flex gap-2 items-center text-purple hover:text-grey group ${
+              !state.answers[state.currentQuestion + 1] ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            aria-label="Next question"
+            disabled={!state.answers[state.currentQuestion + 1]}
+          >
+            next
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              data-icon="tabler:arrow-narrow-right"
+              className="group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out"
+            >
+              <use href="#ai:tabler:arrow-narrow-right"></use>
+            </svg>
+          </button>
         )}
       </div>
     </div>
