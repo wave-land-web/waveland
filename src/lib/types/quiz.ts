@@ -21,6 +21,7 @@ export interface QuizResult {
   archetype: Archetype
   description: string
   strengths: string[]
+  actionItem: string
   growthTip: string
   cta: string
   image: string

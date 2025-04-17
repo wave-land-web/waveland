@@ -171,7 +171,7 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
             <span className="text-lightGrey text-base md:text-lg font-medium">
               Question {state.currentQuestion} of {questions.length}
             </span>
-            <div className="w-full md:w-64 bg-white/10 rounded-full h-2">
+            <div className="w-full md:w-64 bg-white/10 rounded-full h-2.5">
               <div
                 className="bg-purple h-2.5 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${(state.currentQuestion / questions.length) * 100}%` }}

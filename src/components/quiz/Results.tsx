@@ -86,6 +86,11 @@ export default function Results({ result }: ResultsProps) {
       </div>
 
       <div className="p-8 bg-white/5 shadow-lg border border-white/10 rounded-lg lsa lsa-slide-up no-repeat">
+        <h3 className="font-bold mb-4">Your Next Step</h3>
+        <p className="text-lightGrey">{result.actionItem}</p>
+      </div>
+
+      <div className="p-8 bg-white/5 shadow-lg border border-white/10 rounded-lg lsa lsa-slide-up no-repeat">
         <h3 className="font-bold mb-4">Growth Tip</h3>
         <p className="text-lightGrey">{result.growthTip}</p>
       </div>

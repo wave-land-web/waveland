@@ -99,6 +99,8 @@ export const quizResults: Record<string, QuizResult> = {
       'Comfortable taking risks',
       'Inspires others with your boldness',
     ],
+    actionItem:
+      'Start by mapping out your vision for your digital presence. What impact do you want to make? How can your website become a platform for your innovative ideas?',
     growthTip: `Your ideas are powerful — now it's time to translate them into a digital experience that reflects your future-facing mindset and gets others on board.`,
     cta: 'Build your visionary website',
     image: '/images/visionary.png',
@@ -107,6 +109,8 @@ export const quizResults: Record<string, QuizResult> = {
     archetype: 'Artisan',
     description: `You're a craftsperson at heart — obsessed with detail, quality, and aesthetics. You take pride in your work, and your eye for nuance shows up in everything you do. Whether it's a product, portfolio, or performance, your creative output is your signature.`,
     strengths: ['Meticulous and design-minded', 'Driven by mastery and beauty', 'Deeply hands-on'],
+    actionItem:
+      'Take inventory of your best work and consider how to showcase it in a way that highlights your attention to detail and craftsmanship.',
     growthTip: `You don't just need a website — you need a canvas. Your digital home should reflect the care and attention you bring to everything you create.`,
     cta: 'Craft your perfect website',
     image: '/images/artisan.png',
@@ -119,6 +123,7 @@ export const quizResults: Record<string, QuizResult> = {
       'Connects deeply with audiences',
       'Natural sense of pacing and narrative',
     ],
+    actionItem: `Begin crafting your personal narrative. What's the story you want to tell through your website? How can you structure it to create an emotional journey for your visitors?`,
     growthTip: `Your online presence should guide people through a compelling story — your story. One that builds trust, connection, and curiosity with every scroll.`,
     cta: 'Tell your story online',
     image: '/images/storyteller.png',
@@ -131,6 +136,8 @@ export const quizResults: Record<string, QuizResult> = {
       'Loves systems and roadmaps',
       'Analytical thinker with creative edge',
     ],
+    actionItem:
+      'Define your key business objectives and metrics. What actions do you want visitors to take? How can your website become a strategic asset in achieving your goals?',
     growthTip: `Imagine your website not just as a portfolio — but as a conversion engine, a lead funnel, and a content system that works for you behind the scenes.`,
     cta: 'Build a results-driven site',
     image: '/images/strategist.png',
@@ -139,6 +146,8 @@ export const quizResults: Record<string, QuizResult> = {
     archetype: 'Connector',
     description: `You're all about relationships — building community, fostering collaboration, and staying in the creative flow with others. You get energy from conversation, feedback, and sharing ideas. Your work is often shaped by the people around you — and it thrives when it reaches others.`,
     strengths: ['Collaborative and empathetic', 'Natural networker', 'Focused on mutual growth'],
+    actionItem:
+      'Think about how you can create spaces for connection on your website. What kind of community do you want to build? How can you make visitors feel welcomed and engaged?',
     growthTip: `Your online space should feel inviting and human — like a living room, not a billboard. The right digital experience can help you deepen connections at scale.`,
     cta: 'Connect through your website',
     image: '/images/connector.png',
@@ -151,6 +160,8 @@ export const quizResults: Record<string, QuizResult> = {
       'Fast to adapt, slow to settle',
       'Full of fresh ideas and angles',
     ],
+    actionItem:
+      'Consider how your website can evolve with you. What features would allow you to experiment and iterate? How can you build in flexibility for future growth?',
     growthTip: `Your website should be flexible enough to grow with you — a playground for your ideas and a platform for whatever comes next.`,
     cta: 'Explore what you can create',
     image: '/images/explorer.png',
