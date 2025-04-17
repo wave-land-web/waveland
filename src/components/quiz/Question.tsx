@@ -43,9 +43,11 @@ export default function Question({
               tag="button"
               text={answer.text}
               className="w-full text-left"
-              onClick={() => handleAnswer(index, answer.archetype)}
+              onClick={(e) => {
+                e.preventDefault()
+                handleAnswer(index, answer.archetype)
+              }}
               isActive={selectedAnswer === index}
-              client:load
             />
           </div>
         ))}
