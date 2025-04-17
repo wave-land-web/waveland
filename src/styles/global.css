@@ -96,7 +96,7 @@
     scrollbar-color: var(--color-white) var(--color-darkBlue);
     scrollbar-width: thin;
 
-    @apply font-body scroll-pt-(--nav-height) scroll-smooth;
+    @apply font-body scroll-pt-16 scroll-smooth;
   }
 
   body {

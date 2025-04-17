@@ -1,0 +1,25 @@
+---
+import QuizApp from '../components/quiz/QuizApp'
+import PageHeader from '../components/ui/PageHeader.astro'
+import Layout from '../layouts/Layout.astro'
+import { quizQuestions, quizResults } from '../lib/data/quiz'
+---
+
+<Layout
+  title="Wave Land | Discover Your Creative Archetype"
+  description="Find your style. Take this quick quiz to discover your creative archetype and get personalized insights for growing your online presence."
+>
+  <PageHeader
+    title="Discover Your Creative Archetype"
+    subtitle="Find your style"
+    bodyText="Take this quick quiz to discover your creative archetype and get personalized insights for growing your online presence."
+  />
+
+  <main>
+    <section id="quiz" class="pt-0 lsa lsa-slide-up no-repeat">
+      <div class="max-w-3xl mx-auto">
+        <QuizApp client:load questions={quizQuestions} results={quizResults} />
+      </div>
+    </section>
+  </main>
+</Layout>
