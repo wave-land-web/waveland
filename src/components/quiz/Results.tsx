@@ -1,5 +1,6 @@
 // TODO: QA astro image optimization
 import { getImage } from 'astro:assets'
+import { useEffect, useState } from 'react'
 import artisanImage from '../../assets/artisan.png'
 import connectorImage from '../../assets/connector.png'
 import explorerImage from '../../assets/explorer.png'
@@ -13,38 +14,39 @@ interface ResultsProps {
   result: QuizResult
 }
 
-const artisanImageOptimized = await getImage({ src: artisanImage })
-const connectorImageOptimized = await getImage({ src: connectorImage })
-const explorerImageOptimized = await getImage({ src: explorerImage })
-const storytellerImageOptimized = await getImage({ src: storytellerImage })
-const strategistImageOptimized = await getImage({ src: strategistImage })
-const visionaryImageOptimized = await getImage({ src: visionaryImage })
-
 export default function Results({ result }: ResultsProps) {
-  // Determine which image to display
-  let image
-  switch (result.archetype) {
-    case 'Visionary':
-      image = visionaryImageOptimized
-      break
-    case 'Connector':
-      image = connectorImageOptimized
-      break
-    case 'Strategist':
-      image = strategistImageOptimized
-      break
-    case 'Explorer':
-      image = explorerImageOptimized
-      break
-    case 'Storyteller':
-      image = storytellerImageOptimized
-      break
-    case 'Artisan':
-      image = artisanImageOptimized
-      break
-    default:
-      image = null
-  }
+  const [image, setImage] = useState<{ src: string } | null>(null)
+
+  useEffect(() => {
+    const loadImage = async () => {
+      let imageSrc
+      switch (result.archetype) {
+        case 'Visionary':
+          imageSrc = await getImage({ src: visionaryImage })
+          break
+        case 'Connector':
+          imageSrc = await getImage({ src: connectorImage })
+          break
+        case 'Strategist':
+          imageSrc = await getImage({ src: strategistImage })
+          break
+        case 'Explorer':
+          imageSrc = await getImage({ src: explorerImage })
+          break
+        case 'Storyteller':
+          imageSrc = await getImage({ src: storytellerImage })
+          break
+        case 'Artisan':
+          imageSrc = await getImage({ src: artisanImage })
+          break
+        default:
+          imageSrc = null
+      }
+      if (imageSrc) setImage(imageSrc)
+    }
+
+    loadImage()
+  }, [result.archetype])
 
   return (
     <div className="max-w-2xl mx-auto flex flex-col gap-12">

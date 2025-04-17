@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
 import Subscribe from '../ui/Subscribe.tsx'
@@ -25,6 +25,21 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   const [showResults, setShowResults] = useState(false)
   const [hasSubscribed, setHasSubscribed] = useState(false)
   const [showSubscribe, setShowSubscribe] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Reset state when questions change
+    setState({
+      currentQuestion: 1,
+      answers: {},
+      isComplete: false,
+    })
+    setSelectedAnswer(null)
+    setIsTransitioning(false)
+    setShowResults(false)
+    setHasSubscribed(false)
+    setShowSubscribe(true)
+  }, [questions])
 
   const handleSubscribeSuccess = () => {
     setShowSubscribe(false)
@@ -38,10 +53,10 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     if (state.currentQuestion > 1) {
       setIsTransitioning(true)
       setTimeout(() => {
-        setState({
-          ...state,
-          currentQuestion: state.currentQuestion - 1,
-        })
+        setState((prevState) => ({
+          ...prevState,
+          currentQuestion: prevState.currentQuestion - 1,
+        }))
         setSelectedAnswer(null)
         setIsTransitioning(false)
       }, TRANSITION_DURATION)
@@ -54,10 +69,10 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
       if (state.answers[nextQuestionId] || state.currentQuestion === 1) {
         setIsTransitioning(true)
         setTimeout(() => {
-          setState({
-            ...state,
+          setState((prevState) => ({
+            ...prevState,
             currentQuestion: nextQuestionId,
-          })
+          }))
           setSelectedAnswer(null)
           setIsTransitioning(false)
         }, TRANSITION_DURATION)
@@ -66,28 +81,47 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   }
 
   const handleAnswerSelected = (data: { questionId: number; archetype: Archetype }) => {
-    const newAnswers = {
-      ...state.answers,
-      [data.questionId]: data.archetype,
-    }
+    try {
+      const newAnswers = {
+        ...state.answers,
+        [data.questionId]: data.archetype,
+      }
 
-    const isComplete = data.questionId === questions.length
+      const isComplete = data.questionId === questions.length
 
-    setTimeout(() => {
-      setIsTransitioning(true)
       setTimeout(() => {
-        setState({
-          currentQuestion: isComplete ? state.currentQuestion : state.currentQuestion + 1,
-          answers: newAnswers,
-          isComplete,
-        })
-        setSelectedAnswer(null)
-        setIsTransitioning(false)
-        if (isComplete) {
-          setShowResults(true)
-        }
+        setIsTransitioning(true)
+        setTimeout(() => {
+          setState((prevState) => ({
+            currentQuestion: isComplete ? prevState.currentQuestion : prevState.currentQuestion + 1,
+            answers: newAnswers,
+            isComplete,
+          }))
+          setSelectedAnswer(null)
+          setIsTransitioning(false)
+          if (isComplete) {
+            setShowResults(true)
+          }
+        }, TRANSITION_DURATION)
       }, TRANSITION_DURATION)
-    }, TRANSITION_DURATION)
+    } catch (err) {
+      setError('An error occurred while processing your answer. Please try again.')
+      console.error(err)
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 bg-red-500/10 rounded-lg border border-red-500/20">
+        <p className="text-red-500">{error}</p>
+        <button
+          onClick={() => setError(null)}
+          className="mt-2 px-4 py-2 bg-red-500/20 text-red-500 rounded hover:bg-red-500/30"
+        >
+          Try Again
+        </button>
+      </div>
+    )
   }
 
   if (state.isComplete) {
