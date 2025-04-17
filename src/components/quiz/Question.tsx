@@ -15,23 +15,11 @@ export default function Question({ question, selectedAnswer, onAnswerSelected }:
 
   // Shuffle answers when the question changes
   useEffect(() => {
-    console.log('Question mounted/updated:', {
-      questionId: question.id,
-      questionText: question.text,
-      selectedAnswer,
-      shuffledAnswers: shuffledAnswers.map((a) => a.text),
-    })
     setShuffledAnswers(shuffleArray(question.answers))
     setLocalSelectedAnswer(selectedAnswer)
   }, [question, selectedAnswer])
 
   const handleAnswer = (index: number, archetype: Archetype) => {
-    console.log('Answer selected:', {
-      questionId: question.id,
-      answerIndex: index,
-      archetype,
-      answerText: shuffledAnswers[index].text,
-    })
     setLocalSelectedAnswer(index)
     onAnswerSelected({ questionId: question.id, archetype })
   }
@@ -57,15 +45,9 @@ export default function Question({ question, selectedAnswer, onAnswerSelected }:
               onClick={(e) => {
                 e.preventDefault()
                 const target = e.currentTarget as HTMLElement
-                const questionId = parseInt(target.dataset.questionId || '0')
                 const answerIndex = parseInt(target.dataset.answerIndex || '0')
                 const archetype = target.dataset.archetype as Archetype
 
-                console.log('Button clicked:', {
-                  questionId,
-                  answerIndex,
-                  answerText: answer.text,
-                })
                 handleAnswer(answerIndex, archetype)
               }}
               isActive={localSelectedAnswer === index}

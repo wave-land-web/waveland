@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
 import Subscribe from '../ui/Subscribe.tsx'
@@ -66,24 +66,12 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   }
 
   const handleAnswerSelected = (data: { questionId: number; archetype: Archetype }) => {
-    console.log('QuizApp: Answer received', {
-      currentQuestion: state.currentQuestion,
-      archetype: data.archetype,
-      previousAnswers: state.answers,
-    })
-
     const newAnswers = {
       ...state.answers,
       [data.questionId]: data.archetype,
     }
 
     const isComplete = data.questionId === questions.length
-
-    console.log('QuizApp: Updating state', {
-      newAnswers,
-      isComplete,
-      nextQuestion: isComplete ? state.currentQuestion : state.currentQuestion + 1,
-    })
 
     setTimeout(() => {
       setIsTransitioning(true)
@@ -96,24 +84,11 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
         setSelectedAnswer(null)
         setIsTransitioning(false)
         if (isComplete) {
-          console.log('QuizApp: Quiz complete, showing results', {
-            finalAnswers: newAnswers,
-          })
           setShowResults(true)
         }
       }, TRANSITION_DURATION)
     }, TRANSITION_DURATION)
   }
-
-  useEffect(() => {
-    console.log('QuizApp: State updated', {
-      currentQuestion: state.currentQuestion,
-      answers: state.answers,
-      isComplete: state.isComplete,
-      isTransitioning,
-      showResults,
-    })
-  }, [state, isTransitioning, showResults])
 
   if (state.isComplete) {
     const resultArchetype = calculateResult(state.answers)

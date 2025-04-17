@@ -1,5 +1,7 @@
 ---
-import QuizApp from '../components/quiz/QuizApp'
+export const prerender = false
+
+import QuizApp from '../components/quiz/QuizApp.tsx'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import { quizQuestions, quizResults } from '../lib/data/quiz'
