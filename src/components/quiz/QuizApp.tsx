@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
 import Link from '../text/Link'
@@ -69,12 +69,24 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   }
 
   const handleAnswer = (archetype: Archetype) => {
+    console.log('QuizApp: Answer received', {
+      currentQuestion: state.currentQuestion,
+      archetype,
+      previousAnswers: state.answers,
+    })
+
     const newAnswers = {
       ...state.answers,
       [state.currentQuestion]: archetype,
     }
 
     const isComplete = state.currentQuestion === questions.length
+
+    console.log('QuizApp: Updating state', {
+      newAnswers,
+      isComplete,
+      nextQuestion: isComplete ? state.currentQuestion : state.currentQuestion + 1,
+    })
 
     // Wait for user to see their selection before starting transition
     setTimeout(() => {
@@ -90,11 +102,24 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
         setSelectedAnswer(null)
         setIsTransitioning(false)
         if (isComplete) {
+          console.log('QuizApp: Quiz complete, showing results', {
+            finalAnswers: newAnswers,
+          })
           setShowResults(true)
         }
       }, TRANSITION_DURATION) // Fade out duration
     }, TRANSITION_DURATION) // Initial delay to see selection
   }
+
+  useEffect(() => {
+    console.log('QuizApp: State updated', {
+      currentQuestion: state.currentQuestion,
+      answers: state.answers,
+      isComplete: state.isComplete,
+      isTransitioning,
+      showResults,
+    })
+  }, [state, isTransitioning, showResults])
 
   if (state.isComplete) {
     const resultArchetype = calculateResult(state.answers)

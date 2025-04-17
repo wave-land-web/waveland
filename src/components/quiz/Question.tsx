@@ -20,10 +20,22 @@ export default function Question({
 
   // Shuffle answers when the question changes
   useEffect(() => {
+    console.log('Question mounted/updated:', {
+      questionId: question.id,
+      questionText: question.text,
+      selectedAnswer,
+      shuffledAnswers: shuffledAnswers.map((a) => a.text),
+    })
     setShuffledAnswers(shuffleArray(question.answers))
   }, [question])
 
   const handleAnswer = (index: number, archetype: Archetype) => {
+    console.log('Answer selected:', {
+      questionId: question.id,
+      answerIndex: index,
+      archetype,
+      answerText: shuffledAnswers[index].text,
+    })
     setSelectedAnswer(index)
     onAnswer(archetype)
   }
@@ -45,6 +57,11 @@ export default function Question({
               className="w-full text-left"
               onClick={(e) => {
                 e.preventDefault()
+                console.log('Button clicked:', {
+                  questionId: question.id,
+                  answerIndex: index,
+                  answerText: answer.text,
+                })
                 handleAnswer(index, answer.archetype)
               }}
               isActive={selectedAnswer === index}
