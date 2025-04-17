@@ -38,4 +38,39 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  experimental: {
+    // SEE: https://docs.astro.build/en/reference/experimental-flags/fonts/#local-font-variants
+    fonts: [
+      {
+        provider: 'local',
+        name: 'Monaspace Argon Var',
+        cssVariable: '--font-monaspace',
+        variants: [
+          {
+            src: [
+              './src/assets/fonts/monaspace-argon-var-regular.woff2',
+              './src/assets/fonts/monaspace-argon-var-regular.woff',
+            ],
+            weight: '400',
+            style: 'normal',
+          },
+        ],
+      },
+      {
+        provider: 'local',
+        name: 'Poppins Regular',
+        cssVariable: '--font-poppins',
+        variants: [
+          {
+            src: [
+              './src/assets/fonts/poppins-regular.woff2',
+              './src/assets/fonts/poppins-regular.woff',
+            ],
+            weight: '400',
+            style: 'normal',
+          },
+        ],
+      },
+    ],
+  },
 })

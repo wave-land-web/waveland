@@ -3,6 +3,7 @@ import Footer from '../components/ui/Footer.astro'
 import Marquee from '../components/ui/Marquee.astro'
 import Navigation from '../components/ui/navigation/Navigation.astro'
 import '../styles/global.css'
+import { Font } from 'astro:assets'
 
 export interface Props {
   title: string
@@ -49,20 +50,8 @@ const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalU
     <meta name="twitter:image" content={socialImageURL} />
 
     <!-- Preload Fonts -->
-    <link
-      rel="preload"
-      href="/fonts/poppins-regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/monaspace-argon-var-regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <Font cssVariable="--font-monaspace" preload />
+    <Font cssVariable="--font-poppins" preload />
 
     <!-- Favicon & Theme -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

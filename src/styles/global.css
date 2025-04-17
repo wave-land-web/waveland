@@ -1,25 +1,5 @@
 @import 'tailwindcss';
 
-@font-face {
-  font-family: 'Monaspace Argon Var';
-  src:
-    url('/fonts/monaspace-argon-var-regular.woff2') format('woff2'),
-    url('/fonts/monaspace-argon-var-regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
-@font-face {
-  font-family: 'Poppins Regular';
-  src:
-    url('/fonts/poppins-regular.woff2') format('woff2'),
-    url('/fonts/poppins-regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
 @theme {
   --color-white: #fffafa;
   --color-black: var(--color-gray-950);
@@ -31,8 +11,8 @@
   --color-grey: var(--color-gray-500);
   --color-darkGrey: var(--color-gray-700);
 
-  --font-header: 'Poppins Regular', sans-serif;
-  --font-body: 'Monaspace Argon Var', monospace;
+  --font-header: var(--font-poppins);
+  --font-body: var(--font-monaspace);
 
   --breakpoint-2xl: 1440px;
   --breakpoint-3xl: 1600px;
