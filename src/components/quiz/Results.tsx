@@ -1,4 +1,3 @@
-// TODO: QA astro image optimization
 import { getImage } from 'astro:assets'
 import { useEffect, useState } from 'react'
 import artisanImage from '../../assets/artisan.png'
@@ -15,34 +14,34 @@ interface ResultsProps {
 }
 
 export default function Results({ result }: ResultsProps) {
-  const [image, setImage] = useState<{ src: string } | null>(null)
+  const [image, setImage] = useState<Awaited<ReturnType<typeof getImage>> | null>(null)
 
   useEffect(() => {
     const loadImage = async () => {
-      let imageSrc
+      let targetImage
       switch (result.archetype) {
         case 'Visionary':
-          imageSrc = await getImage({ src: visionaryImage })
+          targetImage = await getImage({ src: visionaryImage })
           break
         case 'Connector':
-          imageSrc = await getImage({ src: connectorImage })
+          targetImage = await getImage({ src: connectorImage })
           break
         case 'Strategist':
-          imageSrc = await getImage({ src: strategistImage })
+          targetImage = await getImage({ src: strategistImage })
           break
         case 'Explorer':
-          imageSrc = await getImage({ src: explorerImage })
+          targetImage = await getImage({ src: explorerImage })
           break
         case 'Storyteller':
-          imageSrc = await getImage({ src: storytellerImage })
+          targetImage = await getImage({ src: storytellerImage })
           break
         case 'Artisan':
-          imageSrc = await getImage({ src: artisanImage })
+          targetImage = await getImage({ src: artisanImage })
           break
         default:
-          imageSrc = null
+          targetImage = null
       }
-      if (imageSrc) setImage(imageSrc)
+      if (targetImage) setImage(targetImage)
     }
 
     loadImage()
@@ -63,8 +62,11 @@ export default function Results({ result }: ResultsProps) {
         <img
           src={image.src}
           alt={`${result.archetype} Archetype`}
+          width={image.options.width}
+          height={image.options.height}
           className="w-full h-auto rounded-lg shadow-xl mx-auto hover:scale-[1.02] transition-transform duration-(--transition) ease-in-out"
           loading="lazy"
+          decoding="async"
         />
       )}
 
