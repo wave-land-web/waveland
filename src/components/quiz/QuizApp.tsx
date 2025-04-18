@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
 import Subscribe from '../ui/Subscribe.tsx'
@@ -14,6 +14,7 @@ interface QuizAppProps {
 }
 
 export default function QuizApp({ questions, results }: QuizAppProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<QuizState>({
     currentQuestion: 1,
     answers: {},
@@ -26,6 +27,14 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   const [hasSubscribed, setHasSubscribed] = useState(false)
   const [showSubscribe, setShowSubscribe] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  // Scroll to top of container when quiz state changes
+  // Don't scroll if the user hasn't answered any questions
+  useEffect(() => {
+    if (!isTransitioning && Object.keys(state.answers).length > 0) {
+      containerRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [state.currentQuestion, showResults, showSubscribe, isTransitioning])
 
   useEffect(() => {
     // Reset state when questions change
@@ -131,7 +140,8 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     if (!hasSubscribed) {
       return (
         <div
-          className={`transition-opacity duration-500 ${showSubscribe ? 'opacity-100' : 'opacity-0'}`}
+          ref={containerRef}
+          className={`scroll-mt-16 transition-opacity duration-500 ${showSubscribe ? 'opacity-100' : 'opacity-0'}`}
         >
           <div className="flex flex-col items-center justify-center max-w-3xl mx-auto p-8 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
             <div className="text-center mb-8">
@@ -151,7 +161,8 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
 
     return (
       <div
-        className={`transition-opacity duration-500 ${showResults ? 'opacity-100' : 'opacity-0'}`}
+        ref={containerRef}
+        className={`scroll-mt-16 transition-opacity duration-500 ${showResults ? 'opacity-100' : 'opacity-0'}`}
       >
         <Results result={result} />
       </div>
@@ -163,7 +174,8 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
 
   return (
     <div
-      className={`transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
+      ref={containerRef}
+      className={`scroll-mt-16 transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
     >
       <div className="p-4 bg-white/5 rounded-md border border-white/10 shadow-lg">
         <div className="max-w-2xl mx-auto px-6 py-4">
