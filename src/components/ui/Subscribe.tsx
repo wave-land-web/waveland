@@ -1,13 +1,20 @@
 import { type FormEvent, useState } from 'react'
+import type { Archetype } from '../../lib/types/quiz'
 import CTA from '../text/CTA'
 
 interface SubscribeProps {
   formId: string
   className?: string
   onSuccess?: () => void
+  archetype?: Archetype
 }
 
-export default function Subscribe({ formId, className = '', onSuccess }: SubscribeProps) {
+export default function Subscribe({
+  formId,
+  className = '',
+  onSuccess,
+  archetype,
+}: SubscribeProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -20,6 +27,9 @@ export default function Subscribe({ formId, className = '', onSuccess }: Subscri
     try {
       const formData = new FormData()
       formData.append('email', email)
+      if (archetype) {
+        formData.append('archetype', archetype)
+      }
 
       const response = await fetch('/api/subscribe.json/', {
         method: 'POST',

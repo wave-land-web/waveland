@@ -153,7 +153,11 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
                 personalized insights.
               </p>
             </div>
-            <Subscribe formId="quiz-subscribe" onSuccess={handleSubscribeSuccess} />
+            <Subscribe
+              formId="quiz-subscribe"
+              onSuccess={handleSubscribeSuccess}
+              archetype={resultArchetype}
+            />
           </div>
         </div>
       )
