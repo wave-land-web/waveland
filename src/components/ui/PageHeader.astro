@@ -19,4 +19,5 @@ const { title, subtitle, bodyText, linkText, linkUrl } = Astro.props
   <p class="font-header h1">{subtitle}</p>
   {bodyText && <p class="max-w-xl mb-4 text-lightGrey">{bodyText}</p>}
   {linkText && linkUrl && <Link text={linkText} url={linkUrl} arrowLeft={true} />}
+  <slot />
 </header>

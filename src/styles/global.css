@@ -20,7 +20,7 @@
 
   --nav-height: clamp(6rem, 20vw, 8rem);
 
-  --transition: 300ms;
+  --transition: 200ms;
 }
 
 /* Animations */
@@ -76,7 +76,7 @@
     scrollbar-color: var(--color-white) var(--color-darkBlue);
     scrollbar-width: thin;
 
-    @apply font-body scroll-pt-16 scroll-smooth;
+    @apply font-body scroll-pt-15 scroll-smooth;
   }
 
   body {
@@ -89,8 +89,9 @@
 
   nav,
   header,
-  main {
-    @apply max-w-screen-4xl mx-auto px-4 md:px-8;
+  main,
+  footer {
+    @apply container md:max-w-screen-3xl mx-auto px-4 md:px-8;
   }
 
   nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
@@ -127,7 +128,7 @@
 
   h2,
   .h2 {
-    @apply text-4xl lg:text-5xl leading-normal;
+    @apply text-4xl md:text-5xl leading-normal;
   }
 
   h3,
@@ -222,10 +223,6 @@
 
     & ul li:not(nav ul li) {
       @apply list-disc;
-    }
-
-    & ol li {
-      @apply list-decimal;
     }
 
     & p code,

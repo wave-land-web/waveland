@@ -2,6 +2,8 @@
 import type { SanityDocument } from '@sanity/client'
 import { sanityClient } from 'sanity:client'
 import CaseStudyCard from '../components/ui/CaseStudyCard.astro'
+import PageHeader from '../components/ui/PageHeader.astro'
+import Subscribe from '../components/ui/Subscribe.astro'
 import Layout from '../layouts/Layout.astro'
 
 // Fetch all case studies
@@ -21,15 +23,16 @@ const caseStudies = (await sanityClient.fetch(
   title="Wave Land Web | Case Studies"
   description="Wave Land Web offers custom web design and development services for creatives. Explore our recent work and see how we've helped our clients succeed."
 >
-  <header
-    class="max-w-screen-3xl pt-[calc(4rem+var(--nav-height))] pb-20 md:pb-28 border-b-[1px] border-dashed border-grey"
+  <PageHeader
+    title="Case Studies"
+    subtitle="Our Recent Work"
+    bodyText="Subscribe to our newsletter to receive updates on our latest case studies and projects."
   >
-    <h1 class="text-6xl md:text-7xl lg:text-8xl lsa lsa-slide-left no-repeat">Case Studies</h1>
-  </header>
+    <Subscribe formId="case-studies-subscribe" />
+  </PageHeader>
 
-  <main class="max-w-screen-3xl">
-    <section id="case-studies" class="grid lg:grid-cols-2 gap-12 lg:gap-40 mb-8">
-      <h2 class="sr-only">Recent Work</h2>
+  <main>
+    <section id="case-studies" class="grid lg:grid-cols-2 gap-12 lg:gap-24 pt-4">
       {caseStudies.map((caseStudy) => <CaseStudyCard caseStudy={caseStudy} />)}
     </section>
   </main>

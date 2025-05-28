@@ -1,12 +1,12 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
+import Link from '../../components/text/Link.tsx'
 import Pill from '../../components/text/Pill.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import SanityImage from '../../components/ui/SanityImage.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
-import Link from '../../components/text/Link.tsx'
 import { urlForImage } from '../../sanity/lib/urlForImage'
 
 export async function getStaticPaths() {
@@ -60,7 +60,7 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   socialImage={imageUrl}
 >
   <header
-    class="max-w-screen-3xl grid lg:grid-cols-2 gap-16 lg:gap-40 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-28 border-b-[1px] border-dashed border-grey"
+    class="grid lg:grid-cols-2 gap-16 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-28 border-b-[1px] border-dashed border-grey"
   >
     <div class="flex flex-col gap-4 lg:gap-6">
       <p class="font-header text-purple text-base lg:text-lg lsa lsa-slide-left no-repeat">
@@ -94,31 +94,35 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
     />
   </header>
 
-  <main class="max-w-screen-3xl flex flex-col gap-[1lh]">
-    <section id="case-study" class="w-full grid lg:gap-40 lg:grid-cols-2">
-      <nav
-        aria-label="Case Study Table of Contents"
-        class="w-full hidden lg:block lg:sticky lg:top-[var(--nav-height)] lg:self-start p-0"
-      >
-        <ul class="w-fit">
-          {
-            headings.map((heading: { id: string; text: string }) => (
-              <li class="font-header group" data-section-id={heading.id}>
-                <a href={`#${heading.id}`} class="inline-flex items-center">
-                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-(--transition) ease-in-out" />
-                  <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-(--transition) ease-in-out">
-                    {heading.text}
-                  </span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+  <main>
+    <section id="case-study" class="md:max-w-6xl mx-auto pt-16 md:pt-28">
+      <div class="md:grid md:grid-cols-[1fr_2fr] md:gap-12 lg:gap-16">
+        <nav
+          id="case-study-table-of-contents"
+          aria-label="Case Study Table of Contents"
+          class="w-full mb-8 p-0 md:mb-0 md:sticky md:self-start md:top-(--nav-height)"
+        >
+          <h2 class="mb-4 text-purple text-base lg:text-lg">Table of Contents:</h2>
+          <ol class="list-none p-0">
+            {
+              headings.map((heading: { id: string; text: string }) => (
+                <li class="font-header group" data-section-id={heading.id}>
+                  <a href={`#${heading.id}`} class="inline-flex items-center">
+                    <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-[var(--transition)] ease-in-out" />
+                    <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-(--transition) ease-in-out">
+                      {heading.text}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
 
-      <div class="flex flex-col gap-[1lh]">
-        <PortableText portableText={currentCaseStudy.body} />
-        <Link text="View All Case Studies" url="/case-studies" arrowLeft={true} />
+        <div id="case-study-content" class="flex flex-col gap-[1lh]">
+          <PortableText portableText={currentCaseStudy.body} />
+          <Link text="View All Case Studies" url="/case-studies" arrowLeft={true} />
+        </div>
       </div>
     </section>
 
@@ -133,49 +137,44 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   </main>
 </Layout>
 
-<script is:inline define:vars={{ headings }}>
-  /**
-   * Animate table of contents menu items when the corresponding section comes into view
-   */
-  function handleAnimations() {
-    if (!window.IntersectionObserver) {
-      return console.log('IntersectionObserver not supported')
-    }
+<script>
+  // Track active section using Intersection Observer
+  const tableOfContentsItems = document.querySelectorAll('#case-study-table-of-contents li')
+  const caseStudyH2s = document.querySelectorAll('#case-study-content h2')
 
-    const headingSections = headings.map((heading) => document.getElementById(heading.id))
-
-    if (headingSections.length !== 0) {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0,
-      }
-
-      // Initialize observer
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const section = entry.target
-          const activeMenuItem = document.querySelector(`nav li[data-section-id="${section.id}"]`)
-
-          // By default, animations repeat on scroll
-          if (entry.isIntersecting) {
-            activeMenuItem.classList.add('active')
-          } else if (!entry.isIntersecting) {
-            activeMenuItem.classList.remove('active')
-          }
-        })
-      }, options)
-
-      // Observe each section starting with an h2
-      headingSections.forEach((section) => observer.observe(section))
-    }
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
   }
 
-  // Handle animations on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    handleAnimations()
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id')
+      if (id) {
+        const tocItem = document.querySelector(`li[data-section-id="${id}"]`)
 
-    // Handle animations on scroll
-    document.addEventListener('scroll', handleAnimations)
+        if (entry.isIntersecting) {
+          tableOfContentsItems.forEach((item) => item.classList.remove('active'))
+          if (tocItem) tocItem.classList.add('active')
+        }
+      }
+    })
+  }, observerOptions)
+
+  // Observe all h2 elements
+  caseStudyH2s.forEach((section) => {
+    const id = section.getAttribute('id')
+    if (!id) {
+      // If h2 doesn't have an ID, create one from its text content
+      const newId = section.textContent?.replace(/\s+/g, '-').toLowerCase()
+      if (newId) section.setAttribute('id', newId)
+    }
+    observer.observe(section)
   })
+
+  // Initialize - highlight the first section by default
+  if (tableOfContentsItems.length > 0) {
+    tableOfContentsItems[0].classList.add('active')
+  }
 </script>

@@ -4,8 +4,8 @@ import SocialIcons from './SocialIcons.astro'
 import Subscribe from './Subscribe.astro'
 ---
 
-<footer class="w-full max-w-screen-4xl m-auto pt-4 pb-8 border-t-[1px] border-dashed border-grey">
-  <div id="wrapper" class="grid lg:grid-cols-2 gap-8 max-w-screen-4xl m-auto mb-8 px-4 md:px-8">
+<footer class="pt-4 pb-8 border-t-[1px] border-dashed border-grey">
+  <div id="wrapper" class="grid lg:grid-cols-2 gap-8 m-auto mb-8">
     <div id="newsletter">
       <h2 class="mb-4 pt-5">Newsletter</h2>
       <Subscribe formId="footer-subscribe" />
@@ -20,7 +20,7 @@ import Subscribe from './Subscribe.astro'
       </p>
     </div>
   </div>
-  <div class="flex flex-col md:flex-row justify-between gap-4 max-w-screen-4xl m-auto px-4 md:px-8">
+  <div class="flex flex-col md:flex-row justify-between gap-4 m-auto">
     <SocialIcons color="text-grey" />
     <p class="text-grey lg:text-end text-base">wavelandweb.com © {new Date().getFullYear()}</p>
   </div>
