@@ -26,7 +26,7 @@ export default defineConfig({
       apiVersion: '2024-10-20',
       // Set useCdn to false if you're building statically.
       useCdn: false,
-      studioBasePath: '/studio',
+      studioBasePath: '/admin',
     }),
     react(),
   ],
