@@ -1,7 +1,6 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
-import { db, User } from 'astro:db'
 import { resend } from '../../lib/resend'
 
 /**
@@ -123,22 +122,6 @@ export const POST: APIRoute = async ({ request }) => {
         { status: 500 }
       )
     }
-
-    // Store the user and archetype in the database
-    await db
-      .insert(User)
-      .values({
-        email,
-        archetype: archetype || null,
-        date: new Date(),
-      })
-      .onConflictDoUpdate({
-        target: User.email,
-        set: {
-          archetype: archetype || null,
-          date: new Date(),
-        },
-      })
 
     // If everything worked >> return a success message
     return new Response(

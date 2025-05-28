@@ -1,4 +1,3 @@
-import db from '@astrojs/db'
 import netlify from '@astrojs/netlify'
 import partytown from '@astrojs/partytown'
 import react from '@astrojs/react'
@@ -30,7 +29,6 @@ export default defineConfig({
       studioBasePath: '/studio',
     }),
     react(),
-    db(),
   ],
   adapter: netlify({
     // Netlify image CDN must be disabled as of 01/25/2024 so the build doesn't break - see: <https://docs.astro.build/en/guides/integrations-guide/netlify/#netlify-image-cdn-support>
