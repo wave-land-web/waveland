@@ -31,7 +31,7 @@ const caseStudies = (await sanityClient.fetch(
     <Subscribe formId="case-studies-subscribe" />
   </PageHeader>
 
-  <main>
+  <main class="lg:max-w-screen-xl">
     <section id="case-studies" class="grid lg:grid-cols-2 gap-12 lg:gap-24 pt-4">
       {caseStudies.map((caseStudy) => <CaseStudyCard caseStudy={caseStudy} />)}
     </section>

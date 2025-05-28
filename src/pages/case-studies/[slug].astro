@@ -2,9 +2,8 @@
 import type { SanityDocument } from '@sanity/client'
 import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
 import Link from '../../components/text/Link.tsx'
-import Pill from '../../components/text/Pill.astro'
 import PortableText from '../../components/text/PortableText.astro'
-import SanityImage from '../../components/ui/SanityImage.astro'
+import CaseStudyHeader from '../../components/ui/CaseStudyHeader.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
 import { urlForImage } from '../../sanity/lib/urlForImage'
@@ -35,7 +34,8 @@ const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
     publishedAt,
     description,
     services,
-    body
+    body,
+    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
   }`,
   params,
 })
@@ -59,73 +59,45 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
   description={currentCaseStudy.description}
   socialImage={imageUrl}
 >
-  <header
-    class="grid lg:grid-cols-2 gap-16 items-center pt-[calc(4rem+var(--nav-height))] pb-16 md:pb-28 border-b-[1px] border-dashed border-grey"
-  >
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <p class="font-header text-purple text-base lg:text-lg lsa lsa-slide-left no-repeat">
-        Case Study
-      </p>
-      <h1 class="lsa lsa-slide-left delay-100 no-repeat">
-        {currentCaseStudy.title}
-      </h1>
-      <div class="flex flex-wrap gap-2">
-        {
-          currentCaseStudy.services.map((service: string) => (
-            <Pill
-              text={`${service}`}
-              size="small"
-              class:list={[
-                { 'bg-purple delay-200': service === 'Web Design & Development' },
-                { 'bg-orange delay-300': service === 'Digital Strategy' },
-                { 'bg-green delay-500': service === 'UX/UI' },
-                ['lsa lsa-slide-left no-repeat'],
-              ]}
-            />
-          ))
-        }
-      </div>
-    </div>
-
-    <SanityImage
-      image={currentCaseStudy.mainImage}
-      alt={currentCaseStudy.mainImage.alt}
-      class="aspect-video lsa lsa-slide-right no-repeat"
-    />
-  </header>
+  <CaseStudyHeader
+    title={currentCaseStudy.title}
+    published={currentCaseStudy.publishedAt}
+    minutesRead={currentCaseStudy.estimatedReadingTime}
+    image={currentCaseStudy.mainImage}
+    imageAlt={currentCaseStudy.mainImage.alt}
+    services={currentCaseStudy.services}
+  />
 
   <main>
-    <section id="case-study" class="md:max-w-6xl mx-auto pt-16 md:pt-28">
-      <div class="md:grid md:grid-cols-[1fr_2fr] md:gap-12 lg:gap-16">
-        <nav
-          id="case-study-table-of-contents"
-          aria-label="Case Study Table of Contents"
-          class="w-full mb-8 p-0 md:mb-0 md:sticky md:self-start md:top-(--nav-height)"
-        >
-          <h2 class="mb-4 text-purple text-base lg:text-lg">Table of Contents:</h2>
-          <ol class="list-none p-0">
-            {
-              headings.map((heading: { id: string; text: string }) => (
-                <li class="font-header group" data-section-id={heading.id}>
-                  <a href={`#${heading.id}`} class="inline-flex items-center">
-                    <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-[var(--transition)] ease-in-out" />
-                    <span class="text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-(--transition) ease-in-out">
-                      {heading.text}
-                    </span>
-                  </a>
-                </li>
-              ))
-            }
-          </ol>
-        </nav>
-
+    <div class="container md:max-w-4xl mx-auto">
+      <nav
+        id="case-study-table-of-contents"
+        aria-label="Case Study Table of Contents"
+        class="w-full px-0 py-16 md:self-start"
+      >
+        <h2 class="mb-4 text-purple text-lg md:text-xl">Table of Contents:</h2>
+        <ol class="list-none p-0">
+          {
+            headings.map((heading: { id: string; text: string }) => (
+              <li class="font-header group" data-section-id={heading.id}>
+                <a href={`#${heading.id}`} class="inline-flex items-center">
+                  <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:h-1 group-hover:bg-green group-focus-visible:w-16 group-focus-visible:h-1 group-focus-visible:bg-green group-[.active]:w-16 group-[.active]:h-1 group-[.active]:bg-green rounded transition-all duration-[var(--transition)] ease-in-out" />
+                  <span class="text-base md:text-lg text-grey group-hover:text-green group-focus-visible:text-green group-[.active]:text-green transition-all duration-(--transition) ease-in-out">
+                    {heading.text}
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+      <section id="case-study" class="pt-0">
         <div id="case-study-content" class="flex flex-col gap-[1lh]">
           <PortableText portableText={currentCaseStudy.body} />
           <Link text="View All Case Studies" url="/case-studies" arrowLeft={true} />
         </div>
-      </div>
-    </section>
-
+      </section>
+    </div>
     <section id="get-started">
       <IntroCallCTA
         title="Get Started"
@@ -136,45 +108,3 @@ const headings: { id: string; text: string }[] = currentCaseStudy.body
     </section>
   </main>
 </Layout>
-
-<script>
-  // Track active section using Intersection Observer
-  const tableOfContentsItems = document.querySelectorAll('#case-study-table-of-contents li')
-  const caseStudyH2s = document.querySelectorAll('#case-study-content h2')
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5,
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.getAttribute('id')
-      if (id) {
-        const tocItem = document.querySelector(`li[data-section-id="${id}"]`)
-
-        if (entry.isIntersecting) {
-          tableOfContentsItems.forEach((item) => item.classList.remove('active'))
-          if (tocItem) tocItem.classList.add('active')
-        }
-      }
-    })
-  }, observerOptions)
-
-  // Observe all h2 elements
-  caseStudyH2s.forEach((section) => {
-    const id = section.getAttribute('id')
-    if (!id) {
-      // If h2 doesn't have an ID, create one from its text content
-      const newId = section.textContent?.replace(/\s+/g, '-').toLowerCase()
-      if (newId) section.setAttribute('id', newId)
-    }
-    observer.observe(section)
-  })
-
-  // Initialize - highlight the first section by default
-  if (tableOfContentsItems.length > 0) {
-    tableOfContentsItems[0].classList.add('active')
-  }
-</script>
