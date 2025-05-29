@@ -15,7 +15,7 @@ const { title, published, minutesRead, image, imageAlt } = Astro.props
 ---
 
 <header
-  class="flex flex-col gap-4 w-full max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] px-0 text-center border-grey lsa no-repeat"
+  class="flex flex-col gap-4 w-full max-w-4xl justify-center pt-[calc(4rem+var(--nav-height))] px-0 text-center border-grey lsa"
 >
   <DateAndReadTime class="justify-center" published={published} minutesRead={minutesRead} />
   <h1 class="leading-tight lg:leading-tight">{title}</h1>

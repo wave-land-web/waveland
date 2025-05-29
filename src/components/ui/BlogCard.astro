@@ -12,9 +12,7 @@ const { post } = Astro.props
 const truncatedDescriptionText = createEllipsisText(post.description, 100)
 ---
 
-<article
-  class="flex flex-col gap-4 pb-4 border-b-[1px] border-dashed border-grey lsa lsa-slide-up no-repeat"
->
+<article class="flex flex-col gap-4 pb-4 border-b-[1px] border-dashed border-grey lsa lsa-slide-up">
   <!-- Info -->
   <DateAndReadTime
     class="justify-start"

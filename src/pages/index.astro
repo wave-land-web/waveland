@@ -18,38 +18,30 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
     class="h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
   >
     <div>
-      <div class="mb-6 lsa lsa-slide-left no-repeat">
+      <div class="mb-6 lsa lsa-slide-left">
         <TitleLogo />
       </div>
 
       <div class="flex flex-wrap gap-4">
-        <Pill
-          text="Web Design & Development"
-          href="#services"
-          class="bg-purple lsa delay-100 no-repeat"
-        />
-        <Pill text="Digital Strategy" href="#services" class="bg-orange lsa delay-200 no-repeat" />
-        <Pill
-          text="Education & Community Support"
-          href="#services"
-          class="bg-green lsa delay-300 no-repeat"
-        />
+        <Pill text="Web Design & Development" href="#about" class="bg-purple lsa delay-100" />
+        <Pill text="Digital Strategy" href="#about" class="bg-orange lsa delay-200" />
+        <Pill text="Education & Partnership" href="#about" class="bg-green lsa delay-300" />
       </div>
     </div>
     <div class="max-w-2xl">
-      <p class="mb-6 lsa delay-500 no-repeat">
+      <p class="mb-6 lsa delay-500">
         Helping creatives grow online with custom web design, community resources, and a partnership
         you can trust.
       </p>
 
-      <div class="lsa delay-700 no-repeat">
+      <div class="lsa delay-700">
         <Link text="Discover Your Voice" url="/creative-archetype" />
       </div>
     </div>
   </header>
 
   <main>
-    <section id="about">
+    <section id="introduction">
       <TextAndImage
         title="Carve your path."
         text="Your website should be a true extension of your creativity—giving you more freedom to focus on what you love."
@@ -85,7 +77,7 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
         class="py-16 md:py-24"
       />
 
-      <div class="lsa lsa-slide-up no-repeat">
+      <div class="lsa lsa-slide-up">
         <Link
           text="View Case Studies"
           url="/case-studies"
@@ -95,48 +87,100 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
       </div>
     </section>
 
-    <section id="services">
-      <h2 class="mb-8 lsa no-repeat">Our Services</h2>
+    <section id="about">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="h-full">
+          <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
+            <h2>About <span class="text-green">Wave Land</span></h2>
+          </div>
+        </div>
+
+        <div class="max-w-3xl flex flex-col gap-6">
+          <p class="h4 py-4 lsa lsa-slide-up">
+            We do a lot of things, but it's all centered around making a kick-ass website.
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            Before we design and build your website, it's important to get as familiar as possible
+            with your vision and the project needs.
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            We start with one or two focused strategy sessions to set you up for success and make
+            sure our goals are well-defined.
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            Development can take anywhere from a week to 2-3 months, depending on a lot of factors —
+            we go as fast as we need to, and no quicker.
+          </p>
+
+          <p class="h5 py-4 lsa lsa-slide-up">
+            Our focus is on bringing your vision to life, not crushing deadlines.
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            Our websites are built with more of our code, and less 3rd party libraries, which means
+            they are lightweight, easy to maintain, and made to order for your needs.
+          </p>
+
+          <p class="text-lg md:text-xl lsa lsa-slide-up">
+            <strong><em>Everything you need, nothing you don't.</em></strong>
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            Once you're up and running, we help you set clear, meaningful goals for your online
+            presence, ensuring every step aligns with your vision, engages your community, and
+            drives real impact.
+          </p>
+
+          <p class="h5 py-4 lsa lsa-slide-up">
+            High-performance, user-first web experiences that build trust and empower your audience.
+          </p>
+
+          <p class="text-lg md:text-xl text-lightGrey lsa lsa-slide-up">
+            <Link
+              text="Get In Touch"
+              url="/contact"
+              newWindow={true}
+              linkClass="justify-between font-header mb-2 md:mb-4 text-4xl md:text-5xl"
+              iconClass="w-12"
+            />
+          </p>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 text-black">
-        <Card
-          class="p-8 md:row-span-2 flex flex-col justify-end gap-4 bg-purple lsa lsa-slide-up no-repeat"
-        >
+        <Card class="p-8 md:row-span-2 flex flex-col justify-end gap-4 bg-purple lsa lsa-slide-up">
           <span>01</span>
           <h3>Web Design & Development</h3>
           <p class="text-base">
-            Our custom websites blend striking design with intuitive functionality, creating
-            accessible, user-first experiences that build trust and empower your audience.
+            Custom sites built with more of our code and less 3rd party bloat. Lightweight, easy to
+            maintain, and made to order for your specific needs.
           </p>
         </Card>
 
-        <Card
-          class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100 no-repeat"
-        >
+        <Card class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100">
           <span>02</span>
           <h3>Digital Strategy</h3>
           <p class="text-base">
-            We help you set clear, meaningful goals for your online presence, ensuring every step
-            aligns with your vision, engages your community, and drives real impact.
+            Focused sessions that transform your vision into actionable goals. We'll map out what
+            matters and ditch what doesn't.
           </p>
         </Card>
 
-        <Card
-          class="p-8 flex flex-col justify-end gap-4 bg-green lsa lsa-slide-up delay-200 no-repeat"
-        >
+        <Card class="p-8 flex flex-col justify-end gap-4 bg-green lsa lsa-slide-up delay-200">
           <span>03</span>
-          <h3>Education & Community Support</h3>
+          <h3>Education & Partnership</h3>
           <p class="text-base">
-            We share knowledge, tools, and guidance to help creatives build websites and products
-            that inspire, connect, and serve their audiences seamlessly.
+            Practical knowledge and tools that empower you to grow online without the technical
+            headaches. No gatekeeping, just genuine support.
           </p>
         </Card>
       </div>
     </section>
 
-    <section
-      id="testimonials"
-      class="max-w-screen-md m-auto text-center lsa lsa-slide-up no-repeat"
-    >
+    <section id="testimonials" class="max-w-screen-md m-auto text-center lsa lsa-slide-up">
       <h2 class="mb-8">Testimonials</h2>
       <Testimonials data={testimonialData} />
     </section>

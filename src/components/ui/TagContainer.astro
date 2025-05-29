@@ -9,7 +9,7 @@ export interface Props {
 const { tags } = Astro.props
 ---
 
-<div class="lg:sticky lg:top-[var(--nav-height)] lg:self-start lsa no-repeat">
+<div class="lg:sticky lg:top-[var(--nav-height)] lg:self-start lsa">
   <h2 class="mb-[clamp(2rem,5vw,3rem)]">Tags</h2>
   <div class="max-w-xl flex flex-wrap gap-4">
     {tags.map((tag) => <Tag tag={tag} />)}

@@ -16,7 +16,7 @@ export interface Props {
 const { title, published, minutesRead, image, imageAlt, services } = Astro.props
 ---
 
-<header class="pt-[calc(4rem+var(--nav-height))] text-left lsa no-repeat">
+<header class="pt-[calc(4rem+var(--nav-height))] text-left lsa">
   <div class="container md:max-w-4xl mx-auto flex flex-col gap-4 md:gap-6 justify-center">
     <DateAndReadTime
       class="justify-start md:justify-center"
@@ -35,7 +35,7 @@ const { title, published, minutesRead, image, imageAlt, services } = Astro.props
               { 'bg-purple delay-200': service === 'Web Design & Development' },
               { 'bg-orange delay-300': service === 'Digital Strategy' },
               { 'bg-green delay-500': service === 'UX/UI' },
-              ['lsa lsa-slide-left no-repeat'],
+              ['lsa lsa-slide-left'],
             ]}
           />
         ))
