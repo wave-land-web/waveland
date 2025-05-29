@@ -12,7 +12,7 @@ export interface Props {
 const { title, description, linkText, linkSrc } = Astro.props
 ---
 
-<div class="grid gap-2 md:gap-4 lg:gap-40 md:grid-cols-2 mb-40 lsa lsa-slide-up no-repeat">
+<div class="grid gap-2 md:gap-4 md:grid-cols-2 mb-40 lsa lsa-slide-up no-repeat">
   <div>
     <h2 class="h2 md:mb-4">{title}</h2>
 
@@ -30,7 +30,7 @@ const { title, description, linkText, linkSrc } = Astro.props
       text={linkText}
       url={linkSrc}
       newWindow={true}
-      linkClass="justify-between font-header mb-2 md:mb-4 text-4xl lg:text-5xl"
+      linkClass="justify-between font-header mb-2 md:mb-4 text-4xl md:text-5xl"
       iconClass="w-12"
     />
     <p class="text-lightGrey">{description}</p>
