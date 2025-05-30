@@ -8,7 +8,7 @@
   --color-green: var(--color-teal-300);
   --color-orange: var(--color-red-400);
   --color-lightGrey: var(--color-gray-300);
-  --color-grey: var(--color-gray-500);
+  --color-grey: var(--color-gray-400);
   --color-darkGrey: var(--color-gray-700);
 
   --font-header: var(--font-poppins);
@@ -107,6 +107,10 @@
     @apply block w-full h-auto;
   }
 
+  img {
+    @apply rounded-lg drop-shadow-md;
+  }
+
   svg:not(svg[data-icon='title']) {
     @apply w-6 stroke-1;
   }
@@ -174,6 +178,10 @@
     @apply text-lightGrey;
   }
 
+  .text-container {
+    @apply h-auto flex flex-col gap-6 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
+  }
+
   /* Blog + Case Studies */
 
   #blog-layout h2,
@@ -221,10 +229,6 @@
     & img,
     & pre {
       @apply block my-[1lh];
-    }
-
-    & img {
-      @apply block rounded-lg;
     }
 
     & pre {

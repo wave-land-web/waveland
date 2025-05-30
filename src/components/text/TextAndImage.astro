@@ -1,7 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
-import Card from '../ui/Card.astro'
+import WaveOneIcon from '../../assets/wave-1.svg'
+import WaveTwoIcon from '../../assets/wave-2.svg'
+import WaveThreeIcon from '../../assets/wave-3.svg'
 
 export interface Props {
   title: string
@@ -11,7 +13,7 @@ export interface Props {
   linkText: string
   image: ImageMetadata
   imageAlt: string
-  variant?: 1 | 2 | 3
+  color: string
   isReversed?: boolean
   class?: string
 }
@@ -24,40 +26,17 @@ const {
   linkText,
   image,
   imageAlt,
-  variant,
+  color,
   class: className,
   isReversed,
 } = Astro.props
 
-// Determine which icon to use
-let icon = ''
-switch (variant) {
-  case 1:
-    icon = 'wave-1'
-    break
-  case 2:
-    icon = 'wave-2'
-    break
-  case 3:
-    icon = 'wave-3'
-    break
-  default:
-    icon = 'wave-1'
-    break
-}
-
-// Determine theme styles
-const themeStyles = {
-  text: {
-    'text-purple': variant === 1,
-    'text-orange': variant === 2,
-    'text-green': variant === 3,
-  },
-  bg: {
-    'h-96 bg-purple': variant === 1,
-    'h-96 bg-orange': variant === 2,
-    'h-96 bg-green': variant === 3,
-  },
+// Determine which icon to use based on color
+let icon = 'wave-1'
+if (color === 'orange') {
+  icon = 'wave-2'
+} else if (color === 'green') {
+  icon = 'wave-3'
 }
 ---
 
@@ -75,12 +54,31 @@ const themeStyles = {
       },
     ]}
   >
-    <h2 class:list={themeStyles.text}>{title}</h2>
+    <h2
+      class:list={[
+        {
+          'text-purple': color === 'purple',
+          'text-orange': color === 'orange',
+          'text-green': color === 'green',
+        },
+      ]}
+    >
+      {title}
+    </h2>
     <p class="h2">
       {text}
     </p>
   </div>
-  <Card class={themeStyles.bg}>
+  <article
+    class:list={[
+      'text-container p-0 h-96 group',
+      {
+        'hover:border-purple': color === 'purple',
+        'hover:border-orange': color === 'orange',
+        'hover:border-green': color === 'green',
+      },
+    ]}
+  >
     <Picture
       src={image}
       formats={['avif', 'webp', 'jpg']}
@@ -88,26 +86,45 @@ const themeStyles = {
       quality="low"
       widths={[240, 540, 720, image.width]}
       sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-36 z-10 drop-shadow-lg"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
     />
-    <Icon
-      name={icon}
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-4/5"
-    />
+    {
+      color === 'purple' ? (
+        <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple transition-colors duration-(--transition)" />
+      ) : color === 'orange' ? (
+        <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange transition-colors duration-(--transition)" />
+      ) : (
+        <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green transition-colors duration-(--transition)" />
+      )
+    }
 
     <div
       class="absolute bottom-0 w-full h-full md:h-auto flex flex-col md:flex-row justify-between p-4"
     >
-      <a href={caseStudyUrl} class:list={['w-fit text-base text-black hover:text-darkGrey']}
-        >Case Study</a
+      <a
+        href={caseStudyUrl}
+        class:list={[
+          'text-base',
+          {
+            'hover:text-purple': color === 'purple',
+            'hover:text-orange': color === 'orange',
+            'hover:text-green': color === 'green',
+          },
+        ]}>Case Study</a
       >
       <a
         href={externalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class:list={['w-fit bottom-4 text-base text-black hover:text-darkGrey']}
-        ><Icon name="tabler:link" class="inline mr-2" />{linkText}</a
+        class:list={[
+          'text-base',
+          {
+            'hover:text-purple': color === 'purple',
+            'hover:text-orange': color === 'orange',
+            'hover:text-green': color === 'green',
+          },
+        ]}><Icon name="tabler:link" class="inline mr-2" />{linkText}</a
       >
     </div>
-  </Card>
+  </article>
 </div>

@@ -1,13 +1,15 @@
 ---
+import AppWindowIcon from '../assets/app-window.svg'
+import ChartColumnIcon from '../assets/chart-column.svg'
 import powerPassengerPassageImage from '../assets/power-passenger-passage.png'
 import robbyWebbImage from '../assets/robby-webb.png'
+import SunsetTwoIcon from '../assets/sunset-2.svg'
 import supervoidImage from '../assets/supervoid.png'
 import IntroCallCTA from '../components/text/IntroCallCTA.astro'
 import Link from '../components/text/Link.tsx'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
 import TitleLogo from '../components/text/TitleLogo.astro'
-import Card from '../components/ui/Card.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
 import { testimonials as testimonialData } from '../lib/data/testimonials'
@@ -50,7 +52,7 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
         linkText="supervoid.tv"
         image={supervoidImage}
         imageAlt="Supervoid website on a mobile device"
-        variant={1}
+        color="purple"
         class="py-16 md:py-24"
       />
       <TextAndImage
@@ -61,8 +63,8 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
         externalUrl="https://powerpassengerpassage.com"
         image={powerPassengerPassageImage}
         imageAlt="Power Passenger Passage website on a mobile device"
-        variant={2}
         isReversed={true}
+        color="orange"
         class="py-16 md:py-24"
       />
       <TextAndImage
@@ -73,7 +75,7 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
         linkText="robbywebb.com"
         image={robbyWebbImage}
         imageAlt="Robby Webb website on a mobile device"
-        variant={3}
+        color="green"
         class="py-16 md:py-24"
       />
 
@@ -88,14 +90,30 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
     </section>
 
     <section id="about">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
         <div class="h-full">
           <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
-            <h2>About <span class="text-green">Wave Land</span></h2>
+            <h2>What We Do</h2>
+            <ul class="grid grid-cols-1 gap-8">
+              <li class="lsa lsa-slide-up flex gap-4 items-center">
+                <AppWindowIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-purple" />
+                <h3 class="h4 text-purple">Web Design & Development</h3>
+              </li>
+
+              <li class="lsa lsa-slide-up delay-100 flex gap-4 items-center">
+                <ChartColumnIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-orange" />
+                <h3 class="h4 text-orange">Digital Strategy</h3>
+              </li>
+
+              <li class="lsa lsa-slide-up delay-200 flex gap-4 items-center">
+                <SunsetTwoIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-green" />
+                <h3 class="h4 text-green">Education & Partnership</h3>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div class="max-w-3xl flex flex-col gap-6">
+        <div class="max-w-3xl flex flex-col gap-6 text-container">
           <p class="h4 py-4 lsa lsa-slide-up">
             We do a lot of things, but it's all centered around making a kick-ass website.
           </p>
@@ -149,39 +167,10 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
           </p>
         </div>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 text-black">
-        <Card class="p-8 md:row-span-2 flex flex-col justify-end gap-4 bg-purple lsa lsa-slide-up">
-          <span>01</span>
-          <h3>Web Design & Development</h3>
-          <p class="text-base">
-            Custom sites built with more of our code and less 3rd party bloat. Lightweight, easy to
-            maintain, and made to order for your specific needs.
-          </p>
-        </Card>
-
-        <Card class="p-8 flex flex-col justify-end gap-4 bg-orange lsa lsa-slide-up delay-100">
-          <span>02</span>
-          <h3>Digital Strategy</h3>
-          <p class="text-base">
-            Focused sessions that transform your vision into actionable goals. We'll map out what
-            matters and ditch what doesn't.
-          </p>
-        </Card>
-
-        <Card class="p-8 flex flex-col justify-end gap-4 bg-green lsa lsa-slide-up delay-200">
-          <span>03</span>
-          <h3>Education & Partnership</h3>
-          <p class="text-base">
-            Practical knowledge and tools that empower you to grow online without the technical
-            headaches. No gatekeeping, just genuine support.
-          </p>
-        </Card>
-      </div>
     </section>
 
     <section id="testimonials" class="max-w-screen-md m-auto text-center lsa lsa-slide-up">
-      <h2 class="mb-8">Testimonials</h2>
+      <h2 class="mb-8">What Our Clients Say</h2>
       <Testimonials data={testimonialData} />
     </section>
 
