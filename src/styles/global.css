@@ -108,7 +108,7 @@
   }
 
   img {
-    @apply rounded-lg drop-shadow-md;
+    @apply rounded-lg drop-shadow-2xl;
   }
 
   svg:not(svg[data-icon='title']) {

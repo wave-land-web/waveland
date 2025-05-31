@@ -9,7 +9,6 @@ export interface Props {
   title: string
   text: string
   caseStudyUrl: string
-  externalUrl: string
   linkText: string
   image: ImageMetadata
   imageAlt: string
@@ -22,7 +21,6 @@ const {
   title,
   text,
   caseStudyUrl,
-  externalUrl,
   linkText,
   image,
   imageAlt,
@@ -79,52 +77,40 @@ if (color === 'orange') {
       },
     ]}
   >
-    <Picture
-      src={image}
-      formats={['avif', 'webp', 'jpg']}
-      alt={imageAlt}
-      quality="low"
-      widths={[240, 540, 720, image.width]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
-    />
-    {
-      color === 'purple' ? (
-        <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple transition-colors duration-(--transition)" />
-      ) : color === 'orange' ? (
-        <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange transition-colors duration-(--transition)" />
-      ) : (
-        <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green transition-colors duration-(--transition)" />
-      )
-    }
-
-    <div
-      class="absolute bottom-0 w-full h-full md:h-auto flex flex-col md:flex-row justify-between p-4"
-    >
-      <a
-        href={caseStudyUrl}
+    <a href={caseStudyUrl} class="w-full h-full">
+      <Picture
+        src={image}
+        formats={['avif', 'webp', 'jpg']}
+        alt={imageAlt}
+        quality="low"
+        widths={[240, 540, 720, image.width]}
+        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
+      />
+      {
+        color === 'purple' ? (
+          <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple transition-colors duration-(--transition)" />
+        ) : color === 'orange' ? (
+          <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange transition-colors duration-(--transition)" />
+        ) : (
+          <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green transition-colors duration-(--transition)" />
+        )
+      }
+      <p
         class:list={[
-          'text-base',
+          'flex items-center font-header text-sm md:text-base gap-2 absolute bottom-0 p-4',
           {
-            'hover:text-purple': color === 'purple',
-            'hover:text-orange': color === 'orange',
-            'hover:text-green': color === 'green',
+            'hover:text-purple group-hover:text-purple transition-colors duration-(--transition)':
+              color === 'purple',
+            'hover:text-orange group-hover:text-orange transition-colors duration-(--transition)':
+              color === 'orange',
+            'hover:text-green group-hover:text-green transition-colors duration-(--transition)':
+              color === 'green',
           },
-        ]}>Case Study</a
+        ]}
       >
-      <a
-        href={externalUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class:list={[
-          'text-base',
-          {
-            'hover:text-purple': color === 'purple',
-            'hover:text-orange': color === 'orange',
-            'hover:text-green': color === 'green',
-          },
-        ]}><Icon name="tabler:link" class="inline mr-2" />{linkText}</a
-      >
-    </div>
+        <Icon name="tabler:link" />{linkText}
+      </p>
+    </a>
   </article>
 </div>
