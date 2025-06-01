@@ -1,5 +1,6 @@
 ---
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
+import LinkIcon from '../../assets/link.svg'
 import DateAndReadTime from '../text/DateAndReadTime.astro'
 import Pill from '../text/Pill.astro'
 import SanityImage from './SanityImage.astro'
@@ -11,37 +12,51 @@ export interface Props {
   image: SanityAsset
   imageAlt: string
   services: string[]
+  liveUrl?: string
 }
 
-const { title, published, minutesRead, image, imageAlt, services } = Astro.props
+const { title, published, minutesRead, image, imageAlt, services, liveUrl } = Astro.props
 ---
 
 <header class="pt-[calc(4rem+var(--nav-height))] text-left lsa">
-  <div class="container md:max-w-4xl mx-auto flex flex-col gap-4 md:gap-6 justify-center">
+  <div class="container lg:max-w-6xl mx-auto flex flex-col gap-4 md:gap-6 justify-center">
     <DateAndReadTime
       class="justify-start md:justify-center"
       published={published}
       minutesRead={minutesRead}
     />
     <h1 class="text-left md:text-center">{title}</h1>
-
-    <div class="flex flex-wrap items-center justify-start md:justify-center gap-3 mb-4 md:mb-6">
+    <div class="flex flex-col items-start md:items-center gap-6 md:gap-8 mb-6 md:mb-8">
+      <div class="flex flex-wrap gap-3">
+        {
+          services.map((service: string) => (
+            <Pill
+              text={`${service}`}
+              size="small"
+              class:list={[
+                { 'bg-purple delay-200': service === 'Web Design & Development' },
+                { 'bg-orange delay-300': service === 'Digital Strategy' },
+                { 'bg-green delay-500': service === 'UX/UI' },
+                ['lsa lsa-slide-left'],
+              ]}
+            />
+          ))
+        }
+      </div>
       {
-        services.map((service: string) => (
-          <Pill
-            text={`${service}`}
-            size="small"
-            class:list={[
-              { 'bg-purple delay-200': service === 'Web Design & Development' },
-              { 'bg-orange delay-300': service === 'Digital Strategy' },
-              { 'bg-green delay-500': service === 'UX/UI' },
-              ['lsa lsa-slide-left'],
-            ]}
-          />
-        ))
+        liveUrl && (
+          <a
+            href={liveUrl}
+            class="flex items-center gap-2 font-header text-grey hover:text-purple"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkIcon class="size-5 md:size-6 stroke-2" />
+            Visit Live Site
+          </a>
+        )
       }
     </div>
-
-    <SanityImage image={image} alt={imageAlt} class="h-[clamp(250px,50vw,500px)]" />
+    <SanityImage image={image} alt={imageAlt} class="mb-8 md:mb-16" />
   </div>
 </header>

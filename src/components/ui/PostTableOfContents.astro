@@ -1,0 +1,43 @@
+---
+import type { SanityDocument } from '@sanity/client'
+
+interface Props {
+  post: SanityDocument
+}
+
+const { post } = Astro.props
+
+// Retrieve + format heading data for anchor links and table of contents
+const headings: { id: string; text: string }[] = post.body
+  .filter((block: SanityDocument) => block.style === 'h2')
+  .map((heading: SanityDocument) => {
+    return {
+      id: heading.children[0].text.replace(/\s+/g, '-').toLowerCase(),
+      text: heading.children[0].text,
+    }
+  })
+---
+
+<div class="h-full">
+  <nav
+    id="case-study-table-of-contents"
+    aria-label="Case Study Table of Contents"
+    class="text-container p-4 md:p-6 gap-4 md:gap-6 md:sticky md:top-[calc(var(--nav-height)+1rem)] md:self-start"
+  >
+    <h2 class="text-purple text-lg md:text-xl">Table of Contents:</h2>
+    <ol class="list-none p-0">
+      {
+        headings.map((heading: { id: string; text: string }) => (
+          <li class="font-header group" data-section-id={heading.id}>
+            <a href={`#${heading.id}`} class="inline-flex items-center">
+              <span class="inline-block mr-4 h-[2px] w-8 bg-grey group-hover:w-16 group-hover:bg-green group-focus-visible:w-16 group-focus-within:w-16 group-focus-within:bg-green rounded transition-all duration-[var(--transition)] ease-in-out" />
+              <span class="text-sm md:text-base text-grey group-hover:text-green group-focus-visible:text-green group-focus-within:text-green transition-all duration-(--transition) ease-in-out">
+                {heading.text}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+</div>

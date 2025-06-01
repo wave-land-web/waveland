@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
+import LinkIcon from '../../assets/link.svg'
 import WaveOneIcon from '../../assets/wave-1.svg'
 import WaveTwoIcon from '../../assets/wave-2.svg'
 import WaveThreeIcon from '../../assets/wave-3.svg'
@@ -109,7 +109,7 @@ if (color === 'orange') {
           },
         ]}
       >
-        <Icon name="tabler:link" />{linkText}
+        <LinkIcon class="size-5 md:size-6 stroke-2" />{linkText}
       </p>
     </a>
   </article>

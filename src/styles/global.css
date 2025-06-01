@@ -108,7 +108,7 @@
   }
 
   img {
-    @apply rounded-lg drop-shadow-2xl;
+    @apply rounded-2xl drop-shadow-2xl;
   }
 
   svg:not(svg[data-icon='title']) {
@@ -179,7 +179,7 @@
   }
 
   .text-container {
-    @apply h-auto flex flex-col gap-6 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
+    @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
   }
 
   /* Blog + Case Studies */

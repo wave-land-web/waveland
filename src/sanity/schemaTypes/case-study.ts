@@ -20,6 +20,13 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Please add a description'),
     }),
     defineField({
+      name: 'liveUrl',
+      title: 'Live Site URL',
+      type: 'url',
+      description: 'The URL to the live website (if applicable)',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
