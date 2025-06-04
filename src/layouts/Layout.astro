@@ -126,10 +126,5 @@ const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalU
   }
 
   // Handle animations on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    handleAnimations()
-
-    // Handle animations on scroll
-    document.addEventListener('scroll', handleAnimations)
-  })
+  document.addEventListener('DOMContentLoaded', handleAnimations)
 </script>
