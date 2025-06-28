@@ -68,12 +68,13 @@ if (color === 'orange') {
     </p>
   </div>
   <article
+    id="case-study-card"
     class:list={[
       'text-container p-0 h-96 group',
       {
-        'hover:border-purple': color === 'purple',
-        'hover:border-orange': color === 'orange',
-        'hover:border-green': color === 'green',
+        'hover:border-purple max-md:border-purple': color === 'purple',
+        'hover:border-orange max-md:border-orange': color === 'orange',
+        'hover:border-green max-md:border-green': color === 'green',
       },
     ]}
   >
@@ -89,22 +90,22 @@ if (color === 'orange') {
       />
       {
         color === 'purple' ? (
-          <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple transition-colors duration-(--transition)" />
+          <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple max-md:text-purple transition-colors duration-(--transition)" />
         ) : color === 'orange' ? (
-          <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange transition-colors duration-(--transition)" />
+          <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange max-md:text-orange transition-colors duration-(--transition)" />
         ) : (
-          <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green transition-colors duration-(--transition)" />
+          <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green max-md:text-green transition-colors duration-(--transition)" />
         )
       }
       <p
         class:list={[
           'flex items-center font-header text-sm md:text-base gap-2 absolute bottom-0 p-4',
           {
-            'hover:text-purple group-hover:text-purple transition-colors duration-(--transition)':
+            'hover:text-purple group-hover:text-purple max-md:text-purple transition-colors duration-(--transition)':
               color === 'purple',
-            'hover:text-orange group-hover:text-orange transition-colors duration-(--transition)':
+            'hover:text-orange group-hover:text-orange max-md:text-orange transition-colors duration-(--transition)':
               color === 'orange',
-            'hover:text-green group-hover:text-green transition-colors duration-(--transition)':
+            'hover:text-green group-hover:text-green max-md:text-green transition-colors duration-(--transition)':
               color === 'green',
           },
         ]}
