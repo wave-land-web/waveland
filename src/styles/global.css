@@ -104,7 +104,7 @@
   img,
   svg,
   video {
-    @apply block w-full h-auto;
+    @apply block w-full h-auto object-cover;
   }
 
   img {

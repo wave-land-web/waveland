@@ -14,6 +14,14 @@ export default defineConfig({
     prefetchAll: true,
   },
   scopedStyleStrategy: 'class',
+  image: {
+    responsiveStyles: true,
+    layout: 'full-width',
+    domains: ['cdn.sanity.io'],
+  },
+  adapter: netlify({
+    cacheOnDemandPages: true,
+  }),
   integrations: [
     sitemap({
       lastmod: new Date(),
@@ -30,11 +38,6 @@ export default defineConfig({
     }),
     react(),
   ],
-  adapter: netlify({
-    // Netlify image CDN must be disabled as of 01/25/2024 so the build doesn't break - see: <https://docs.astro.build/en/guides/integrations-guide/netlify/#netlify-image-cdn-support>
-    imageCDN: false,
-    cacheOnDemandPages: true,
-  }),
   vite: {
     plugins: [tailwindcss()],
   },

@@ -16,5 +16,5 @@ const webpUrl = urlForImage(image).format('webp').url()
 
 <picture>
   <source srcset={webpUrl} type="image/webp" />
-  <img class={`${className}`} src={url} alt={alt} decoding="async" fetchpriority="high" />
+  <img class={`${className}`} src={url} alt={alt} decoding="async" loading="lazy" />
 </picture>
