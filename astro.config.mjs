@@ -19,6 +19,7 @@ export default defineConfig({
     layout: 'full-width',
   },
   adapter: netlify({
+    imageCDN: false,
     cacheOnDemandPages: true,
   }),
   integrations: [
