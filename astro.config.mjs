@@ -17,7 +17,6 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
     layout: 'full-width',
-    domains: ['cdn.sanity.io'],
   },
   adapter: netlify({
     cacheOnDemandPages: true,
