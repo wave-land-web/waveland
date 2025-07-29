@@ -61,21 +61,9 @@ export const POST: APIRoute = async ({ request }) => {
           </p>
           <p>Thanks so much being here.</p>
           <p>
-            Building websites allows me to work with so many amazing people, solving interesting and
-            creative problems.
-          </p>
-          <p>
-            I've learned a lot along the way, and I want to share these valuable nuggets whenever
-            possible.
-          </p>
-          <p>
-            In the <a href="https://wavelandweb.com/blog" target="_blank">Wave Land blog</a>, and
-            here in our newsletter, I share my thoughts about technology and building on the web
-            with you.
-          </p>
-          <p>
-            I'll also share updates on Wave Land's latest projects, services, and special offers,
-            along with tips and tricks to help you in your creative journey.
+            I started Wave Land to help people like you build better websites and web apps. Whether
+            you're an artist, entrepreneur, or just a creative person on a mission, I hope you'll
+            find something useful here.
           </p>
           <p>
             Reach out anytime with questions, comments, or just to say hi -
