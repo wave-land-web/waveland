@@ -51,8 +51,8 @@ export default defineConfig({
         variants: [
           {
             src: [
-              './src/assets/fonts/monaspace-argon-var-regular.woff2',
-              './src/assets/fonts/monaspace-argon-var-regular.woff',
+              './src/assets/fonts/monaspace-argon-var-extra-light.woff2',
+              './src/assets/fonts/monaspace-argon-var-extra-light.woff',
             ],
             weight: '400',
             style: 'normal',
