@@ -8,7 +8,7 @@ export interface Props {
 const { formId } = Astro.props
 ---
 
-<form id={formId} method="POST" class="w-full max-w-120">
+<form id={formId} method="POST" class="w-full max-w-120" data-netlify="true">
   <div class="flex gap-2 mb-2">
     <label for="email" class="sr-only">Email Address</label>
     <input

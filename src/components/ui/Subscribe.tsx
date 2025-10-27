@@ -54,7 +54,12 @@ export default function Subscribe({
   }
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className={`${className} max-w-96`}>
+    <form
+      id={formId}
+      onSubmit={handleSubmit}
+      className={`${className} max-w-96`}
+      data-netlify="true"
+    >
       <div className="flex gap-2 mb-2">
         <label htmlFor="email" className="sr-only">
           Email Address
