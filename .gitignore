@@ -26,3 +26,6 @@ NOTES.md
 
 # content
 /archive/
+
+# Local Netlify folder
+.netlify

@@ -9,6 +9,8 @@ const { formId } = Astro.props
 ---
 
 <form id={formId} method="POST" class="w-full max-w-120" data-netlify="true">
+  <input type="text" name="bot-field" class="sr-only" tabindex="-1" autocomplete="off" />
+  
   <div class="flex gap-2 mb-2">
     <label for="email" class="sr-only">Email Address</label>
     <input

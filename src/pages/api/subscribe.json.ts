@@ -13,7 +13,22 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const formData = await request.formData()
     const email = formData.get('email') as string
-    const archetype = formData.get('archetype') as string | null
+    const botField = formData.get('bot-field') as string
+
+    // Reject if honeypot is filled (likely a bot)
+    if (botField) {
+      return new Response(
+        JSON.stringify({
+          error: 'Invalid submission',
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+    }
 
     if (!email) {
       return new Response(
