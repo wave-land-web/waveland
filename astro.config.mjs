@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap'
 import sanity from '@sanity/astro'
 import tailwindcss from '@tailwindcss/vite'
 import icon from 'astro-icon'
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -45,34 +45,38 @@ export default defineConfig({
     // SEE: https://docs.astro.build/en/reference/experimental-flags/fonts/#local-font-variants
     fonts: [
       {
-        provider: 'local',
+        provider: fontProviders.local(),
         name: 'Monaspace Argon Var',
         cssVariable: '--font-monaspace',
-        variants: [
-          {
-            src: [
-              './src/assets/fonts/monaspace-argon-var-extra-light.woff2',
-              './src/assets/fonts/monaspace-argon-var-extra-light.woff',
-            ],
-            weight: '400',
-            style: 'normal',
-          },
-        ],
+        options: {
+          variants: [
+            {
+              src: [
+                './src/assets/fonts/monaspace-argon-var-extra-light.woff2',
+                './src/assets/fonts/monaspace-argon-var-extra-light.woff',
+              ],
+              weight: 400,
+              style: 'normal',
+            },
+          ],
+        },
       },
       {
-        provider: 'local',
+        provider: fontProviders.local(),
         name: 'Poppins Regular',
         cssVariable: '--font-poppins',
-        variants: [
-          {
-            src: [
-              './src/assets/fonts/poppins-regular.woff2',
-              './src/assets/fonts/poppins-regular.woff',
-            ],
-            weight: '400',
-            style: 'normal',
-          },
-        ],
+        options: {
+          variants: [
+            {
+              src: [
+                './src/assets/fonts/poppins-regular.woff2',
+                './src/assets/fonts/poppins-regular.woff',
+              ],
+              weight: 400,
+              style: 'normal',
+            },
+          ],
+        },
       },
     ],
   },
