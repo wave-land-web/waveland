@@ -25,6 +25,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       lastmod: new Date(),
+      filter: (page) => page !== 'https://wavelandweb.com/pricing/' && !/\/blog/.test(page),
     }),
     icon(),
     partytown(),

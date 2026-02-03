@@ -13,6 +13,39 @@ import TitleLogo from '../components/text/TitleLogo.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
 import { testimonials as testimonialData } from '../lib/data/testimonials'
+
+const websiteDetails = [
+  {
+    summary: 'Ongoing Partnership',
+    description:
+      "Our relationship doesn't end once your site is live. We offer continuous digital strategy, mentorship, and partnership to help your business grow and adapt. All packages include 24/7 customer support via email and optional video calls.",
+  },
+  {
+    summary: 'High Performance',
+    description:
+      'Expect fast load times and seamless performance across all devices, ensuring your visitors have a smooth and satisfying experience.',
+  },
+  {
+    summary: 'Custom Design & Branding',
+    description:
+      'We create one-of-a-kind designs that capture the essence of your brand, making sure your website stands out in a crowded digital landscape.',
+  },
+  {
+    summary: 'SEO Optimizations',
+    description:
+      'Benefit from on-site and technical SEO optimizations that make your website easier to find and rank higher in search engines.',
+  },
+  {
+    summary: 'Sustainable & Accessible',
+    description:
+      'We design with sustainability in mind, focusing on accessibility and user experience to ensure your site is inclusive and user-friendly.',
+  },
+  {
+    summary: 'User-Centric Approach',
+    description:
+      'We prioritize empathy for your users, leading to increased trust, stronger connections, and higher conversion rates.',
+  },
+]
 ---
 
 <Layout title="Wave Land | Web Design, Strategy, and Resources for Creatives">
@@ -25,9 +58,9 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
       </div>
 
       <div class="flex flex-wrap gap-4">
-        <Pill text="Web Design & Development" href="#about" class="bg-purple lsa delay-100" />
-        <Pill text="Digital Strategy" href="#about" class="bg-orange lsa delay-200" />
-        <Pill text="Education & Partnership" href="#about" class="bg-green lsa delay-300" />
+        <Pill text="Web Design & Development" href="#about-us" class="bg-purple lsa delay-100" />
+        <Pill text="Digital Strategy" href="#about-us" class="bg-orange lsa delay-200" />
+        <Pill text="Education & Partnership" href="#about-us" class="bg-green lsa delay-300" />
       </div>
     </div>
     <div class="max-w-2xl">
@@ -36,9 +69,8 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
       </p>
       <div class="lsa delay-700">
         <Link
-          text="Free Strategy Call"
-          url="https://calendly.com/wavelandweb/15-min-meeting"
-          newWindow={true}
+          text="Contact Us"
+          url="/contact"
           linkClass="font-header text-3xl md:text-4xl lg:text-5xl"
           iconClass="w-8 md:w-10 lg:w-12"
         />
@@ -89,7 +121,7 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
       </div>
     </section>
 
-    <section id="about">
+    <section id="about-us">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
         <div class="h-full">
           <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
@@ -157,6 +189,28 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
       </div>
     </section>
 
+    <section
+      id="website-details"
+      class="lsa lsa-slide-up p-6 md:p-8 bg-purple/5 rounded-2xl shadow-md"
+    >
+      <div class="grid gap-8 md:gap-16 md:grid-cols-2">
+        <h2><span class="text-green">Every Website</span> Includes:</h2>
+
+        <div>
+          {
+            websiteDetails.map((detail) => (
+              <details class="mb-4 group">
+                <summary class="text-xl flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-(--transition) cursor-pointer">
+                  {detail.summary}
+                </summary>
+                <p class="py-4 text-lightGrey text-base">{detail.description}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section id="testimonials" class="max-w-screen-md m-auto text-center lsa lsa-slide-up">
       <h2 class="mb-8">What Our Clients Say</h2>
       <Testimonials data={testimonialData} />
@@ -164,11 +218,44 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
 
     <section id="get-started">
       <IntroCallCTA
-        title="Get Started"
-        description="Let's explore how to bring your ideas to life. Schedule a free strategy session or send us an email. We're here to help."
-        linkText="Free Strategy Call"
-        linkSrc="https://calendly.com/wavelandweb/15-min-meeting"
+        title="Let's Build Together"
+        description="Ready to create a website that connects you with your community and reflects the care you put into your work?"
+        linkText="Get Started"
+        linkSrc="/contact"
       />
     </section>
   </main>
 </Layout>
+
+<style is:global>
+  summary::after {
+    content: '＋';
+  }
+
+  details[open] summary::after {
+    content: '－';
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
+
+<script>
+  const details = document.querySelectorAll('details')
+  const firstDetail = details[0]
+
+  // Open the first detail by default
+  firstDetail.setAttribute('open', '')
+
+  // Close all details that are not targetDetail
+  details.forEach((targetDetail) => {
+    targetDetail.addEventListener('click', () => {
+      details.forEach((detail) => {
+        if (detail !== targetDetail) {
+          detail.removeAttribute('open')
+        }
+      })
+    })
+  })
+</script>
