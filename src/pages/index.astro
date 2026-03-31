@@ -10,6 +10,7 @@ import Link from '../components/text/Link.tsx'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
 import TitleLogo from '../components/text/TitleLogo.astro'
+import Marquee from '../components/ui/Marquee.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
 import { testimonials as testimonialData } from '../lib/data/testimonials'
@@ -77,6 +78,8 @@ const websiteDetails = [
       </div>
     </div>
   </header>
+
+  <Marquee />
 
   <main>
     <section id="introduction">

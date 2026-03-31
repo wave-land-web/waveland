@@ -5,6 +5,7 @@ import CaseStudyCard from '../components/ui/CaseStudyCard.astro'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Subscribe from '../components/ui/Subscribe.astro'
 import Layout from '../layouts/Layout.astro'
+import Marquee from '../components/ui/Marquee.astro'
 
 // Fetch all case studies
 const caseStudies = (await sanityClient.fetch(
@@ -15,7 +16,7 @@ const caseStudies = (await sanityClient.fetch(
     publishedAt,
     description,
     services,
-  }`
+  }`,
 )) as SanityDocument[]
 ---
 
@@ -36,4 +37,5 @@ const caseStudies = (await sanityClient.fetch(
       {caseStudies.map((caseStudy) => <CaseStudyCard caseStudy={caseStudy} />)}
     </section>
   </main>
+  <Marquee />
 </Layout>

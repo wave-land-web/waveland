@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components'
 import CTA from '../components/text/CTA'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
+import Marquee from '../components/ui/Marquee.astro'
 ---
 
 <Layout
@@ -16,7 +17,7 @@ import Layout from '../layouts/Layout.astro'
   />
 
   <main>
-    <section class="pt-0 text-center lsa lsa-slide-up delay-300">
+    <section class="pt-0 text-center lsa lsa-slide-up">
       <form
         method="POST"
         name="contactForm"
@@ -86,7 +87,7 @@ import Layout from '../layouts/Layout.astro'
       </form>
     </section>
 
-    <section class="lsa lsa-slide-up delay-300">
+    <section class="lsa lsa-slide-up">
       <div class="max-w-2xl m-auto text-center">
         <h2 class="mb-4">More Ways to Reach Us</h2>
 
@@ -110,5 +111,7 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
     </section>
+
+    <Marquee />
   </main>
 </Layout>
