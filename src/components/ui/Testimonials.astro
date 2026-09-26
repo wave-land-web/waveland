@@ -1,10 +1,8 @@
 ---
+import type { Testimonial } from '../../lib/data/testimonials'
+
 export interface Props {
-  data: {
-    quote: string
-    href: string
-    citation: string
-  }[]
+  data: Testimonial[]
 }
 
 const { data } = Astro.props
@@ -20,9 +18,13 @@ const { data } = Astro.props
               <em>"{testimonial.quote}"</em>
             </p>
             <cite>
-              <a class="text-purple hover:text-grey" href={testimonial.href}>
-                - {testimonial.citation}
-              </a>
+              {testimonial.href ? (
+                <a class="text-purple hover:text-grey" href={testimonial.href}>
+                  - {testimonial.citation}
+                </a>
+              ) : (
+                <span class="text-purple">- {testimonial.citation}</span>
+              )}
             </cite>
           </blockquote>
         )

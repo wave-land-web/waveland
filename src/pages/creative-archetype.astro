@@ -1,10 +1,38 @@
 ---
-export const prerender = false
-
+import { getImage } from 'astro:assets'
+import artisanImage from '../assets/artisan.png'
+import connectorImage from '../assets/connector.png'
+import explorerImage from '../assets/explorer.png'
+import storytellerImage from '../assets/storyteller.png'
+import strategistImage from '../assets/strategist.png'
+import visionaryImage from '../assets/visionary.png'
 import QuizApp from '../components/quiz/QuizApp.tsx'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import { quizQuestions, quizResults } from '../lib/data/quiz'
+import type { Archetype, QuizImage } from '../lib/types/quiz'
+
+// Optimize result images at build time (getImage can't run in the browser)
+const sources: Record<Archetype, ImageMetadata> = {
+  Artisan: artisanImage,
+  Connector: connectorImage,
+  Explorer: explorerImage,
+  Storyteller: storytellerImage,
+  Strategist: strategistImage,
+  Visionary: visionaryImage,
+}
+
+const images = Object.fromEntries(
+  await Promise.all(
+    Object.entries(sources).map(async ([archetype, src]) => {
+      const image = await getImage({ src, format: 'webp' })
+      return [
+        archetype,
+        { src: image.src, width: image.attributes.width, height: image.attributes.height },
+      ]
+    }),
+  ),
+) as Record<Archetype, QuizImage>
 ---
 
 <Layout
@@ -20,7 +48,7 @@ import { quizQuestions, quizResults } from '../lib/data/quiz'
   <main>
     <section id="quiz" class="pt-0 lsa lsa-slide-up">
       <div class="max-w-3xl mx-auto">
-        <QuizApp client:load questions={quizQuestions} results={quizResults} />
+        <QuizApp client:load questions={quizQuestions} results={quizResults} images={images} />
       </div>
     </section>
   </main>

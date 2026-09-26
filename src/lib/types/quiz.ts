@@ -27,6 +27,12 @@ export interface QuizResult {
   image: string
 }
 
+export interface QuizImage {
+  src: string
+  width: number
+  height: number
+}
+
 export interface QuizState {
   currentQuestion: number
   answers: Record<number, Archetype>

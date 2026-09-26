@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Archetype, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
+import type { Archetype, QuizImage, QuizQuestion, QuizResult, QuizState } from '../../lib/types/quiz'
 import { calculateResult } from '../../lib/utils/quiz'
-import Subscribe from '../ui/Subscribe.tsx'
 import Question from './Question'
 import Results from './Results'
 
@@ -11,9 +10,10 @@ const TRANSITION_DURATION = 500
 interface QuizAppProps {
   questions: QuizQuestion[]
   results: Record<Archetype, QuizResult>
+  images: Record<Archetype, QuizImage>
 }
 
-export default function QuizApp({ questions, results }: QuizAppProps) {
+export default function QuizApp({ questions, results, images }: QuizAppProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<QuizState>({
     currentQuestion: 1,
@@ -24,8 +24,6 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [showResults, setShowResults] = useState(false)
-  const [hasSubscribed, setHasSubscribed] = useState(false)
-  const [showSubscribe, setShowSubscribe] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   // Scroll to top of container when quiz state changes
@@ -34,7 +32,7 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     if (!isTransitioning && Object.keys(state.answers).length > 0) {
       containerRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [state.currentQuestion, showResults, showSubscribe, isTransitioning])
+  }, [state.currentQuestion, showResults, isTransitioning])
 
   useEffect(() => {
     // Reset state when questions change
@@ -46,17 +44,7 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     setSelectedAnswer(null)
     setIsTransitioning(false)
     setShowResults(false)
-    setHasSubscribed(false)
-    setShowSubscribe(true)
   }, [questions])
-
-  const handleSubscribeSuccess = () => {
-    setShowSubscribe(false)
-    setTimeout(() => {
-      setHasSubscribed(true)
-      setShowResults(true)
-    }, TRANSITION_DURATION)
-  }
 
   const handlePreviousQuestion = () => {
     if (state.currentQuestion > 1) {
@@ -137,38 +125,12 @@ export default function QuizApp({ questions, results }: QuizAppProps) {
     const resultArchetype = calculateResult(state.answers)
     const result = results[resultArchetype]
 
-    if (!hasSubscribed) {
-      return (
-        <div
-          ref={containerRef}
-          className={`scroll-mt-16 transition-opacity duration-500 ${showSubscribe ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <div className="flex flex-col items-center justify-center max-w-3xl mx-auto p-8 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
-            <div className="text-center mb-8">
-              <h2 className="font-bold mb-4 bg-gradient-to-r from-purple to-green bg-clip-text text-transparent">
-                Discover Your Creative Archetype! ✨
-              </h2>
-              <p className="text-lightGrey text-lg">
-                Join our community to get your creative archetype results and stay inspired with
-                personalized insights.
-              </p>
-            </div>
-            <Subscribe
-              formId="quiz-subscribe"
-              onSuccess={handleSubscribeSuccess}
-              archetype={resultArchetype}
-            />
-          </div>
-        </div>
-      )
-    }
-
     return (
       <div
         ref={containerRef}
         className={`scroll-mt-16 transition-opacity duration-500 ${showResults ? 'opacity-100' : 'opacity-0'}`}
       >
-        <Results result={result} />
+        <Results result={result} image={images[resultArchetype]} />
       </div>
     )
   }
