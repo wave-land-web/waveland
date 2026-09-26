@@ -16,6 +16,8 @@ export default defineConfig({
   redirects: {
     // Pricing page was retired; send old links to the contact form
     '/pricing': '/contact/',
+    // Creative Archetype quiz was retired
+    '/creative-archetype': '/',
   },
   image: {
     responsiveStyles: true,
