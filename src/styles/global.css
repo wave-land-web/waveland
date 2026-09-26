@@ -95,7 +95,6 @@
   }
 
   nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
-  nav[data-current-url-path^='/blog'] [aria-label='Blog'],
   nav[data-current-url-path^='/contact'] [aria-label='Contact'] {
     @apply text-purple;
   }
@@ -181,14 +180,12 @@
     @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
   }
 
-  /* Blog + Case Studies */
+  /* Case Studies */
 
-  #blog-layout h2,
   #case-study h2:not(:first-of-type) {
     @apply mt-[1lh];
   }
 
-  #blog-layout,
   #case-study {
     & h3,
     & h4,
