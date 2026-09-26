@@ -1,5 +1,4 @@
 import netlify from '@astrojs/netlify'
-import partytown from '@astrojs/partytown'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import sanity from '@sanity/astro'
@@ -14,6 +13,12 @@ export default defineConfig({
     prefetchAll: true,
   },
   scopedStyleStrategy: 'class',
+  redirects: {
+    // Pricing page was retired; send old links to the contact form
+    '/pricing': '/contact/',
+    // Creative Archetype quiz was retired
+    '/creative-archetype': '/',
+  },
   image: {
     responsiveStyles: true,
     layout: 'full-width',
@@ -25,10 +30,9 @@ export default defineConfig({
   integrations: [
     sitemap({
       lastmod: new Date(),
-      filter: (page) => page !== 'https://wavelandweb.com/pricing/' && !/\/blog/.test(page),
+      filter: (page) => !/\/blog/.test(page),
     }),
     icon(),
-    partytown(),
     sanity({
       projectId: 'uuas57um',
       dataset: 'production',

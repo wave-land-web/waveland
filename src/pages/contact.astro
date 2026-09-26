@@ -24,7 +24,12 @@ import Marquee from '../components/ui/Marquee.astro'
         action="/success/"
         class="max-w-2xl m-auto flex flex-col gap-4"
         data-netlify="true"
+        data-netlify-honeypot="bot-field"
       >
+        <!-- Honeypot: hidden from people, bots fill it and Netlify drops the submission -->
+        <p class="hidden" aria-hidden="true">
+          <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
         <div class="w-full flex flex-col md:flex-row gap-4 justify-between">
           <div class="w-full">
             <label for="first-name" class="sr-only">First Name</label>

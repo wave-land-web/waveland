@@ -95,7 +95,6 @@
   }
 
   nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
-  nav[data-current-url-path^='/pricing'] [aria-label='Pricing'],
   nav[data-current-url-path^='/blog'] [aria-label='Blog'],
   nav[data-current-url-path^='/contact'] [aria-label='Contact'] {
     @apply text-purple;

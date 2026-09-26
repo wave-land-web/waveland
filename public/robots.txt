@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /pricing/
 Disallow: /blog/
 
 Sitemap: https://wavelandweb.com/sitemap-index.xml
