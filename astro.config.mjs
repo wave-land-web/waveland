@@ -18,6 +18,8 @@ export default defineConfig({
     '/pricing': '/contact/',
     // Creative Archetype quiz was retired
     '/creative-archetype': '/',
+    // Blog was retired (post and tag URLs are covered in public/_redirects)
+    '/blog': '/',
   },
   image: {
     responsiveStyles: true,
@@ -30,7 +32,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       lastmod: new Date(),
-      filter: (page) => !/\/blog/.test(page),
+      // Keep utility pages out of the sitemap
+      filter: (page) => !/\/(success|unsubscribed)\/$/.test(page),
     }),
     icon(),
     sanity({

@@ -1,0 +1,2 @@
+# Blog was retired: send old post and tag URLs to the homepage
+/blog/*    /    301

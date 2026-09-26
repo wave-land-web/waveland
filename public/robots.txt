@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /blog/
 
 Sitemap: https://wavelandweb.com/sitemap-index.xml
