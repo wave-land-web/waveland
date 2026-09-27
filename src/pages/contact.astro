@@ -1,4 +1,5 @@
 ---
+import { CALENDLY_URL, EMAIL, EMAIL_HREF } from '../lib/site'
 import { Icon } from 'astro-icon/components'
 import CTA from '../components/text/CTA'
 import PageHeader from '../components/ui/PageHeader.astro'
@@ -7,13 +8,13 @@ import Marquee from '../components/ui/Marquee.astro'
 ---
 
 <Layout
-  title="Wave Land Web | Contact"
-  description="Get in touch with Wave Land Web to discuss your web development needs. I'm here to help bring your vision to life."
+  title="Contact | Wave Land"
+  description="Tell me about your project, or book a 15-minute call. I'm Josh Nussbaum, the development partner for brand agencies."
 >
   <PageHeader
     title="Contact"
-    subtitle="Ready to Connect?"
-    bodyText="I'd love to hear about your vision. Share your ideas below and let's explore how we can build something meaningful together."
+    subtitle="Tell Me About Your Project"
+    bodyText="A rough idea is enough to start. If you know the platform or the launch date, include it. I'll reply by email within 48 hours."
   />
 
   <main>
@@ -75,7 +76,7 @@ import Marquee from '../components/ui/Marquee.astro'
             name="message"
             id="message"
             rows="4"
-            placeholder="Describe your project"
+            placeholder="What are you building, and when does it need to launch?"
             required
             class="block w-full backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-lg px-4 py-3 shadow-md transition duration-(--transition) focus:outline-none focus:border-purple"
           ></textarea>
@@ -94,24 +95,24 @@ import Marquee from '../components/ui/Marquee.astro'
 
     <section class="lsa lsa-slide-up">
       <div class="max-w-2xl m-auto text-center">
-        <h2 class="mb-4">More Ways to Reach Me</h2>
+        <h2 class="mb-4">Prefer to Talk?</h2>
 
         <div class="flex flex-col gap-6 items-center">
           <!-- Calendly Link -->
           <a
-            href="https://calendly.com/wavelandweb/15-min-meeting"
+            href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex gap-2 items-center text-grey hover:text-purple"
-            ><Icon name="tabler:calendar" />Free Strategy Session
+            ><Icon name="tabler:calendar" />Book a 15-Minute Call
           </a>
           <!-- Email Link -->
           <a
-            href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+            href={EMAIL_HREF}
             aria-label="Email"
             title="Email"
             class="inline-flex gap-2 items-center text-grey hover:text-purple"
-            ><Icon name="tabler:mail" />hello@wavelandweb.com
+            ><Icon name="tabler:mail" />{EMAIL}
           </a>
         </div>
       </div>

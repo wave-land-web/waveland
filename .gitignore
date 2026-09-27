@@ -29,3 +29,6 @@ NOTES.md
 
 # Local Netlify folder
 .netlify
+
+# Content drafts (private; repo is public)
+/docs/content/
