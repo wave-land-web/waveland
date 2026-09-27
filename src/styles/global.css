@@ -240,9 +240,12 @@
     & h3,
     & h4,
     & h5,
-    & h6,
-    & img {
+    & h6 {
       @apply mt-[1lh];
+    }
+
+    & .case-study-figure {
+      @apply my-[1lh];
     }
 
     & h2 {
@@ -271,7 +274,6 @@
       @apply text-lightGrey;
     }
 
-    & img,
     & pre {
       @apply block my-[1lh];
     }

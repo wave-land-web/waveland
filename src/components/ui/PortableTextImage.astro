@@ -1,13 +1,33 @@
 ---
 import { urlForImage } from '../../sanity/lib/urlForImage'
 
-const { asset, alt } = Astro.props.node // `.node` is the current node in the PortableText
+const { asset, alt, caption } = Astro.props.node // `.node` is the current node in the PortableText
 
-const url = urlForImage(asset).url()
-const webpUrl = urlForImage(asset).format('webp').url()
+// Asset refs carry the original size: image-<id>-<width>x<height>-<format>
+const [, width = 1600, height = 900] = asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
+const isPortrait = height > width
+
+// Phone screenshots sit at phone size instead of filling the column
+const widths = isPortrait ? [320, 480, 640, 960] : [640, 960, 1280, 1600]
+const sizes = isPortrait ? '320px' : '(min-width: 1024px) 720px, 100vw'
+const srcset = widths
+  .filter((w) => w <= width)
+  .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
+  .join(', ')
+const src = urlForImage(asset).width(widths[1]).auto('format').url()
 ---
 
-<picture>
-  <source srcset={webpUrl} type="image/webp" />
-  <img src={url} alt={alt} decoding="async" loading="lazy" />
-</picture>
+<figure class:list={['case-study-figure', { 'max-w-[320px] mx-auto': isPortrait }]}>
+  <img
+    src={src}
+    srcset={srcset}
+    sizes={sizes}
+    width={width}
+    height={height}
+    alt={alt}
+    decoding="async"
+    loading="lazy"
+    class="w-full h-auto rounded-xl"
+  />
+  {caption && <figcaption class="mt-3 text-label text-grey">{caption}</figcaption>}
+</figure>
