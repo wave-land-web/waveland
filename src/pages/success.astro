@@ -1,14 +1,95 @@
 ---
-import PageHeader from '../components/ui/PageHeader.astro'
+import { CALENDLY_URL, EMAIL } from '../lib/site'
+import CTA from '../components/text/CTA'
+import Link from '../components/text/Link.tsx'
 import Layout from '../layouts/Layout.astro'
+
+// What happens after the form, in order. The first step is already done.
+const steps = [
+  { title: 'Your Message Is In', body: 'Nothing else to do on your end.' },
+  { title: 'I Reply Within 48 Hours', body: `From ${EMAIL}, with questions or a next step.` },
+  { title: 'We Talk It Through', body: 'A 15-minute call, if it helps. Book it now or after my reply.' },
+]
 ---
 
 <Layout title="Message Sent | Wave Land">
-  <PageHeader
-    title="Success"
-    subtitle="Message Sent"
-    bodyText="Thanks. I'll reply by email within 48 hours."
-    linkText="Back to Site"
-    linkUrl="/"
-  />
+  <main class="pt-[calc(4rem+var(--nav-height))] pb-24">
+    <div class="max-w-xl mx-auto hero-in">
+      <h1 class="mb-4">Message Sent</h1>
+      <p class="text-lightGrey mb-12 md:mb-16">Thanks for reaching out. Here's what happens next.</p>
+
+      <ol class="steps flex flex-col gap-(--gap) [--gap:2.5rem] md:[--gap:3rem]">
+        {
+          steps.map((step, i) => (
+            <li class="relative pl-12 md:pl-14">
+              <span
+                class:list={[
+                  'step-dot absolute left-0 top-[0.35em] size-6 rounded-full border border-dashed grid place-items-center',
+                  i === 0 ? 'is-done border-purple bg-darkBlue' : 'border-darkGrey bg-darkBlue',
+                ]}
+                aria-hidden="true"
+              />
+              <h2 class:list={['h5 mb-1', i === 0 ? 'text-white' : 'text-lightGrey']}>
+                {step.title}
+                {i === 0 && <span class="sr-only">(done)</span>}
+              </h2>
+              <p class="text-grey text-label">{step.body}</p>
+              {
+                i === 2 && (
+                  <CTA
+                    tag="link"
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    text="Book a 15-Minute Call"
+                    className="inline-block mt-5"
+                  />
+                )
+              }
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-16 pt-8 border-t border-dashed border-darkGrey">
+        <Link text="Browse Case Studies" url="/case-studies/" />
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<style>
+  /* Dashed rail from each dot down to the next one */
+  .steps > li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(0.75rem - 0.5px);
+    top: calc(0.35em + 1.5rem);
+    bottom: calc(-1 * var(--gap) - 0.35em);
+    border-left: 1px dashed var(--color-darkGrey);
+  }
+
+  /* The finished step fills in once, the page's only motion */
+  .step-dot.is-done::after {
+    content: '';
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background: var(--color-purple);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .step-dot.is-done::after {
+      animation: fill-in 500ms cubic-bezier(0.3, 1.4, 0.5, 1) 450ms both;
+    }
+  }
+
+  @keyframes fill-in {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+</style>
