@@ -43,8 +43,8 @@ const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
   params,
 })
 
-// Generate OG image URL for the case study, at the 1200px width social sites use
-const imageUrl = urlForImage(currentCaseStudy.mainImage).width(1200).format('jpg').quality(80).url()
+// Share image for link previews: a 1200×630 crop of the cover, the shape Slack and LinkedIn show
+const imageUrl = urlForImage(currentCaseStudy.mainImage).width(1200).height(630).fit('crop').format('jpg').quality(80).url()
 
 const pageUrl = new URL(`/case-studies/${currentCaseStudy.slug.current}/`, Astro.site).href
 const schema = [
