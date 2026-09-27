@@ -13,10 +13,10 @@ const { title, subtitle, bodyText, linkText, linkUrl } = Astro.props
 ---
 
 <header
-  class="max-w-2xl mb-16 md:mb-24 pt-[calc(4rem+var(--nav-height))] flex flex-col justify-center items-center gap-4 text-center lsa"
+  class="max-w-2xl mb-16 md:mb-24 pt-[calc(4rem+var(--nav-height))] flex flex-col justify-center items-center gap-4 text-center hero-in"
 >
-  <h1 class="text-purple text-base md:text-lg">{title}</h1>
-  <p class="font-header h1">{subtitle}</p>
+  <p class="font-header text-purple text-prose">{title}</p>
+  <h1>{subtitle}</h1>
   {bodyText && <p class="max-w-xl mb-4 text-lightGrey">{bodyText}</p>}
   {linkText && linkUrl && <Link text={linkText} url={linkUrl} arrowLeft={true} />}
   <slot />

@@ -12,7 +12,7 @@ export interface Props {
 
 const {
   title,
-  description = 'Helping creatives grow online with custom web design, community resources, and a partnership you can trust.',
+  description = 'Josh Nussbaum is a web developer in Madison, WI, and the development partner for brand agencies. Astro and Sanity, Webflow, Shopify, and more.',
   socialImage,
 } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
@@ -24,6 +24,8 @@ const socialImageURL = new URL(socialImage || '/images/og-image.png', canonicalU
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Scroll animations only hide content once JavaScript is running -->
+    <script is:inline>document.documentElement.classList.add('lsa-on')</script>
 
     <!-- SEO -->
     <title>{title}</title>

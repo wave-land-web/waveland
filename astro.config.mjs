@@ -35,7 +35,13 @@ export default defineConfig({
       // Keep utility pages out of the sitemap
       filter: (page) => !/\/(success|unsubscribed)\/$/.test(page),
     }),
-    icon(),
+    icon({
+      // Keep the logo SVGs' prefixed IDs; SVGO's default renames them to "a", "b"... which collide
+      // when several logos share a page
+      svgoOptions: {
+        plugins: [{ name: 'preset-default', params: { overrides: { cleanupIds: false } } }],
+      },
+    }),
     sanity({
       projectId: 'uuas57um',
       dataset: 'production',
