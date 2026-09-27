@@ -1,0 +1,36 @@
+---
+import { urlForImage } from '../../sanity/lib/urlForImage'
+
+const { images } = Astro.props.node // `.node` is the current node in the PortableText
+
+// One caption for the row: the first image that has one
+const caption = images.find((image: { caption?: string }) => image.caption)?.caption
+const widths = [240, 360, 480, 720]
+---
+
+<figure class="case-study-figure">
+  <div class="grid grid-cols-3 gap-3 md:gap-4">
+    {
+      images.map(({ asset, alt }: { asset: { _ref: string }; alt?: string }) => {
+        const [, width = 1170, height = 2532] = asset._ref.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
+        return (
+          <img
+            src={urlForImage(asset).width(360).auto('format').url()}
+            srcset={widths
+              .filter((w) => w <= width)
+              .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
+              .join(', ')}
+            sizes="(min-width: 1024px) 240px, 33vw"
+            width={width}
+            height={height}
+            alt={alt}
+            decoding="async"
+            loading="lazy"
+            class="w-full h-auto rounded-lg md:rounded-xl"
+          />
+        )
+      })
+    }
+  </div>
+  {caption && <figcaption class="mt-3 text-label text-grey">{caption}</figcaption>}
+</figure>
