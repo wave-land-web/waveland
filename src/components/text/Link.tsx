@@ -2,8 +2,8 @@ interface Props {
   text: string
   url: string
   arrowLeft?: boolean
-  /** `display` is the large header-font link used for section CTAs. Default matches body copy. */
-  size?: 'body' | 'display'
+  /** Header-font sizes for CTAs: `lead` (h4) or `display` (h3). Default matches body copy. */
+  size?: 'body' | 'lead' | 'display'
   newWindow?: boolean
   linkClass?: string
   iconClass?: string
@@ -45,7 +45,7 @@ export default function Link({
       href={url}
       target={newWindow ? '_blank' : '_self'}
       rel={newWindow ? 'noopener noreferrer' : ''}
-      className={`${size === 'display' ? 'font-header text-h3' : ''} ${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
+      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
       aria-label={text}
       onClick={handleClick}
     >

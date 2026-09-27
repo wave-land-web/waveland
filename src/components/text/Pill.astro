@@ -16,7 +16,7 @@ const { text, size = 'big', href, class: className } = Astro.props
       class:list={[
         `${className} inline-block rounded-full text-black text-label uppercase shadow-sm`,
         { 'px-4 py-2': size === 'small' },
-        { 'px-6 py-4': size === 'big' },
+        { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}
     >
       {text}
@@ -26,7 +26,7 @@ const { text, size = 'big', href, class: className } = Astro.props
       class:list={[
         `${className} inline-block rounded-full text-black text-label uppercase shadow-sm`,
         { 'px-4 py-2': size === 'small' },
-        { 'px-6 py-4': size === 'big' },
+        { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}
     >
       {text}
