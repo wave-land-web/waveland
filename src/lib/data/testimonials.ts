@@ -25,13 +25,11 @@ export const testimonials: Testimonial[] = [
   {
     quote:
       'Josh had incredible insight through the whole process. It helps when the person who is building your site understands music and what you want to portray.',
-    href: '/case-studies/robby-webb/',
     citation: 'Robby, RobbyWebb.com',
   },
   {
     quote:
       "I loved thinking and collaborating with Josh at Wave Land. He got me excited about my website, which not only affected how I branded myself for my online presence, but also influenced some of the ideas in my own research. Our work together connected so deeply to how I understand what I do, communicate it to others, and how I fundamentally do this work daily. I can't thank Josh and Wave Land enough!",
-    href: '/case-studies/lauren-vogelstein-phd/',
     citation: 'Lauren, LaurenVogelstein.com',
   },
 ]
