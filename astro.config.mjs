@@ -20,6 +20,10 @@ export default defineConfig({
     '/creative-archetype': '/',
     // Blog was retired (post and tag URLs are covered in public/_redirects)
     '/blog': '/',
+    // Retired case studies (agency repositioning); their quotes stay on the homepage
+    '/case-studies/robby-webb': '/case-studies/',
+    '/case-studies/lauren-vogelstein-phd': '/case-studies/',
+    '/case-studies/power-passenger-passage': '/case-studies/',
   },
   image: {
     responsiveStyles: true,
