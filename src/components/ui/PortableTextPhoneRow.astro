@@ -18,20 +18,27 @@ const widths = [240, 360, 480, 720]
       images.map(({ asset, alt }: { asset: { _ref: string }; alt?: string }) => {
         const [, width = 1170, height = 2532] = asset._ref.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
         return (
-          <img
-            src={urlForImage(asset).width(360).auto('format').url()}
-            srcset={widths
-              .filter((w) => w <= width)
-              .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
-              .join(', ')}
-            sizes="(min-width: 1024px) 240px, 33vw"
-            width={width}
-            height={height}
-            alt={alt}
-            decoding="async"
-            loading="lazy"
-            class="w-[calc((100%-1.5rem)/3)] md:w-[calc((100%-2rem)/3)] h-auto rounded-lg md:rounded-xl"
-          />
+          <button
+            type="button"
+            class="zoomable w-[calc((100%-1.5rem)/3)] md:w-[calc((100%-2rem)/3)]"
+            data-zoom={urlForImage(asset).width(Math.min(width, 1200)).auto('format').url()}
+            aria-label={`Enlarge image: ${alt}`}
+          >
+            <img
+              src={urlForImage(asset).width(360).auto('format').url()}
+              srcset={widths
+                .filter((w) => w <= width)
+                .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
+                .join(', ')}
+              sizes="(min-width: 1024px) 240px, 33vw"
+              width={width}
+              height={height}
+              alt={alt}
+              decoding="async"
+              loading="lazy"
+              class="w-full h-auto rounded-lg md:rounded-xl"
+            />
+          </button>
         )
       })
     }

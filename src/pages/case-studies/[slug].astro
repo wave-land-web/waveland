@@ -5,6 +5,7 @@ import CTA from '../../components/text/CTA'
 import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import CaseStudyHeader from '../../components/ui/CaseStudyHeader.astro'
+import CaseStudyLightbox from '../../components/ui/CaseStudyLightbox.astro'
 import PostTableOfContents from '../../components/ui/PostTableOfContents.astro'
 import Layout from '../../layouts/Layout.astro'
 import { loadQuery } from '../../sanity/lib/load-query'
@@ -108,4 +109,5 @@ const schema = [
       />
     </section>
   </main>
+  <CaseStudyLightbox />
 </Layout>
