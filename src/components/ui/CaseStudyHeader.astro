@@ -16,6 +16,16 @@ export interface Props {
 }
 
 const { title, published, minutesRead, image, imageAlt, services, liveUrl } = Astro.props
+
+// Pill colors match the homepage pills. The old names stay mapped until every case study is republished.
+const serviceColors: Record<string, string> = {
+  Development: 'bg-purple',
+  Strategy: 'bg-orange',
+  Partnership: 'bg-green',
+  'Web Design & Development': 'bg-purple',
+  'Digital Strategy': 'bg-orange',
+  'UX/UI': 'bg-green',
+}
 ---
 
 <header class="pt-[calc(4rem+var(--nav-height))] text-left hero-in">
@@ -33,12 +43,7 @@ const { title, published, minutesRead, image, imageAlt, services, liveUrl } = As
             <Pill
               text={`${service}`}
               size="small"
-              class:list={[
-                { 'bg-purple delay-200': service === 'Web Design & Development' },
-                { 'bg-orange delay-300': service === 'Digital Strategy' },
-                { 'bg-green delay-500': service === 'UX/UI' },
-                ['hero-in'],
-              ]}
+              class:list={[serviceColors[service], 'hero-in']}
             />
           ))
         }

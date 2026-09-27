@@ -68,9 +68,9 @@ export default defineType({
       ],
       options: {
         list: [
-          { title: 'Web Design & Development', value: 'Web Design & Development' },
-          { title: 'Digital Strategy', value: 'Digital Strategy' },
-          { title: 'UX/UI', value: 'UX/UI' },
+          { title: 'Development', value: 'Development' },
+          { title: 'Strategy', value: 'Strategy' },
+          { title: 'Partnership', value: 'Partnership' },
         ],
         layout: 'list',
       },
