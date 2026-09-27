@@ -3,13 +3,17 @@ import { urlForImage } from '../../sanity/lib/urlForImage'
 
 const { images } = Astro.props.node // `.node` is the current node in the PortableText
 
-// One caption for the row: the first image that has one
-const caption = images.find((image: { caption?: string }) => image.caption)?.caption
+// One caption for the row, joined from every image that has one
+const caption = images
+  .map((image: { caption?: string }) => image.caption?.trim())
+  .filter(Boolean)
+  .join(' ')
 const widths = [240, 360, 480, 720]
+// Each shot takes a third of the column, so rows of one or two stay phone-sized and centered
 ---
 
 <figure class="case-study-figure">
-  <div class="grid grid-cols-3 gap-3 md:gap-4">
+  <div class="flex justify-center gap-3 md:gap-4">
     {
       images.map(({ asset, alt }: { asset: { _ref: string }; alt?: string }) => {
         const [, width = 1170, height = 2532] = asset._ref.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
@@ -26,7 +30,7 @@ const widths = [240, 360, 480, 720]
             alt={alt}
             decoding="async"
             loading="lazy"
-            class="w-full h-auto rounded-lg md:rounded-xl"
+            class="w-[calc((100%-1.5rem)/3)] md:w-[calc((100%-2rem)/3)] h-auto rounded-lg md:rounded-xl"
           />
         )
       })
