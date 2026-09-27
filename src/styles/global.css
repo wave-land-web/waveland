@@ -20,6 +20,26 @@
 
   --nav-height: clamp(6rem, 20vw, 8rem);
 
+  /* Type scale: every size is fluid, scaling linearly from a 360px to a 1440px
+     viewport and holding steady outside that band. Element rules below apply
+     these, so markup shouldn't need size utilities for headings or body copy. */
+  --text-h1: clamp(2.25rem, 1.75rem + 2.222vw, 3.75rem); /* 36px → 60px */
+  --text-h1--line-height: 1.15;
+  --text-h2: clamp(1.875rem, 1.5rem + 1.667vw, 3rem); /* 30px → 48px */
+  --text-h2--line-height: 1.25;
+  --text-h3: clamp(1.5rem, 1.25rem + 1.111vw, 2.25rem); /* 24px → 36px */
+  --text-h3--line-height: 1.3;
+  --text-h4: clamp(1.375rem, 1.208rem + 0.741vw, 1.875rem); /* 22px → 30px */
+  --text-h4--line-height: 1.35;
+  --text-h5: clamp(1.25rem, 1.167rem + 0.37vw, 1.5rem); /* 20px → 24px */
+  --text-h5--line-height: 1.4;
+  --text-body: clamp(1.0625rem, 1rem + 0.278vw, 1.25rem); /* 17px → 20px */
+  --text-body--line-height: 1.6;
+  --text-prose: clamp(1rem, 0.958rem + 0.185vw, 1.125rem); /* 16px → 18px, long-form case study copy */
+  --text-prose--line-height: 1.7;
+  --text-label: clamp(0.9375rem, 0.917rem + 0.093vw, 1rem); /* 15px → 16px, nav, pills, captions */
+  --text-label--line-height: 1.5;
+
   --transition: 200ms;
 }
 
@@ -33,8 +53,10 @@
   /**
     * Required class: `lsa` (initializes animations and defaults to fade-in)
     * Note: Add `no-repeat` class to prevent animations from repeating on scroll
+    * Content is only hidden once `lsa-on` is set on <html> (Layout.astro), so the page
+    * still shows if JavaScript is slow or blocked. Use `hero-in` for anything above the fold.
     */
-  .lsa {
+  .lsa-on .lsa {
     @apply opacity-0 transform transition duration-700;
 
     /* Slide animations */
@@ -70,6 +92,27 @@
   }
 }
 
+/**
+  * Hero entrance: a CSS-only fade and rise for above-the-fold content, so it never waits on
+  * JavaScript. Stagger with an arbitrary delay, e.g. `[animation-delay:200ms]`.
+  */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: hero-rise 0.7s ease-out both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
 @layer base {
   html {
     /* Scrollbar */
@@ -80,7 +123,10 @@
   }
 
   body {
-    @apply text-white bg-darkBlue;
+    /* Body size is set once here and inherited: p, a, button and form fields
+       (Tailwind's preflight sets them to font: inherit) all follow it, and a link
+       inside a heading takes the heading's size. */
+    @apply text-body text-white bg-darkBlue;
   }
 
   section {
@@ -120,6 +166,7 @@
   h3,
   h4,
   h5,
+  h6,
   .h1,
   .h2,
   .h3,
@@ -130,41 +177,43 @@
 
   h1,
   .h1 {
-    @apply text-5xl md:text-6xl leading-tight;
+    @apply text-h1;
   }
 
   h2,
   .h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl leading-normal;
+    @apply text-h2;
   }
 
   h3,
   .h3 {
-    @apply text-3xl md:text-4xl;
+    @apply text-h3;
   }
 
   h4,
   .h4 {
-    @apply text-2xl md:text-3xl;
+    @apply text-h4;
   }
 
   h5,
   .h5 {
-    @apply text-xl md:text-2xl;
+    @apply text-h5;
+  }
+
+  h6 {
+    @apply text-body;
   }
 
   p {
-    @apply text-pretty text-base md:text-lg;
+    @apply text-pretty;
   }
 
   a {
     @apply hover:text-purple transition-all duration-(--transition) ease-in-out;
   }
 
-  p,
-  a,
-  button {
-    @apply text-lg md:text-xl;
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-purple rounded-sm;
   }
 
   button {
@@ -172,12 +221,13 @@
   }
 
   input,
-  textarea {
-    @apply text-lightGrey;
+  textarea,
+  select {
+    @apply text-prose text-lightGrey;
   }
 
   .text-container {
-    @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
+    @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
   }
 
   /* Case Studies */
@@ -196,11 +246,11 @@
     }
 
     & h2 {
-      @apply text-3xl md:text-4xl;
+      @apply text-h3;
     }
 
     & h3 {
-      @apply text-2xl md:text-3xl;
+      @apply text-h4;
     }
 
     & a {
@@ -210,9 +260,8 @@
     & p:not(header > p),
     & ul,
     & ol,
-    & pre,
-    & a {
-      @apply text-base md:text-lg;
+    & pre {
+      @apply text-prose;
     }
 
     & p:not(header > p),

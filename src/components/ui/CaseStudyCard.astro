@@ -22,7 +22,7 @@ const { caseStudy } = Astro.props
     />
 
     <h3>{caseStudy.title}</h3>
-    <p class="text-base text-grey">{createEllipsisText(caseStudy.description, 100)}</p>
+    <p class="text-prose text-grey">{createEllipsisText(caseStudy.description, 100)}</p>
     <p
       class="flex gap-2 items-center text-purple hover:text-grey group-hover:text-grey group-focus-visible:text-grey transition-all duration-(--transition) ease-in-out group"
     >

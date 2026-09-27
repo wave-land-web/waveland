@@ -1,4 +1,5 @@
 ---
+import { CALENDLY_URL } from '../../lib/site'
 import type { SanityDocument } from '@sanity/client'
 import CTA from '../../components/text/CTA'
 import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
@@ -47,7 +48,7 @@ const imageUrl = urlForImage(currentCaseStudy.mainImage).format('jpg').url()
 ---
 
 <Layout
-  title={`Wave Land Web | ${currentCaseStudy.title}`}
+  title={`${currentCaseStudy.title} | Wave Land`}
   description={currentCaseStudy.description}
   socialImage={imageUrl}
 >
@@ -76,10 +77,9 @@ const imageUrl = urlForImage(currentCaseStudy.mainImage).format('jpg').url()
     </div>
     <section id="get-started">
       <IntroCallCTA
-        title="Get Started"
-        description="Ready for the next step? Schedule a complimentary strategy session or send me an email to discuss your project."
-        linkText="Free Intro Call"
-        linkSrc="https://calendly.com/wavelandweb/15-min-meeting"
+        title="Working on Something Like This?"
+        linkText="Book a 15-Minute Call"
+        linkSrc={CALENDLY_URL}
       />
     </section>
   </main>

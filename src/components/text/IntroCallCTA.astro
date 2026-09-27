@@ -1,4 +1,5 @@
 ---
+import { EMAIL, EMAIL_HREF } from '../../lib/site'
 import { Icon } from 'astro-icon/components'
 import Link from './Link.tsx'
 
@@ -12,35 +13,36 @@ export interface Props {
 const { title, description, linkText, linkSrc } = Astro.props
 ---
 
-<div class="grid gap-2 md:gap-16 md:grid-cols-2 mb-40 lsa lsa-slide-up">
+<div class="grid gap-2 md:gap-16 md:grid-cols-2 lsa lsa-slide-up">
   <div>
     <h2 class="h2 md:mb-4">{title}</h2>
 
     <!-- Desktop Email -->
     <a
-      href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+      href={EMAIL_HREF}
       aria-label="Email"
       title="Email"
       class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple"
-      ><Icon name="tabler:mail" />hello@wavelandweb.com
+      ><Icon name="tabler:mail" />{EMAIL}
     </a>
   </div>
   <div>
     <Link
       text={linkText}
       url={linkSrc}
-      linkClass="font-header mb-2 md:mb-4 text-3xl md:text-4xl lg:text-5xl"
-      iconClass="w-8 md:w-10 lg:w-12"
+      newWindow={linkSrc.startsWith('http')}
+      size="display"
+      linkClass="mb-2 md:mb-4"
     />
-    <p class="text-lightGrey">{description}</p>
+    {description && <p class="text-lightGrey">{description}</p>}
   </div>
 
   <!-- Mobile Email -->
   <a
-    href="mailto:hello@wavelandweb.com?subject=Website Inquiry from wavelandweb.com"
+    href={EMAIL_HREF}
     aria-label="Email"
     title="Email"
     class="inline-flex md:hidden gap-2 items-center mt-2 text-grey hover:text-purple"
-    ><Icon name="tabler:mail" />hello@wavelandweb.com
+    ><Icon name="tabler:mail" />{EMAIL}
   </a>
 </div>

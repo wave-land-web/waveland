@@ -13,6 +13,12 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
+      'Wave Land Web is the best branding & communication decision I made for my business. Although Born Yesterday Bakery started off with font and colors in mind, Josh really took those small elements and ran with them. I get complimented on my website regularly. People love to use it! Also, Josh is an amazing listener/sounding board. He knows how to take my mess of an idea and turn it into something beautiful, cohesive & functional. Everything a website should be. I could not recommend Wave Land Web enough.',
+    href: '/case-studies/born-yesterday-bakery/',
+    citation: 'Syd, BornYesterdayBakery.com',
+  },
+  {
+    quote:
       "I really love Josh's keen ability to connect with my vision and execute it even better than I could think of myself! He is also very punctual about responding to my requests and getting back to me with his updates.",
     citation: 'Emmie, PowerPassengerPassage.com',
   },
@@ -21,12 +27,6 @@ export const testimonials: Testimonial[] = [
       'Josh had incredible insight through the whole process. It helps when the person who is building your site understands music and what you want to portray.',
     href: '/case-studies/robby-webb/',
     citation: 'Robby, RobbyWebb.com',
-  },
-  {
-    quote:
-      'Wave Land Web is the best branding & communication decision I made for my business. Although Born Yesterday Bakery started off with font and colors in mind, Josh really took those small elements and ran with them. I get complimented on my website regularly. People love to use it! Also, Josh is an amazing listener/sounding board. He knows how to take my mess of an idea and turn it into something beautiful, cohesive & functional. Everything a website should be. I could not recommend Wave Land Web enough.',
-    href: '/case-studies/born-yesterday-bakery/',
-    citation: 'Syd, BornYesterdayBakery.com',
   },
   {
     quote:
