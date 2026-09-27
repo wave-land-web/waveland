@@ -5,9 +5,11 @@ import SanityImage from './SanityImage.astro'
 
 export interface Props {
   caseStudy: SanityDocument
+  // The first card on the page is its largest image
+  priority?: boolean
 }
 
-const { caseStudy } = Astro.props
+const { caseStudy, priority = false } = Astro.props
 ---
 
 <article class="lsa lsa-slide-up group">
@@ -18,7 +20,9 @@ const { caseStudy } = Astro.props
     <SanityImage
       image={caseStudy.mainImage}
       alt={caseStudy.mainImage.alt}
-      class="mb-4 aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-linear"
+      sizes="(min-width: 1024px) 600px, calc(100vw - 2rem)"
+      priority={priority}
+      class="w-full h-auto mb-4 aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-linear"
     />
 
     <h3>{caseStudy.title}</h3>

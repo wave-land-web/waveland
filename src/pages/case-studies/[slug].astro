@@ -43,14 +43,39 @@ const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
   params,
 })
 
-// Generate OG image URL for the case study
-const imageUrl = urlForImage(currentCaseStudy.mainImage).format('jpg').url()
+// Generate OG image URL for the case study, at the 1200px width social sites use
+const imageUrl = urlForImage(currentCaseStudy.mainImage).width(1200).format('jpg').quality(80).url()
+
+const pageUrl = new URL(`/case-studies/${currentCaseStudy.slug.current}/`, Astro.site).href
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: currentCaseStudy.title,
+    description: currentCaseStudy.description,
+    image: imageUrl,
+    datePublished: currentCaseStudy.publishedAt,
+    url: pageUrl,
+    author: { '@type': 'Person', name: 'Josh Nussbaum', url: 'https://wavelandweb.com/' },
+    publisher: { '@id': 'https://wavelandweb.com/#business' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wavelandweb.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Case Studies', item: 'https://wavelandweb.com/case-studies/' },
+      { '@type': 'ListItem', position: 3, name: currentCaseStudy.title, item: pageUrl },
+    ],
+  },
+]
 ---
 
 <Layout
   title={`${currentCaseStudy.title} | Wave Land`}
   description={currentCaseStudy.description}
   socialImage={imageUrl}
+  schema={schema}
 >
   <CaseStudyHeader
     title={currentCaseStudy.title}
