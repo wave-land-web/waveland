@@ -59,6 +59,12 @@ const serviceColors: Record<string, string> = {
         )
       }
     </div>
-    <SanityImage image={image} alt={imageAlt} class="mb-8 md:mb-16" />
+    <SanityImage
+      image={image}
+      alt={imageAlt}
+      sizes="(min-width: 1152px) 1104px, calc(100vw - 2rem)"
+      priority
+      class="w-full h-auto mb-8 md:mb-16"
+    />
   </div>
 </header>
