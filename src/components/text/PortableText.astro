@@ -2,14 +2,33 @@
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
 import PortableTextCode from '../ui/PortableTextCode.astro'
 import PortableTextImage from '../ui/PortableTextImage.astro'
+import PortableTextPhoneRow from '../ui/PortableTextPhoneRow.astro'
 import PortableTextH2 from './PortableTextH2.astro'
 
 const { portableText } = Astro.props
+
+// Asset refs carry the original size: image-<id>-<width>x<height>-<format>
+const isPhoneShot = (block: any) => {
+  const [, width, height] = block?._type === 'image' ? (block.asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []) : []
+  return height > width
+}
+
+// Consecutive phone screenshots render side by side as one row
+const value = (portableText ?? []).reduce((blocks: any[], block: any) => {
+  const previous = blocks.at(-1)
+  if (!isPhoneShot(block)) return [...blocks, block]
+  if (previous?._type === 'phoneRow') {
+    previous.images.push(block)
+    return blocks
+  }
+  return [...blocks, { _type: 'phoneRow', _key: `${block._key}-row`, images: [block] }]
+}, [])
 
 const components = {
   type: {
     code: PortableTextCode,
     image: PortableTextImage,
+    phoneRow: PortableTextPhoneRow,
   },
   block: {
     h2: PortableTextH2,
@@ -17,4 +36,4 @@ const components = {
 }
 ---
 
-<PortableTextInternal value={portableText} components={components} />
+<PortableTextInternal value={value} components={components} />

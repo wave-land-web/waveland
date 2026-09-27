@@ -4,12 +4,9 @@ import { urlForImage } from '../../sanity/lib/urlForImage'
 const { asset, alt, caption } = Astro.props.node // `.node` is the current node in the PortableText
 
 // Asset refs carry the original size: image-<id>-<width>x<height>-<format>
+// Phone screenshots are grouped into rows by PortableText.astro
 const [, width = 1600, height = 900] = asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
-const isPortrait = height > width
-
-// Phone screenshots sit at phone size instead of filling the column
-const widths = isPortrait ? [320, 480, 640, 960] : [640, 960, 1280, 1600]
-const sizes = isPortrait ? '320px' : '(min-width: 1024px) 720px, 100vw'
+const widths = [640, 960, 1280, 1600]
 const srcset = widths
   .filter((w) => w <= width)
   .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
@@ -17,11 +14,11 @@ const srcset = widths
 const src = urlForImage(asset).width(widths[1]).auto('format').url()
 ---
 
-<figure class:list={['case-study-figure', { 'max-w-[320px] mx-auto': isPortrait }]}>
+<figure class="case-study-figure">
   <img
     src={src}
     srcset={srcset}
-    sizes={sizes}
+    sizes="(min-width: 1024px) 720px, 100vw"
     width={width}
     height={height}
     alt={alt}
