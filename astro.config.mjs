@@ -59,43 +59,43 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  experimental: {
-    // SEE: https://docs.astro.build/en/reference/experimental-flags/fonts/#local-font-variants
-    fonts: [
-      {
-        provider: fontProviders.local(),
-        name: 'Monaspace Argon Var',
-        cssVariable: '--font-monaspace',
-        options: {
-          variants: [
-            {
-              src: [
-                './src/assets/fonts/monaspace-argon-var-extra-light.woff2',
-                './src/assets/fonts/monaspace-argon-var-extra-light.woff',
-              ],
-              weight: 400,
-              style: 'normal',
-            },
-          ],
-        },
+  // Astro 7 defaults to JSX-style whitespace; keep the HTML output it had before
+  compressHTML: true,
+  // SEE: https://docs.astro.build/en/guides/fonts/
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Monaspace Argon Var',
+      cssVariable: '--font-monaspace',
+      options: {
+        variants: [
+          {
+            src: [
+              './src/assets/fonts/monaspace-argon-var-extra-light.woff2',
+              './src/assets/fonts/monaspace-argon-var-extra-light.woff',
+            ],
+            weight: 400,
+            style: 'normal',
+          },
+        ],
       },
-      {
-        provider: fontProviders.local(),
-        name: 'Poppins Regular',
-        cssVariable: '--font-poppins',
-        options: {
-          variants: [
-            {
-              src: [
-                './src/assets/fonts/poppins-regular.woff2',
-                './src/assets/fonts/poppins-regular.woff',
-              ],
-              weight: 400,
-              style: 'normal',
-            },
-          ],
-        },
+    },
+    {
+      provider: fontProviders.local(),
+      name: 'Poppins Regular',
+      cssVariable: '--font-poppins',
+      options: {
+        variants: [
+          {
+            src: [
+              './src/assets/fonts/poppins-regular.woff2',
+              './src/assets/fonts/poppins-regular.woff',
+            ],
+            weight: 400,
+            style: 'normal',
+          },
+        ],
       },
-    ],
-  },
+    },
+  ],
 })
