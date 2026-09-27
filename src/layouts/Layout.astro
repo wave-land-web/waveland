@@ -57,7 +57,7 @@ const business = {
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       [business, ...schema].map((data) => (
-        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+        <script type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
       ))
     }
 
