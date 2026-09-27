@@ -12,19 +12,23 @@ const srcset = widths
   .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
   .join(', ')
 const src = urlForImage(asset).width(widths[1]).auto('format').url()
+// Full-size version for the lightbox (CaseStudyLightbox.astro)
+const zoomSrc = urlForImage(asset).width(Math.min(width, 2400)).auto('format').url()
 ---
 
 <figure class="case-study-figure">
-  <img
-    src={src}
-    srcset={srcset}
-    sizes="(min-width: 1024px) 720px, 100vw"
-    width={width}
-    height={height}
-    alt={alt}
-    decoding="async"
-    loading="lazy"
-    class="w-full h-auto rounded-xl"
-  />
+  <button type="button" class="zoomable block w-full" data-zoom={zoomSrc} aria-label={`Enlarge image: ${alt}`}>
+    <img
+      src={src}
+      srcset={srcset}
+      sizes="(min-width: 1024px) 720px, 100vw"
+      width={width}
+      height={height}
+      alt={alt}
+      decoding="async"
+      loading="lazy"
+      class="w-full h-auto rounded-xl"
+    />
+  </button>
   {caption && <figcaption class="mt-3 text-label text-grey">{caption}</figcaption>}
 </figure>

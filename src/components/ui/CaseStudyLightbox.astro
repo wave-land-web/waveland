@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<!-- Opens any `.zoomable` button's `data-zoom` image full size. Esc, the close button or a tap anywhere closes it. -->
+<dialog id="lightbox" class="lightbox" aria-label="Enlarged image">
+  <button
+    type="button"
+    class="lightbox-close fixed top-4 right-4 md:top-6 md:right-6 z-10 p-2 rounded-full text-white bg-black/60 hover:text-purple focus-visible:text-purple"
+    aria-label="Close"
+    title="Close"
+  >
+    <Icon name="tabler:x" class="size-6" />
+  </button>
+  <img class="lightbox-img" alt="" />
+</dialog>
+
+<style>
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    cursor: zoom-out;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+  }
+
+  .lightbox::backdrop {
+    background: rgb(3 7 18 / 0.92);
+  }
+
+  .lightbox-img {
+    max-width: min(100%, 1600px);
+    max-height: calc(100dvh - 2rem);
+    width: auto;
+    height: auto;
+    border-radius: 0.75rem;
+  }
+
+  /* On a phone, a wide screenshot shown at screen width is no bigger than the inline one.
+     Show it taller instead and let it pan sideways. */
+  @media (max-width: 767px) {
+    .lightbox.is-wide {
+      overflow-x: auto;
+      place-items: center start;
+    }
+
+    .lightbox.is-wide .lightbox-img {
+      max-width: none;
+      height: min(70dvh, 40rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lightbox[open] .lightbox-img {
+      animation: zoom-in 200ms ease-out;
+    }
+  }
+
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  :global(.zoomable) {
+    cursor: zoom-in;
+    border-radius: 0.75rem;
+  }
+
+  :global(.zoomable:focus-visible) {
+    outline: 2px solid var(--color-purple);
+    outline-offset: 4px;
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#lightbox')
+  const image = dialog?.querySelector<HTMLImageElement>('.lightbox-img')
+
+  if (dialog && image) {
+    document.querySelectorAll<HTMLButtonElement>('.zoomable').forEach((button) => {
+      button.addEventListener('click', () => {
+        const thumb = button.querySelector('img')
+        image.src = button.dataset.zoom || thumb?.currentSrc || ''
+        image.alt = thumb?.alt || ''
+        dialog.classList.toggle('is-wide', Number(thumb?.width) > Number(thumb?.height))
+        dialog.showModal()
+        // Start a panning image from its middle
+        dialog.scrollLeft = (dialog.scrollWidth - dialog.clientWidth) / 2
+      })
+    })
+
+    // Any click closes it, including on the image itself
+    dialog.addEventListener('click', () => dialog.close())
+    dialog.addEventListener('close', () => image.removeAttribute('src'))
+    image.addEventListener('load', () => {
+      dialog.scrollLeft = (dialog.scrollWidth - dialog.clientWidth) / 2
+    })
+  }
+</script>
