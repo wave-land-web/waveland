@@ -78,13 +78,15 @@ if (color === 'orange') {
     ]}
   >
     <a href={caseStudyUrl} class="w-full h-full">
+      <!-- Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp -->
       <Image
         src={image}
         alt={imageAlt}
         width={144}
         layout="constrained"
-        widths={[144, 288, 432]}
-        sizes="144px"
+        widths={[216, 432, 648]}
+        sizes="216px"
+        quality={90}
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
       />
       {
