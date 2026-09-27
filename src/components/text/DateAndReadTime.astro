@@ -8,7 +8,7 @@ export interface Props {
 const { published, minutesRead, class: className } = Astro.props
 ---
 
-<p class={`${className} flex gap-2 font-header text-purple text-base md:text-lg`}>
+<p class={`${className} flex gap-2 font-header text-purple text-prose`}>
   <time
     >{
       new Date(published).toLocaleDateString('en-US', {

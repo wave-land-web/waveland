@@ -2,19 +2,35 @@ interface Props {
   text: string
   url: string
   arrowLeft?: boolean
+  /** `display` is the large header-font link used for section CTAs. Default matches body copy. */
+  size?: 'body' | 'display'
   newWindow?: boolean
   linkClass?: string
   iconClass?: string
   onClick?: () => void
 }
 
+// Keep hyphenated words like "15-minute" on one line so they never split at the hyphen
+function keepHyphenatedWordsTogether(text: string) {
+  return text.split(/(\S+-\S+)/).map((part, i) =>
+    part.includes('-') && !/\s/.test(part) ? (
+      <span key={i} className="whitespace-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
+
 export default function Link({
   text,
   url,
   arrowLeft,
+  size = 'body',
   newWindow,
-  linkClass,
-  iconClass,
+  linkClass = '',
+  iconClass = '',
   onClick,
 }: Props) {
   const handleClick = (e: React.MouseEvent) => {
@@ -29,7 +45,7 @@ export default function Link({
       href={url}
       target={newWindow ? '_blank' : '_self'}
       rel={newWindow ? 'noopener noreferrer' : ''}
-      className={`${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
+      className={`${size === 'display' ? 'font-header text-h3' : ''} ${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
       aria-label={text}
       onClick={handleClick}
     >
@@ -39,7 +55,7 @@ export default function Link({
             width="1em"
             height="1em"
             data-icon="tabler:arrow-narrow-left"
-            className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out ${iconClass}`}
+            className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
           >
             <symbol id="ai:tabler:arrow-narrow-left" viewBox="0 0 24 24">
               <path
@@ -53,17 +69,17 @@ export default function Link({
             </symbol>
             <use href="#ai:tabler:arrow-narrow-left"></use>
           </svg>
-          {text}
+          <span>{keepHyphenatedWordsTogether(text)}</span>
         </>
       ) : (
         <>
-          {text}
+          <span>{keepHyphenatedWordsTogether(text)}</span>
           <svg
             width="1em"
             height="1em"
             viewBox="0 0 24 24"
             data-icon="tabler:arrow-narrow-right"
-            className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out ${iconClass}`}
+            className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
           >
             <use href="#ai:tabler:arrow-narrow-right"></use>
           </svg>
