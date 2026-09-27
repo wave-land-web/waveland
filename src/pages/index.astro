@@ -51,26 +51,27 @@ const websiteDetails = [
 
 <Layout title="Wave Land | Development Partner for Brand Agencies">
   <header
-    class="h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
+    class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
   >
     <div>
       <div class="mb-6 hero-in">
         <TitleLogo />
       </div>
 
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-2 md:gap-4">
         <Pill text="Development" href="#about-us" class="bg-purple hero-in [animation-delay:100ms]" />
         <Pill text="Strategy" href="#about-us" class="bg-orange hero-in [animation-delay:200ms]" />
         <Pill text="Partnership" href="#about-us" class="bg-green hero-in [animation-delay:300ms]" />
       </div>
     </div>
     <div class="max-w-3xl">
-      <h1 class="mb-4 md:mb-6 hero-in [animation-delay:400ms]">The development partner for brand agencies.</h1>
+      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in [animation-delay:400ms]">A development partner for brand agencies.</h1>
       <div class="hero-in [animation-delay:500ms]">
         <Link
           text="Book a 15-Minute Call"
           url={CALENDLY_URL}
           newWindow={true}
+          size="lead"
         />
       </div>
     </div>
