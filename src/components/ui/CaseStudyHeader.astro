@@ -17,14 +17,11 @@ export interface Props {
 
 const { title, published, minutesRead, image, imageAlt, services, liveUrl } = Astro.props
 
-// Pill colors match the homepage pills. The old names stay mapped until every case study is republished.
+// Pill colors match the homepage pills
 const serviceColors: Record<string, string> = {
   Development: 'bg-purple',
   Strategy: 'bg-orange',
   Partnership: 'bg-green',
-  'Web Design & Development': 'bg-purple',
-  'Digital Strategy': 'bg-orange',
-  'UX/UI': 'bg-green',
 }
 ---
 
