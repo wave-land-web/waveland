@@ -4,33 +4,23 @@ interface BaseProps {
   text: string
   // Use className, not class: Astro drops `class` before it reaches a React component
   className?: string
-  isActive?: boolean
   /** `large` gives a headline action more room. Same type either way, so every button reads as one family. */
   size?: 'default' | 'large'
-  /** `solid` is for the one main action on a page: filled at rest, the usual dashed outline on hover. */
-  variant?: 'outline' | 'solid'
+  /** One `primary` per screen: the action the page is for. `secondary` for a repeat or an alternative. */
+  variant?: 'primary' | 'secondary'
 }
 
 type LinkProps = BaseProps & { tag: 'link'; href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>
 type ButtonProps = BaseProps & { tag: 'button' } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>
 type Props = LinkProps | ButtonProps
 
-const sizeClasses = { default: 'px-5 py-3', large: 'px-7 py-4' }
-
-const baseClasses =
-  'inline-block w-fit leading-tight border border-purple rounded-lg shadow-lg transition-all duration-(--transition) ease-in-out text-center'
-
-const variantClasses = {
-  outline: 'border-dashed text-purple hover:text-black hover:bg-purple focus-visible:text-black focus-visible:bg-purple',
-  solid:
-    'font-semibold bg-purple text-black hover:bg-transparent hover:text-purple hover:border-dashed focus-visible:bg-transparent focus-visible:text-purple focus-visible:border-dashed',
-}
+// Button styles live in global.css (btn, btn-primary, btn-secondary) so the whole system changes in one place
+const sizeClasses = { default: 'px-6 py-3', large: 'px-8 py-4' }
+const variantClasses = { primary: 'btn-primary', secondary: 'btn-secondary' }
 
 export default function CTA(props: Props) {
-  const { text, className, isActive, size = 'default', variant = 'outline', ...rest } = props
-  const classes = [className, baseClasses, variantClasses[variant], sizeClasses[size], isActive && '!text-black bg-purple']
-    .filter(Boolean)
-    .join(' ')
+  const { text, className, size = 'default', variant = 'primary', ...rest } = props
+  const classes = [className, 'btn', variantClasses[variant], sizeClasses[size]].filter(Boolean).join(' ')
 
   if (rest.tag === 'link') {
     const { tag, ...anchorProps } = rest
