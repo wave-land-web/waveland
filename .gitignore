@@ -32,3 +32,6 @@ NOTES.md
 
 # Content drafts (private; repo is public)
 /docs/content/
+
+# Playwright MCP screenshots and logs
+.playwright-mcp/
