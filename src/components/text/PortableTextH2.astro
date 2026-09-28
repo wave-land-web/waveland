@@ -1,15 +1,8 @@
 ---
-// Creates a custom H2 component with an id that can be used for linking
+// A case study H2 with an id, so the table of contents can link to it
+import { blockText, headingId } from '../../lib/text'
 
-// The current node received from the PortableText component
 const { node } = Astro.props
-
-// Extract text and create an id
-// TODO: figure out why content is displayed differently for Lauren's case study
-const headerText = node.children[0].children
-  ? node.children[0].children[0].text
-  : node.children[0].text
-const headerId = headerText.replace(/\s+/g, '-').toLowerCase()
 ---
 
-<h2 id={headerId} class="scroll-mt-15">{headerText}</h2>
+<h2 id={headingId(blockText(node))} class="scroll-mt-15"><slot /></h2>

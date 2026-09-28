@@ -1,3 +1,5 @@
+import ArrowIcon from '../ui/ArrowIcon'
+
 interface Props {
   text: string
   url: string
@@ -49,41 +51,17 @@ export default function Link({
       aria-label={text}
       onClick={handleClick}
     >
-      {arrowLeft ? (
-        <>
-          <svg
-            width="1em"
-            height="1em"
-            data-icon="tabler:arrow-narrow-left"
-            className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
-          >
-            <symbol id="ai:tabler:arrow-narrow-left" viewBox="0 0 24 24">
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 12h14M5 12l4 4m-4-4l4-4"
-              ></path>
-            </symbol>
-            <use href="#ai:tabler:arrow-narrow-left"></use>
-          </svg>
-          <span>{keepHyphenatedWordsTogether(text)}</span>
-        </>
-      ) : (
-        <>
-          <span>{keepHyphenatedWordsTogether(text)}</span>
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            data-icon="tabler:arrow-narrow-right"
-            className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
-          >
-            <use href="#ai:tabler:arrow-narrow-right"></use>
-          </svg>
-        </>
+      {arrowLeft && (
+        <ArrowIcon
+          direction="left"
+          className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
+        />
+      )}
+      <span>{keepHyphenatedWordsTogether(text)}</span>
+      {!arrowLeft && (
+        <ArrowIcon
+          className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
+        />
       )}
     </a>
   )

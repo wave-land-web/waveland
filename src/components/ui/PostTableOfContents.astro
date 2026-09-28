@@ -1,5 +1,6 @@
 ---
 import type { SanityDocument } from '@sanity/client'
+import { blockText, headingId } from '../../lib/text'
 
 interface Props {
   post: SanityDocument
@@ -11,10 +12,8 @@ const { post } = Astro.props
 const headings: { id: string; text: string }[] = post.body
   .filter((block: SanityDocument) => block.style === 'h2')
   .map((heading: SanityDocument) => {
-    return {
-      id: heading.children[0].text.replace(/\s+/g, '-').toLowerCase(),
-      text: heading.children[0].text,
-    }
+    const text = blockText(heading)
+    return { id: headingId(text), text }
   })
 ---
 

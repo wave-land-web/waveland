@@ -212,37 +212,36 @@ const websiteDetails = [
       />
     </section>
   </main>
-</Layout>
+  <style is:global>
+    summary::after {
+      content: '＋';
+    }
 
-<style is:global>
-  summary::after {
-    content: '＋';
-  }
+    details[open] summary::after {
+      content: '－';
+    }
 
-  details[open] summary::after {
-    content: '－';
-  }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
 
-  details > summary::-webkit-details-marker {
-    display: none;
-  }
-</style>
+  <script>
+    const details = document.querySelectorAll('details')
+    const firstDetail = details[0]
 
-<script>
-  const details = document.querySelectorAll('details')
-  const firstDetail = details[0]
+    // Open the first detail by default
+    firstDetail.setAttribute('open', '')
 
-  // Open the first detail by default
-  firstDetail.setAttribute('open', '')
-
-  // Close all details that are not targetDetail
-  details.forEach((targetDetail) => {
-    targetDetail.addEventListener('click', () => {
-      details.forEach((detail) => {
-        if (detail !== targetDetail) {
-          detail.removeAttribute('open')
-        }
+    // Close all details that are not targetDetail
+    details.forEach((targetDetail) => {
+      targetDetail.addEventListener('click', () => {
+        details.forEach((detail) => {
+          if (detail !== targetDetail) {
+            detail.removeAttribute('open')
+          }
+        })
       })
     })
-  })
-</script>
+  </script>
+</Layout>
