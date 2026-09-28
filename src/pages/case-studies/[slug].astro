@@ -96,7 +96,9 @@ const schema = [
       <section id="case-study" class="py-0">
         <div id="case-study-content" class="flex flex-col gap-[1lh]">
           <PortableText portableText={currentCaseStudy.body} />
-          <Link text="View Case Studies" url="/case-studies/" />
+          <div class="pt-[1lh] border-t border-dashed border-darkGrey">
+            <Link text="View Case Studies" url="/case-studies/" />
+          </div>
         </div>
       </section>
       <div class="hidden md:block"></div>
