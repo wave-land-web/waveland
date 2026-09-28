@@ -19,9 +19,9 @@ const { title, published, minutesRead, image, imageAlt, services, liveUrl } = As
 
 // Pill colors match the homepage pills
 const serviceColors: Record<string, string> = {
-  Development: 'bg-purple',
-  Strategy: 'bg-orange',
-  Partnership: 'bg-green',
+  Development: 'border-purple text-purple',
+  Strategy: 'border-orange text-orange',
+  Partnership: 'border-green text-green',
 }
 ---
 
@@ -40,7 +40,8 @@ const serviceColors: Record<string, string> = {
             <Pill
               text={`${service}`}
               size="small"
-              class:list={[serviceColors[service], 'hero-in']}
+              variant="outline"
+              class={`${serviceColors[service]} hero-in`}
             />
           ))
         }
