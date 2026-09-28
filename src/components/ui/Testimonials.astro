@@ -19,7 +19,11 @@ const { data } = Astro.props
             </p>
             <cite>
               {testimonial.href ? (
-                <a class="text-purple hover:text-grey" href={testimonial.href}>
+                <a
+                  class="text-purple hover:text-grey"
+                  href={testimonial.href}
+                  {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
+                >
                   - {testimonial.citation}
                 </a>
               ) : (
