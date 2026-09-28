@@ -184,20 +184,17 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         <h2 class="mb-4">Prefer to Talk?</h2>
 
         <div class="flex flex-col gap-6 items-center">
-          <!-- Calendly Link -->
-          <a
+          <CTA
+            tag="link"
             href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex gap-2 items-center text-grey hover:text-purple"
-            ><Icon name="tabler:calendar" />Book a 15-Minute Call
-          </a>
+            text="Book a 15-Minute Call"
+          />
           <!-- Email Link -->
           <a
             href={EMAIL_HREF}
-            aria-label="Email"
-            title="Email"
-            class="inline-flex gap-2 items-center text-grey hover:text-purple"
+            class="inline-flex gap-2 items-center text-grey hover:text-purple link-underline"
             ><Icon name="tabler:mail" />{EMAIL}
           </a>
         </div>

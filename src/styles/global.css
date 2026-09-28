@@ -44,6 +44,16 @@
   --transition: 200ms;
 }
 
+/* Links: every hover changes more than color. Action and utility links underline on hover. */
+@utility link-underline {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  &:hover,
+  &:focus-visible {
+    text-decoration-line: underline;
+  }
+}
+
 /* Animations */
 
 @view-transition {

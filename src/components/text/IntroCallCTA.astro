@@ -1,7 +1,7 @@
 ---
 import { EMAIL, EMAIL_HREF } from '../../lib/site'
 import { Icon } from 'astro-icon/components'
-import Link from './Link.tsx'
+import CTA from './CTA'
 
 export interface Props {
   title: string
@@ -22,17 +22,18 @@ const { title, description, linkText, linkSrc } = Astro.props
       href={EMAIL_HREF}
       aria-label="Email"
       title="Email"
-      class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple"
+      class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple link-underline"
       ><Icon name="tabler:mail" />{EMAIL}
     </a>
   </div>
   <div>
-    <Link
+    <CTA
+      tag="link"
+      href={linkSrc}
+      {...(linkSrc.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
       text={linkText}
-      url={linkSrc}
-      newWindow={linkSrc.startsWith('http')}
-      size="display"
-      linkClass="mb-2 md:mb-4"
+      size="large"
+      className="mb-4"
     />
     {description && <p class="text-lightGrey">{description}</p>}
   </div>
@@ -40,9 +41,7 @@ const { title, description, linkText, linkSrc } = Astro.props
   <!-- Mobile Email -->
   <a
     href={EMAIL_HREF}
-    aria-label="Email"
-    title="Email"
-    class="inline-flex md:hidden gap-2 items-center mt-2 text-grey hover:text-purple"
+    class="inline-flex md:hidden gap-2 items-center mt-2 text-grey hover:text-purple link-underline"
     ><Icon name="tabler:mail" />{EMAIL}
   </a>
 </div>
