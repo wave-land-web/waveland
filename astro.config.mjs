@@ -87,6 +87,23 @@ export default defineConfig({
             weight: '600 900',
             style: 'normal',
           },
+          // Italics, instanced the same way at the font's own slant (-11°), so the browser never fakes italic either
+          {
+            src: [
+              './src/assets/fonts/monaspace-argon-var-extra-light-italic.woff2',
+              './src/assets/fonts/monaspace-argon-var-extra-light-italic.woff',
+            ],
+            weight: 400,
+            style: 'italic',
+          },
+          {
+            src: [
+              './src/assets/fonts/monaspace-argon-var-semibold-italic.woff2',
+              './src/assets/fonts/monaspace-argon-var-semibold-italic.woff',
+            ],
+            weight: '600 900',
+            style: 'italic',
+          },
         ],
       },
     },
