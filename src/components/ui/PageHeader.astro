@@ -2,20 +2,28 @@
 import Link from '../text/Link.tsx'
 
 export interface Props {
-  title: string
+  // Small line above the h1; leave it out when it would repeat the h1
+  title?: string
   subtitle: string
+  // 'left' lines the header up with a full-width grid below it
+  align?: 'center' | 'left'
   bodyText?: string
   linkText?: string
   linkUrl?: string
 }
 
-const { title, subtitle, bodyText, linkText, linkUrl } = Astro.props
+const { title, subtitle, bodyText, linkText, linkUrl, align = 'center' } = Astro.props
+
+const alignClasses = {
+  center: 'max-w-2xl items-center text-center',
+  left: 'lg:max-w-screen-xl items-start text-left',
+}
 ---
 
 <header
-  class="max-w-2xl mb-16 md:mb-24 pt-[calc(4rem+var(--nav-height))] flex flex-col justify-center items-center gap-4 text-center hero-in"
+  class:list={[alignClasses[align], 'mb-16 md:mb-24 pt-[calc(4rem+var(--nav-height))] flex flex-col justify-center gap-4 hero-in']}
 >
-  <p class="font-header text-purple text-prose">{title}</p>
+  {title && <p class="font-header text-purple text-prose">{title}</p>}
   <h1>{subtitle}</h1>
   {bodyText && <p class="max-w-xl mb-4 text-lightGrey">{bodyText}</p>}
   {linkText && linkUrl && <Link text={linkText} url={linkUrl} />}

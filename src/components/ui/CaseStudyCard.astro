@@ -1,6 +1,5 @@
 ---
 import type { SanityDocument } from '@sanity/client'
-import { createEllipsisText } from '../../lib/text'
 import SanityImage from './SanityImage.astro'
 
 export interface Props {
@@ -10,13 +9,18 @@ export interface Props {
 }
 
 const { caseStudy, priority = false } = Astro.props
+
+const workedWithLabels: Record<string, string> = {
+  'for-agency': 'for an agency',
+  'with-agency': 'with an agency',
+  direct: 'direct client',
+}
+const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
 ---
 
 <article class="lsa lsa-slide-up group">
-  <a
-    href={`/case-studies/${caseStudy.slug.current}/`}
-    class="w-full h-full hover:text-white flex flex-col gap-4"
-  >
+  <!-- The whole card is the link; the title underlines when it's hovered or focused -->
+  <a href={`/case-studies/${caseStudy.slug.current}/`} class="w-full h-full hover:text-white flex flex-col gap-4">
     <SanityImage
       image={caseStudy.mainImage}
       alt={caseStudy.mainImage.alt}
@@ -25,11 +29,14 @@ const { caseStudy, priority = false } = Astro.props
       class="w-full h-auto mb-4 aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-linear"
     />
 
-    <h3>{caseStudy.title}</h3>
-    <p class="text-prose text-grey">{createEllipsisText(caseStudy.description, 100)}</p>
-    <!-- The whole card is the link; "Read More" underlines when it's hovered -->
-    <p class="w-fit text-purple underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-current group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
-      Read More
-    </p>
+    <div class="flex flex-col gap-2">
+      <h2 class="h3">
+        <span class="underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:decoration-current group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
+          {caseStudy.title}
+        </span>
+      </h2>
+      {meta && <p class="text-prose text-lightGrey">{meta}</p>}
+    </div>
+    <p class="text-prose text-grey">{caseStudy.description}</p>
   </a>
 </article>
