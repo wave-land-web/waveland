@@ -339,7 +339,7 @@
     }
 
     & strong {
-      @apply font-black text-white;
+      @apply font-semibold text-white;
     }
   }
 }

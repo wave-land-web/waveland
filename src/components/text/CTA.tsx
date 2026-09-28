@@ -23,7 +23,7 @@ const baseClasses =
 const variantClasses = {
   outline: 'border-dashed text-purple hover:text-black hover:bg-purple focus-visible:text-black focus-visible:bg-purple',
   solid:
-    'bg-purple text-black hover:bg-transparent hover:text-purple hover:border-dashed focus-visible:bg-transparent focus-visible:text-purple focus-visible:border-dashed',
+    'font-semibold bg-purple text-black hover:bg-transparent hover:text-purple hover:border-dashed focus-visible:bg-transparent focus-visible:text-purple focus-visible:border-dashed',
 }
 
 export default function CTA(props: Props) {

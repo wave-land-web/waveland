@@ -77,6 +77,16 @@ export default defineConfig({
             weight: 400,
             style: 'normal',
           },
+          {
+            // SemiBold, instanced from the same Monaspace Argon v1.200 variable font and subset to the same characters.
+            // It answers every weight from 600 up (font-semibold, font-bold, <strong>), so the browser never fakes bold.
+            src: [
+              './src/assets/fonts/monaspace-argon-var-semibold.woff2',
+              './src/assets/fonts/monaspace-argon-var-semibold.woff',
+            ],
+            weight: '600 900',
+            style: 'normal',
+          },
         ],
       },
     },
