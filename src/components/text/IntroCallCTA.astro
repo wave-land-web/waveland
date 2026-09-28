@@ -13,35 +13,20 @@ export interface Props {
 const { title, description, linkText, linkSrc } = Astro.props
 ---
 
-<div class="grid gap-2 md:gap-16 md:grid-cols-2 lsa lsa-slide-up">
-  <div>
-    <h2 class="h2 md:mb-4">{title}</h2>
-
-    <!-- Desktop Email -->
-    <a
-      href={EMAIL_HREF}
-      aria-label="Email"
-      title="Email"
-      class="hidden md:inline-flex gap-2 items-center text-grey hover:text-purple link-underline"
-      ><Icon name="tabler:mail" />{EMAIL}
-    </a>
-  </div>
-  <div>
+<!-- Heading on the left, the pitch on the right. The button always comes last, so it closes the section when the columns stack. -->
+<div class="grid gap-6 md:gap-16 md:grid-cols-2 md:items-center lsa lsa-slide-up">
+  <h2 class="h2">{title}</h2>
+  <div class="flex flex-col items-start gap-6">
+    {description && <p class="text-lightGrey max-w-[48ch]">{description}</p>}
+    <a href={EMAIL_HREF} class="inline-flex gap-2 items-center text-grey hover:text-purple link-underline"
+      ><Icon name="tabler:mail" />{EMAIL}</a
+    >
     <CTA
       tag="link"
       href={linkSrc}
       {...(linkSrc.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
       text={linkText}
       size="large"
-      className="mb-4"
     />
-    {description && <p class="text-lightGrey">{description}</p>}
   </div>
-
-  <!-- Mobile Email -->
-  <a
-    href={EMAIL_HREF}
-    class="inline-flex md:hidden gap-2 items-center mt-2 text-grey hover:text-purple link-underline"
-    ><Icon name="tabler:mail" />{EMAIL}
-  </a>
 </div>
