@@ -45,7 +45,7 @@
 }
 
 /* Buttons: pills with solid edges. Dashed edges are for structure (cards, inputs, dividers); a solid pill is something you can press.
-   Primary is the wordmark's white and turns purple on hover; secondary is a thin outline. One primary per screen. */
+   Option B preview: primary is a purple-tinted pill that fills purple on hover; secondary is a purple outline. One primary per screen. */
 @utility btn {
   display: inline-block;
   width: fit-content;
@@ -69,23 +69,23 @@
 }
 
 @utility btn-primary {
-  background-color: var(--color-white);
-  border-color: var(--color-white);
-  color: var(--color-black);
+  background-color: color-mix(in oklab, var(--color-purple) 16%, transparent);
+  border-color: var(--color-purple);
+  color: var(--color-white);
   &:hover:not(:disabled),
   &:focus-visible {
     background-color: var(--color-purple);
-    border-color: var(--color-purple);
+    color: var(--color-black);
   }
 }
 
 @utility btn-secondary {
-  border-color: color-mix(in oklab, var(--color-white) 35%, transparent);
-  color: var(--color-white);
+  border-color: color-mix(in oklab, var(--color-purple) 45%, transparent);
+  color: var(--color-purple);
   &:hover:not(:disabled),
   &:focus-visible {
-    border-color: var(--color-white);
-    background-color: color-mix(in oklab, var(--color-white) 6%, transparent);
+    border-color: var(--color-purple);
+    background-color: color-mix(in oklab, var(--color-purple) 10%, transparent);
   }
 }
 
