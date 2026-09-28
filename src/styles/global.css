@@ -49,8 +49,9 @@
    (text-decoration-line itself can't transition). */
 @utility link-underline {
   text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  /* Scale with the text so display-size links don't get a hairline hugging the letters */
+  text-decoration-thickness: max(1px, 0.05em);
+  text-underline-offset: 0.25em;
   text-decoration-color: transparent;
   transition-property: color, text-decoration-color;
   transition-duration: var(--transition);
