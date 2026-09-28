@@ -125,7 +125,7 @@ const websiteDetails = [
     </section>
 
     <section id="about-us">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
+      <div class="section-split mb-16">
         <div class="h-full">
           <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
             <h2>What I Do</h2>
@@ -183,7 +183,7 @@ const websiteDetails = [
       id="website-details"
       class="lsa lsa-slide-up p-6 md:p-8 bg-purple/5 rounded-2xl shadow-md"
     >
-      <div class="grid gap-8 md:gap-16 md:grid-cols-2">
+      <div class="section-split">
         <h2><span class="text-green">What Every Build</span> Includes</h2>
 
         <div>
@@ -202,7 +202,7 @@ const websiteDetails = [
     </section>
 
     <!-- A bordered, left-aligned quote card, so it reads differently from the open, centered sign-off below -->
-    <section id="testimonials" class="grid gap-8 md:grid-cols-[1fr_2fr] md:gap-16 lsa lsa-slide-up">
+    <section id="testimonials" class="section-split lsa lsa-slide-up">
       <h2>What Clients Say</h2>
       <div class="min-w-0">
         <Testimonials data={testimonialData} />
