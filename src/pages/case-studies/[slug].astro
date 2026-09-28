@@ -1,8 +1,7 @@
 ---
-import { CALENDLY_URL } from '../../lib/site'
 import type { SanityDocument } from '@sanity/client'
 import Link from '../../components/text/Link.tsx'
-import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
+import ClosingCTA from '../../components/text/ClosingCTA.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import CaseStudyHeader from '../../components/ui/CaseStudyHeader.astro'
 import CaseStudyLightbox from '../../components/ui/CaseStudyLightbox.astro'
@@ -103,10 +102,9 @@ const schema = [
       <div class="hidden md:block"></div>
     </div>
     <section id="get-started">
-      <IntroCallCTA
+      <ClosingCTA
         title="Working on Something Like This?"
-        linkText="Book a 15-Minute Call"
-        linkSrc={CALENDLY_URL}
+        description="Tell me what you're building. I reply within 48 hours."
       />
     </section>
   </main>

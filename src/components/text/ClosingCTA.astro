@@ -1,0 +1,25 @@
+---
+import { CALENDLY_URL } from '../../lib/site'
+import CTA from './CTA'
+import Link from './Link.tsx'
+
+export interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!-- The page's sign-off: one centered column. The contact form comes first because it asks the
+     questions that help me reply well; the call is there for people who'd rather talk. -->
+<div class="max-w-2xl mx-auto flex flex-col items-center gap-6 text-center lsa lsa-slide-up">
+  <h2 class="h2 text-balance">{title}</h2>
+  <p class="text-lightGrey max-w-[48ch]">{description}</p>
+  <div class="flex flex-col items-center gap-5 mt-2">
+    <CTA tag="link" href="/contact/" text="Tell Me About Your Project" size="large" />
+    <p class="text-grey">
+      Or <Link text="book a 15-minute call" url={CALENDLY_URL} newWindow />
+    </p>
+  </div>
+</div>
