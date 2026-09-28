@@ -201,9 +201,12 @@ const websiteDetails = [
       </div>
     </section>
 
-    <section id="testimonials" class="max-w-screen-md m-auto text-center lsa lsa-slide-up">
-      <h2 class="mb-8">What Clients Say</h2>
-      <Testimonials data={testimonialData} />
+    <!-- A bordered, left-aligned quote card, so it reads differently from the open, centered sign-off below -->
+    <section id="testimonials" class="grid gap-8 md:grid-cols-[1fr_2fr] md:gap-16 lsa lsa-slide-up">
+      <h2>What Clients Say</h2>
+      <div class="min-w-0">
+        <Testimonials data={testimonialData} />
+      </div>
     </section>
 
     <section id="get-started">

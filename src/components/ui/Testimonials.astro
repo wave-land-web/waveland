@@ -9,33 +9,29 @@ const { data } = Astro.props
 ---
 
 <div class="swiper">
-  <div class="swiper-wrapper mb-16">
+  <div class="swiper-wrapper mb-12">
     {
-      data.map((testimonial) => {
-        return (
-          <blockquote class="swiper-slide">
-            <p class="mb-4 text-lightGrey">
-              <em>"{testimonial.quote}"</em>
-            </p>
-            <cite>
+      data.map((testimonial) => (
+        <blockquote class="swiper-slide">
+          <!-- Swiper sets slides to display: block, so the card layout lives on an inner element -->
+          <div class="text-container !gap-5">
+            <span aria-hidden="true" class="block font-header text-purple text-[3.5rem] leading-none h-[0.5em]">“</span>
+            <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
+            <cite class="not-italic text-label text-grey">
               {testimonial.href ? (
-                <a
-                  class="text-purple link-underline"
-                  href={testimonial.href}
-                  {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
-                >
-                  - {testimonial.citation}
+                <a class="text-purple link-underline" href={testimonial.href} {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
+                  {testimonial.citation}
                 </a>
               ) : (
-                <span class="text-purple">- {testimonial.citation}</span>
+                testimonial.citation
               )}
             </cite>
-          </blockquote>
-        )
-      })
+          </div>
+        </blockquote>
+      ))
     }
   </div>
-  <div class="swiper-pagination"></div>
+  <div class="swiper-pagination !text-left !bottom-0"></div>
 </div>
 
 <style is:inline>
