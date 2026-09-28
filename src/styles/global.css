@@ -4,7 +4,8 @@
   --color-white: #fffafa;
   --color-black: var(--color-gray-950);
   --color-darkBlue: var(--color-gray-900);
-  --color-purple: var(--color-purple-500);
+  /* A touch lighter than purple-500 (#ad46ff, 4.3:1) so purple text passes 4.5:1 on darkBlue: #b45bff, 5.0:1 */
+  --color-purple: oklch(66% 0.245 304);
   --color-green: var(--color-teal-300);
   --color-orange: var(--color-red-400);
   --color-lightGrey: var(--color-gray-300);
@@ -258,6 +259,11 @@
 
     & a {
       @apply text-purple hover:text-grey;
+    }
+
+    /* Links inside copy are underlined: purple alone is too close to the grey body text to spot */
+    & :is(p, li) a {
+      @apply underline decoration-1 underline-offset-4;
     }
 
     & p:not(header > p),
