@@ -7,6 +7,10 @@ interface Props {
   /** Header-font sizes for CTAs: `lead` (h4) or `display` (h3). Default matches body copy. */
   size?: 'body' | 'lead' | 'display'
   newWindow?: boolean
+  /** Brand color. Use purple, orange and green in that order when three links sit in a row. */
+  color?: 'purple' | 'orange' | 'green'
+  /** Hide the arrow, e.g. for a row of short links. It underlines on hover instead, so hover is more than a color change. */
+  noArrow?: boolean
   linkClass?: string
   iconClass?: string
   onClick?: () => void
@@ -31,6 +35,8 @@ export default function Link({
   arrowLeft,
   size = 'body',
   newWindow,
+  color = 'purple',
+  noArrow,
   linkClass = '',
   iconClass = '',
   onClick,
@@ -42,23 +48,25 @@ export default function Link({
     }
   }
 
+  const colorClass = { purple: 'text-purple', orange: 'text-orange', green: 'text-green' }[color]
+
   return (
     <a
       href={url}
       target={newWindow ? '_blank' : '_self'}
       rel={newWindow ? 'noopener noreferrer' : ''}
-      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center text-purple hover:text-grey group`}
+      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center ${colorClass} hover:text-grey group ${noArrow ? 'decoration-1 underline-offset-4 hover:underline focus-visible:underline' : ''}`}
       aria-label={text}
       onClick={handleClick}
     >
-      {arrowLeft && (
+      {!noArrow && arrowLeft && (
         <ArrowIcon
           direction="left"
           className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
         />
       )}
       <span>{keepHyphenatedWordsTogether(text)}</span>
-      {!arrowLeft && (
+      {!noArrow && !arrowLeft && (
         <ArrowIcon
           className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
         />
