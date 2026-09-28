@@ -1,5 +1,5 @@
 ---
-import { CALENDLY_URL, EMAIL } from '../lib/site'
+import { CALENDLY_URL } from '../lib/site'
 import CTA from '../components/text/CTA'
 import Link from '../components/text/Link.tsx'
 import Layout from '../layouts/Layout.astro'
@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro'
 // What happens after the form, in order. The first step is already done.
 const steps = [
   { title: 'Your Message Is In', body: 'Nothing else to do on your end.' },
-  { title: 'I Reply Within 48 Hours', body: `From ${EMAIL}, with questions or a next step.` },
+  { title: 'I Reply Within 48 Hours', body: 'By email, with questions or a next step.' },
   { title: 'We Talk It Through', body: 'A 15-minute call, if it helps. Book it now or after my reply.' },
 ]
 ---
