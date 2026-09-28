@@ -18,39 +18,72 @@ import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
 import { testimonials as testimonialData } from '../lib/data/testimonials'
 
-const websiteDetails = [
+// Homepage FAQ. Also sent to search and AI answer engines as FAQPage structured data.
+const faqs = [
   {
-    summary: 'Support After Launch',
-    description:
-      'I handle maintenance and updates after launch, billed hourly or through a monthly retainer. Unused retainer hours roll over.',
+    question: 'Do you work white-label?',
+    answer:
+      "Yes. I can work under your agency's name, join client calls as part of your team, or stay behind the scenes.",
   },
   {
-    summary: 'High Performance',
-    description:
-      'Expect fast load times and seamless performance across all devices, ensuring your visitors have a smooth and satisfying experience.',
+    question: 'Can you build from our designs?',
+    answer:
+      "Yes. I build from your team's Figma files and flag anything that won't hold up in production before it's built. When a project needs design help, I can cover that too.",
   },
   {
-    summary: 'Built from Your Designs',
-    description:
-      "I build from your team's designs and flag anything that won't hold up in production. When a project needs design help, I can cover that too.",
+    question: 'Which platforms do you build on?',
+    answer:
+      'Whatever your client already uses. I work in WordPress, Webflow, Shopify, HubSpot, Squarespace, Wix and more. When a project calls for a custom build, my premium option is SanityPress, built on Astro and Sanity.',
   },
   {
-    summary: 'Technical SEO',
-    description: 'Clean markup, metadata, sitemaps, and redirects handled before launch.',
+    question: 'What is SanityPress?',
+    answer:
+      'My premium CMS setup, built on Sanity. Each client gets a control center shaped around how they actually work. The things they update most come first, pages are built from a kit of flexible blocks, and the system underneath is proven across multiple builds. It costs more up front. In return, your client runs their own site, and it grows with them.',
   },
   {
-    summary: 'Accessible by Default',
-    description: 'Semantic markup, keyboard support, and readable contrast.',
+    question: "What's included in every build?",
+    answer:
+      'Fast load times, accessibility (semantic markup, keyboard support, readable contrast), and SEO and AEO (clean metadata, structured data, sitemaps and redirects), so both search engines and AI answer engines can read the site.',
   },
   {
-    summary: 'A CMS They Can Run',
-    description:
-      'Every client gets an editing setup matched to their platform, with SanityPress as the premium option.',
+    question: 'How long does a build take?',
+    answer:
+      'Usually 4 to 8 weeks, depending on the number of pages and how ready the content is. The timeline goes in the scope outline.',
+  },
+  {
+    question: 'What does a project cost?',
+    answer:
+      'It depends on what the site needs to do. After a discovery call, I send a scope outline and an estimate, so you know the number before any work starts.',
+  },
+  {
+    question: 'Can our client edit the site themselves?',
+    answer:
+      'Yes. Every client gets an editing setup matched to their platform. At handoff, I walk their team through it and leave a guide they can keep.',
+  },
+  {
+    question: 'Who owns the site after launch?',
+    answer:
+      'Whoever we agree on up front, you or your client. The code, content and accounts are handed over to them at launch.',
+  },
+  {
+    question: 'What happens after launch?',
+    answer:
+      'I stay on for maintenance and updates, billed hourly or through a monthly retainer with rollover hours. Your client is never left without a developer.',
   },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+}
 ---
 
-<Layout title="Wave Land | Development Partner for Brand Agencies">
+<Layout title="Wave Land | Development Partner for Brand Agencies" schema={[faqSchema]}>
   <header
     class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
   >
@@ -166,10 +199,6 @@ const websiteDetails = [
           <p class="lsa lsa-slide-up">
             <strong><em>Everything you need, nothing you don't.</em></strong>
           </p>
-          <p class="text-lightGrey lsa lsa-slide-up">
-            After launch, I stay on for maintenance and updates, billed hourly or through a monthly
-            retainer with rollover hours. Your client is never left without a developer.
-          </p>
           <p class="h5 py-4 lsa lsa-slide-up">
             Fast, accessible sites your client's team can update without me.
           </p>
@@ -180,18 +209,18 @@ const websiteDetails = [
     <Founder />
 
     <!-- The section keeps the standard section spacing; the tinted panel is its own container inside it -->
-    <section id="website-details" class="lsa lsa-slide-up">
+    <section id="faq" class="lsa lsa-slide-up">
       <div class="section-split p-6 md:p-10 lg:p-12 bg-purple/5 rounded-2xl shadow-md">
-        <h2><span class="text-green">What Every Build</span> Includes</h2>
+        <h2>Questions Agencies Ask</h2>
 
         <div>
           {
-            websiteDetails.map((detail) => (
+            faqs.map((faq) => (
               <details class="mb-4 group">
                 <summary class="flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-(--transition) cursor-pointer">
-                  {detail.summary}
+                  {faq.question}
                 </summary>
-                <p class="py-4 text-lightGrey text-prose">{detail.description}</p>
+                <p class="py-4 text-lightGrey text-prose">{faq.answer}</p>
               </details>
             ))
           }
