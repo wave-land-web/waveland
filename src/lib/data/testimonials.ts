@@ -19,11 +19,6 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I really love Josh's keen ability to connect with my vision and execute it even better than I could think of myself! He is also very punctual about responding to my requests and getting back to me with his updates.",
-    citation: 'Emmie, PowerPassengerPassage.com',
-  },
-  {
-    quote:
       'Josh had incredible insight through the whole process. It helps when the person who is building your site understands music and what you want to portray.',
     citation: 'Robby, RobbyWebb.com',
   },
