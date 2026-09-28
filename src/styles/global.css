@@ -63,12 +63,15 @@
 }
 
 /* Two-column homepage sections (What I Do, Founder, What Every Build Includes, Testimonials)
-   share one grid, so their columns line up down the page */
+   use the same grid as the case study rows (TextAndImage), so every column lines up down the page */
 @utility section-split {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
   @variant md {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 2rem;
+  }
+  @variant lg {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4rem;
   }
 }
