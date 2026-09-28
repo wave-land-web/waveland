@@ -9,7 +9,7 @@ interface Props {
   newWindow?: boolean
   /** Brand color. Use purple, orange and green in that order when three links sit in a row. */
   color?: 'purple' | 'orange' | 'green'
-  /** Hide the arrow, e.g. for a row of short links */
+  /** Hide the arrow, e.g. for a row of short links. It underlines on hover instead, so hover is more than a color change. */
   noArrow?: boolean
   linkClass?: string
   iconClass?: string
@@ -55,7 +55,7 @@ export default function Link({
       href={url}
       target={newWindow ? '_blank' : '_self'}
       rel={newWindow ? 'noopener noreferrer' : ''}
-      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center ${colorClass} hover:text-grey group`}
+      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center ${colorClass} hover:text-grey group ${noArrow ? 'decoration-1 underline-offset-4 hover:underline focus-visible:underline' : ''}`}
       aria-label={text}
       onClick={handleClick}
     >
