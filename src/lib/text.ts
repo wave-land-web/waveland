@@ -17,7 +17,7 @@ function createEllipsisText(text: string, maxLength: number) {
  * @param block - Portable Text block
  * @returns The block's plain text
  */
-function blockText(block: { children?: { text?: string }[] }) {
+function blockText(block: { children?: { text?: string }[]; [key: string]: unknown }) {
   return (block.children ?? []).map((child) => child.text ?? '').join('')
 }
 
