@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets'
 import LinkIcon from '../../assets/link.svg'
-import WaveOneIcon from '../../assets/wave-1.svg'
-import WaveTwoIcon from '../../assets/wave-2.svg'
-import WaveThreeIcon from '../../assets/wave-3.svg'
+// Loaded as cached files, not inlined: together they were ~190 KB of homepage HTML
+import waveOne from '../../assets/wave-1.svg?url'
+import waveTwo from '../../assets/wave-2.svg?url'
+import waveThree from '../../assets/wave-3.svg?url'
 
 export interface Props {
   title: string
@@ -29,13 +30,7 @@ const {
   isReversed,
 } = Astro.props
 
-// Determine which icon to use based on color
-let icon = 'wave-1'
-if (color === 'orange') {
-  icon = 'wave-2'
-} else if (color === 'green') {
-  icon = 'wave-3'
-}
+const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green: waveThree }
 ---
 
 <div
@@ -88,15 +83,19 @@ if (color === 'orange') {
         quality={90}
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
       />
-      {
-        color === 'purple' ? (
-          <WaveOneIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-purple max-md:text-purple transition-colors duration-(--transition)" />
-        ) : color === 'orange' ? (
-          <WaveTwoIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-orange max-md:text-orange transition-colors duration-(--transition)" />
-        ) : (
-          <WaveThreeIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 text-darkGrey group-hover:text-green max-md:text-green transition-colors duration-(--transition)" />
-        )
-      }
+      <!-- The wave is a mask over the text color, so it still changes color on hover -->
+      <span
+        aria-hidden="true"
+        class:list={[
+          'wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition)',
+          {
+            'group-hover:text-purple max-md:text-purple': color === 'purple',
+            'group-hover:text-orange max-md:text-orange': color === 'orange',
+            'group-hover:text-green max-md:text-green': color === 'green',
+          },
+        ]}
+        style={`--wave: url(${waves[color]})`}
+      ></span>
       <p
         class:list={[
           'flex items-center font-header text-label gap-2 absolute bottom-0 p-4',
@@ -115,3 +114,9 @@ if (color === 'orange') {
     </a>
   </article>
 </div>
+
+<style>
+  .wave {
+    mask: var(--wave) center / contain no-repeat;
+  }
+</style>
