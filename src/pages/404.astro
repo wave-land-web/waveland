@@ -1,14 +1,15 @@
 ---
+import Link from '../components/text/Link.tsx'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Page Not Found | Wave Land" noindex>
-  <PageHeader
-    title="404"
-    subtitle="Page Not Found"
-    bodyText="This page doesn't exist, or it's moved."
-    linkText="Back to Site"
-    linkUrl="/"
-  />
+  <PageHeader title="404" subtitle="Page Not Found" bodyText="This page doesn't exist, or it's moved.">
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center">
+      <Link text="Home" url="/" />
+      <Link text="Case Studies" url="/case-studies/" />
+      <Link text="Contact" url="/contact/" />
+    </div>
+  </PageHeader>
 </Layout>
