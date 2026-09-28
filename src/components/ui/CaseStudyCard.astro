@@ -28,7 +28,7 @@ const { caseStudy, priority = false } = Astro.props
     <h3>{caseStudy.title}</h3>
     <p class="text-prose text-grey">{createEllipsisText(caseStudy.description, 100)}</p>
     <!-- The whole card is the link; "Read More" underlines when it's hovered -->
-    <p class="w-fit text-purple decoration-1 underline-offset-4 group-hover:underline group-focus-visible:underline">
+    <p class="w-fit text-purple underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-current group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
       Read More
     </p>
   </a>
