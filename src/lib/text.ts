@@ -11,14 +11,17 @@ function createEllipsisText(text: string, maxLength: number) {
   return lastChar !== ' ' ? `${subText}...` : `${subText.substring(0, maxLength - 1)}...`
 }
 
+type TextNode = { text?: string; children?: TextNode[]; [key: string]: unknown }
+
 /**
  * Joins every span of a Portable Text block, so headings keep text inside links and marks.
  *
  * @param block - Portable Text block
  * @returns The block's plain text
  */
-function blockText(block: { children?: { text?: string }[]; [key: string]: unknown }) {
-  return (block.children ?? []).map((child) => child.text ?? '').join('')
+function blockText(block: TextNode): string {
+  // Rendered nodes nest marked text (bold, links) one level down; raw blocks don't
+  return (block.children ?? []).map((child) => child.text ?? blockText(child)).join('')
 }
 
 /**
