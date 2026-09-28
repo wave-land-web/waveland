@@ -4,23 +4,23 @@ interface BaseProps {
   text: string
   // Use className, not class: Astro drops `class` before it reaches a React component
   className?: string
-  isActive?: boolean
   /** `large` gives a headline action more room. Same type either way, so every button reads as one family. */
   size?: 'default' | 'large'
+  /** One `primary` per screen: the action the page is for. `secondary` for a repeat or an alternative. */
+  variant?: 'primary' | 'secondary'
 }
 
 type LinkProps = BaseProps & { tag: 'link'; href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>
 type ButtonProps = BaseProps & { tag: 'button' } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>
 type Props = LinkProps | ButtonProps
 
-const sizeClasses = { default: 'px-5 py-3', large: 'px-7 py-4' }
-
-const baseClasses =
-  'inline-block w-fit leading-tight border border-purple border-dashed rounded-lg shadow-lg text-purple hover:text-black hover:bg-purple focus-visible:text-black focus-visible:bg-purple transition-all duration-(--transition) ease-in-out text-center'
+// Button styles live in global.css (btn, btn-primary, btn-secondary) so the whole system changes in one place
+const sizeClasses = { default: 'px-6 py-3', large: 'px-8 py-4' }
+const variantClasses = { primary: 'btn-primary', secondary: 'btn-secondary' }
 
 export default function CTA(props: Props) {
-  const { text, className, isActive, size = 'default', ...rest } = props
-  const classes = [className, baseClasses, sizeClasses[size], isActive && '!text-black bg-purple'].filter(Boolean).join(' ')
+  const { text, className, size = 'default', variant = 'primary', ...rest } = props
+  const classes = [className, 'btn', variantClasses[variant], sizeClasses[size]].filter(Boolean).join(' ')
 
   if (rest.tag === 'link') {
     const { tag, ...anchorProps } = rest

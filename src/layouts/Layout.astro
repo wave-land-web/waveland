@@ -87,7 +87,8 @@ const business = {
     <meta name="twitter:image" content={socialImageURL} />
 
     <!-- Preload Fonts -->
-    <Font cssVariable="--font-monaspace" preload />
+    <!-- Italics load when a page uses them; only the upright weights are preloaded -->
+    <Font cssVariable="--font-monaspace" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-poppins" preload />
 
     <!-- Favicon & Theme -->

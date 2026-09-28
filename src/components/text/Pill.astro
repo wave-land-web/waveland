@@ -4,9 +4,12 @@ export interface Props {
   size?: 'big' | 'small'
   href?: string
   class?: string
+  // outline: a colored border and text instead of a fill (pass the border and text color in class)
+  variant?: 'solid' | 'outline'
 }
 
-const { text, size = 'big', href, class: className } = Astro.props
+const { text, size = 'big', href, class: className, variant = 'solid' } = Astro.props
+const variantClasses = variant === 'outline' ? 'border' : 'text-black shadow-sm'
 ---
 
 {
@@ -14,7 +17,7 @@ const { text, size = 'big', href, class: className } = Astro.props
     <a
       href={href}
       class:list={[
-        `${className} inline-block rounded-full text-black text-label uppercase shadow-sm`,
+        `${className} ${variantClasses} inline-block rounded-full text-label uppercase`,
         { 'px-4 py-2': size === 'small' },
         { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}
@@ -24,7 +27,7 @@ const { text, size = 'big', href, class: className } = Astro.props
   ) : (
     <span
       class:list={[
-        `${className} inline-block rounded-full text-black text-label uppercase shadow-sm`,
+        `${className} ${variantClasses} inline-block rounded-full text-label uppercase`,
         { 'px-4 py-2': size === 'small' },
         { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}
