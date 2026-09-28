@@ -1,22 +1,32 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import { sanityClient } from 'sanity:client'
+import ClosingCTA from '../components/text/ClosingCTA.astro'
 import CaseStudyCard from '../components/ui/CaseStudyCard.astro'
 import PageHeader from '../components/ui/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/ui/Marquee.astro'
 
-// Fetch all case studies
-const caseStudies = (await sanityClient.fetch(
-  `*[_type == "case-study"] | order(publishedAt desc) {
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    description,
-    services,
+// Fetch all case studies, plus the order set in Studio (Case Study Order)
+const { caseStudies, order } = (await sanityClient.fetch(
+  `{
+    "caseStudies": *[_type == "case-study"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      description,
+      platform,
+      workedWith,
+    },
+    "order": *[_id == "case-study-order"][0].caseStudies[]._ref,
   }`,
-)) as SanityDocument[]
+)) as { caseStudies: SanityDocument[]; order: string[] | null }
+
+// Ordered ones first, in the Studio order; the rest after them, newest first (the query's order)
+const rank = new Map((order ?? []).map((id, i) => [id, i]))
+const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (rank.get(b._id) ?? Infinity))
 ---
 
 <Layout
@@ -24,18 +34,20 @@ const caseStudies = (await sanityClient.fetch(
   description="Case studies from Josh Nussbaum: Astro and Sanity, Webflow, Shopify, and Wix builds, with the decisions behind them."
 >
   <PageHeader
-    title="Case Studies"
-    subtitle="Recent Work"
+    subtitle="Case Studies"
+    align="left"
     bodyText="Projects built with agency partners and directly with clients. What each one needed, the architecture, and how it turned out."
   />
 
   <main class="lg:max-w-screen-xl">
-    <section id="case-studies" class="grid lg:grid-cols-2 gap-24 pt-4">
-      {
-        caseStudies.map((caseStudy, i) => (
-          <CaseStudyCard caseStudy={caseStudy} priority={i === 0} />
-        ))
-      }
+    <section id="case-studies" class="grid lg:grid-cols-2 gap-x-12 gap-y-20 pt-4 pb-24 md:pb-20">
+      {sorted.map((caseStudy, i) => <CaseStudyCard caseStudy={caseStudy} priority={i === 0} />)}
+    </section>
+    <section id="get-started">
+      <ClosingCTA
+        title="Working on Something Like This?"
+        description="Tell me what you're building. I reply within 48 hours."
+      />
     </section>
   </main>
   <Marquee />

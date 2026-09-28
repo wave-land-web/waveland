@@ -58,6 +58,31 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'platform',
+      title: 'Platform',
+      type: 'string',
+      description: 'Shown on the case study card, and used to filter the Case Studies page',
+      options: {
+        list: ['Astro + Sanity', 'Astro', 'Webflow', 'Shopify', 'Wix', 'WordPress', 'HubSpot', 'Squarespace'],
+      },
+      validation: (Rule) => Rule.required().error('Please pick a platform'),
+    }),
+    defineField({
+      name: 'workedWith',
+      title: 'Worked With',
+      type: 'string',
+      description: 'Who hired me. Never name the agency here.',
+      options: {
+        list: [
+          { title: 'For an agency (their own site)', value: 'for-agency' },
+          { title: 'With an agency (their client)', value: 'with-agency' },
+          { title: 'Directly with the client', value: 'direct' },
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required().error('Please pick who you worked with'),
+    }),
+    defineField({
       name: 'services',
       title: 'Services',
       type: 'array',
