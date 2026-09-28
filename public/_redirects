@@ -1,2 +1,5 @@
 # Blog was retired: send old post and tag URLs to the homepage
 /blog/*    /    301
+
+# The sitemap lives at /sitemap-index.xml; send the usual guess there
+/sitemap.xml    /sitemap-index.xml    301

@@ -9,6 +9,10 @@ export interface Props {
   title: string
   description?: string
   socialImage?: string
+  // 'article' for case studies, so link previews treat them as posts
+  ogType?: 'website' | 'article'
+  // Keep utility pages (404, success, unsubscribed) out of search results
+  noindex?: boolean
   // Extra JSON-LD for this page, added after the business
   schema?: Record<string, unknown>[]
 }
@@ -17,6 +21,8 @@ const {
   title,
   description = 'Josh Nussbaum is a web developer in Madison, WI, and a development partner for brand agencies. Astro and Sanity, Webflow, Shopify, and more.',
   socialImage,
+  ogType = 'website',
+  noindex = false,
   schema = [],
 } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
@@ -53,6 +59,7 @@ const business = {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
@@ -63,7 +70,7 @@ const business = {
 
     <!-- Facebook -->
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
