@@ -2,12 +2,12 @@
 import { CALENDLY_URL } from '../../lib/site'
 import { Image } from 'astro:assets'
 import headshot from '../../assets/headshot.webp'
-import Link from '../text/Link.tsx'
+import CTA from '../text/CTA'
 
 ---
 
 <section id="founder" class="founder">
-  <div class="founder-grid">
+  <div class="section-split items-center">
     <figure class="founder-photo">
       <Image
         src={headshot}
@@ -36,30 +36,19 @@ import Link from '../text/Link.tsx'
         after.
       </p>
 
-      <Link
+      <CTA
+        tag="link"
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         text="Book a 15-Minute Call"
-        url={CALENDLY_URL}
-        newWindow={true}
-        size="display"
+        size="large"
       />
     </div>
   </div>
 </section>
 
 <style>
-  .founder-grid {
-    display: grid;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .founder-grid {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      gap: 5rem;
-    }
-  }
-
   .founder-photo {
     margin: 0;
     padding: 0.75rem;

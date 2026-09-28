@@ -1,8 +1,7 @@
 ---
-import { CALENDLY_URL } from '../../lib/site'
 import type { SanityDocument } from '@sanity/client'
-import CTA from '../../components/text/CTA'
-import IntroCallCTA from '../../components/text/IntroCallCTA.astro'
+import Link from '../../components/text/Link.tsx'
+import ClosingCTA from '../../components/text/ClosingCTA.astro'
 import PortableText from '../../components/text/PortableText.astro'
 import CaseStudyHeader from '../../components/ui/CaseStudyHeader.astro'
 import CaseStudyLightbox from '../../components/ui/CaseStudyLightbox.astro'
@@ -97,16 +96,15 @@ const schema = [
       <section id="case-study" class="py-0">
         <div id="case-study-content" class="flex flex-col gap-[1lh]">
           <PortableText portableText={currentCaseStudy.body} />
-          <CTA tag="link" text="View All Case Studies" href="/case-studies/" className="w-fit" />
+          <Link text="View Case Studies" url="/case-studies/" />
         </div>
       </section>
       <div class="hidden md:block"></div>
     </div>
     <section id="get-started">
-      <IntroCallCTA
+      <ClosingCTA
         title="Working on Something Like This?"
-        linkText="Book a 15-Minute Call"
-        linkSrc={CALENDLY_URL}
+        description="Tell me what you're building. I reply within 48 hours."
       />
     </section>
   </main>

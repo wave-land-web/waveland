@@ -1,20 +1,16 @@
-import ArrowIcon from '../ui/ArrowIcon'
-
 interface Props {
   text: string
   url: string
-  arrowLeft?: boolean
-  /** Header-font sizes for CTAs: `lead` (h4) or `display` (h3). Default matches body copy. */
+  /** Header-font sizes: `lead` (h4) or `display` (h3). Default matches body copy. */
   size?: 'body' | 'lead' | 'display'
   newWindow?: boolean
   /** Brand color. Use purple, orange and green in that order when three links sit in a row. */
   color?: 'purple' | 'orange' | 'green'
-  /** Hide the arrow, e.g. for a row of short links. It underlines on hover instead, so hover is more than a color change. */
-  noArrow?: boolean
   linkClass?: string
-  iconClass?: string
-  onClick?: () => void
 }
+
+const colorClasses = { purple: 'text-purple', orange: 'text-orange', green: 'text-green' }
+const sizeClasses = { body: '', lead: 'font-header text-h4', display: 'font-header text-h3' }
 
 // Keep hyphenated words like "15-minute" on one line so they never split at the hyphen
 function keepHyphenatedWordsTogether(text: string) {
@@ -29,48 +25,15 @@ function keepHyphenatedWordsTogether(text: string) {
   )
 }
 
-export default function Link({
-  text,
-  url,
-  arrowLeft,
-  size = 'body',
-  newWindow,
-  color = 'purple',
-  noArrow,
-  linkClass = '',
-  iconClass = '',
-  onClick,
-}: Props) {
-  const handleClick = (e: React.MouseEvent) => {
-    if (onClick) {
-      e.preventDefault()
-      onClick()
-    }
-  }
-
-  const colorClass = { purple: 'text-purple', orange: 'text-orange', green: 'text-green' }[color]
-
+/** An action link: goes to another page. Brand color at rest, underlined on hover. */
+export default function Link({ text, url, size = 'body', newWindow, color = 'purple', linkClass = '' }: Props) {
   return (
     <a
       href={url}
-      target={newWindow ? '_blank' : '_self'}
-      rel={newWindow ? 'noopener noreferrer' : ''}
-      className={`${size === 'display' ? 'font-header text-h3' : size === 'lead' ? 'font-header text-h4' : ''} ${linkClass} flex gap-2 items-center ${colorClass} hover:text-grey group ${noArrow ? 'decoration-1 underline-offset-4 hover:underline focus-visible:underline' : ''}`}
-      aria-label={text}
-      onClick={handleClick}
+      {...(newWindow && { target: '_blank', rel: 'noopener noreferrer' })}
+      className={[sizeClasses[size], linkClass, 'inline-block w-fit link-underline', colorClasses[color]].filter(Boolean).join(' ')}
     >
-      {!noArrow && arrowLeft && (
-        <ArrowIcon
-          direction="left"
-          className={`group-hover:-translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
-        />
-      )}
-      <span>{keepHyphenatedWordsTogether(text)}</span>
-      {!noArrow && !arrowLeft && (
-        <ArrowIcon
-          className={`group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out w-[1em] shrink-0 ${iconClass}`}
-        />
-      )}
+      {keepHyphenatedWordsTogether(text)}
     </a>
   )
 }

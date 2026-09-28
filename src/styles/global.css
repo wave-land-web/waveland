@@ -44,6 +44,38 @@
   --transition: 200ms;
 }
 
+/* Links: every hover changes more than color. Action and utility links underline on hover.
+   The underline is always there but transparent, so it fades in at the same rate as the color
+   (text-decoration-line itself can't transition). */
+@utility link-underline {
+  text-decoration-line: underline;
+  /* Scale with the text so display-size links don't get a hairline hugging the letters */
+  text-decoration-thickness: max(1px, 0.05em);
+  text-underline-offset: 0.25em;
+  text-decoration-color: transparent;
+  transition-property: color, text-decoration-color;
+  transition-duration: var(--transition);
+  transition-timing-function: ease-in-out;
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Two-column homepage sections (What I Do, Founder, What Every Build Includes, Testimonials)
+   use the same grid as the case study rows (TextAndImage), so every column lines up down the page */
+@utility section-split {
+  display: grid;
+  gap: 1.5rem;
+  @variant md {
+    gap: 2rem;
+  }
+  @variant lg {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+  }
+}
+
 /* Animations */
 
 @view-transition {
@@ -141,8 +173,8 @@
     @apply container md:max-w-screen-3xl mx-auto px-4 md:px-8;
   }
 
-  nav[data-current-url-path^='/case-studies'] [aria-label='Case Studies'],
-  nav[data-current-url-path^='/contact'] [aria-label='Contact'] {
+  nav[data-current-url-path^='/case-studies'] [data-nav='case-studies'],
+  nav[data-current-url-path^='/contact'] [data-nav='contact'] {
     @apply text-purple;
   }
 

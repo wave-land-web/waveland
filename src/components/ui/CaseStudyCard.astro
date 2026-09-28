@@ -1,7 +1,6 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import { createEllipsisText } from '../../lib/text'
-import ArrowIcon from './ArrowIcon'
 import SanityImage from './SanityImage.astro'
 
 export interface Props {
@@ -28,11 +27,9 @@ const { caseStudy, priority = false } = Astro.props
 
     <h3>{caseStudy.title}</h3>
     <p class="text-prose text-grey">{createEllipsisText(caseStudy.description, 100)}</p>
-    <p
-      class="flex gap-2 items-center text-purple hover:text-grey group-hover:text-grey group-focus-visible:text-grey transition-all duration-(--transition) ease-in-out group"
-    >
+    <!-- The whole card is the link; "Read More" underlines when it's hovered -->
+    <p class="w-fit text-purple underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-current group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
       Read More
-      <ArrowIcon className="group-hover:translate-x-1 transition-transform duration-(--transition) ease-in-out" />
     </p>
   </a>
 </article>

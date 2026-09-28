@@ -6,7 +6,8 @@ import jtbiImage from '../assets/jtbi-mobile.webp'
 import lsomImage from '../assets/lsom-mobile.webp'
 import SunsetTwoIcon from '../assets/sunset-2.svg'
 import supervoidImage from '../assets/supervoid.webp'
-import IntroCallCTA from '../components/text/IntroCallCTA.astro'
+import ClosingCTA from '../components/text/ClosingCTA.astro'
+import CTA from '../components/text/CTA'
 import Link from '../components/text/Link.tsx'
 import Pill from '../components/text/Pill.astro'
 import TextAndImage from '../components/text/TextAndImage.astro'
@@ -59,19 +60,21 @@ const websiteDetails = [
       </div>
 
       <div class="flex flex-wrap gap-2 md:gap-4">
-        <Pill text="Development" href="#about-us" class="bg-purple hero-in [animation-delay:100ms]" />
-        <Pill text="Strategy" href="#about-us" class="bg-orange hero-in [animation-delay:200ms]" />
-        <Pill text="Partnership" href="#about-us" class="bg-green hero-in [animation-delay:300ms]" />
+        <Pill text="Development" class="bg-purple hero-in [animation-delay:100ms]" />
+        <Pill text="Strategy" class="bg-orange hero-in [animation-delay:200ms]" />
+        <Pill text="Partnership" class="bg-green hero-in [animation-delay:300ms]" />
       </div>
     </div>
     <div class="max-w-3xl">
       <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in [animation-delay:400ms]">A development partner for brand agencies.</h1>
       <div class="hero-in [animation-delay:500ms]">
-        <Link
+        <CTA
+          tag="link"
+          href={CALENDLY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           text="Book a 15-Minute Call"
-          url={CALENDLY_URL}
-          newWindow={true}
-          size="lead"
+          size="large"
         />
       </div>
     </div>
@@ -122,7 +125,7 @@ const websiteDetails = [
     </section>
 
     <section id="about-us">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
+      <div class="section-split mb-16">
         <div class="h-full">
           <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
             <h2>What I Do</h2>
@@ -180,7 +183,7 @@ const websiteDetails = [
       id="website-details"
       class="lsa lsa-slide-up p-6 md:p-8 bg-purple/5 rounded-2xl shadow-md"
     >
-      <div class="grid gap-8 md:gap-16 md:grid-cols-2">
+      <div class="section-split">
         <h2><span class="text-green">What Every Build</span> Includes</h2>
 
         <div>
@@ -198,17 +201,18 @@ const websiteDetails = [
       </div>
     </section>
 
-    <section id="testimonials" class="max-w-screen-md m-auto text-center lsa lsa-slide-up">
-      <h2 class="mb-8">What Clients Say</h2>
-      <Testimonials data={testimonialData} />
+    <!-- A bordered, left-aligned quote card, so it reads differently from the open, centered sign-off below -->
+    <section id="testimonials" class="section-split lsa lsa-slide-up">
+      <h2>What Clients Say</h2>
+      <div class="min-w-0">
+        <Testimonials data={testimonialData} />
+      </div>
     </section>
 
     <section id="get-started">
-      <IntroCallCTA
+      <ClosingCTA
         title="Looking for a Development Partner?"
         description="If your agency needs someone to build what you design, I'd like to hear about it."
-        linkText="Book a 15-Minute Call"
-        linkSrc={CALENDLY_URL}
       />
     </section>
   </main>
