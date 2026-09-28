@@ -40,8 +40,9 @@ export default defineType({
                 type: 'url',
                 validation: (Rule) =>
                   Rule.uri({
+                    allowRelative: true,
                     scheme: ['http', 'https', 'mailto', 'tel'],
-                  }).error(`URL must start with 'http', 'https', 'mailto' or 'tel'`),
+                  }).error(`Use a full URL (https://…, mailto: or tel:) or a path on this site, like /case-studies/supervoid/`),
               },
             ],
           },

@@ -1,0 +1,10 @@
+---
+const { node, index, isInline, ...attrs } = Astro.props
+const href: string = node.markDef?.href ?? ''
+
+// Links to other sites open in a new tab; links on wavelandweb.com stay in this one
+const siteHost = new URL(Astro.site ?? 'https://wavelandweb.com').host
+const isExternal = URL.canParse(href) && /^https?:$/.test(new URL(href).protocol) && new URL(href).host !== siteHost
+---
+
+<a href={href} {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })} {...attrs}><slot /></a>
