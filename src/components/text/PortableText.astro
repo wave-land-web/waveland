@@ -4,6 +4,7 @@ import PortableTextCode from '../ui/PortableTextCode.astro'
 import PortableTextImage from '../ui/PortableTextImage.astro'
 import PortableTextPhoneRow from '../ui/PortableTextPhoneRow.astro'
 import PortableTextH2 from './PortableTextH2.astro'
+import PortableTextLink from './PortableTextLink.astro'
 
 const { portableText } = Astro.props
 
@@ -32,6 +33,9 @@ const components = {
   },
   block: {
     h2: PortableTextH2,
+  },
+  mark: {
+    link: PortableTextLink,
   },
 }
 ---
