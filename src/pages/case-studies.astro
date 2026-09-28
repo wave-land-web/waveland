@@ -34,6 +34,7 @@ const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (
   description="Case studies from Josh Nussbaum: Astro and Sanity, Webflow, Shopify, and Wix builds, with the decisions behind them."
 >
   <PageHeader
+    title="Selected Work"
     subtitle="Case Studies"
     align="left"
     bodyText="Projects built with agency partners and directly with clients. What each one needed, the architecture, and how it turned out."
@@ -41,7 +42,7 @@ const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (
 
   <main class="lg:max-w-screen-xl">
     <section id="case-studies" class="grid lg:grid-cols-2 gap-x-12 gap-y-20 pt-4 pb-24 md:pb-20">
-      {sorted.map((caseStudy, i) => <CaseStudyCard caseStudy={caseStudy} priority={i === 0} />)}
+      {sorted.map((caseStudy, i) => <CaseStudyCard caseStudy={caseStudy} priority={i === 0} featured={i === 0} />)}
     </section>
     <section id="get-started">
       <ClosingCTA
