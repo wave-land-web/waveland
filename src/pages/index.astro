@@ -124,8 +124,8 @@ const websiteDetails = [
       </div>
     </section>
 
-    <section id="about-us">
-      <div class="section-split mb-16">
+    <section id="about">
+      <div class="section-split">
         <div class="h-full">
           <div class="sticky top-[calc(var(--nav-height)+1rem)] flex flex-col gap-6">
             <h2>What I Do</h2>
@@ -179,11 +179,9 @@ const websiteDetails = [
 
     <Founder />
 
-    <section
-      id="website-details"
-      class="lsa lsa-slide-up p-6 md:p-8 bg-purple/5 rounded-2xl shadow-md"
-    >
-      <div class="section-split">
+    <!-- The section keeps the standard section spacing; the tinted panel is its own container inside it -->
+    <section id="website-details" class="lsa lsa-slide-up">
+      <div class="section-split p-6 md:p-10 lg:p-12 bg-purple/5 rounded-2xl shadow-md">
         <h2><span class="text-green">What Every Build</span> Includes</h2>
 
         <div>
