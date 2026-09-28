@@ -12,23 +12,23 @@ function createEllipsisText(text: string, maxLength: number) {
 }
 
 /**
- * Creates a slug from a given title.
+ * Joins every span of a Portable Text block, so headings keep text inside links and marks.
  *
- * @param title - The title to create a slug from.
- * @returns The slugified version of the title.
+ * @param block - Portable Text block
+ * @returns The block's plain text
  */
-function createSlug(title: string) {
-  return title.toLowerCase().split(' ').join('-') // 'Hello World' -> 'hello-world'
+function blockText(block: { children?: { text?: string }[]; [key: string]: unknown }) {
+  return (block.children ?? []).map((child) => child.text ?? '').join('')
 }
 
 /**
- * Removes special characters from a given slug.
+ * Creates the anchor id for a heading, shared by the heading and the table of contents.
  *
- * @param slug - The slug to remove special characters from.
- * @returns The slug without special characters.
+ * @param text - Heading text
+ * @returns The id, e.g. 'The Build' -> 'the-build'
  */
-function removeSpecialCharactersFromSlug(slug: string) {
-  return slug.replace(/[^a-zA-Z0-9]/g, '') // 'hello-world!' -> 'helloworld'
+function headingId(text: string) {
+  return text.trim().replace(/\s+/g, '-').toLowerCase()
 }
 
-export { createEllipsisText, createSlug, removeSpecialCharactersFromSlug }
+export { blockText, createEllipsisText, headingId }
