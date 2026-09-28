@@ -7,6 +7,9 @@ import SocialIcons from '../SocialIcons.astro'
 <!-- Mobile nav -->
 <button
   id="menu"
+  type="button"
+  aria-expanded="false"
+  aria-controls="mobile-nav-overlay"
   class="flex items-center gap-2.5 z-30 md:hidden hover:text-purple transition-all duration-(--transition) ease-in-out cursor-pointer"
 >
   <span class="text-label uppercase">Menu</span>
@@ -79,8 +82,16 @@ import SocialIcons from '../SocialIcons.astro'
     mobileNavOverlay?.classList.toggle('hidden')
     mobileNavOverlay?.classList.toggle('flex')
     menu?.setAttribute('aria-expanded', `${overlayDisplayed}`)
+    setPageInert(overlayDisplayed)
 
     handleContentUpdate()
+  }
+
+  /**
+   * While the menu is open, the page behind it can't be focused or read by screen readers
+   */
+  function setPageInert(inert) {
+    document.querySelectorAll('body > :not(nav)').forEach((el) => (el.inert = inert))
   }
 
   /**
@@ -93,6 +104,7 @@ import SocialIcons from '../SocialIcons.astro'
       body?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
       mobileNavOverlay?.classList.add('hidden')
       menu?.setAttribute('aria-expanded', `${overlayDisplayed}`)
+      setPageInert(false)
 
       handleContentUpdate()
     }
@@ -102,6 +114,7 @@ import SocialIcons from '../SocialIcons.astro'
   body?.addEventListener('keyup', (event) => {
     if (event.code === 'Escape' && overlayDisplayed) {
       handleMobileNavigationOnClick()
+      menu?.focus()
     }
   })
 

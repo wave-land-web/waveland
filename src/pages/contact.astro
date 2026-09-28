@@ -8,6 +8,7 @@ import Marquee from '../components/ui/Marquee.astro'
 
 const fieldClass =
   'block w-full backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-lg px-4 py-3 shadow-md transition duration-(--transition) focus:outline-none focus:border-purple'
+const labelClass = 'block mb-2 text-left text-label text-lightGrey'
 // Selects show their first option as a placeholder, in the same grey as the inputs' placeholders
 const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointer invalid:text-lightGrey/50 [&:has(option[value='']:checked)]:text-lightGrey/50 [&_option]:text-black`
 ---
@@ -28,7 +29,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         method="POST"
         name="contactForm"
         action="/success/"
-        class="max-w-2xl m-auto flex flex-col gap-4"
+        class="max-w-2xl m-auto flex flex-col gap-6"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
@@ -36,129 +37,132 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         <p class="hidden" aria-hidden="true">
           <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
-        <div class="w-full flex flex-col md:flex-row gap-4 justify-between">
+        <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
           <div class="w-full">
-            <label for="first-name" class="sr-only">First Name</label>
+            <label for="first-name" class={labelClass}>First Name</label>
             <input
               type="text"
               name="first-name"
               id="first-name"
               autocomplete="given-name"
-              placeholder="First Name"
               required
               class={fieldClass}
             />
           </div>
 
           <div class="w-full">
-            <label for="last-name" class="sr-only">Last Name</label>
+            <label for="last-name" class={labelClass}>Last Name <span class="text-grey">(Optional)</span></label>
             <input
               type="text"
               name="last-name"
               id="last-name"
               autocomplete="family-name"
-              placeholder="Last Name (Optional)"
               class={fieldClass}
             />
           </div>
         </div>
         <div>
-          <label for="email" class="sr-only">Email</label>
+          <label for="email" class={labelClass}>Email</label>
           <input
             type="email"
             name="email"
             id="email"
             autocomplete="email"
-            placeholder="Email"
+            placeholder="you@example.com"
             required
             class={fieldClass}
           />
         </div>
 
-        <div class="w-full flex flex-col md:flex-row gap-4 justify-between">
-          <div class="w-full relative">
-            <label for="role" class="sr-only">I'm Reaching Out As</label>
-            <select name="role" id="role" required class={selectClass}>
-              <option value="" disabled selected>I'm reaching out as…</option>
-              <option>An agency</option>
-              <option>A business or organization</option>
-              <option>Something else</option>
-            </select>
-            <Icon
-              name="tabler:chevron-down"
-              class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
-              aria-hidden="true"
-            />
+        <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
+          <div class="w-full">
+            <label for="role" class={labelClass}>I'm Reaching Out As</label>
+            <div class="relative">
+              <select name="role" id="role" required class={selectClass}>
+                <option value="" disabled selected>Choose one</option>
+                <option>An agency</option>
+                <option>A business or organization</option>
+                <option>Something else</option>
+              </select>
+              <Icon
+                name="tabler:chevron-down"
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
+                aria-hidden="true"
+              />
+            </div>
           </div>
 
           <div class="w-full">
-            <label for="company" class="sr-only">Agency or Company</label>
+            <label for="company" class={labelClass}>Agency or Company <span class="text-grey">(Optional)</span></label>
             <input
               type="text"
               name="company"
               id="company"
               autocomplete="organization"
-              placeholder="Company (Optional)"
               class={fieldClass}
             />
           </div>
         </div>
 
-        <div class="w-full flex flex-col md:flex-row gap-4 justify-between">
-          <div class="w-full relative">
-            <label for="budget" class="sr-only">Budget</label>
-            <select name="budget" id="budget" class={selectClass}>
-              <option value="" selected>Budget (Optional)</option>
-              <option>Under $5k</option>
-              <option>$5k to $15k</option>
-              <option>$15k to $30k</option>
-              <option>$30k or more</option>
-              <option>Not sure yet</option>
-            </select>
-            <Icon
-              name="tabler:chevron-down"
-              class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
-              aria-hidden="true"
-            />
+        <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
+          <div class="w-full">
+            <label for="budget" class={labelClass}>Budget <span class="text-grey">(Optional)</span></label>
+            <div class="relative">
+              <select name="budget" id="budget" class={selectClass}>
+                <option value="" selected>Choose one</option>
+                <option>Under $5k</option>
+                <option>$5k to $15k</option>
+                <option>$15k to $30k</option>
+                <option>$30k or more</option>
+                <option>Not sure yet</option>
+              </select>
+              <Icon
+                name="tabler:chevron-down"
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
+                aria-hidden="true"
+              />
+            </div>
           </div>
 
-          <div class="w-full relative">
-            <label for="timeline" class="sr-only">Timeline</label>
-            <select name="timeline" id="timeline" class={selectClass}>
-              <option value="" selected>Timeline (Optional)</option>
-              <option>As soon as possible</option>
-              <option>In 1 to 3 months</option>
-              <option>In 3 months or more</option>
-              <option>Flexible</option>
-            </select>
-            <Icon
-              name="tabler:chevron-down"
-              class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
-              aria-hidden="true"
-            />
+          <div class="w-full">
+            <label for="timeline" class={labelClass}>Timeline <span class="text-grey">(Optional)</span></label>
+            <div class="relative">
+              <select name="timeline" id="timeline" class={selectClass}>
+                <option value="" selected>Choose one</option>
+                <option>As soon as possible</option>
+                <option>In 1 to 3 months</option>
+                <option>In 3 months or more</option>
+                <option>Flexible</option>
+              </select>
+              <Icon
+                name="tabler:chevron-down"
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-grey"
+                aria-hidden="true"
+              />
+            </div>
           </div>
         </div>
 
         <div>
-          <label for="website" class="sr-only">Current Website</label>
+          <label for="website" class={labelClass}>Current Website <span class="text-grey">(Optional)</span></label>
           <input
             type="text"
             inputmode="url"
             name="website"
             id="website"
             autocomplete="url"
-            placeholder="Current Website (Optional)"
+            placeholder="example.com"
             class={fieldClass}
           />
         </div>
 
         <div>
-          <label for="message" class="sr-only">Describe Your Project</label>
+          <label for="message" class={labelClass}>What Are You Building?</label>
           <textarea
             name="message"
             id="message"
             rows="4"
-            placeholder="What are you building?"
+            placeholder="The platform, the launch date, anything you know so far."
             required
             class={fieldClass}
           ></textarea>
