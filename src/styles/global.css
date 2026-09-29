@@ -143,8 +143,14 @@
    right for another page here, up and right for another site. Links inside copy are underlined instead (#case-study rules). */
 @utility link-arrow {
   display: inline-flex;
-  align-items: center;
+  /* Sit the arrow on the text's baseline, then drop it so it centers on the capitals (about 0.7em tall) rather than the
+     line box, whose descender space would leave it looking low */
+  align-items: baseline;
   gap: 0.35em;
+  & .arrow {
+    position: relative;
+    top: 0.15em;
+  }
   width: fit-content;
   transition-property: color;
   transition-duration: var(--transition);
