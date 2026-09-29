@@ -33,7 +33,8 @@ const logos = [
 ---
 
 <div class="marquee-wrapper container md:max-w-screen-3xl">
-  <h2 class="mb-10 text-center font-body label text-grey">Brands I’ve built for</h2>
+  <!-- No visible label; screen readers still get one -->
+  <h2 class="sr-only">Brands I’ve built for</h2>
   <div class="marquee">
     <div class="marquee-content">
       {logos.map((logo) => <img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} style={`--w: ${logo.width}`} fetchpriority="low" decoding="async" />)}
