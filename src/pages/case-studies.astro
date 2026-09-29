@@ -1,11 +1,11 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import { sanityClient } from 'sanity:client'
-import ClosingCTA from '../components/text/ClosingCTA.astro'
-import CaseStudyCard from '../components/ui/CaseStudyCard.astro'
-import PageHeader from '../components/ui/PageHeader.astro'
+import ClosingCTA from '../components/ui/ClosingCTA.astro'
+import CaseStudyCard from '../components/case-study/CaseStudyCard.astro'
+import PageHeader from '../components/layout/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
-import Marquee from '../components/ui/Marquee.astro'
+import Marquee from '../components/layout/Marquee.astro'
 
 // Fetch all case studies, plus the order set in Studio (Case Study Order)
 const { caseStudies, order } = (await sanityClient.fetch(
