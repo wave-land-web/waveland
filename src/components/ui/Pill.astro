@@ -1,38 +1,23 @@
 ---
+// An outlined label (not a link): pass the border and text color in class
 export interface Props {
   text: string
   size?: 'big' | 'small'
-  href?: string
   class?: string
-  // outline: a colored border and text instead of a fill (pass the border and text color in class)
-  variant?: 'solid' | 'outline'
+  style?: string
 }
 
-const { text, size = 'big', href, class: className, variant = 'solid' } = Astro.props
-const variantClasses = variant === 'outline' ? 'border' : 'text-black shadow-sm'
+const { text, size = 'big', class: className, style } = Astro.props
 ---
 
-{
-  href ? (
-    <a
-      href={href}
-      class:list={[
-        `${className} ${variantClasses} inline-block rounded-control label`,
-        { 'px-4 py-2': size === 'small' },
-        { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
-      ]}
-    >
-      {text}
-    </a>
-  ) : (
-    <span
-      class:list={[
-        `${className} ${variantClasses} inline-block rounded-control label`,
-        { 'px-4 py-2': size === 'small' },
-        { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
-      ]}
-    >
-      {text}
-    </span>
-  )
-}
+<span
+  class:list={[
+    className,
+    'inline-block border rounded-control label',
+    { 'px-4 py-2': size === 'small' },
+    { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
+  ]}
+  style={style}
+>
+  {text}
+</span>

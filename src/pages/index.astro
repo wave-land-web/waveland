@@ -93,14 +93,14 @@ const faqSchema = {
       </div>
 
       <div class="flex flex-wrap gap-2 md:gap-4">
-        <Pill text="Development" variant="outline" class="border-purple text-purple hero-in [animation-delay:100ms]" />
-        <Pill text="Strategy" variant="outline" class="border-orange text-orange hero-in [animation-delay:200ms]" />
-        <Pill text="Partnership" variant="outline" class="border-green text-green hero-in [animation-delay:300ms]" />
+        <Pill text="Development" class="border-purple text-purple hero-in" style="--i: 1" />
+        <Pill text="Strategy" class="border-orange text-orange hero-in" style="--i: 2" />
+        <Pill text="Partnership" class="border-green text-green hero-in" style="--i: 3" />
       </div>
     </div>
     <div class="max-w-3xl">
-      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in [animation-delay:400ms]">A development partner for brand agencies.</h1>
-      <div class="hero-in [animation-delay:500ms]">
+      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in" style="--i: 4">A development partner for brand agencies.</h1>
+      <div class="hero-in" style="--i: 5">
         <CTA
           tag="link"
           href={CALENDLY_URL}
@@ -148,7 +148,7 @@ const faqSchema = {
         color="green"
         class="py-section"
       />
-      <div class="lsa lsa-slide-up">
+      <div class="lsa">
         <Link
           text="View Case Studies"
           url="/case-studies/"
@@ -163,21 +163,21 @@ const faqSchema = {
           <div class="sticky top-sticky flex flex-col gap-6">
             <h2>What I Do</h2>
             <ul class="grid grid-cols-1 gap-4 md:gap-8">
-              <li class="lsa lsa-slide-up flex gap-4 items-start">
+              <li class="lsa flex gap-4 items-start">
                 <AppWindowIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-purple" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-purple">Development</h3>
                   <p class="text-grey text-prose">Built from your designs, on the platform your client already uses.</p>
                 </div>
               </li>
-              <li class="lsa lsa-slide-up delay-100 flex gap-4 items-start">
+              <li class="lsa flex gap-4 items-start" style="--i: 1">
                 <ChartColumnIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-orange" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-orange">Strategy</h3>
                   <p class="text-grey text-prose">Platform, CMS and content decisions, made before the build starts.</p>
                 </div>
               </li>
-              <li class="lsa lsa-slide-up delay-200 flex gap-4 items-start">
+              <li class="lsa flex gap-4 items-start" style="--i: 2">
                 <SunsetTwoIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-green" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-green">Partnership</h3>
@@ -188,24 +188,24 @@ const faqSchema = {
           </div>
         </div>
 
-        <div class="flex flex-col gap-6 text-container">
-          <p class="h4 py-4 lsa lsa-slide-up">
+        <div class="flex flex-col gap-6 text-container lsa">
+          <p class="h4 py-4">
             Every project starts with the client, not the platform.
           </p>
-          <p class="text-lightGrey lsa lsa-slide-up">
+          <p class="text-lightGrey">
             Before I write code, I learn the brand, the content, and who will update the site after
             launch.
           </p>
-          <p class="text-lightGrey lsa lsa-slide-up">
+          <p class="text-lightGrey">
             First comes a discovery call with you and your client. Then I write up a scope outline and
             an estimate, and we go over it together until all three of us agree on exactly what's being
             delivered.
           </p>
-          <p class="text-lightGrey lsa lsa-slide-up">
+          <p class="text-lightGrey">
             I write most of the code myself and keep third-party libraries to a minimum, so sites stay
             fast and are easy to hand off or maintain.
           </p>
-          <p class="h5 py-4 lsa lsa-slide-up">
+          <p class="h5 py-4">
             Fast, accessible sites your client's team can update without me.
           </p>
         </div>
@@ -215,7 +215,7 @@ const faqSchema = {
     <Founder />
 
     <!-- The section keeps the standard section spacing; the tinted panel is its own container inside it -->
-    <section id="faq" class="lsa lsa-slide-up">
+    <section id="faq" class="lsa">
       <div class="section-split p-6 md:p-10 lg:p-12 bg-purple/5 rounded-media shadow-md">
         <h2><span class="text-green">Questions</span> Agencies Ask</h2>
 
@@ -235,7 +235,7 @@ const faqSchema = {
     </section>
 
     <!-- A bordered, left-aligned quote card, so it reads differently from the open, centered sign-off below -->
-    <section id="testimonials" class="section-split lsa lsa-slide-up">
+    <section id="testimonials" class="section-split lsa">
       <h2>What Clients Say</h2>
       <div class="min-w-0">
         <Testimonials data={testimonialData} />

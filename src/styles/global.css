@@ -67,6 +67,8 @@
   /* Motion: --transition for hovers and small state changes, --duration-reveal for entrances (hero-in, lsa) */
   --transition: 200ms;
   --duration-reveal: 700ms;
+  --ease-reveal: cubic-bezier(0, 0, 0.2, 1); /* ease-out: fast start, gentle landing */
+  --stagger: 100ms; /* between items revealed together; set --i: 1, 2, 3 on each */
 }
 
 /* Small uppercase text: nav links, pills, the marquee heading */
@@ -176,56 +178,32 @@
   navigation: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  /**
-    * Required class: `lsa` (initializes animations and defaults to fade-in)
-    * Note: Add `no-repeat` class to prevent animations from repeating on scroll
-    * Content is only hidden once `lsa-on` is set on <html> (Layout.astro), so the page
-    * still shows if JavaScript is slow or blocked. Use `hero-in` for anything above the fold.
-    */
-  .lsa-on .lsa {
-    @apply opacity-0 transform transition duration-(--duration-reveal);
-
-    /* Slide animations */
-    &.lsa-slide-up {
-      @apply translate-y-4;
-    }
-    &.lsa-slide-down {
-      @apply -translate-y-4;
-    }
-    &.lsa-slide-left {
-      @apply -translate-x-4;
-    }
-    &.lsa-slide-right {
-      @apply translate-x-4;
-    }
-    &.lsa-slide-down-right {
-      @apply -translate-x-4 -translate-y-4;
-    }
-    &.lsa-slide-down-left {
-      @apply translate-x-4 -translate-y-4;
-    }
-    &.lsa-slide-up-right {
-      @apply -translate-x-4 translate-y-4;
-    }
-    &.lsa-slide-up-left {
-      @apply translate-x-4 translate-y-4;
-    }
-
-    /* Handle active state */
-    &.active {
-      @apply opacity-100 translate-x-0 translate-y-0;
-    }
-  }
-}
-
 /**
-  * Hero entrance: a CSS-only fade and rise for above-the-fold content, so it never waits on
-  * JavaScript. Stagger with an arbitrary delay, e.g. `[animation-delay:200ms]`.
+  * Two entrances, one motion: both fade in and rise 1rem, at the same speed and easing.
+  * - `hero-in`: above the fold. CSS only, plays on load.
+  * - `lsa`: below the fold. Plays once when it scrolls into view (the script in Layout.astro).
+  * Animate a whole section or card, not single paragraphs. To stagger items in a list, set
+  * style="--i: 1" (2, 3…) on each; the delay is --i × --stagger.
+  * Content is only hidden once `lsa-on` is set on <html>, so the page still shows without JavaScript.
   */
 @media (prefers-reduced-motion: no-preference) {
+  .lsa-on .lsa {
+    opacity: 0;
+    translate: 0 1rem;
+    transition-property: opacity, translate;
+    transition-duration: var(--duration-reveal);
+    transition-timing-function: var(--ease-reveal);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+
+    &.active {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
   .hero-in {
-    animation: hero-rise var(--duration-reveal) ease-out both;
+    animation: hero-rise var(--duration-reveal) var(--ease-reveal) both;
+    animation-delay: calc(var(--i, 0) * var(--stagger));
   }
 }
 
