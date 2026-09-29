@@ -53,6 +53,19 @@ const business = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Scroll animations only hide content once JavaScript is running -->
     <script is:inline>document.documentElement.classList.add('lsa-on')</script>
+    <!-- Pages crossfade by view transition (global.css). Runs before the first frame of a page reached that way:
+         scroll reveals already on screen show at once, so they don't fade in a second time after the crossfade -->
+    <script is:inline>
+      window.addEventListener('pagereveal', (event) => {
+        if (!event.viewTransition) return
+        const root = document.documentElement
+        root.classList.add('vt-arrival')
+        document.querySelectorAll('.lsa').forEach((el) => {
+          if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
+        })
+        event.viewTransition.finished.finally(() => root.classList.remove('vt-arrival'))
+      })
+    </script>
 
     <!-- SEO -->
     <title>{title}</title>
@@ -120,6 +133,13 @@ const business = {
       function handleAnimations() {
         const elements = document.querySelectorAll('.lsa')
         if (elements.length === 0) return
+
+        // Arriving by view transition: anything parsed after the transition started, and already on screen, shows at once
+        if (document.documentElement.classList.contains('vt-arrival')) {
+          elements.forEach((el) => {
+            if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
+          })
+        }
 
         // Without IntersectionObserver, show everything rather than leave it hidden
         if (!('IntersectionObserver' in window)) {

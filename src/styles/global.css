@@ -69,6 +69,7 @@
   --duration-reveal: 700ms;
   --ease-reveal: cubic-bezier(0, 0, 0.2, 1); /* ease-out: fast start, gentle landing */
   --stagger: 100ms; /* between items revealed together; set --i: 1, 2, 3 on each */
+  --duration-move: 350ms; /* things moving to a new place on screen (view transitions) */
 }
 
 /* Small uppercase text: nav links, pills, the marquee heading */
@@ -197,6 +198,40 @@
 
 @view-transition {
   navigation: auto;
+}
+
+/**
+  * View transitions (progressive enhancement: browsers without them, and reduced motion, change instantly).
+  * - Page to page: a crossfade, while the nav (view-transition-name: site-nav) holds still.
+  * - view-transition-class: move: elements that travel to a new place, like case study cards when the filter changes.
+  * All of it runs on the motion tokens instead of the browser default (0.25s ease).
+  */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(.move),
+  ::view-transition-old(.move),
+  ::view-transition-new(.move) {
+    animation-duration: var(--duration-move);
+    animation-timing-function: var(--ease-reveal);
+  }
+
+  /* The nav stays above anything travelling under it, as it does on the page */
+  ::view-transition-group(site-nav) {
+    z-index: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* While a page arrives by view transition (Layout.astro sets vt-arrival), scroll reveals already on screen show at once */
+.vt-arrival .lsa {
+  transition: none;
 }
 
 /**

@@ -1,6 +1,6 @@
 ---
 import type { SanityAsset } from '@sanity/image-url'
-import { urlForImage } from '../../sanity/lib/urlForImage'
+import { sanityImageSizes } from '../../sanity/lib/urlForImage'
 
 export interface Props {
   image: SanityAsset
@@ -13,12 +13,7 @@ export interface Props {
 
 const { image, alt, sizes, priority = false, class: className } = Astro.props
 
-// Asset refs carry the original size: image-<id>-<width>x<height>-<format>
-const [, width = 1600, height = 900] = image?.asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
-// Standard widths up to the original, plus the original itself so small images still get a srcset
-const widths = [...new Set([480, 800, 1200, 1600, 2400].filter((w) => w < width).concat(Math.min(width, 2400)))]
-const srcFor = (w: number) => urlForImage(image).width(w).quality(75).auto('format').url()
-const srcset = widths.map((w) => `${srcFor(w)} ${w}w`).join(', ')
+const { width, height, srcFor, srcset } = sanityImageSizes(image)
 ---
 
 <img

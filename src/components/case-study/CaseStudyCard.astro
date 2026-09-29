@@ -22,11 +22,11 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
 const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<!-- The view-transition-name lets cards glide into place when the filter changes -->
+<!-- The filter gives each card a view-transition name while it runs (data-vt-slug), so cards glide into place -->
 <article
   class:list={['lsa', featured && 'lg:col-span-2']}
+  data-vt-slug={caseStudy.slug.current}
   data-platform={platformFamily}
-  style={`view-transition-name: case-${caseStudy.slug.current}`}
 >
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
@@ -54,7 +54,9 @@ const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
     <div class="stack">
       <div class="flex flex-col gap-2">
         <h2 class={featured ? 'h2' : 'h3'}>
-          <span class="underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:text-purple group-hover:decoration-current group-focus-visible:text-purple group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
+          <span
+            class="underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:text-purple group-hover:decoration-current group-focus-visible:text-purple group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out"
+          >
             {caseStudy.title}
           </span>
         </h2>
