@@ -33,7 +33,7 @@ Check styling changes on a build or the Netlify deploy preview, not only the dev
   - `portable-text/`: how Sanity body content renders.
   - `ui/`: small shared pieces (links, pills, CTAs, images).
 - `src/sanity/`: Studio schema, structure, queries and image URLs. Case study order is set in Studio (Case Study Order), and the first one is featured.
-- `src/assets/logos/`: marquee logos. Every SVG in the folder shows up, sized to equal visual weight.
+- `src/assets/logos/`: marquee logos. Add the SVG here and its slug and name to the list in `src/components/layout/Marquee.astro`; logos are sized to equal visual weight.
 - `src/lib/site.ts`: shared values (email, Calendly link).
 - `src/lib/data/testimonials.ts`: homepage testimonials.
 - `public/_headers` and `public/_redirects`: Netlify headers and redirects. Page redirects live in `astro.config.mjs`.
