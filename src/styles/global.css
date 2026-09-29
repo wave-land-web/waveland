@@ -223,6 +223,29 @@
   }
 }
 
+/* Details (the FAQ) open and close by growing to their height, on the motion tokens. CSS only:
+   browsers without ::details-content or interpolate-size, and reduced motion, open instantly. */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  details::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow-y: clip;
+    transition-property: block-size, opacity, content-visibility;
+    transition-duration: var(--duration-move);
+    transition-timing-function: var(--ease-reveal);
+    transition-behavior: allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
 /* While a page arrives by view transition (Layout.astro sets vt-arrival), scroll reveals already on screen show at once */
 .vt-arrival .lsa {
   transition: none;
