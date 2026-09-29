@@ -1,8 +1,11 @@
+import ArrowIcon from './ArrowIcon'
+
 interface Props {
   text: string
   url: string
   /** Header-font sizes: `lead` (h4) or `display` (h3). Default matches body copy. */
   size?: 'body' | 'lead' | 'display'
+  /** Opens in a new tab, with an up-right arrow instead of a right one */
   newWindow?: boolean
   /** Brand color. Use purple, orange and green in that order when three links sit in a row. */
   color?: 'purple' | 'orange' | 'green'
@@ -25,15 +28,16 @@ function keepHyphenatedWordsTogether(text: string) {
   )
 }
 
-/** An action link: goes to another page. Brand color at rest, underlined on hover. */
+/** An action link: goes somewhere. Brand color at rest, white on hover, and the arrow nudges toward where it goes. */
 export default function Link({ text, url, size = 'body', newWindow, color = 'purple', linkClass = '' }: Props) {
   return (
     <a
       href={url}
       {...(newWindow && { target: '_blank', rel: 'noopener noreferrer' })}
-      className={[sizeClasses[size], linkClass, 'inline-block w-fit link-underline', colorClasses[color]].filter(Boolean).join(' ')}
+      className={[sizeClasses[size], linkClass, 'link-arrow hover:text-white focus-visible:text-white', colorClasses[color]].filter(Boolean).join(' ')}
     >
       {keepHyphenatedWordsTogether(text)}
+      <ArrowIcon direction={newWindow ? 'external' : 'right'} />
     </a>
   )
 }
