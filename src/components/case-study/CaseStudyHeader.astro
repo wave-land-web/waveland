@@ -60,12 +60,64 @@ const serviceColors: Record<string, string> = {
         )
       }
     </div>
-    <SanityImage
-      image={image}
-      alt={imageAlt}
-      sizes="(min-width: 1600px) 1536px, (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2rem)"
-      priority
-      class="w-full h-auto mb-header"
-    />
+    <!-- The frame clips the image so it can drift for a subtle parallax -->
+    <div class="hero-frame mb-header">
+      <SanityImage
+        image={image}
+        alt={imageAlt}
+        sizes="(min-width: 1600px) 1536px, (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2rem)"
+        priority
+        class="hero-image"
+      />
+    </div>
   </div>
 </header>
+
+<style>
+  /* The frame is a little shorter than the 16:9 cover, so the image overhangs it top and bottom (never at the sides,
+     where the covers put their phone mockups). The height cap leaves some of the case study showing on large screens. */
+  .hero-frame {
+    position: relative;
+    /* clip, not hidden: a hidden frame becomes the scroll container view() tracks, and the parallax never moves */
+    overflow: clip;
+    border-radius: var(--radius-media);
+    aspect-ratio: 16 / 8.4;
+    max-height: 80svh;
+  }
+
+  /* Centered vertically in the frame; the parallax moves it 3% either side of center */
+  .hero-frame :global(.hero-image) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    translate: 0 -50%;
+    border-radius: 0;
+  }
+
+  /* Parallax: the image drifts a little slower than the page. Scroll-driven, so no JavaScript;
+     browsers without it, and reduced motion, get the still image. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .hero-frame :global(.hero-image) {
+        animation: hero-parallax linear both;
+        animation-range: cover;
+      }
+      /* Its own rule: the CSS minifier folds animation-timeline into the shorthand, which browsers reject */
+      .hero-frame :global(img.hero-image) {
+        animation-timeline: view();
+      }
+    }
+  }
+
+  /* The image overhangs the frame by about 3.3% of its height on each side, so 3% of drift never shows an edge */
+  @keyframes hero-parallax {
+    from {
+      translate: 0 -53%;
+    }
+    to {
+      translate: 0 -47%;
+    }
+  }
+</style>
