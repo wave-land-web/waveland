@@ -27,6 +27,15 @@ const { caseStudies, order } = (await sanityClient.fetch(
 // Ordered ones first, in the Studio order; the rest after them, newest first (the query's order)
 const rank = new Map((order ?? []).map((id, i) => [id, i]))
 const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (rank.get(b._id) ?? Infinity))
+
+// Filters: one per platform family ("Astro + Sanity" counts as Astro), most case studies first.
+// Only platforms with a published case study get a filter, so a filter never comes up empty.
+const counts = new Map<string, number>()
+for (const { platform } of caseStudies) {
+  const family = platform?.split(' + ')[0]
+  if (family) counts.set(family, (counts.get(family) ?? 0) + 1)
+}
+const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
 ---
 
 <Layout
@@ -41,6 +50,20 @@ const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (
   />
 
   <main>
+    <!-- Filters are buttons, so they only show once the script that runs them is here (see below) -->
+    <div id="case-study-filters" role="group" aria-label="Filter case studies by platform" class="hidden flex-wrap gap-3 mb-12">
+      <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter="all" aria-pressed="true">
+        All <span class="opacity-60">{caseStudies.length}</span>
+      </button>
+      {
+        filters.map(([family, count]) => (
+          <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter={family} aria-pressed="false">
+            {family} <span class="opacity-60">{count}</span>
+          </button>
+        ))
+      }
+    </div>
+    <p id="case-study-filter-status" class="sr-only" aria-live="polite"></p>
     <section id="case-studies" class="grid lg:grid-cols-2 gap-x-12 gap-y-20 pt-0">
       {sorted.map((caseStudy, i) => <CaseStudyCard caseStudy={caseStudy} priority={i === 0} featured={i === 0} />)}
     </section>
@@ -53,3 +76,48 @@ const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (
   </main>
   <Marquee />
 </Layout>
+
+<script>
+  const bar = document.getElementById('case-study-filters')
+  const status = document.getElementById('case-study-filter-status')
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('#case-study-filters [data-filter]')]
+  const cards = [...document.querySelectorAll<HTMLElement>('#case-studies [data-platform]')]
+
+  // Show the cards for one platform ('all' for every card), and keep the choice in the URL so it can be shared
+  function apply(filter: string) {
+    let shown = 0
+    cards.forEach((card) => {
+      const match = filter === 'all' || card.dataset.platform === filter
+      card.hidden = !match
+      if (match) {
+        shown++
+        card.classList.add('active') // skip the scroll reveal; the filter change is the motion
+      }
+    })
+    buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)))
+    if (status) status.textContent = `Showing ${shown} case ${shown === 1 ? 'study' : 'studies'}${filter === 'all' ? '' : ` built with ${filter}`}`
+
+    const url = new URL(location.href)
+    if (filter === 'all') url.searchParams.delete('platform')
+    else url.searchParams.set('platform', filter)
+    history.replaceState(null, '', url)
+  }
+
+  if (bar && cards.length > 0) {
+    bar.classList.replace('hidden', 'flex')
+
+    buttons.forEach((button) =>
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter ?? 'all'
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+        // Cards glide to their new places where view transitions are supported
+        if (document.startViewTransition && !reduce) document.startViewTransition(() => apply(filter))
+        else apply(filter)
+      }),
+    )
+
+    // A shared link like ?platform=Webflow opens filtered
+    const initial = new URL(location.href).searchParams.get('platform')
+    if (initial && buttons.some((button) => button.dataset.filter === initial)) apply(initial)
+  }
+</script>
