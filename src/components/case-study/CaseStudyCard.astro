@@ -25,7 +25,7 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
   class:list={['lsa', featured && 'lg:col-span-2']}
   data-platform={platformFamily(caseStudy.platform)}
 >
-  <!-- The whole card is the link; the title underlines when it's hovered or focused -->
+  <!-- The whole card is the link; the title turns purple and the image zooms when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
     class:list={[
@@ -52,7 +52,7 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
       <div class="flex flex-col gap-2">
         <h2 class={featured ? 'h2' : 'h3'}>
           <span
-            class="underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:text-purple group-hover:decoration-current group-focus-visible:text-purple group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out"
+            class="group-hover:text-purple group-focus-visible:text-purple transition-colors duration-(--transition) ease-in-out"
           >
             {caseStudy.title}
           </span>

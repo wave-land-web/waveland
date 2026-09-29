@@ -139,21 +139,30 @@
   }
 }
 
-/* Links: every hover changes more than color. Action and utility links underline on hover.
-   The underline is always there but transparent, so it fades in at the same rate as the color
-   (text-decoration-line itself can't transition). */
-@utility link-underline {
-  text-decoration-line: underline;
-  /* Scale with the text so display-size links don't get a hairline hugging the letters */
-  text-decoration-thickness: max(1px, 0.05em);
-  text-underline-offset: 0.25em;
-  text-decoration-color: transparent;
-  transition-property: color, text-decoration-color;
+/* Links: every hover changes more than color. Action links carry an arrow (ArrowIcon) that nudges toward where the link goes:
+   right for another page here, up and right for another site. Links inside copy are underlined instead (#case-study rules). */
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  width: fit-content;
+  transition-property: color;
   transition-duration: var(--transition);
   transition-timing-function: ease-in-out;
-  &:hover,
-  &:focus-visible {
-    text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .arrow {
+    transition: translate var(--transition) ease-in-out;
+  }
+
+  /* The link itself, or a card (.group) that holds the arrow */
+  :is(.link-arrow, .group):is(:hover, :has(:focus-visible), :focus-visible) .arrow[data-arrow='right'] {
+    translate: 0.25em 0;
+  }
+
+  :is(.link-arrow, .group):is(:hover, :has(:focus-visible), :focus-visible) .arrow[data-arrow='external'] {
+    translate: 0.15em -0.15em;
   }
 }
 

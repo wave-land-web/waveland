@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import LinkIcon from '../../assets/link.svg'
+import ArrowIcon from './ArrowIcon'
 // Loaded as cached files, not inlined: together they were ~190 KB of homepage HTML
 import waveOne from '../../assets/wave-1.svg?url'
 import waveTwo from '../../assets/wave-2.svg?url'
@@ -64,7 +64,7 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
       <p
         class="flex items-center font-header text-label gap-2 absolute bottom-0 p-4 transition-colors duration-(--transition) group-hover:text-(--accent) group-has-focus-visible:text-(--accent) max-md:text-(--accent)"
       >
-        <LinkIcon class="size-5 md:size-6 stroke-2" />{linkText}
+        {linkText}<ArrowIcon />
       </p>
     </a>
   </article>

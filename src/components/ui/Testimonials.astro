@@ -1,5 +1,6 @@
 ---
 import type { Testimonial } from '../../lib/data/testimonials'
+import ArrowIcon from './ArrowIcon'
 
 export interface Props {
   data: Testimonial[]
@@ -19,8 +20,9 @@ const { data } = Astro.props
             <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
             <cite class="not-italic text-label text-grey">
               {testimonial.href ? (
-                <a class="text-purple link-underline" href={testimonial.href} {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
+                <a class="link-arrow text-purple hover:text-white focus-visible:text-white" href={testimonial.href} {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
                   {testimonial.citation}
+                  <ArrowIcon direction={testimonial.href.startsWith('http') ? 'external' : 'right'} />
                 </a>
               ) : (
                 testimonial.citation
