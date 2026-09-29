@@ -34,7 +34,7 @@ import { Icon } from 'astro-icon/components'
   }
 
   .lightbox::backdrop {
-    background: rgb(3 7 18 / 0.92);
+    background: color-mix(in oklab, var(--color-black) 92%, transparent);
   }
 
   .lightbox-img {
@@ -61,7 +61,7 @@ import { Icon } from 'astro-icon/components'
 
   @media (prefers-reduced-motion: no-preference) {
     .lightbox[open] .lightbox-img {
-      animation: zoom-in 200ms ease-out;
+      animation: zoom-in var(--transition) ease-out;
     }
   }
 
