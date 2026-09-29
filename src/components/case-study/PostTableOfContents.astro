@@ -77,24 +77,47 @@ const headings: { id: string; text: string }[] = post.body
     })
   }
 
-  // Clicking a link scrolls its heading level with the link, so the two read as one line.
-  // On phones the normal jump to the heading (with scroll-margin) is kept.
-  links.forEach((link) => {
+  // A heading scrolls level with its table of contents link, so the two read as one line. This runs for the table of
+  // contents links, the headings' own links, and a page opened at #section. On phones the normal jump (with scroll-margin) is kept.
+  function align(heading: HTMLElement, behavior: ScrollBehavior) {
+    const link = links.find((l) => l.dataset.sectionId === heading.id)
+    if (!link || !toc) return
+    // Where the link will sit once the table of contents is stuck (it may not be yet, near the top of the page)
+    const label = link.lastElementChild ?? link
+    const stuckTop = parseFloat(getComputedStyle(toc).top)
+    const labelWhenStuck = stuckTop + (firstLineMiddle(label) - toc.getBoundingClientRect().top)
+    window.scrollTo({ top: window.scrollY + firstLineMiddle(heading) - labelWhenStuck, behavior })
+  }
+
+  // Hashes come back percent-encoded (curly apostrophes, accents), ids don't
+  const sectionId = (hash: string) => decodeURIComponent(hash.slice(1))
+  const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')].filter((a) =>
+    headings.some((heading) => sectionId(a.hash) === heading.id),
+  )
+  sectionLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
-      const heading = document.getElementById(link.dataset.sectionId ?? '')
+      const heading = document.getElementById(sectionId(link.hash))
       if (!heading || !isSticky()) return
       event.preventDefault()
-      // Where the link will sit once the table of contents is stuck (it may not be yet, near the top of the page)
-      const label = link.lastElementChild ?? link
-      const stuckTop = parseFloat(getComputedStyle(toc!).top)
-      const labelWhenStuck = stuckTop + (firstLineMiddle(label) - toc!.getBoundingClientRect().top)
-      const top = window.scrollY + firstLineMiddle(heading) - labelWhenStuck
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-      window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' })
+      align(heading, reduce ? 'instant' : 'smooth')
       history.pushState(null, '', `#${heading.id}`)
       heading.focus({ preventScroll: true })
     })
   })
+
+  // Opened at #section (a fresh visit, not a reload or back, where the browser restores the scroll): line it up once the
+  // images above it have their size, unless the reader has scrolled in the meantime
+  const target = headings.find((heading) => sectionId(location.hash) === heading.id)
+  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+  if (target && navigation?.type === 'navigate') {
+    let scrolled = false
+    const markScrolled = () => (scrolled = true)
+    for (const type of ['wheel', 'touchmove', 'keydown', 'pointerdown']) addEventListener(type, markScrolled, { once: true, passive: true })
+    const lineUp = () => requestAnimationFrame(() => !scrolled && isSticky() && align(target, 'instant'))
+    if (document.readyState === 'complete') lineUp()
+    else window.addEventListener('load', lineUp, { once: true })
+  }
 
   if (headings.length > 0) {
     window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true })
