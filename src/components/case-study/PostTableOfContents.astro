@@ -46,16 +46,25 @@ const headings: { id: string; text: string }[] = post.body
 </div>
 
 <script>
-  // Highlight the section being read: the last heading that has scrolled above 30% of the viewport
+  const toc = document.querySelector<HTMLElement>('#case-study-table-of-contents')
   const links = [...document.querySelectorAll<HTMLAnchorElement>('#case-study-table-of-contents a[data-section-id]')]
   const headings = links
     .map((link) => document.getElementById(link.dataset.sectionId ?? ''))
     .filter((heading): heading is HTMLElement => heading !== null)
 
+  // The table of contents only sticks beside the article from md up; on phones it sits above it
+  const isSticky = () => toc !== null && getComputedStyle(toc).position === 'sticky'
+
+  // Where a line of text sits: the middle of its first line
+  const firstLineMiddle = (el: Element) => el.getBoundingClientRect().top + parseFloat(getComputedStyle(el).lineHeight) / 2
+
+  // Highlight the section being read: the last heading scrolled above the table of contents
+  // (or above 30% of the screen, when it isn't sticky)
   let frame = 0
   function update() {
     frame = 0
-    const line = window.innerHeight * 0.3
+    const tocBottom = isSticky() ? (toc?.querySelector('ol')?.getBoundingClientRect().bottom ?? 0) : 0
+    const line = Math.max(window.innerHeight * 0.3, tocBottom)
     const current = headings.filter((heading) => heading.getBoundingClientRect().top <= line).at(-1)
     links.forEach((link) => {
       const active = link.dataset.sectionId === current?.id
@@ -64,6 +73,25 @@ const headings: { id: string; text: string }[] = post.body
       else link.removeAttribute('aria-current')
     })
   }
+
+  // Clicking a link scrolls its heading level with the link, so the two read as one line.
+  // On phones the normal jump to the heading (with scroll-margin) is kept.
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const heading = document.getElementById(link.dataset.sectionId ?? '')
+      if (!heading || !isSticky()) return
+      event.preventDefault()
+      // Where the link will sit once the table of contents is stuck (it may not be yet, near the top of the page)
+      const label = link.lastElementChild ?? link
+      const stuckTop = parseFloat(getComputedStyle(toc!).top)
+      const labelWhenStuck = stuckTop + (firstLineMiddle(label) - toc!.getBoundingClientRect().top)
+      const top = window.scrollY + firstLineMiddle(heading) - labelWhenStuck
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+      window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' })
+      history.pushState(null, '', `#${heading.id}`)
+      heading.focus({ preventScroll: true })
+    })
+  })
 
   if (headings.length > 0) {
     window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true })
