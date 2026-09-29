@@ -5,12 +5,13 @@ import PortableTextImage from './PortableTextImage.astro'
 import PortableTextPhoneRow from './PortableTextPhoneRow.astro'
 import PortableTextH2 from './PortableTextH2.astro'
 import PortableTextLink from './PortableTextLink.astro'
+import { assetDimensions } from '../../sanity/lib/urlForImage'
 
 const { portableText } = Astro.props
 
-// Asset refs carry the original size: image-<id>-<width>x<height>-<format>
+// Portrait screenshots are phone shots
 const isPhoneShot = (block: any) => {
-  const [, width, height] = block?._type === 'image' ? (block.asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []) : []
+  const [width = 0, height = 0] = block?._type === 'image' ? assetDimensions(block.asset?._ref) : []
   return height > width
 }
 

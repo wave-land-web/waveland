@@ -1,5 +1,6 @@
 ---
-import { urlForImage } from '../../sanity/lib/urlForImage'
+import SanityImage from '../ui/SanityImage.astro'
+import { sanityImageSizes } from '../../sanity/lib/urlForImage'
 
 const { images } = Astro.props.node // `.node` is the current node in the PortableText
 
@@ -8,6 +9,7 @@ const caption = images
   .map((image: { caption?: string }) => image.caption?.trim())
   .filter(Boolean)
   .join(' ')
+// Shown at 240px at most, so the srcset stops at 720 (3x)
 const widths = [240, 360, 480, 720]
 // Each shot is a third of the column (md and up), so rows of one or two stay phone-sized and centered
 ---
@@ -19,26 +21,20 @@ const widths = [240, 360, 480, 720]
   >
     {
       images.map(({ asset, alt }: { asset: { _ref: string }; alt?: string }) => {
-        const [, width = 1170, height = 2532] = asset._ref.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
+        const image = { asset }
+        const { width, srcFor } = sanityImageSizes(image, widths)
         return (
           <button
             type="button"
             class="zoomable shrink-0 w-[62%] snap-center md:shrink md:w-[calc((100%-2rem)/3)]"
-            data-zoom={urlForImage(asset).width(Math.min(width, 1200)).auto('format').url()}
+            data-zoom={srcFor(Math.min(width, 1200))}
             aria-label={`Enlarge image: ${alt}`}
           >
-            <img
-              src={urlForImage(asset).width(360).auto('format').url()}
-              srcset={widths
-                .filter((w) => w <= width)
-                .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
-                .join(', ')}
+            <SanityImage
+              image={image}
+              alt={alt ?? ''}
+              widths={widths}
               sizes="(min-width: 1024px) 240px, (min-width: 768px) calc((100vw - 6rem) * 2 / 9), 62vw"
-              width={width}
-              height={height}
-              alt={alt}
-              decoding="async"
-              loading="lazy"
               class="w-full h-auto rounded-media"
             />
           </button>

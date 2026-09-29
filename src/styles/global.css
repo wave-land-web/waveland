@@ -126,13 +126,7 @@
 
 /* Toggle: a secondary pill that fills white while it's on (aria-pressed), like the primary button */
 @utility btn-toggle {
-  border-color: color-mix(in oklab, var(--color-white) 35%, transparent);
-  color: var(--color-white);
-  &:hover:not(:disabled),
-  &:focus-visible {
-    border-color: var(--color-white);
-    background-color: color-mix(in oklab, var(--color-white) 6%, transparent);
-  }
+  @apply btn-secondary;
   &[aria-pressed='true'] {
     background-color: var(--color-white);
     border-color: var(--color-white);

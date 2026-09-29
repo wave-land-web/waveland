@@ -43,7 +43,7 @@ const linkIndex = pillStart + services.length
         {
           services.map((service: string, i: number) => (
             <Pill
-              text={`${service}`}
+              text={service}
               size="small"
               class={`${serviceColors[service]} hero-in`}
               style={`--i: ${pillStart + i}`}

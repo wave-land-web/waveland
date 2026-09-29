@@ -14,8 +14,8 @@ const { text, size = 'big', class: className, style } = Astro.props
   class:list={[
     className,
     'inline-block border rounded-control label',
-    { 'px-4 py-2': size === 'small' },
-    { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
+    'px-4 py-2',
+    size === 'big' && 'md:px-6 md:py-4',
   ]}
   style={style}
 >

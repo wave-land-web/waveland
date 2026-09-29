@@ -4,6 +4,9 @@
 const files = import.meta.glob<string>('../../assets/logos/*.svg', { eager: true, query: '?url', import: 'default' })
 const sources = import.meta.glob<string>('../../assets/logos/*.svg', { eager: true, query: '?raw', import: 'default' })
 
+// Every logo covers about this many square pixels
+const AREA = 5200
+
 // Big brands from in-house and agency work, mixed with case study clients
 const logos = [
   { slug: 'loreal', name: "L'Oréal" },
@@ -25,7 +28,6 @@ const logos = [
   // Width comes from the viewBox's aspect ratio; heights are capped so square marks don't tower.
   const [, , vbWidth, vbHeight] = (sources[path].match(/viewBox="([^"]+)"/)?.[1] ?? '0 0 1 1').split(/[\s,]+/).map(Number)
   const ratio = vbWidth / vbHeight
-  const AREA = 5200
   const height = Math.min(Math.sqrt(AREA / ratio), 72)
   const width = Math.min(height * ratio, 220)
   return { ...logo, src: files[path], width: Math.round(width), height: Math.round(width / ratio) }
@@ -36,12 +38,16 @@ const logos = [
   <!-- No visible label; screen readers still get one -->
   <h2 class="sr-only">Brands I’ve built for</h2>
   <div class="marquee">
-    <div class="marquee-content">
-      {logos.map((logo) => <img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} style={`--w: ${logo.width}`} fetchpriority="low" decoding="async" />)}
-    </div>
-    <div class="marquee-content" aria-hidden="true">
-      {logos.map((logo) => <img src={logo.src} alt="" width={logo.width} height={logo.height} style={`--w: ${logo.width}`} fetchpriority="low" decoding="async" />)}
-    </div>
+    <!-- Two identical strips so the loop is seamless; the copy is hidden from screen readers -->
+    {
+      [false, true].map((copy) => (
+        <div class="marquee-content" aria-hidden={copy ? 'true' : undefined}>
+          {logos.map((logo) => (
+            <img src={logo.src} alt={copy ? '' : logo.name} width={logo.width} height={logo.height} style={`--w: ${logo.width}`} fetchpriority="low" decoding="async" />
+          ))}
+        </div>
+      ))
+    }
   </div>
 </div>
 

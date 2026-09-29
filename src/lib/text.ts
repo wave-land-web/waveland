@@ -21,4 +21,14 @@ function headingId(text: string) {
   return text.trim().replace(/\s+/g, '-').toLowerCase()
 }
 
-export { blockText, headingId }
+/**
+ * The platform family a case study files under for the filters: "Astro + Sanity" counts as Astro.
+ *
+ * @param platform - The case study's platform field
+ * @returns The family, or '' when there's no platform
+ */
+function platformFamily(platform?: string) {
+  return platform?.split(' + ')[0] ?? ''
+}
+
+export { blockText, headingId, platformFamily }

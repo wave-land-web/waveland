@@ -6,6 +6,7 @@ import CaseStudyCard from '../components/case-study/CaseStudyCard.astro'
 import PageHeader from '../components/layout/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/layout/Marquee.astro'
+import { platformFamily } from '../lib/text'
 
 // Fetch all case studies, plus the order set in Studio (Case Study Order)
 const { caseStudies, order } = (await sanityClient.fetch(
@@ -32,10 +33,13 @@ const sorted = [...caseStudies].sort((a, b) => (rank.get(a._id) ?? Infinity) - (
 // Only platforms with a published case study get a filter, so a filter never comes up empty.
 const counts = new Map<string, number>()
 for (const { platform } of caseStudies) {
-  const family = platform?.split(' + ')[0]
+  const family = platformFamily(platform)
   if (family) counts.set(family, (counts.get(family) ?? 0) + 1)
 }
-const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+const filters = [
+  ['all', 'All', caseStudies.length],
+  ...[...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([family, count]) => [family, family, count]),
+] as [string, string, number][]
 ---
 
 <Layout
@@ -52,13 +56,10 @@ const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0
   <main>
     <!-- Filters are buttons, so they only show once the script that runs them is here (see below) -->
     <div id="case-study-filters" role="group" aria-label="Filter case studies by platform" class="hidden flex-wrap gap-3 mb-12">
-      <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter="all" aria-pressed="true">
-        All <span class="opacity-60">{caseStudies.length}</span>
-      </button>
       {
-        filters.map(([family, count]) => (
-          <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter={family} aria-pressed="false">
-            {family} <span class="opacity-60">{count}</span>
+        filters.map(([value, label, count]) => (
+          <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter={value} aria-pressed={value === 'all' ? 'true' : 'false'}>
+            {label} <span class="opacity-60">{count}</span>
           </button>
         ))
       }
@@ -114,8 +115,8 @@ const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0
         if (!document.startViewTransition || reduce) return apply(filter)
         // Name every card for this transition only (a name each), then clear them
         const name = (on: boolean) =>
-          cards.forEach((card) => {
-            card.style.viewTransitionName = on ? `case-${card.dataset.vtSlug}` : ''
+          cards.forEach((card, i) => {
+            card.style.viewTransitionName = on ? `case-${i}` : ''
             card.style.viewTransitionClass = on ? 'move' : ''
           })
         name(true)

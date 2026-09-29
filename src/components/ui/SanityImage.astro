@@ -8,12 +8,14 @@ export interface Props {
   sizes: string
   // The first image on the page: load it right away instead of lazily
   priority?: boolean
+  // Srcset widths, for images shown small (defaults to the standard set)
+  widths?: number[]
   class?: string
 }
 
-const { image, alt, sizes, priority = false, class: className } = Astro.props
+const { image, alt, sizes, priority = false, widths, class: className } = Astro.props
 
-const { width, height, srcFor, srcset } = sanityImageSizes(image)
+const { width, height, srcFor, srcset } = sanityImageSizes(image, widths)
 ---
 
 <img

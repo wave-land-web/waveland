@@ -1,6 +1,7 @@
 ---
 import type { SanityDocument } from '@sanity/client'
 import SanityImage from '../ui/SanityImage.astro'
+import { platformFamily } from '../../lib/text'
 
 export interface Props {
   caseStudy: SanityDocument
@@ -18,26 +19,22 @@ const workedWithLabels: Record<string, string> = {
   direct: 'direct client',
 }
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
-// The platform family the filters use: "Astro + Sanity" files under Astro
-const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<!-- The filter gives each card a view-transition name while it runs (data-vt-slug), so cards glide into place -->
 <article
   class:list={['lsa', featured && 'lg:col-span-2']}
-  data-vt-slug={caseStudy.slug.current}
-  data-platform={platformFamily}
+  data-platform={platformFamily(caseStudy.platform)}
 >
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
     class:list={[
-      'group rounded-media w-full h-full hover:text-white flex flex-col gap-4',
+      'group rounded-media w-full h-full hover:text-white flex flex-col gap-8',
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',
     ]}
   >
     <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
-    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
+    <div class="overflow-hidden rounded-media">
       <SanityImage
         image={caseStudy.mainImage}
         alt={caseStudy.mainImage.alt}

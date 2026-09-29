@@ -13,7 +13,7 @@ export interface Props {
   linkText: string
   image: ImageMetadata
   imageAlt: string
-  color: string
+  color: 'purple' | 'orange' | 'green'
   isReversed?: boolean
   class?: string
 }
@@ -33,44 +33,16 @@ const {
 const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green: waveThree }
 ---
 
-<div
-  class:list={[
-    'grid gap-split items-center lg:grid-cols-2 lsa',
-    className,
-  ]}
->
-  <div
-    class:list={[
-      'font-header',
-      {
-        'lg:order-2': isReversed,
-      },
-    ]}
-  >
-    <h2
-      class:list={[
-        {
-          'text-purple': color === 'purple',
-          'text-orange': color === 'orange',
-          'text-green': color === 'green',
-        },
-      ]}
-    >
-      {title}
-    </h2>
+<!-- --accent is the row's color: the title, and the card's border, wave and link on hover (always on, below md) -->
+<div class:list={['section-split items-center lsa', className]} style={`--accent: var(--color-${color})`}>
+  <div class:list={['font-header', { 'lg:order-2': isReversed }]}>
+    <h2 class="text-(--accent)">{title}</h2>
     <p class="h2">
       {text}
     </p>
   </div>
   <article
-    class:list={[
-      'text-container p-0 h-96 group',
-      {
-        'hover:border-purple has-focus-visible:border-purple max-md:border-purple': color === 'purple',
-        'hover:border-orange has-focus-visible:border-orange max-md:border-orange': color === 'orange',
-        'hover:border-green has-focus-visible:border-green max-md:border-green': color === 'green',
-      },
-    ]}
+    class="text-container p-0 h-96 group hover:border-(--accent) has-focus-visible:border-(--accent) max-md:border-(--accent)"
   >
     <a href={caseStudyUrl} class="block w-full h-full rounded-media">
       <!-- Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp -->
@@ -86,28 +58,11 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
       <!-- The wave is a mask over the text color, so it still changes color on hover -->
       <span
         aria-hidden="true"
-        class:list={[
-          'wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition)',
-          {
-            'group-hover:text-purple group-has-focus-visible:text-purple max-md:text-purple': color === 'purple',
-            'group-hover:text-orange group-has-focus-visible:text-orange max-md:text-orange': color === 'orange',
-            'group-hover:text-green group-has-focus-visible:text-green max-md:text-green': color === 'green',
-          },
-        ]}
+        class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hover:text-(--accent) group-has-focus-visible:text-(--accent) max-md:text-(--accent)"
         style={`--wave: url(${waves[color]})`}
       ></span>
       <p
-        class:list={[
-          'flex items-center font-header text-label gap-2 absolute bottom-0 p-4',
-          {
-            'hover:text-purple group-hover:text-purple group-has-focus-visible:text-purple max-md:text-purple transition-colors duration-(--transition)':
-              color === 'purple',
-            'hover:text-orange group-hover:text-orange group-has-focus-visible:text-orange max-md:text-orange transition-colors duration-(--transition)':
-              color === 'orange',
-            'hover:text-green group-hover:text-green group-has-focus-visible:text-green max-md:text-green transition-colors duration-(--transition)':
-              color === 'green',
-          },
-        ]}
+        class="flex items-center font-header text-label gap-2 absolute bottom-0 p-4 transition-colors duration-(--transition) group-hover:text-(--accent) group-has-focus-visible:text-(--accent) max-md:text-(--accent)"
       >
         <LinkIcon class="size-5 md:size-6 stroke-2" />{linkText}
       </p>
