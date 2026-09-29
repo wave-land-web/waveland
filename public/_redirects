@@ -3,3 +3,6 @@
 
 # The sitemap lives at /sitemap-index.xml; send the usual guess there
 /sitemap.xml    /sitemap-index.xml    301
+
+# The share image was renamed so link previews refetch it
+/images/og-image.jpg    /images/og-image-v2.jpg    301
