@@ -14,7 +14,7 @@ const { data } = Astro.props
       data.map((testimonial) => (
         <blockquote class="swiper-slide">
           <!-- Swiper sets slides to display: block, so the card layout lives on an inner element -->
-          <div class="text-container stack">
+          <div class="text-container gap-4 md:gap-6">
             <span aria-hidden="true" class="block font-header text-purple text-quote h-[0.5em]">“</span>
             <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
             <cite class="not-italic text-label text-grey">

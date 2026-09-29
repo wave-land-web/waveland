@@ -29,12 +29,12 @@ const headings: { id: string; text: string }[] = post.body
         headings.map((heading: { id: string; text: string }) => (
           <li class="font-header">
             <!-- The line grows inside a fixed slot, so the heading never moves or rewraps on hover.
-                 data-active marks the section being read (set by the script below). -->
+                 aria-current marks the section being read (set by the script below). -->
             <a href={`#${heading.id}`} data-section-id={heading.id} class="group grid grid-cols-[2.5rem_1fr] gap-x-3">
               <span aria-hidden="true" class="label h-[1lh] flex items-center">
-                <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hover:scale-x-100 group-hover:bg-green group-focus-visible:scale-x-100 group-focus-visible:bg-green group-data-active:scale-x-100 group-data-active:bg-green" />
+                <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hover:scale-x-100 group-hover:bg-green group-focus-visible:scale-x-100 group-focus-visible:bg-green group-aria-[current=location]:scale-x-100 group-aria-[current=location]:bg-green" />
               </span>
-              <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hover:text-green group-focus-visible:text-green group-data-active:text-green">
+              <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hover:text-green group-focus-visible:text-green group-aria-[current=location]:text-green">
                 {heading.text}
               </span>
             </a>
@@ -53,23 +53,26 @@ const headings: { id: string; text: string }[] = post.body
     .filter((heading): heading is HTMLElement => heading !== null)
 
   // The table of contents only sticks beside the article from md up; on phones it sits above it
-  const isSticky = () => toc !== null && getComputedStyle(toc).position === 'sticky'
+  const md = matchMedia('(min-width: 768px)')
+  const isSticky = () => toc !== null && md.matches
 
   // Where a line of text sits: the middle of its first line
   const firstLineMiddle = (el: Element) => el.getBoundingClientRect().top + parseFloat(getComputedStyle(el).lineHeight) / 2
 
   // Highlight the section being read: the last heading scrolled above the table of contents
   // (or above 30% of the screen, when it isn't sticky)
+  const list = toc?.querySelector('ol')
   let frame = 0
+  let currentId: string | undefined
   function update() {
     frame = 0
-    const tocBottom = isSticky() ? (toc?.querySelector('ol')?.getBoundingClientRect().bottom ?? 0) : 0
+    const tocBottom = isSticky() ? (list?.getBoundingClientRect().bottom ?? 0) : 0
     const line = Math.max(window.innerHeight * 0.3, tocBottom)
-    const current = headings.filter((heading) => heading.getBoundingClientRect().top <= line).at(-1)
+    const id = headings.filter((heading) => heading.getBoundingClientRect().top <= line).at(-1)?.id
+    if (id === currentId) return
+    currentId = id
     links.forEach((link) => {
-      const active = link.dataset.sectionId === current?.id
-      link.toggleAttribute('data-active', active)
-      if (active) link.setAttribute('aria-current', 'location')
+      if (link.dataset.sectionId === id) link.setAttribute('aria-current', 'location')
       else link.removeAttribute('aria-current')
     })
   }

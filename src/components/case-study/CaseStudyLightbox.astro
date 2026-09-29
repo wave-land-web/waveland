@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components'
 <dialog id="lightbox" class="lightbox" aria-label="Enlarged image">
   <button
     type="button"
-    class="lightbox-close fixed top-4 right-4 md:top-6 md:right-6 z-10 p-2 rounded-full text-white bg-black/60 hover:text-purple focus-visible:text-purple"
+    class="lightbox-close fixed top-4 right-4 md:top-6 md:right-6 z-10 p-2 rounded-control text-white bg-black/60 hover:text-purple focus-visible:text-purple"
     aria-label="Close"
     title="Close"
   >
@@ -75,11 +75,6 @@ import { Icon } from 'astro-icon/components'
   :global(.zoomable) {
     cursor: zoom-in;
     border-radius: var(--radius-media);
-  }
-
-  :global(.zoomable:focus-visible) {
-    outline: 2px solid var(--color-purple);
-    outline-offset: 4px;
   }
 </style>
 
