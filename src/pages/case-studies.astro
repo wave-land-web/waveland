@@ -103,6 +103,19 @@ const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0
     history.replaceState(null, '', url)
   }
 
+  // Fetch a case study's cover when its card is hovered or focused, so the image is ready when the card morphs into
+  // the page header. Once per card, at low priority.
+  document.querySelectorAll<HTMLAnchorElement>('#case-studies a[data-hero-srcset]').forEach((link) => {
+    const warm = () => {
+      const preload = Object.assign(document.createElement('link'), { rel: 'preload', as: 'image', fetchPriority: 'low' })
+      preload.setAttribute('imagesrcset', link.dataset.heroSrcset ?? '')
+      preload.setAttribute('imagesizes', link.dataset.heroSizes ?? '')
+      document.head.append(preload)
+    }
+    link.addEventListener('pointerenter', warm, { once: true })
+    link.addEventListener('focus', warm, { once: true })
+  })
+
   if (bar && cards.length > 0) {
     bar.classList.replace('hidden', 'flex')
 

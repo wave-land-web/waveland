@@ -1,6 +1,8 @@
 ---
 import type { SanityDocument } from '@sanity/client'
+import { sanityImageSizes } from '../../sanity/lib/urlForImage'
 import SanityImage from '../ui/SanityImage.astro'
+import { HERO_SIZES } from './hero'
 
 export interface Props {
   caseStudy: SanityDocument
@@ -17,6 +19,8 @@ const workedWithLabels: Record<string, string> = {
   'with-agency': 'with an agency',
   direct: 'direct client',
 }
+// The case study page's cover, so the list can fetch it when a card is hovered (it's then ready for the morph)
+const heroSrcset = sanityImageSizes(caseStudy.mainImage).srcset
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
 // The platform family the filters use: "Astro + Sanity" files under Astro
 const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
@@ -32,6 +36,8 @@ const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
+    data-hero-srcset={heroSrcset}
+    data-hero-sizes={HERO_SIZES}
     class:list={[
       'group rounded-media w-full h-full hover:text-white flex flex-col gap-4',
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',

@@ -68,7 +68,7 @@ const business = {
             const el = card.querySelector(`[data-vt="${part}"]`)
             if (!el) continue
             el.style.viewTransitionName = on ? `${part}-${slug}` : ''
-            el.style.viewTransitionClass = on ? 'move' : ''
+            el.style.viewTransitionClass = on ? `move ${part}` : ''
           }
         }
 
