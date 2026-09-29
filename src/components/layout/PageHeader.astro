@@ -16,12 +16,12 @@ const { title, subtitle, bodyText, linkText, linkUrl, align = 'center' } = Astro
 
 const alignClasses = {
   center: 'max-w-copy items-center text-center',
-  left: 'lg:max-w-wide items-start text-left',
+  left: 'items-start text-left',
 }
 ---
 
 <header
-  class:list={[alignClasses[align], 'mb-16 md:mb-24 pt-page-top flex flex-col justify-center gap-4 hero-in']}
+  class:list={[alignClasses[align], 'mb-header pt-page-top stack justify-center hero-in']}
 >
   {title && <p class="font-header text-purple text-prose">{title}</p>}
   <h1>{subtitle}</h1>

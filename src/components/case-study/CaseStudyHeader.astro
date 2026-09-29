@@ -26,7 +26,7 @@ const serviceColors: Record<string, string> = {
 ---
 
 <header class="pt-page-top text-left hero-in">
-  <div class="container lg:max-w-article mx-auto flex flex-col gap-4 md:gap-6 justify-center">
+  <div class="stack justify-center">
     <DateAndReadTime
       class="justify-start md:justify-center"
       published={published}
@@ -63,9 +63,9 @@ const serviceColors: Record<string, string> = {
     <SanityImage
       image={image}
       alt={imageAlt}
-      sizes="(min-width: 1152px) 1104px, calc(100vw - 2rem)"
+      sizes="(min-width: 1600px) 1536px, (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2rem)"
       priority
-      class="w-full h-auto mb-8 md:mb-16"
+      class="w-full h-auto mb-header"
     />
   </div>
 </header>
