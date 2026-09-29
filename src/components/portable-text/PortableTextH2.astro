@@ -1,9 +1,20 @@
 ---
-// A case study H2 with an id, so the table of contents can link to it
+// A case study H2 with an id and a link to itself, so any section can be shared (like Supervoid.tv's year headings)
+import { Icon } from 'astro-icon/components'
 import { blockText, headingId } from '../../lib/text'
 
 const { node } = Astro.props
+const id = headingId(blockText(node))
 ---
 
 <!-- tabindex lets the table of contents move focus here after scrolling to it -->
-<h2 id={headingId(blockText(node))} tabindex="-1" class="scroll-mt-15 outline-none"><slot /></h2>
+<h2 id={id} tabindex="-1" class="scroll-mt-15 outline-none">
+  <!-- The link keeps the heading's color; the chain icon shows on hover or focus -->
+  <a href={`#${id}`} class="group text-inherit hover:text-purple focus-visible:text-purple transition-colors duration-(--transition)">
+    <slot /><Icon
+      name="tabler:link"
+      aria-hidden="true"
+      class="inline-block size-[0.6em] ml-[0.25em] align-middle stroke-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-(--transition)"
+    />
+  </a>
+</h2>
