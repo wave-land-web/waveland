@@ -22,11 +22,11 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
 const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<!-- The view-transition-name lets cards glide into place when the filter changes -->
+<!-- The view-transition-name lets cards glide into place when the filter changes; the class sets its timing (global.css) -->
 <article
   class:list={['lsa', featured && 'lg:col-span-2']}
   data-platform={platformFamily}
-  style={`view-transition-name: case-${caseStudy.slug.current}`}
+  style={`view-transition-name: case-${caseStudy.slug.current}; view-transition-class: move`}
 >
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
