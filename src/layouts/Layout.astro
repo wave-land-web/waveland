@@ -26,7 +26,7 @@ const {
   schema = [],
 } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-const socialImageURL = new URL(socialImage || '/images/og-image.jpg', canonicalURL)
+const socialImageURL = new URL(socialImage || '/images/og-image-v2.jpg', canonicalURL)
 
 // Tells search engines who the business is and where it's based
 const business = {
@@ -36,7 +36,7 @@ const business = {
   name: 'Wave Land',
   url: 'https://wavelandweb.com/',
   logo: 'https://wavelandweb.com/apple-touch-icon.png',
-  image: 'https://wavelandweb.com/images/og-image.jpg',
+  image: 'https://wavelandweb.com/images/og-image-v2.jpg',
   description: 'A development partner for brand agencies. WordPress, Webflow, Shopify and more, with SanityPress for custom builds.',
   email: EMAIL,
   founder: { '@type': 'Person', name: 'Josh Nussbaum' },
