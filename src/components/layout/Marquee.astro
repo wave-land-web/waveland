@@ -84,6 +84,11 @@ const logos = [
     animation: scroll var(--duration) linear infinite;
   }
 
+  /* Hovering stops the logos so they can be read; reduced motion keeps them still */
+  .marquee:hover .marquee-content {
+    animation-play-state: paused;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-content {
       animation-play-state: paused;
