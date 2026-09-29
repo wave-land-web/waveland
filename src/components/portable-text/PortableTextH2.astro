@@ -5,16 +5,24 @@ import { blockText, headingId } from '../../lib/text'
 
 const { node } = Astro.props
 const id = headingId(blockText(node))
+// A heading that already holds a link can't be wrapped in another one (links can't nest)
+const hasLink = (node.markDefs ?? []).some((def: { _type: string }) => def._type === 'link')
 ---
 
 <!-- tabindex lets the table of contents move focus here after scrolling to it -->
+<!-- The link keeps the heading's color; the chain icon shows on hover or focus -->
 <h2 id={id} tabindex="-1" class="scroll-mt-15 outline-none">
-  <!-- The link keeps the heading's color; the chain icon shows on hover or focus -->
-  <a href={`#${id}`} class="group text-inherit hover:text-purple focus-visible:text-purple transition-colors duration-(--transition)">
-    <slot /><Icon
-      name="tabler:link"
-      aria-hidden="true"
-      class="inline-block size-[0.6em] ml-[0.25em] align-middle stroke-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-(--transition)"
-    />
-  </a>
+  {
+    hasLink ? (
+      <slot />
+    ) : (
+      <a href={`#${id}`} class="group text-inherit hover:text-purple focus-visible:text-purple transition-colors duration-(--transition)">
+        <slot /><Icon
+          name="tabler:link"
+          aria-hidden="true"
+          class="inline-block size-[0.6em] ml-[0.25em] align-middle stroke-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-(--transition)"
+        />
+      </a>
+    )
+  }
 </h2>
