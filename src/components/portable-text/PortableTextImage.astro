@@ -1,32 +1,22 @@
 ---
-import { urlForImage } from '../../sanity/lib/urlForImage'
+import SanityImage from '../ui/SanityImage.astro'
+import { sanityImageSizes } from '../../sanity/lib/urlForImage'
 
 const { asset, alt, caption } = Astro.props.node // `.node` is the current node in the PortableText
 
-// Asset refs carry the original size: image-<id>-<width>x<height>-<format>
-// Phone screenshots are grouped into rows by PortableText.astro
-const [, width = 1600, height = 900] = asset?._ref?.match(/-(\d+)x(\d+)-/)?.map(Number) ?? []
-const widths = [640, 960, 1280, 1600]
-const srcset = widths
-  .filter((w) => w <= width)
-  .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
-  .join(', ')
-const src = urlForImage(asset).width(widths[1]).auto('format').url()
+// Same srcset and quality as every other Sanity image; phone screenshots are grouped into rows by PortableText.astro
+const image = { asset }
+const { width, srcFor } = sanityImageSizes(image)
 // Full-size version for the lightbox (CaseStudyLightbox.astro)
-const zoomSrc = urlForImage(asset).width(Math.min(width, 2400)).auto('format').url()
+const zoomSrc = srcFor(Math.min(width, 2400))
 ---
 
 <figure class="case-study-figure">
   <button type="button" class="zoomable block w-full" data-zoom={zoomSrc} aria-label={`Enlarge image: ${alt}`}>
-    <img
-      src={src}
-      srcset={srcset}
-      sizes="(min-width: 1280px) 720px, (min-width: 1024px) calc((100vw - 8rem) * 2 / 3), (min-width: 768px) calc((100vw - 6rem) * 2 / 3), calc(100vw - 2rem)"
-      width={width}
-      height={height}
+    <SanityImage
+      image={image}
       alt={alt}
-      decoding="async"
-      loading="lazy"
+      sizes="(min-width: 1280px) 720px, (min-width: 1024px) calc((100vw - 8rem) * 2 / 3), (min-width: 768px) calc((100vw - 6rem) * 2 / 3), calc(100vw - 2rem)"
       class="w-full h-auto rounded-media"
     />
   </button>
