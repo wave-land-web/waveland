@@ -90,7 +90,7 @@ const schema = [
 
   <main>
     <div
-      class="container lg:max-w-article mx-auto pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16"
+      class="grid grid-cols-1 gap-split md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,var(--container-prose-column))_minmax(0,1fr)]"
     >
       <PostTableOfContents post={currentCaseStudy} />
       <section id="case-study" class="py-0">
@@ -101,7 +101,7 @@ const schema = [
           </div>
         </div>
       </section>
-      <div class="hidden md:block"></div>
+      <div class="hidden xl:block"></div>
     </div>
     <section id="get-started">
       <ClosingCTA

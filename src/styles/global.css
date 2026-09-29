@@ -30,11 +30,17 @@
   --spacing-page-top: calc(4rem + var(--nav-height));
   --spacing-sticky: calc(var(--nav-height) + 1rem);
 
-  /* Content widths: max-w-narrow (intros), max-w-copy (centered copy and forms), max-w-article (a case study), max-w-wide (the case study list) */
+  /* Vertical rhythm, fluid like the type scale (360px to 1440px viewports).
+     py-section: above and below every section, so two sections sit 112px to 160px apart.
+     mb-header: from a page header to the content under it. */
+  --spacing-section: clamp(3.5rem, 3rem + 2.222vw, 5rem); /* 56px → 80px */
+  --spacing-header: clamp(4rem, 3.333rem + 2.963vw, 6rem); /* 64px → 96px */
+
+  /* Every page uses the nav's container, so content starts under the logo. Inside it:
+     max-w-narrow (intros), max-w-copy (centered copy and forms), max-w-prose-column (case study body) */
   --container-narrow: 36rem;
   --container-copy: 42rem;
-  --container-article: 72rem;
-  --container-wide: 80rem;
+  --container-prose-column: 45rem;
 
   /* Type scale: every size is fluid, scaling linearly from a 360px to a 1440px
      viewport and holding steady outside that band. Element rules below apply
@@ -133,17 +139,34 @@
   }
 }
 
-/* Two-column homepage sections (What I Do, Founder, What Every Build Includes, Testimonials)
-   use the same grid as the case study rows (TextAndImage), so every column lines up down the page */
-@utility section-split {
-  display: grid;
+/* Layout gaps, one per job:
+   stack: a heading and the text under it. gap-split: between columns. Small internals (icons, meta lines) use the spacing scale. */
+@utility stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @variant md {
+    gap: 1.5rem;
+  }
+}
+
+@utility gap-split {
   gap: 1.5rem;
   @variant md {
     gap: 2rem;
   }
   @variant lg {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4rem;
+  }
+}
+
+/* Two-column homepage sections (What I Do, Founder, What Every Build Includes, Testimonials)
+   use the same grid as the case study rows (TextAndImage), so every column lines up down the page */
+@utility section-split {
+  display: grid;
+  @apply gap-split;
+  @variant lg {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -234,7 +257,7 @@
   }
 
   section {
-    @apply py-14 md:py-20;
+    @apply py-section;
   }
 
   nav,

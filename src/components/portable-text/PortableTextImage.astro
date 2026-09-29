@@ -21,7 +21,7 @@ const zoomSrc = urlForImage(asset).width(Math.min(width, 2400)).auto('format').u
     <img
       src={src}
       srcset={srcset}
-      sizes="(min-width: 1024px) 720px, 100vw"
+      sizes="(min-width: 1280px) 720px, (min-width: 1024px) calc((100vw - 8rem) * 2 / 3), (min-width: 768px) calc((100vw - 6rem) * 2 / 3), calc(100vw - 2rem)"
       width={width}
       height={height}
       alt={alt}
