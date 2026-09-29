@@ -203,8 +203,7 @@
 /**
   * View transitions (progressive enhancement: browsers without them, and reduced motion, change instantly).
   * - Page to page: a crossfade, while the nav (view-transition-name: site-nav) holds still.
-  * - view-transition-class: move: elements that travel to a new place, like case study cards when the filter
-  *   changes, and a card's cover morphing into the case study header.
+  * - view-transition-class: move: elements that travel to a new place, like case study cards when the filter changes.
   * All of it runs on the motion tokens instead of the browser default (0.25s ease).
   */
 @media (prefers-reduced-motion: no-preference) {
@@ -222,13 +221,6 @@
   ::view-transition-group(site-nav) {
     z-index: 1;
   }
-
-  /* A card cover (16:9) and the header frame (wider) have different shapes: crop, don't stretch, while morphing */
-  ::view-transition-old(.move),
-  ::view-transition-new(.move) {
-    height: 100%;
-    object-fit: cover;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -237,12 +229,7 @@
   }
 }
 
-/* While a page arrives by view transition (Layout.astro sets vt-arrival, plus vt-from-list when a card morphs into
-   a case study header): the morphing cover skips its own entrance, and scroll reveals already on screen show at
-   once, so nothing animates twice */
-.vt-from-list [data-morph].hero-in {
-  animation: none;
-}
+/* While a page arrives by view transition (Layout.astro sets vt-arrival), scroll reveals already on screen show at once */
 .vt-arrival .lsa {
   transition: none;
 }

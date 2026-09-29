@@ -4,12 +4,9 @@ import LinkIcon from '../../assets/link.svg'
 import DateAndReadTime from '../ui/DateAndReadTime.astro'
 import Pill from '../ui/Pill.astro'
 import SanityImage from '../ui/SanityImage.astro'
-import { HERO_SIZES } from './hero'
 
 export interface Props {
   title: string
-  // Names the cover for the morph from a case study card (view transitions)
-  slug: string
   published: string
   minutesRead: number
   image: SanityAsset
@@ -18,7 +15,7 @@ export interface Props {
   liveUrl?: string
 }
 
-const { title, slug, published, minutesRead, image, imageAlt, services, liveUrl } = Astro.props
+const { title, published, minutesRead, image, imageAlt, services, liveUrl } = Astro.props
 
 // Pill colors match the homepage pills
 const serviceColors: Record<string, string> = {
@@ -70,15 +67,11 @@ const linkIndex = pillStart + services.length
       }
     </div>
     <!-- The frame clips the image so it can drift for a subtle parallax -->
-    <div
-      class="hero-frame mb-header hero-in"
-      style={`--i: 2; view-transition-name: cover-${slug}; view-transition-class: move`}
-      data-morph
-    >
+    <div class="hero-frame mb-header hero-in" style="--i: 2">
       <SanityImage
         image={image}
         alt={imageAlt}
-        sizes={HERO_SIZES}
+        sizes="(min-width: 1600px) 1536px, (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2rem)"
         priority
         class="hero-image"
       />

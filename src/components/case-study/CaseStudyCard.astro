@@ -1,8 +1,6 @@
 ---
 import type { SanityDocument } from '@sanity/client'
-import { sanityImageSizes } from '../../sanity/lib/urlForImage'
 import SanityImage from '../ui/SanityImage.astro'
-import { HERO_SIZES } from './hero'
 
 export interface Props {
   caseStudy: SanityDocument
@@ -19,15 +17,12 @@ const workedWithLabels: Record<string, string> = {
   'with-agency': 'with an agency',
   direct: 'direct client',
 }
-// The case study page's cover, so the list can fetch it when a card is hovered (it's then ready for the morph)
-const heroSrcset = sanityImageSizes(caseStudy.mainImage).srcset
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
 // The platform family the filters use: "Astro + Sanity" files under Astro
 const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<!-- View transitions name cards only while they're needed (data-vt-*): the filter names every card, and opening
-     or returning to a case study names just that card's cover, so it morphs into the page header and back -->
+<!-- The filter gives each card a view-transition name while it runs (data-vt-slug), so cards glide into place -->
 <article
   class:list={['lsa', featured && 'lg:col-span-2']}
   data-vt-slug={caseStudy.slug.current}
@@ -36,15 +31,13 @@ const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
-    data-hero-srcset={heroSrcset}
-    data-hero-sizes={HERO_SIZES}
     class:list={[
       'group rounded-media w-full h-full hover:text-white flex flex-col gap-4',
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',
     ]}
   >
     <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
-    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']} data-vt="cover">
+    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
       <SanityImage
         image={caseStudy.mainImage}
         alt={caseStudy.mainImage.alt}
