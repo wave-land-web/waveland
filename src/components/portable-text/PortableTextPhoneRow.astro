@@ -33,7 +33,7 @@ const widths = [240, 360, 480, 720]
                 .filter((w) => w <= width)
                 .map((w) => `${urlForImage(asset).width(w).auto('format').url()} ${w}w`)
                 .join(', ')}
-              sizes="(min-width: 1024px) 240px, (min-width: 768px) 33vw, 62vw"
+              sizes="(min-width: 1024px) 240px, (min-width: 768px) calc((100vw - 6rem) * 2 / 9), 62vw"
               width={width}
               height={height}
               alt={alt}
