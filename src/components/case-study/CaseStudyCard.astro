@@ -18,9 +18,16 @@ const workedWithLabels: Record<string, string> = {
   direct: 'direct client',
 }
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
+// The platform family the filters use: "Astro + Sanity" files under Astro
+const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<article class:list={['lsa', featured && 'lg:col-span-2']}>
+<!-- The view-transition-name lets cards glide into place when the filter changes -->
+<article
+  class:list={['lsa', featured && 'lg:col-span-2']}
+  data-platform={platformFamily}
+  style={`view-transition-name: case-${caseStudy.slug.current}`}
+>
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}

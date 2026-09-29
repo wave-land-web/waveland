@@ -123,6 +123,27 @@
   }
 }
 
+/* Toggle: a secondary pill that fills white while it's on (aria-pressed), like the primary button */
+@utility btn-toggle {
+  border-color: color-mix(in oklab, var(--color-white) 35%, transparent);
+  color: var(--color-white);
+  &:hover:not(:disabled),
+  &:focus-visible {
+    border-color: var(--color-white);
+    background-color: color-mix(in oklab, var(--color-white) 6%, transparent);
+  }
+  &[aria-pressed='true'] {
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+    color: var(--color-black);
+  }
+  /* On and hovered: purple, like a hovered primary button */
+  &[aria-pressed='true']:is(:hover, :focus-visible) {
+    background-color: var(--color-purple);
+    border-color: var(--color-purple);
+  }
+}
+
 /* Links: every hover changes more than color. Action and utility links underline on hover.
    The underline is always there but transparent, so it fades in at the same rate as the color
    (text-decoration-line itself can't transition). */
