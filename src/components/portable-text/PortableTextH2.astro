@@ -5,4 +5,5 @@ import { blockText, headingId } from '../../lib/text'
 const { node } = Astro.props
 ---
 
-<h2 id={headingId(blockText(node))} class="scroll-mt-15"><slot /></h2>
+<!-- tabindex lets the table of contents move focus here after scrolling to it -->
+<h2 id={headingId(blockText(node))} tabindex="-1" class="scroll-mt-15 outline-none"><slot /></h2>
