@@ -17,7 +17,7 @@ const variantClasses = variant === 'outline' ? 'border' : 'text-black shadow-sm'
     <a
       href={href}
       class:list={[
-        `${className} ${variantClasses} inline-block rounded-control text-label uppercase`,
+        `${className} ${variantClasses} inline-block rounded-control label`,
         { 'px-4 py-2': size === 'small' },
         { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}
@@ -27,7 +27,7 @@ const variantClasses = variant === 'outline' ? 'border' : 'text-black shadow-sm'
   ) : (
     <span
       class:list={[
-        `${className} ${variantClasses} inline-block rounded-control text-label uppercase`,
+        `${className} ${variantClasses} inline-block rounded-control label`,
         { 'px-4 py-2': size === 'small' },
         { 'px-4 py-2 md:px-6 md:py-4': size === 'big' },
       ]}

@@ -96,6 +96,7 @@ const business = {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!-- #101828 is --color-darkBlue (gray-900); meta tags can't read CSS variables -->
     <meta name="msapplication-TileColor" content="#101828" />
     <meta name="theme-color" content="#101828" />
   </head>
@@ -103,7 +104,7 @@ const business = {
   <body>
     <a
       href="#content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2 focus:z-50 focus:px-4 focus:py-3 focus:rounded-lg focus:bg-purple focus:text-black"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2 focus:z-50 focus:px-4 focus:py-3 focus:rounded-field focus:bg-purple focus:text-black"
       >Skip to Content</a
     >
     <Navigation />

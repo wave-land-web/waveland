@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/layout/Marquee.astro'
 
 const fieldClass =
-  'block w-full backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-lg px-4 py-3 shadow-md transition duration-(--transition) focus:outline-none focus:border-purple'
+  'block w-full backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey hover:border-purple rounded-field px-4 py-3 shadow-md transition duration-(--transition) focus:outline-none focus:border-purple'
 const labelClass = 'block mb-2 text-left text-label text-lightGrey'
 // Selects show their first option as a placeholder, in the same grey as the inputs' placeholders
 const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointer invalid:text-lightGrey/50 [&:has(option[value='']:checked)]:text-lightGrey/50 [&_option]:text-black`
@@ -29,7 +29,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         method="POST"
         name="contactForm"
         action="/success/"
-        class="max-w-2xl m-auto flex flex-col gap-6"
+        class="max-w-copy m-auto flex flex-col gap-6"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
@@ -178,7 +178,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
     </section>
 
     <section class="lsa lsa-slide-up">
-      <div class="max-w-2xl m-auto text-center">
+      <div class="max-w-copy m-auto text-center">
         <h2 class="mb-4">Prefer to Talk?</h2>
 
         <div class="flex flex-col gap-6 items-center">

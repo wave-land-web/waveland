@@ -4,6 +4,7 @@
   /* Corners: media for images, frames and cards; control for buttons and pills */
   --radius-media: 1rem;
   --radius-control: 9999px;
+  --radius-field: 0.5rem; /* form fields, code blocks, the skip link */
 
   --color-white: #fffafa;
   --color-black: var(--color-gray-950);
@@ -25,6 +26,16 @@
 
   --nav-height: clamp(6rem, 20vw, 8rem);
 
+  /* Offsets from the fixed nav: pt-page-top clears it at the top of a page, top-sticky is where sticky columns stop */
+  --spacing-page-top: calc(4rem + var(--nav-height));
+  --spacing-sticky: calc(var(--nav-height) + 1rem);
+
+  /* Content widths: max-w-narrow (intros), max-w-copy (centered copy and forms), max-w-article (a case study), max-w-wide (the case study list) */
+  --container-narrow: 36rem;
+  --container-copy: 42rem;
+  --container-article: 72rem;
+  --container-wide: 80rem;
+
   /* Type scale: every size is fluid, scaling linearly from a 360px to a 1440px
      viewport and holding steady outside that band. Element rules below apply
      these, so markup shouldn't need size utilities for headings or body copy. */
@@ -44,8 +55,19 @@
   --text-prose--line-height: 1.7;
   --text-label: clamp(0.9375rem, 0.917rem + 0.093vw, 1rem); /* 15px → 16px, nav, pills, captions */
   --text-label--line-height: 1.5;
+  --text-quote: 3.5rem; /* the decorative quote mark on testimonials */
+  --text-quote--line-height: 1;
 
+  /* Motion: --transition for hovers and small state changes, --duration-reveal for entrances (hero-in, lsa) */
   --transition: 200ms;
+  --duration-reveal: 700ms;
+}
+
+/* Small uppercase text: nav links, pills, the marquee heading */
+@utility label {
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  text-transform: uppercase;
 }
 
 /* Buttons: pills with solid edges. Dashed edges are for structure (cards, inputs, dividers); a solid pill is something you can press.
@@ -139,7 +161,7 @@
     * still shows if JavaScript is slow or blocked. Use `hero-in` for anything above the fold.
     */
   .lsa-on .lsa {
-    @apply opacity-0 transform transition duration-700;
+    @apply opacity-0 transform transition duration-(--duration-reveal);
 
     /* Slide animations */
     &.lsa-slide-up {
@@ -180,7 +202,7 @@
   */
 @media (prefers-reduced-motion: no-preference) {
   .hero-in {
-    animation: hero-rise 0.7s ease-out both;
+    animation: hero-rise var(--duration-reveal) ease-out both;
   }
 }
 
@@ -291,7 +313,7 @@
   }
 
   a {
-    @apply hover:text-purple transition-all duration-(--transition) ease-in-out;
+    @apply hover:text-purple transition-colors duration-(--transition) ease-in-out;
   }
 
   :focus-visible {
@@ -366,7 +388,7 @@
     }
 
     & pre {
-      @apply p-4 rounded-lg;
+      @apply p-4 rounded-field;
     }
 
     & ul:not(nav ul),
