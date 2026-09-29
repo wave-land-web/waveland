@@ -20,7 +20,7 @@ const workedWithLabels: Record<string, string> = {
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
 ---
 
-<article class:list={['lsa lsa-slide-up', featured && 'lg:col-span-2']}>
+<article class:list={['lsa', featured && 'lg:col-span-2']}>
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
