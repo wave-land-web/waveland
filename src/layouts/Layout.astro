@@ -54,7 +54,7 @@ const business = {
     <!-- Scroll animations only hide content once JavaScript is running -->
     <script is:inline>document.documentElement.classList.add('lsa-on')</script>
     <!-- View transitions between pages (see global.css for the timing):
-         - pageswap (old page): opening a case study names the clicked card's cover and title, to morph into its header
+         - pageswap (old page): opening a case study names the clicked card's cover, to morph into its header
          - pagereveal (new page): mark the arrival, name the matching card when returning to the list, and show the
            scroll reveals already on screen, so nothing is hidden or animated twice -->
     <script is:inline>
@@ -62,33 +62,57 @@ const business = {
         const slugOf = (url) => url && new URL(url).pathname.match(/^\/case-studies\/([^/]+)\/$/)?.[1]
         const isList = (url) => url && new URL(url).pathname === '/case-studies/'
         const nameCard = (slug, on) => {
-          const card = slug && document.querySelector(`[data-vt-slug="${slug}"]`)
-          if (!card) return
-          for (const part of ['cover', 'title']) {
-            const el = card.querySelector(`[data-vt="${part}"]`)
-            if (!el) continue
-            el.style.viewTransitionName = on ? `${part}-${slug}` : ''
-            el.style.viewTransitionClass = on ? `move ${part}` : ''
-          }
+          const cover = slug && document.querySelector(`[data-vt-slug="${slug}"] [data-vt="cover"]`)
+          if (!cover) return
+          cover.style.viewTransitionName = on ? `cover-${slug}` : ''
+          cover.style.viewTransitionClass = on ? 'move' : ''
+        }
+
+        const onScreen = (el) => {
+          const box = el.getBoundingClientRect()
+          return box.bottom > 0 && box.top < innerHeight
         }
 
         window.addEventListener('pageswap', (event) => {
-          if (event.viewTransition) nameCard(slugOf(event.activation?.entry?.url), true)
+          if (!event.viewTransition) return
+          // Remember where the list was, to put it back before the return transition (see pagereveal)
+          if (isList(location.href)) sessionStorage.setItem('vt-list-scroll', String(scrollY))
+          nameCard(slugOf(event.activation?.entry?.url), true)
+          // Leaving a case study: morph its cover back into the card only if the cover is on screen; one scrolled
+          // away would fly in from off screen, so it joins the crossfade instead
+          document.querySelectorAll('[data-morph][style*="view-transition-name"]').forEach((el) => {
+            if (onScreen(el)) return
+            el.dataset.vtName = el.style.viewTransitionName
+            el.style.viewTransitionName = 'none'
+          })
         })
 
         window.addEventListener('pagereveal', (event) => {
           const root = document.documentElement
-          // Names set for a transition that has finished (or a page restored from the back-forward cache)
+          // Undo names changed for a transition that has finished (a page restored from the back-forward cache)
           document.querySelectorAll('[data-vt]').forEach((el) => {
             el.style.viewTransitionName = ''
             el.style.viewTransitionClass = ''
+          })
+          document.querySelectorAll('[data-vt-name]').forEach((el) => {
+            el.style.viewTransitionName = el.dataset.vtName
+            delete el.dataset.vtName
           })
           if (!event.viewTransition) return
 
           const from = window.navigation?.activation?.from?.url
           root.classList.add('vt-arrival')
           if (isList(from)) root.classList.add('vt-from-list')
-          if (isList(location.href)) nameCard(slugOf(from), true)
+          // Back on the list: the card takes the cover back if it's on screen. The back button returns to where the
+          // card was clicked, but the browser restores that scroll only after the transition, so do it now
+          if (isList(location.href)) {
+            const saved = sessionStorage.getItem('vt-list-scroll')
+            if (window.navigation?.activation?.navigationType === 'traverse' && saved) {
+              window.scrollTo({ top: Number(saved), behavior: 'instant' })
+            }
+            const cover = document.querySelector(`[data-vt-slug="${slugOf(from)}"] [data-vt="cover"]`)
+            if (cover && onScreen(cover)) nameCard(slugOf(from), true)
+          }
 
           document.querySelectorAll('.lsa').forEach((el) => {
             if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')

@@ -8,7 +8,7 @@ import { HERO_SIZES } from './hero'
 
 export interface Props {
   title: string
-  // Names the cover and title for the morph from a case study card (view transitions)
+  // Names the cover for the morph from a case study card (view transitions)
   slug: string
   published: string
   minutesRead: number
@@ -40,10 +40,7 @@ const linkIndex = pillStart + services.length
       published={published}
       minutesRead={minutesRead}
     />
-    <!-- data-morph: skips its entrance when it arrives by morphing from a card (see Layout.astro) -->
-    <h1 class="text-left md:text-center hero-in" style="--i: 1" data-morph>
-      <span class="inline-block" style={`view-transition-name: title-${slug}; view-transition-class: move`}>{title}</span>
-    </h1>
+    <h1 class="text-left md:text-center hero-in" style="--i: 1">{title}</h1>
     <div class="flex flex-col items-start md:items-center gap-6 md:gap-8 mb-6 md:mb-8">
       <div class="flex flex-wrap gap-3">
         {
@@ -75,7 +72,7 @@ const linkIndex = pillStart + services.length
     <!-- The frame clips the image so it can drift for a subtle parallax -->
     <div
       class="hero-frame mb-header hero-in"
-      style={`--i: 2; view-transition-name: cover-${slug}; view-transition-class: move cover`}
+      style={`--i: 2; view-transition-name: cover-${slug}; view-transition-class: move`}
       data-morph
     >
       <SanityImage
