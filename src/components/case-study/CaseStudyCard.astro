@@ -22,11 +22,12 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
 const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
 ---
 
-<!-- The view-transition-name lets cards glide into place when the filter changes; the class sets its timing (global.css) -->
+<!-- View transitions name cards only while they're needed (data-vt-*): the filter names every card, and opening
+     or returning to a case study names just that card's cover and title, so they morph into its header and back -->
 <article
   class:list={['lsa', featured && 'lg:col-span-2']}
+  data-vt-slug={caseStudy.slug.current}
   data-platform={platformFamily}
-  style={`view-transition-name: case-${caseStudy.slug.current}; view-transition-class: move`}
 >
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
@@ -37,7 +38,7 @@ const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
     ]}
   >
     <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
-    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
+    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']} data-vt="cover">
       <SanityImage
         image={caseStudy.mainImage}
         alt={caseStudy.mainImage.alt}
@@ -54,7 +55,10 @@ const platformFamily = caseStudy.platform?.split(' + ')[0] ?? ''
     <div class="stack">
       <div class="flex flex-col gap-2">
         <h2 class={featured ? 'h2' : 'h3'}>
-          <span class="underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:text-purple group-hover:decoration-current group-focus-visible:text-purple group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out">
+          <span
+            data-vt="title"
+            class="inline-block underline decoration-1 underline-offset-[0.2em] decoration-transparent group-hover:text-purple group-hover:decoration-current group-focus-visible:text-purple group-focus-visible:decoration-current transition-colors duration-(--transition) ease-in-out"
+          >
             {caseStudy.title}
           </span>
         </h2>

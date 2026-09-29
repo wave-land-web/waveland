@@ -53,6 +53,53 @@ const business = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Scroll animations only hide content once JavaScript is running -->
     <script is:inline>document.documentElement.classList.add('lsa-on')</script>
+    <!-- View transitions between pages (see global.css for the timing):
+         - pageswap (old page): opening a case study names the clicked card's cover and title, to morph into its header
+         - pagereveal (new page): mark the arrival, name the matching card when returning to the list, and show the
+           scroll reveals already on screen, so nothing is hidden or animated twice -->
+    <script is:inline>
+      ;(() => {
+        const slugOf = (url) => url && new URL(url).pathname.match(/^\/case-studies\/([^/]+)\/$/)?.[1]
+        const isList = (url) => url && new URL(url).pathname === '/case-studies/'
+        const nameCard = (slug, on) => {
+          const card = slug && document.querySelector(`[data-vt-slug="${slug}"]`)
+          if (!card) return
+          for (const part of ['cover', 'title']) {
+            const el = card.querySelector(`[data-vt="${part}"]`)
+            if (!el) continue
+            el.style.viewTransitionName = on ? `${part}-${slug}` : ''
+            el.style.viewTransitionClass = on ? 'move' : ''
+          }
+        }
+
+        window.addEventListener('pageswap', (event) => {
+          if (event.viewTransition) nameCard(slugOf(event.activation?.entry?.url), true)
+        })
+
+        window.addEventListener('pagereveal', (event) => {
+          const root = document.documentElement
+          // Names set for a transition that has finished (or a page restored from the back-forward cache)
+          document.querySelectorAll('[data-vt]').forEach((el) => {
+            el.style.viewTransitionName = ''
+            el.style.viewTransitionClass = ''
+          })
+          if (!event.viewTransition) return
+
+          const from = window.navigation?.activation?.from?.url
+          root.classList.add('vt-arrival')
+          if (isList(from)) root.classList.add('vt-from-list')
+          if (isList(location.href)) nameCard(slugOf(from), true)
+
+          document.querySelectorAll('.lsa').forEach((el) => {
+            if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
+          })
+          event.viewTransition.finished.finally(() => {
+            root.classList.remove('vt-arrival', 'vt-from-list')
+            nameCard(slugOf(from), false)
+          })
+        })
+      })()
+    </script>
 
     <!-- SEO -->
     <title>{title}</title>
@@ -120,6 +167,13 @@ const business = {
       function handleAnimations() {
         const elements = document.querySelectorAll('.lsa')
         if (elements.length === 0) return
+
+        // Arriving by view transition: anything parsed after the transition started, and already on screen, shows at once
+        if (document.documentElement.classList.contains('vt-arrival')) {
+          elements.forEach((el) => {
+            if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
+          })
+        }
 
         // Without IntersectionObserver, show everything rather than leave it hidden
         if (!('IntersectionObserver' in window)) {

@@ -111,8 +111,15 @@ const filters = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0
         const filter = button.dataset.filter ?? 'all'
         const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
         // Cards glide to their new places where view transitions are supported
-        if (document.startViewTransition && !reduce) document.startViewTransition(() => apply(filter))
-        else apply(filter)
+        if (!document.startViewTransition || reduce) return apply(filter)
+        // Name every card for this transition only (a name each), then clear them
+        const name = (on: boolean) =>
+          cards.forEach((card) => {
+            card.style.viewTransitionName = on ? `case-${card.dataset.vtSlug}` : ''
+            card.style.viewTransitionClass = on ? 'move' : ''
+          })
+        name(true)
+        document.startViewTransition(() => apply(filter)).finished.finally(() => name(false))
       }),
     )
 
