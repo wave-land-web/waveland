@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 
 @theme {
+  /* Corners: media for images, frames and cards; control for buttons and pills */
+  --radius-media: 1rem;
+  --radius-control: 9999px;
+
   --color-white: #fffafa;
   --color-black: var(--color-gray-950);
   --color-darkBlue: var(--color-gray-900);
@@ -51,7 +55,7 @@
   width: fit-content;
   border-width: 1px;
   border-style: solid;
-  border-radius: 9999px;
+  border-radius: var(--radius-control);
   font-weight: 600;
   line-height: 1.25;
   text-align: center;
@@ -230,7 +234,7 @@
   }
 
   img {
-    @apply rounded-2xl drop-shadow-2xl;
+    @apply rounded-media drop-shadow-2xl;
   }
 
   svg:not(svg[data-icon='title']) {
@@ -291,7 +295,7 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-purple rounded-sm;
+    @apply outline-2 outline-offset-4 outline-purple;
   }
 
   button {
@@ -305,7 +309,7 @@
   }
 
   .text-container {
-    @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey rounded-2xl p-6 md:p-8 shadow-md transition duration-(--transition);
+    @apply h-auto flex flex-col gap-6 md:gap-8 backdrop-blur-sm bg-white/1 border border-dashed border-darkGrey rounded-media p-6 md:p-8 shadow-md transition duration-(--transition);
   }
 
   /* Case Studies */

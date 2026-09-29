@@ -25,12 +25,12 @@ const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
     class:list={[
-      'group w-full h-full hover:text-white flex flex-col gap-4',
+      'group rounded-media w-full h-full hover:text-white flex flex-col gap-4',
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',
     ]}
   >
     <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
-    <div class:list={['overflow-hidden rounded-2xl', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
+    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
       <SanityImage
         image={caseStudy.mainImage}
         alt={caseStudy.mainImage.alt}
