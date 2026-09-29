@@ -23,24 +23,30 @@ const serviceColors: Record<string, string> = {
   Strategy: 'border-orange text-orange',
   Partnership: 'border-green text-green',
 }
+
+// Entrance order, like the homepage hero: date, title, each pill, the live link. The image starts early
+// (it's the largest thing on the page, and holding it back would delay when the page looks loaded).
+const pillStart = 2
+const linkIndex = pillStart + services.length
 ---
 
-<header class="pt-page-top text-left hero-in">
+<header class="pt-page-top text-left">
   <div class="stack justify-center">
     <DateAndReadTime
-      class="justify-start md:justify-center"
+      class="justify-start md:justify-center hero-in"
       published={published}
       minutesRead={minutesRead}
     />
-    <h1 class="text-left md:text-center">{title}</h1>
+    <h1 class="text-left md:text-center hero-in" style="--i: 1">{title}</h1>
     <div class="flex flex-col items-start md:items-center gap-6 md:gap-8 mb-6 md:mb-8">
       <div class="flex flex-wrap gap-3">
         {
-          services.map((service: string) => (
+          services.map((service: string, i: number) => (
             <Pill
               text={`${service}`}
               size="small"
               class={`${serviceColors[service]} hero-in`}
+              style={`--i: ${pillStart + i}`}
             />
           ))
         }
@@ -49,7 +55,8 @@ const serviceColors: Record<string, string> = {
         liveUrl && (
           <a
             href={liveUrl}
-            class="flex items-center gap-2 font-header text-grey hover:text-purple link-underline"
+            class="flex items-center gap-2 font-header text-grey hover:text-purple link-underline hero-in"
+            style={`--i: ${linkIndex}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,7 +67,7 @@ const serviceColors: Record<string, string> = {
       }
     </div>
     <!-- The frame clips the image so it can drift for a subtle parallax -->
-    <div class="hero-frame mb-header">
+    <div class="hero-frame mb-header hero-in" style="--i: 2">
       <SanityImage
         image={image}
         alt={imageAlt}
