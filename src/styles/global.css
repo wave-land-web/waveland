@@ -295,7 +295,7 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-purple;
+    @apply outline-2 outline-offset-4 outline-purple rounded-sm;
   }
 
   button {
