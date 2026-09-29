@@ -20,22 +20,25 @@ const workedWithLabels: Record<string, string> = {
 const meta = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean).join(', ')
 ---
 
-<article class:list={['lsa lsa-slide-up group', featured && 'lg:col-span-2']}>
+<article class:list={['lsa lsa-slide-up', featured && 'lg:col-span-2']}>
   <!-- The whole card is the link; the title underlines when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
     class:list={[
-      'w-full h-full hover:text-white flex flex-col gap-4',
+      'group rounded-media w-full h-full hover:text-white flex flex-col gap-4',
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',
     ]}
   >
-    <SanityImage
-      image={caseStudy.mainImage}
-      alt={caseStudy.mainImage.alt}
-      sizes={featured ? '(min-width: 1024px) 720px, calc(100vw - 2rem)' : '(min-width: 1024px) 600px, calc(100vw - 2rem)'}
-      priority={priority}
-      class={`${featured ? 'mb-4 lg:mb-0' : 'mb-4'} w-full h-auto aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-linear`}
-    />
+    <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
+    <div class:list={['overflow-hidden rounded-media', featured ? 'mb-4 lg:mb-0' : 'mb-4']}>
+      <SanityImage
+        image={caseStudy.mainImage}
+        alt={caseStudy.mainImage.alt}
+        sizes={featured ? '(min-width: 1024px) 720px, calc(100vw - 2rem)' : '(min-width: 1024px) 600px, calc(100vw - 2rem)'}
+        priority={priority}
+        class="w-full h-auto aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-linear"
+      />
+    </div>
 
     <div class:list={['flex flex-col gap-4', featured && 'lg:gap-6']}>
       <div class="flex flex-col gap-2">
