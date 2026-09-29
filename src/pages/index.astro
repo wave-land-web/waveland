@@ -164,21 +164,21 @@ const faqSchema = {
             <h2>What I Do</h2>
             <ul class="grid grid-cols-1 gap-4 md:gap-8">
               <li class="lsa flex gap-4 items-start">
-                <AppWindowIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-purple" />
+                <AppWindowIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-purple" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-purple">Development</h3>
                   <p class="text-grey text-prose">Built from your designs, on the platform your client already uses.</p>
                 </div>
               </li>
               <li class="lsa flex gap-4 items-start" style="--i: 1">
-                <ChartColumnIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-orange" />
+                <ChartColumnIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-orange" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-orange">Strategy</h3>
                   <p class="text-grey text-prose">Platform, CMS and content decisions, made before the build starts.</p>
                 </div>
               </li>
               <li class="lsa flex gap-4 items-start" style="--i: 2">
-                <SunsetTwoIcon class="flex-shrink-0 w-8 md:w-10 h-auto stroke-2 text-green" />
+                <SunsetTwoIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-green" />
                 <div class="flex flex-col gap-1">
                   <h3 class="h4 text-green">Partnership</h3>
                   <p class="text-grey text-prose">White-label or alongside your team, from the first call to after launch.</p>
@@ -221,9 +221,10 @@ const faqSchema = {
 
         <div>
           {
-            faqs.map((faq) => (
-              <details class="mb-4 group">
-                <summary class="flex justify-between gap-4 group-open:text-purple group-hover:text-purple transition duration-(--transition) cursor-pointer">
+            // One open at a time (name groups them); the first starts open
+            faqs.map((faq, i) => (
+              <details name="faq" open={i === 0} class="mb-4 group">
+                <summary class="flex justify-between gap-4 group-open:text-purple group-open:font-semibold group-hover:text-purple transition duration-(--transition) cursor-pointer">
                   {faq.question}
                 </summary>
                 <p class="py-4 text-lightGrey text-prose">{faq.answer}</p>
@@ -262,23 +263,4 @@ const faqSchema = {
       display: none;
     }
   </style>
-
-  <script>
-    const details = document.querySelectorAll('details')
-    const firstDetail = details[0]
-
-    // Open the first detail by default
-    firstDetail.setAttribute('open', '')
-
-    // Close all details that are not targetDetail
-    details.forEach((targetDetail) => {
-      targetDetail.addEventListener('click', () => {
-        details.forEach((detail) => {
-          if (detail !== targetDetail) {
-            detail.removeAttribute('open')
-          }
-        })
-      })
-    })
-  </script>
 </Layout>
