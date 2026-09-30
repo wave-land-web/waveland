@@ -1,9 +1,9 @@
 ---
-import type { Testimonial } from '../../lib/data/testimonials'
+import type { TESTIMONIALS_QUERY_RESULT } from '../../sanity/sanity.types'
 import ArrowIcon from './ArrowIcon'
 
 export interface Props {
-  data: Testimonial[]
+  data: TESTIMONIALS_QUERY_RESULT
 }
 
 const { data } = Astro.props
@@ -20,14 +20,14 @@ const { data } = Astro.props
           </span>
           <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
           <cite class="not-italic text-label text-grey">
-            {testimonial.href ? (
+            {testimonial.link ? (
               <a
                 class="link-arrow text-purple hocus:text-white"
-                href={testimonial.href}
-                {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
+                href={testimonial.link}
+                {...(testimonial.link.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
               >
                 {testimonial.citation}
-                <ArrowIcon direction={testimonial.href.startsWith('http') ? 'external' : 'right'} />
+                <ArrowIcon direction={testimonial.link.startsWith('http') ? 'external' : 'right'} />
               </a>
             ) : (
               testimonial.citation

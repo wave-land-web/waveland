@@ -19,6 +19,13 @@ export const structure: StructureResolver = (S) => {
                 .title('Case Study Order')
                 .icon(SortIcon)
                 .child(S.document().schemaType('case-study-order').documentId('case-study-order').title('Case Study Order')),
+              S.documentTypeListItem('testimonial')
+                .title('Testimonials')
+                .child(
+                  S.documentTypeList('testimonial')
+                    .title('Testimonials')
+                    .defaultOrdering([{ field: 'order', direction: 'asc' }]),
+                ),
             ]),
         ),
     ])

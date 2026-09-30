@@ -17,7 +17,35 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (Rule) => Rule.required().error('Please add a description'),
+      description: 'Shown on the case study card, and in search results unless Search and Sharing has its own',
+      validation: (Rule) => [
+        Rule.required().error('Please add a description'),
+        Rule.max(160).warning('Search results cut descriptions off at about 160 characters'),
+      ],
+    }),
+    defineField({
+      name: 'seo',
+      title: 'Search and Sharing',
+      type: 'object',
+      description: 'Optional. Leave blank to use the title and description above.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Search Title',
+          type: 'string',
+          description: 'Replaces "<Title> Case Study | Wave Land" in search results and link previews',
+          validation: (Rule) => Rule.max(60).warning('Search results cut titles off at about 60 characters'),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Search Description',
+          type: 'text',
+          rows: 3,
+          description: 'Replaces the description in search results and link previews',
+          validation: (Rule) => Rule.max(160).warning('Search results cut descriptions off at about 160 characters'),
+        }),
+      ],
     }),
     defineField({
       name: 'liveUrl',
