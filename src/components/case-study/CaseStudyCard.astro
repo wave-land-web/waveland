@@ -43,16 +43,14 @@ const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
             : '(min-width: 1024px) calc((min(100vw, 1600px) - 7rem) / 2), (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2rem)'
         }
         priority={priority}
-        class="w-full h-auto aspect-video brightness-90 group-hover:brightness-100 group-hover:scale-102 group-focus-visible:scale-102 transition-all duration-(--transition) ease-in-out"
+        class="w-full h-auto aspect-video brightness-90 group-hover:brightness-100 group-hocus:scale-102 transition-all duration-(--transition) ease-in-out"
       />
     </div>
 
     <div class="stack">
       <div class="flex flex-col gap-3">
         <h2 class={featured ? 'h2' : 'h3'}>
-          <span class="group-hover:text-purple group-focus-visible:text-purple transition-colors duration-(--transition) ease-in-out">
-            {caseStudy.title}
-          </span>
+          <span class="group-hocus:text-purple transition-colors duration-(--transition) ease-in-out">{caseStudy.title}</span>
         </h2>
         {tags.length > 0 && (
           <ul class="flex flex-wrap gap-2">

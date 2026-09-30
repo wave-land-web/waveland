@@ -1,5 +1,41 @@
 @import 'tailwindcss';
 
+/* Hover and keyboard focus, as one variant, so a focus state is never forgotten. Hover only counts on devices that hover,
+   like Tailwind's own hover: variant.
+   hocus: the element itself. hocus-within: it, or a focused element inside it. group-hocus: an ancestor .group. */
+@custom-variant hocus {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &:focus-visible {
+    @slot;
+  }
+}
+
+@custom-variant hocus-within {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &:has(:focus-visible) {
+    @slot;
+  }
+}
+
+@custom-variant group-hocus {
+  @media (hover: hover) {
+    &:is(:where(.group):hover *) {
+      @slot;
+    }
+  }
+  &:is(:where(.group):focus-visible *, :where(.group):has(:focus-visible) *) {
+    @slot;
+  }
+}
+
 @theme {
   /* Corners: media for images, frames and cards; control for buttons and pills */
   --radius-media: 1rem;

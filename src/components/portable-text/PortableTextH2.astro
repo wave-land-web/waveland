@@ -18,11 +18,11 @@ const hasLink = (node.markDefs ?? []).some((def: { _type: string }) => def._type
     hasLink ? (
       <slot />
     ) : (
-      <a href={`#${id}`} class="group text-inherit hover:text-purple focus-visible:text-purple transition-colors duration-(--transition)">
+      <a href={`#${id}`} class="group text-inherit hocus:text-purple transition-colors duration-(--transition)">
         <slot /><Icon
           name="tabler:link"
           aria-hidden="true"
-          class="inline-block size-[0.6em] ml-[0.25em] align-middle stroke-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-(--transition)"
+          class="inline-block size-[0.6em] ml-[0.25em] align-middle stroke-2 opacity-0 group-hocus:opacity-100 transition-opacity duration-(--transition)"
         />
       </a>
     )

@@ -34,9 +34,7 @@ export default function Link({ text, url, size = 'body', newWindow, color = 'pur
     <a
       href={url}
       {...(newWindow && { target: '_blank', rel: 'noopener noreferrer' })}
-      className={[sizeClasses[size], linkClass, 'link-arrow hover:text-white focus-visible:text-white', colorClasses[color]]
-        .filter(Boolean)
-        .join(' ')}
+      className={[sizeClasses[size], linkClass, 'link-arrow hocus:text-white', colorClasses[color]].filter(Boolean).join(' ')}
     >
       {keepHyphenatedWordsTogether(text)}
       <ArrowIcon direction={newWindow ? 'external' : 'right'} />
