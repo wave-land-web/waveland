@@ -19,36 +19,32 @@ const steps = [
       <p class="text-lightGrey mb-12 md:mb-16">Thanks for reaching out. Here's what happens next.</p>
 
       <ol class="steps flex flex-col gap-(--gap) [--gap:2.5rem] md:[--gap:3rem]">
-        {
-          steps.map((step, i) => (
-            <li class="relative pl-12 md:pl-14">
-              <span
-                class:list={[
-                  'step-dot absolute left-0 top-[0.35em] size-6 rounded-full border border-dashed grid place-items-center',
-                  i === 0 ? 'is-done border-purple bg-darkBlue' : 'border-darkGrey bg-darkBlue',
-                ]}
-                aria-hidden="true"
+        {steps.map((step, i) => (
+          <li class="relative pl-12 md:pl-14">
+            <span
+              class:list={[
+                'step-dot absolute left-0 top-[0.35em] size-6 rounded-full border border-dashed grid place-items-center',
+                i === 0 ? 'is-done border-purple bg-darkBlue' : 'border-darkGrey bg-darkBlue',
+              ]}
+              aria-hidden="true"
+            />
+            <h2 class:list={['h5 mb-1', i === 0 ? 'text-white' : 'text-lightGrey']}>
+              {step.title}
+              {i === 0 && <span class="sr-only">(done)</span>}
+            </h2>
+            <p class="text-grey text-label">{step.body}</p>
+            {i === 2 && (
+              <CTA
+                tag="link"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                text="Book a 15-Minute Call"
+                className="inline-block mt-5"
               />
-              <h2 class:list={['h5 mb-1', i === 0 ? 'text-white' : 'text-lightGrey']}>
-                {step.title}
-                {i === 0 && <span class="sr-only">(done)</span>}
-              </h2>
-              <p class="text-grey text-label">{step.body}</p>
-              {
-                i === 2 && (
-                  <CTA
-                    tag="link"
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    text="Book a 15-Minute Call"
-                    className="inline-block mt-5"
-                  />
-                )
-              }
-            </li>
-          ))
-        }
+            )}
+          </li>
+        ))}
       </ol>
 
       <div class="mt-16 pt-8 border-t border-dashed border-darkGrey">

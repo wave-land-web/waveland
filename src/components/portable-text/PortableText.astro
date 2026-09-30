@@ -9,22 +9,25 @@ import { assetDimensions } from '../../sanity/lib/urlForImage'
 
 const { portableText } = Astro.props
 
+// The fields this file reads from body blocks; everything else passes through to astro-portabletext
+type Block = { _type: string; _key: string; asset?: { _ref?: string }; images?: Block[] }
+
 // Portrait screenshots are phone shots
-const isPhoneShot = (block: any) => {
+const isPhoneShot = (block: Block) => {
   const [width = 0, height = 0] = block?._type === 'image' ? assetDimensions(block.asset?._ref) : []
   return height > width
 }
 
 // Consecutive phone screenshots render side by side as one row
-const value = (portableText ?? []).reduce((blocks: any[], block: any) => {
+const value = ((portableText ?? []) as Block[]).reduce((blocks: Block[], block) => {
   const previous = blocks.at(-1)
   if (!isPhoneShot(block)) return [...blocks, block]
   if (previous?._type === 'phoneRow') {
-    previous.images.push(block)
+    previous.images?.push(block)
     return blocks
   }
   return [...blocks, { _type: 'phoneRow', _key: `${block._key}-row`, images: [block] }]
-}, [])
+}, [] as Block[])
 
 const components = {
   type: {

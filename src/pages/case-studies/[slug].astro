@@ -89,9 +89,7 @@ const schema = [
   />
 
   <main>
-    <div
-      class="grid grid-cols-1 gap-split md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,var(--container-prose-column))_minmax(0,1fr)]"
-    >
+    <div class="grid grid-cols-1 gap-split md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,var(--container-prose-column))_minmax(0,1fr)]">
       <PostTableOfContents post={currentCaseStudy} />
       <section id="case-study" class="py-0">
         <div id="case-study-content" class="flex flex-col gap-[1lh]">
@@ -104,10 +102,7 @@ const schema = [
       <div class="hidden xl:block"></div>
     </div>
     <section id="get-started">
-      <ClosingCTA
-        title="Working on Something Like This?"
-        description="Tell me what you're building. I reply within 48 hours."
-      />
+      <ClosingCTA title="Working on Something Like This?" description="Tell me what you're building. I reply within 48 hours." />
     </section>
   </main>
   <CaseStudyLightbox />

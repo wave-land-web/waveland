@@ -20,9 +20,7 @@ const alignClasses = {
 }
 ---
 
-<header
-  class:list={[alignClasses[align], 'mb-header pt-page-top stack justify-center hero-in']}
->
+<header class:list={[alignClasses[align], 'mb-header pt-page-top stack justify-center hero-in']}>
   {title && <p class="font-header text-purple text-prose">{title}</p>}
   <h1>{subtitle}</h1>
   {bodyText && <p class="max-w-narrow mb-4 text-lightGrey">{bodyText}</p>}

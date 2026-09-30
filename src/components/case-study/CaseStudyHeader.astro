@@ -32,39 +32,28 @@ const linkIndex = pillStart + services.length
 
 <header class="pt-page-top text-left">
   <div class="stack justify-center">
-    <DateAndReadTime
-      class="justify-start md:justify-center hero-in"
-      published={published}
-      minutesRead={minutesRead}
-    />
-    <h1 class="text-left md:text-center hero-in" style="--i: 1">{title}</h1>
+    <DateAndReadTime class="justify-start md:justify-center hero-in" published={published} minutesRead={minutesRead} />
+    <h1 class="text-left md:text-center hero-in" style="--i: 1">
+      {title}
+    </h1>
     <div class="flex flex-col items-start md:items-center gap-6 md:gap-8 mb-6 md:mb-8">
       <div class="flex flex-wrap gap-3">
-        {
-          services.map((service: string, i: number) => (
-            <Pill
-              text={service}
-              size="small"
-              class={`${serviceColors[service]} hero-in`}
-              style={`--i: ${pillStart + i}`}
-            />
-          ))
-        }
+        {services.map((service: string, i: number) => (
+          <Pill text={service} size="small" class={`${serviceColors[service]} hero-in`} style={`--i: ${pillStart + i}`} />
+        ))}
       </div>
-      {
-        liveUrl && (
-          <a
-            href={liveUrl}
-            class="link-arrow font-header text-grey hover:text-purple hero-in"
-            style={`--i: ${linkIndex}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit Live Site
-            <ArrowIcon direction="external" />
-          </a>
-        )
-      }
+      {liveUrl && (
+        <a
+          href={liveUrl}
+          class="link-arrow font-header text-grey hover:text-purple hero-in"
+          style={`--i: ${linkIndex}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Live Site
+          <ArrowIcon direction="external" />
+        </a>
+      )}
     </div>
     <!-- The frame clips the image so it can drift for a subtle parallax -->
     <div class="hero-frame mb-header hero-in" style="--i: 2">

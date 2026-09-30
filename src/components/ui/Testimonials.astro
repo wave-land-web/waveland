@@ -11,27 +11,31 @@ const { data } = Astro.props
 
 <div class="swiper">
   <div class="swiper-wrapper mb-12">
-    {
-      data.map((testimonial) => (
-        <blockquote class="swiper-slide">
-          <!-- Swiper sets slides to display: block, so the card layout lives on an inner element -->
-          <div class="text-container gap-4 md:gap-6">
-            <span aria-hidden="true" class="block font-header text-purple text-quote h-[0.5em]">“</span>
-            <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
-            <cite class="not-italic text-label text-grey">
-              {testimonial.href ? (
-                <a class="link-arrow text-purple hover:text-white focus-visible:text-white" href={testimonial.href} {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
-                  {testimonial.citation}
-                  <ArrowIcon direction={testimonial.href.startsWith('http') ? 'external' : 'right'} />
-                </a>
-              ) : (
-                testimonial.citation
-              )}
-            </cite>
-          </div>
-        </blockquote>
-      ))
-    }
+    {data.map((testimonial) => (
+      <blockquote class="swiper-slide">
+        <!-- Swiper sets slides to display: block, so the card layout lives on an inner element -->
+        <div class="text-container gap-4 md:gap-6">
+          <span aria-hidden="true" class="block font-header text-purple text-quote h-[0.5em]">
+            “
+          </span>
+          <p class="font-header text-h5 text-lightGrey">{testimonial.quote}</p>
+          <cite class="not-italic text-label text-grey">
+            {testimonial.href ? (
+              <a
+                class="link-arrow text-purple hover:text-white focus-visible:text-white"
+                href={testimonial.href}
+                {...(testimonial.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
+              >
+                {testimonial.citation}
+                <ArrowIcon direction={testimonial.href.startsWith('http') ? 'external' : 'right'} />
+              </a>
+            ) : (
+              testimonial.citation
+            )}
+          </cite>
+        </div>
+      </blockquote>
+    ))}
   </div>
   <div class="swiper-pagination !text-left !bottom-0"></div>
 </div>

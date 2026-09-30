@@ -52,7 +52,9 @@ const business = {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Scroll animations only hide content once JavaScript is running -->
-    <script is:inline>document.documentElement.classList.add('lsa-on')</script>
+    <script is:inline>
+      document.documentElement.classList.add('lsa-on')
+    </script>
     <!-- Pages crossfade by view transition (global.css). Runs before the first frame of a page reached that way:
          scroll reveals already on screen show at once, so they don't fade in a second time after the crossfade -->
     <script is:inline>
@@ -70,7 +72,6 @@ const business = {
         event.viewTransition.finished.finally(() => root.classList.remove('vt-arrival'))
       })
     </script>
-
     <!-- SEO -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -79,11 +80,9 @@ const business = {
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {
-      [business, ...schema].map((data) => (
-        <script type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
-      ))
-    }
+    {[business, ...schema].map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    ))}
 
     <!-- Facebook -->
     <meta property="og:url" content={canonicalURL} />
@@ -122,8 +121,9 @@ const business = {
     <a
       href="#content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2 focus:z-50 focus:px-4 focus:py-3 focus:rounded-field focus:bg-purple focus:text-black"
-      >Skip to Content</a
     >
+      Skip to Content
+    </a>
     <Navigation />
     <!-- Skip link target, just below the fixed nav -->
     <div id="content" tabindex="-1" class="outline-none"></div>

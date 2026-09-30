@@ -1,5 +1,6 @@
 ---
-const { node, index, isInline, ...attrs } = Astro.props
+// index and isInline are astro-portabletext's own props; pulled out so they don't land on the <a>
+const { node, index: _index, isInline: _isInline, ...attrs } = Astro.props
 const href: string = node.markDef?.href ?? ''
 
 // Links to other sites open in a new tab; links on wavelandweb.com stay in this one
@@ -7,4 +8,6 @@ const siteHost = new URL(Astro.site ?? 'https://wavelandweb.com').host
 const isExternal = URL.canParse(href) && /^https?:$/.test(new URL(href).protocol) && new URL(href).host !== siteHost
 ---
 
+<!-- On one line: whitespace around the slot would be underlined as part of the link -->
+<!-- prettier-ignore -->
 <a href={href} {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })} {...attrs}><slot /></a>

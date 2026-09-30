@@ -3,38 +3,25 @@ import { CALENDLY_URL } from '../../lib/site'
 import { Image } from 'astro:assets'
 import headshot from '../../assets/headshot.webp'
 import CTA from './CTA'
-
 ---
 
 <section id="founder" class="founder">
   <div class="section-split items-center lsa">
     <figure class="founder-photo">
-      <Image
-        src={headshot}
-        alt="Josh Nussbaum, founder of Wave Land"
-        width={640}
-        height={640}
-        layout="constrained"
-        class="rounded-media"
-      />
+      <Image src={headshot} alt="Josh Nussbaum, founder of Wave Land" width={640} height={640} layout="constrained" class="rounded-media" />
     </figure>
 
     <div class="stack">
       <h2>Hi, I’m Josh.</h2>
       <p class="text-lightGrey">
-        Before web development, I spent 10+ years as a session guitarist. The stage looks different
-        these days, but the job is the same: learn the material deeply, serve the project, and make
-        everyone around me sound good.
+        Before web development, I spent 10+ years as a session guitarist. The stage looks different these days, but the job is the same:
+        learn the material deeply, serve the project, and make everyone around me sound good.
       </p>
       <p class="text-lightGrey">
-        My first development job was in-house, building for brands like L’Oréal and AAA. It taught
-        me that I do my best work as a partner, not just a pair of hands. Agencies working at that
-        level need exactly that.
+        My first development job was in-house, building for brands like L’Oréal and AAA. It taught me that I do my best work as a partner,
+        not just a pair of hands. Agencies working at that level need exactly that.
       </p>
-      <p class="text-lightGrey">
-        When you work with Wave Land, you work with me, from the first call to launch day and
-        after.
-      </p>
+      <p class="text-lightGrey">When you work with Wave Land, you work with me, from the first call to launch day and after.</p>
 
       <CTA
         tag="link"

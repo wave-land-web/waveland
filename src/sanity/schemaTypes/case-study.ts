@@ -30,14 +30,12 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description:
-        'The "slug" will be the URL path for your case study - ex/ wavelandweb.com/case-studies/supervoid',
+      description: 'The "slug" will be the URL path for your case study - ex/ wavelandweb.com/case-studies/supervoid',
       options: {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) =>
-        Rule.required().error('Please create your own, or click "generate" to add a slug'),
+      validation: (Rule) => Rule.required().error('Please create your own, or click "generate" to add a slug'),
     }),
     defineField({
       name: 'mainImage',
@@ -114,10 +112,7 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
       description: 'Add content here',
-      validation: (Rule) =>
-        Rule.required().error(
-          'Body text is required to create a case study - please add some text'
-        ),
+      validation: (Rule) => Rule.required().error('Body text is required to create a case study - please add some text'),
     }),
   ],
   preview: {
