@@ -1,7 +1,7 @@
 ---
-// Logos load as image files, cached once across pages. Inlined, they added ~300 KB to every page.
+// Logos load as image files, cached once across pages (?no-inline stops Vite inlining the small ones into every page's HTML, twice).
 // Not lazy: the strip scrolls sideways, and lazy logos outside the viewport would slide in blank.
-const files = import.meta.glob<string>('../../assets/logos/*.svg', { eager: true, query: '?url', import: 'default' })
+const files = import.meta.glob<string>('../../assets/logos/*.svg', { eager: true, query: '?no-inline', import: 'default' })
 const sources = import.meta.glob<string>('../../assets/logos/*.svg', { eager: true, query: '?raw', import: 'default' })
 
 // Every logo covers about this many square pixels
