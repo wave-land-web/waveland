@@ -22,13 +22,13 @@ function headingId(text: string) {
 }
 
 /**
- * The platform family a case study files under for the filters: "Astro + Sanity" counts as Astro.
+ * The platforms a case study files under for the filters: "Astro + Sanity" counts as both Astro and Sanity.
  *
  * @param platform - The case study's platform field
- * @returns The family, or '' when there's no platform
+ * @returns Each platform in it, e.g. ['Astro', 'Sanity'], or [] when there's none
  */
-function platformFamily(platform?: string) {
-  return platform?.split(' + ')[0] ?? ''
+function platformTags(platform?: string) {
+  return platform ? platform.split(' + ') : []
 }
 
-export { blockText, headingId, platformFamily }
+export { blockText, headingId, platformTags }
