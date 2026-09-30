@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typegen": "sanity schema extract --path schema.json --enforce-required-fields && sanity typegen generate"
+    "typegen": "sanity schema extract --path schema.json --enforce-required-fields --force && sanity typegen generate"
   },
   "dependencies": {
     "@astrojs/netlify": "^8.2.6",

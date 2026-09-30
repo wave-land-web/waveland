@@ -24,8 +24,17 @@ export const CASE_STUDY_PAGES_QUERY = defineQuery(`*[_type == "case-study" && de
   mainImage,
   publishedAt,
   description,
+  seo,
   services,
   body,
   liveUrl,
   "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)
+}`)
+
+// The homepage carousel, in the order set on each testimonial
+export const TESTIMONIALS_QUERY = defineQuery(`*[_type == "testimonial"] | order(order asc) {
+  _id,
+  quote,
+  citation,
+  link,
 }`)

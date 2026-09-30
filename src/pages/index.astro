@@ -16,9 +16,13 @@ import Founder from '../components/ui/Founder.astro'
 import Marquee from '../components/layout/Marquee.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
-import { testimonials as testimonialData } from '../lib/data/testimonials'
+import { sanityClient } from 'sanity:client'
+import { TESTIMONIALS_QUERY } from '../sanity/lib/queries'
 
 // Homepage FAQ. Also sent to search and AI answer engines as FAQPage structured data.
+// Client quotes for the carousel, edited in Studio (Testimonials)
+const testimonialData = await sanityClient.fetch(TESTIMONIALS_QUERY)
+
 const faqs = [
   {
     question: 'Do you work white-label?',
