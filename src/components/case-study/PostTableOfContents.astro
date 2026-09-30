@@ -31,9 +31,9 @@ const headings = post.body
                  aria-current marks the section being read (set by the script below). -->
           <a href={`#${heading.id}`} data-section-id={heading.id} class="group grid grid-cols-[2.5rem_1fr] gap-x-3">
             <span aria-hidden="true" class="label h-[1lh] flex items-center">
-              <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hover:scale-x-100 group-hover:bg-green group-focus-visible:scale-x-100 group-focus-visible:bg-green group-aria-[current=location]:scale-x-100 group-aria-[current=location]:bg-green" />
+              <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hocus:scale-x-100 group-hocus:bg-green group-aria-[current=location]:scale-x-100 group-aria-[current=location]:bg-green" />
             </span>
-            <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hover:text-green group-focus-visible:text-green group-aria-[current=location]:text-green">
+            <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hocus:text-green group-aria-[current=location]:text-green">
               {heading.text}
             </span>
           </a>

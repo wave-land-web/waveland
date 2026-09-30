@@ -29,7 +29,7 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
     <h2 class="text-(--accent)">{title}</h2>
     <p class="h2">{text}</p>
   </div>
-  <article class="text-container p-0 h-96 group hover:border-(--accent) has-focus-visible:border-(--accent) max-md:border-(--accent)">
+  <article class="text-container p-0 h-96 group hocus-within:border-(--accent) max-md:border-(--accent)">
     <a href={caseStudyUrl} class="block w-full h-full rounded-media">
       <!-- Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp -->
       <Image
@@ -44,10 +44,10 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
       <!-- The wave is a mask over the text color, so it still changes color on hover -->
       <span
         aria-hidden="true"
-        class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hover:text-(--accent) group-has-focus-visible:text-(--accent) max-md:text-(--accent)"
+        class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:text-(--accent)"
         style={`--wave: url(${waves[color]})`}
       ></span>
-      <p class="link-arrow font-header text-label absolute bottom-0 p-4 transition-colors duration-(--transition) group-hover:text-(--accent) group-has-focus-visible:text-(--accent) max-md:text-(--accent)">
+      <p class="link-arrow font-header text-label absolute bottom-0 p-4 transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:text-(--accent)">
         {linkText}
         <ArrowIcon />
       </p>

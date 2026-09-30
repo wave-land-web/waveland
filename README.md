@@ -50,6 +50,7 @@ Tokens and utilities live in `src/styles/global.css`. Use them rather than raw v
 - **Radius:** `rounded-media` for cards and frames, the `media` utility for images shown on their own (corners plus shadow; images are plain by default), `rounded-control` for buttons and pills, `rounded-field` for inputs.
 - **Spacing and widths:** `py-section`, `mb-header`, `pt-page-top`, `top-sticky`, `gap-split`, `stack`, `max-w-copy` and `max-w-narrow`.
 - **Buttons and links:** `btn`, `btn-primary`, `btn-secondary` and `btn-toggle`, plus the `Link` component. Standalone links carry an arrow (`ArrowIcon`, `link-arrow`) that nudges on hover: → for a page on this site, ↗ for another site. Links inside copy are underlined; nav links just change color.
+- **Hover and focus:** use `hocus:` (hover or keyboard focus), `hocus-within:` (or a focused child) and `group-hocus:` instead of pairing `hover:` with `focus-visible:` by hand.
 - **Motion:** `hero-in` for content above the fold and `lsa` for content that reveals on scroll. Stagger items with `style="--i: n"`, and reveal whole sections or cards, not single paragraphs. Timing uses `--transition`, `--duration-reveal`, `--duration-move`, `--ease-reveal` and `--stagger`.
 - **Page transitions:** pages crossfade (View Transitions API) and the nav stays still. Reduced motion turns off every animation.
 
