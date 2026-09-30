@@ -1,5 +1,5 @@
 ---
-import { EMAIL, EMAIL_HREF } from '../../lib/site'
+import { EMAIL_HREF } from '../../lib/site'
 import { Icon } from 'astro-icon/components'
 
 interface Props {
@@ -11,12 +11,7 @@ const { color = 'text-white' } = Astro.props
 
 <ul class="inline-flex items-center gap-6">
   <li>
-    <a
-      href={EMAIL_HREF}
-      aria-label="Email"
-      title="Email"
-      class={`flex items-center ${color} hover:text-purple focus-visible:text-purple`}
-    >
+    <a href={EMAIL_HREF} aria-label="Email" title="Email" class={`flex items-center ${color} hover:text-purple focus-visible:text-purple`}>
       <Icon name="tabler:mail" />
     </a>
   </li>

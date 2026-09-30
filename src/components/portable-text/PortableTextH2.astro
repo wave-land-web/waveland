@@ -11,6 +11,8 @@ const hasLink = (node.markDefs ?? []).some((def: { _type: string }) => def._type
 
 <!-- tabindex lets the table of contents move focus here after scrolling to it -->
 <!-- The link keeps the heading's color; the chain icon shows on hover or focus -->
+<!-- Not reformatted: the icon sits right after the text, with no space between -->
+<!-- prettier-ignore -->
 <h2 id={id} tabindex="-1" class="scroll-mt-15 outline-none">
   {
     hasLink ? (

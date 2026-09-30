@@ -16,11 +16,11 @@ The site runs at http://localhost:4321, and Sanity Studio at http://localhost:43
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `npm run dev` | Start the dev server (`npx astro dev stop` stops it) |
-| `npm run build` | Type-check, then build to `dist/` |
-| `npm run preview` | Serve the build locally |
+| Command           | What it does                                         |
+| ----------------- | ---------------------------------------------------- |
+| `npm run dev`     | Start the dev server (`npx astro dev stop` stops it) |
+| `npm run build`   | Type-check, then build to `dist/`                    |
+| `npm run preview` | Serve the build locally                              |
 
 Check styling changes on a build or the Netlify deploy preview, not only the dev server. Production CSS loads in a different order.
 

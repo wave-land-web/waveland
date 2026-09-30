@@ -35,51 +35,42 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
       >
         <!-- Honeypot: hidden from people, bots fill it and Netlify drops the submission -->
         <p class="hidden" aria-hidden="true">
-          <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          <label>
+            Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
         </p>
         <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
           <div class="w-full">
-            <label for="first-name" class={labelClass}>First Name</label>
-            <input
-              type="text"
-              name="first-name"
-              id="first-name"
-              autocomplete="given-name"
-              required
-              class={fieldClass}
-            />
+            <label for="first-name" class={labelClass}>
+              First Name
+            </label>
+            <input type="text" name="first-name" id="first-name" autocomplete="given-name" required class={fieldClass} />
           </div>
 
           <div class="w-full">
-            <label for="last-name" class={labelClass}>Last Name <span class="text-grey">(Optional)</span></label>
-            <input
-              type="text"
-              name="last-name"
-              id="last-name"
-              autocomplete="family-name"
-              class={fieldClass}
-            />
+            <label for="last-name" class={labelClass}>
+              Last Name <span class="text-grey">(Optional)</span>
+            </label>
+            <input type="text" name="last-name" id="last-name" autocomplete="family-name" class={fieldClass} />
           </div>
         </div>
         <div>
-          <label for="email" class={labelClass}>Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            autocomplete="email"
-            placeholder="you@example.com"
-            required
-            class={fieldClass}
-          />
+          <label for="email" class={labelClass}>
+            Email
+          </label>
+          <input type="email" name="email" id="email" autocomplete="email" placeholder="you@example.com" required class={fieldClass} />
         </div>
 
         <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
           <div class="w-full">
-            <label for="role" class={labelClass}>I'm Reaching Out As</label>
+            <label for="role" class={labelClass}>
+              I'm Reaching Out As
+            </label>
             <div class="relative">
               <select name="role" id="role" required class={selectClass}>
-                <option value="" disabled selected>Choose one</option>
+                <option value="" disabled selected>
+                  Choose one
+                </option>
                 <option>An agency</option>
                 <option>A business or organization</option>
                 <option>Something else</option>
@@ -93,23 +84,23 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
           </div>
 
           <div class="w-full">
-            <label for="company" class={labelClass}>Agency or Company <span class="text-grey">(Optional)</span></label>
-            <input
-              type="text"
-              name="company"
-              id="company"
-              autocomplete="organization"
-              class={fieldClass}
-            />
+            <label for="company" class={labelClass}>
+              Agency or Company <span class="text-grey">(Optional)</span>
+            </label>
+            <input type="text" name="company" id="company" autocomplete="organization" class={fieldClass} />
           </div>
         </div>
 
         <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
           <div class="w-full">
-            <label for="budget" class={labelClass}>Budget <span class="text-grey">(Optional)</span></label>
+            <label for="budget" class={labelClass}>
+              Budget <span class="text-grey">(Optional)</span>
+            </label>
             <div class="relative">
               <select name="budget" id="budget" class={selectClass}>
-                <option value="" selected>Choose one</option>
+                <option value="" selected>
+                  Choose one
+                </option>
                 <option>Under $5k</option>
                 <option>$5k to $15k</option>
                 <option>$15k to $30k</option>
@@ -125,10 +116,14 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
           </div>
 
           <div class="w-full">
-            <label for="timeline" class={labelClass}>Timeline <span class="text-grey">(Optional)</span></label>
+            <label for="timeline" class={labelClass}>
+              Timeline <span class="text-grey">(Optional)</span>
+            </label>
             <div class="relative">
               <select name="timeline" id="timeline" class={selectClass}>
-                <option value="" selected>Choose one</option>
+                <option value="" selected>
+                  Choose one
+                </option>
                 <option>As soon as possible</option>
                 <option>In 1 to 3 months</option>
                 <option>In 3 months or more</option>
@@ -144,20 +139,16 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         </div>
 
         <div>
-          <label for="website" class={labelClass}>Current Website <span class="text-grey">(Optional)</span></label>
-          <input
-            type="text"
-            inputmode="url"
-            name="website"
-            id="website"
-            autocomplete="url"
-            placeholder="example.com"
-            class={fieldClass}
-          />
+          <label for="website" class={labelClass}>
+            Current Website <span class="text-grey">(Optional)</span>
+          </label>
+          <input type="text" inputmode="url" name="website" id="website" autocomplete="url" placeholder="example.com" class={fieldClass} />
         </div>
 
         <div>
-          <label for="message" class={labelClass}>What Are You Building?</label>
+          <label for="message" class={labelClass}>
+            What Are You Building?
+          </label>
           <textarea
             name="message"
             id="message"
@@ -168,12 +159,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
           ></textarea>
         </div>
 
-        <CTA
-          tag="button"
-          type="submit"
-          text="Send Message"
-          className="w-fit mx-auto"
-        />
+        <CTA tag="button" type="submit" text="Send Message" className="w-fit mx-auto" />
       </form>
     </section>
 
@@ -182,19 +168,11 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         <h2 class="mb-4">Prefer to Talk?</h2>
 
         <div class="flex flex-col gap-6 items-center">
-          <CTA
-            tag="link"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            text="Book a 15-Minute Call"
-            variant="secondary"
-          />
+          <CTA tag="link" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" text="Book a 15-Minute Call" variant="secondary" />
           <!-- Email Link -->
-          <a
-            href={EMAIL_HREF}
-            class="inline-flex gap-2 items-center text-grey hover:text-purple"
-            ><Icon name="tabler:mail" />{EMAIL}
+          <a href={EMAIL_HREF} class="inline-flex gap-2 items-center text-grey hover:text-purple">
+            <Icon name="tabler:mail" />
+            {EMAIL}
           </a>
         </div>
       </div>

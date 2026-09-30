@@ -25,22 +25,20 @@ const headings: { id: string; text: string }[] = post.body
   >
     <h2 class="text-purple text-body">Table of Contents</h2>
     <ol class="list-none p-0 flex flex-col gap-2">
-      {
-        headings.map((heading: { id: string; text: string }) => (
-          <li class="font-header">
-            <!-- The line grows inside a fixed slot, so the heading never moves or rewraps on hover.
+      {headings.map((heading: { id: string; text: string }) => (
+        <li class="font-header">
+          <!-- The line grows inside a fixed slot, so the heading never moves or rewraps on hover.
                  aria-current marks the section being read (set by the script below). -->
-            <a href={`#${heading.id}`} data-section-id={heading.id} class="group grid grid-cols-[2.5rem_1fr] gap-x-3">
-              <span aria-hidden="true" class="label h-[1lh] flex items-center">
-                <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hover:scale-x-100 group-hover:bg-green group-focus-visible:scale-x-100 group-focus-visible:bg-green group-aria-[current=location]:scale-x-100 group-aria-[current=location]:bg-green" />
-              </span>
-              <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hover:text-green group-focus-visible:text-green group-aria-[current=location]:text-green">
-                {heading.text}
-              </span>
-            </a>
-          </li>
-        ))
-      }
+          <a href={`#${heading.id}`} data-section-id={heading.id} class="group grid grid-cols-[2.5rem_1fr] gap-x-3">
+            <span aria-hidden="true" class="label h-[1lh] flex items-center">
+              <span class="h-0.5 w-full rounded-control bg-grey origin-left scale-x-50 transition-[scale,background-color] duration-(--transition) ease-in-out group-hover:scale-x-100 group-hover:bg-green group-focus-visible:scale-x-100 group-focus-visible:bg-green group-aria-[current=location]:scale-x-100 group-aria-[current=location]:bg-green" />
+            </span>
+            <span class="text-label text-grey transition-colors duration-(--transition) ease-in-out group-hover:text-green group-focus-visible:text-green group-aria-[current=location]:text-green">
+              {heading.text}
+            </span>
+          </a>
+        </li>
+      ))}
     </ol>
   </nav>
 </div>

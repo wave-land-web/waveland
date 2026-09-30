@@ -8,11 +8,6 @@ export interface Props {
 const { class: className } = Astro.props
 ---
 
-<a
-  href="/"
-  class:list={['block w-full py-6', className]}
-  title="Wave Land"
-  aria-label="Wave Land"
->
+<a href="/" class:list={['block w-full py-6', className]} title="Wave Land" aria-label="Wave Land">
   <Icon name="title" />
 </a>

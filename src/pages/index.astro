@@ -22,8 +22,7 @@ import { testimonials as testimonialData } from '../lib/data/testimonials'
 const faqs = [
   {
     question: 'Do you work white-label?',
-    answer:
-      "Yes. I can work under your agency's name, join client calls as part of your team, or stay behind the scenes.",
+    answer: "Yes. I can work under your agency's name, join client calls as part of your team, or stay behind the scenes.",
   },
   {
     question: 'Can you build from our designs?',
@@ -47,8 +46,7 @@ const faqs = [
   },
   {
     question: 'How long does a build take?',
-    answer:
-      'Usually 4 to 8 weeks, depending on the number of pages and how ready the content is. The timeline goes in the scope outline.',
+    answer: 'Usually 4 to 8 weeks, depending on the number of pages and how ready the content is. The timeline goes in the scope outline.',
   },
   {
     question: 'What does a project cost?',
@@ -62,8 +60,7 @@ const faqs = [
   },
   {
     question: 'Who owns the site after launch?',
-    answer:
-      'Whoever we agree on up front, you or your client. The code, content and accounts are handed over to them at launch.',
+    answer: 'Whoever we agree on up front, you or your client. The code, content and accounts are handed over to them at launch.',
   },
   {
     question: 'What happens after launch?',
@@ -84,9 +81,7 @@ const faqSchema = {
 ---
 
 <Layout title="Wave Land | Development Partner for Brand Agencies" schema={[faqSchema]}>
-  <header
-    class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12"
-  >
+  <header class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12">
     <div>
       <div class="mb-6 hero-in">
         <TitleLogo />
@@ -99,16 +94,11 @@ const faqSchema = {
       </div>
     </div>
     <div class="max-w-3xl">
-      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in" style="--i: 4">A development partner for brand agencies.</h1>
+      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in" style="--i: 4">
+        A development partner for brand agencies.
+      </h1>
       <div class="hero-in" style="--i: 5">
-        <CTA
-          tag="link"
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          text="Book a 15-Minute Call"
-          size="large"
-        />
+        <CTA tag="link" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" text="Book a 15-Minute Call" size="large" />
       </div>
     </div>
   </header>
@@ -149,11 +139,7 @@ const faqSchema = {
         class="py-section"
       />
       <div class="lsa">
-        <Link
-          text="View Case Studies"
-          url="/case-studies/"
-          size="display"
-        />
+        <Link text="View Case Studies" url="/case-studies/" size="display" />
       </div>
     </section>
 
@@ -189,25 +175,17 @@ const faqSchema = {
         </div>
 
         <div class="flex flex-col gap-6 text-container lsa">
-          <p class="h4 py-4">
-            Every project starts with the client, not the platform.
+          <p class="h4 py-4">Every project starts with the client, not the platform.</p>
+          <p class="text-lightGrey">Before I write code, I learn the brand, the content, and who will update the site after launch.</p>
+          <p class="text-lightGrey">
+            First comes a discovery call with you and your client. Then I write up a scope outline and an estimate, and we go over it
+            together until all three of us agree on exactly what's being delivered.
           </p>
           <p class="text-lightGrey">
-            Before I write code, I learn the brand, the content, and who will update the site after
-            launch.
+            I write most of the code myself and keep third-party libraries to a minimum, so sites stay fast and are easy to hand off or
+            maintain.
           </p>
-          <p class="text-lightGrey">
-            First comes a discovery call with you and your client. Then I write up a scope outline and
-            an estimate, and we go over it together until all three of us agree on exactly what's being
-            delivered.
-          </p>
-          <p class="text-lightGrey">
-            I write most of the code myself and keep third-party libraries to a minimum, so sites stay
-            fast and are easy to hand off or maintain.
-          </p>
-          <p class="h5 py-4">
-            Fast, accessible sites your client's team can update without me.
-          </p>
+          <p class="h5 py-4">Fast, accessible sites your client's team can update without me.</p>
         </div>
       </div>
     </section>
@@ -217,7 +195,9 @@ const faqSchema = {
     <!-- The section keeps the standard section spacing; the tinted panel is its own container inside it -->
     <section id="faq" class="lsa">
       <div class="section-split p-6 md:p-10 lg:p-12 bg-purple/5 rounded-media shadow-md">
-        <h2><span class="text-green">Questions</span> Agencies Ask</h2>
+        <h2>
+          <span class="text-green">Questions</span> Agencies Ask
+        </h2>
 
         <div>
           {

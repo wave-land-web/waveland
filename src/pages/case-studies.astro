@@ -56,23 +56,25 @@ const filters = [
   <main>
     <!-- Filters are buttons, so they only show once the script that runs them is here (see below) -->
     <div id="case-study-filters" role="group" aria-label="Filter case studies by platform" class="hidden flex-wrap gap-3 mb-12">
-      {
-        filters.map(([value, label, count]) => (
-          <button type="button" class="btn btn-toggle text-label px-4 py-2" data-filter={value} aria-pressed={value === 'all' ? 'true' : 'false'}>
-            {label} <span class="opacity-60">{count}</span>
-          </button>
-        ))
-      }
+      {filters.map(([value, label, count]) => (
+        <button
+          type="button"
+          class="btn btn-toggle text-label px-4 py-2"
+          data-filter={value}
+          aria-pressed={value === 'all' ? 'true' : 'false'}
+        >
+          {label} <span class="opacity-60">{count}</span>
+        </button>
+      ))}
     </div>
     <p id="case-study-filter-status" class="sr-only" aria-live="polite"></p>
     <section id="case-studies" class="grid lg:grid-cols-2 gap-x-12 gap-y-20 pt-0">
-      {sorted.map((caseStudy, i) => <CaseStudyCard caseStudy={caseStudy} priority={i === 0} featured={i === 0} />)}
+      {sorted.map((caseStudy, i) => (
+        <CaseStudyCard caseStudy={caseStudy} priority={i === 0} featured={i === 0} />
+      ))}
     </section>
     <section id="get-started">
-      <ClosingCTA
-        title="Working on Something Like This?"
-        description="Tell me what you're building. I reply within 48 hours."
-      />
+      <ClosingCTA title="Working on Something Like This?" description="Tell me what you're building. I reply within 48 hours." />
     </section>
   </main>
   <Marquee />
@@ -96,7 +98,8 @@ const filters = [
       }
     })
     buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)))
-    if (status) status.textContent = `Showing ${shown} case ${shown === 1 ? 'study' : 'studies'}${filter === 'all' ? '' : ` built with ${filter}`}`
+    if (status)
+      status.textContent = `Showing ${shown} case ${shown === 1 ? 'study' : 'studies'}${filter === 'all' ? '' : ` built with ${filter}`}`
 
     const url = new URL(location.href)
     if (filter === 'all') url.searchParams.delete('platform')

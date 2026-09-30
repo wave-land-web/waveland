@@ -1,7 +1,8 @@
+import type { StructureResolver } from 'sanity/structure'
 import { EarthGlobeIcon } from '@sanity/icons/EarthGlobe'
 import { SortIcon } from '@sanity/icons/Sort'
 
-export const structure = (S: any) => {
+export const structure: StructureResolver = (S) => {
   return S.list()
     .title('Sanity Studio')
     .items([
@@ -18,7 +19,7 @@ export const structure = (S: any) => {
                 .title('Case Study Order')
                 .icon(SortIcon)
                 .child(S.document().schemaType('case-study-order').documentId('case-study-order').title('Case Study Order')),
-            ])
+            ]),
         ),
     ])
 }

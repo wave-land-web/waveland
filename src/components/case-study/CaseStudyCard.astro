@@ -23,10 +23,7 @@ const workedWithLabels: Record<string, string> = {
 const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean)
 ---
 
-<article
-  class:list={['lsa', featured && 'lg:col-span-2']}
-  data-platform={platformFamily(caseStudy.platform)}
->
+<article class:list={['lsa', featured && 'lg:col-span-2']} data-platform={platformFamily(caseStudy.platform)}>
   <!-- The whole card is the link; the title turns purple and the image zooms when it's hovered or focused -->
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
@@ -53,23 +50,19 @@ const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
     <div class="stack">
       <div class="flex flex-col gap-3">
         <h2 class={featured ? 'h2' : 'h3'}>
-          <span
-            class="group-hover:text-purple group-focus-visible:text-purple transition-colors duration-(--transition) ease-in-out"
-          >
+          <span class="group-hover:text-purple group-focus-visible:text-purple transition-colors duration-(--transition) ease-in-out">
             {caseStudy.title}
           </span>
         </h2>
-        {
-          tags.length > 0 && (
-            <ul class="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <li>
-                  <Pill text={tag} size="small" class="border-darkGrey text-lightGrey" />
-                </li>
-              ))}
-            </ul>
-          )
-        }
+        {tags.length > 0 && (
+          <ul class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <li>
+                <Pill text={tag} size="small" class="border-darkGrey text-lightGrey" />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <p class="text-prose text-grey">{caseStudy.description}</p>
     </div>

@@ -23,7 +23,7 @@ export default function CTA(props: Props) {
   const classes = [className, 'btn', variantClasses[variant], sizeClasses[size]].filter(Boolean).join(' ')
 
   if (rest.tag === 'link') {
-    const { tag, ...anchorProps } = rest
+    const { tag: _tag, ...anchorProps } = rest
     return (
       <a className={classes} {...anchorProps}>
         {text}
@@ -31,7 +31,7 @@ export default function CTA(props: Props) {
     )
   }
 
-  const { tag, ...buttonProps } = rest
+  const { tag: _tag, ...buttonProps } = rest
   return (
     <button className={classes} {...buttonProps}>
       {text}
