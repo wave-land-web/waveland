@@ -72,7 +72,13 @@ const filters = [
   const buttons = [...document.querySelectorAll<HTMLButtonElement>('#case-study-filters [data-filter]')]
   const cards = [...document.querySelectorAll<HTMLElement>('#case-studies [data-platforms]')]
 
-  // Show the cards for one platform ('all' for every card), and keep the choice in the URL so it can be shared
+  // The filter in the URL (?platform=Webflow), or 'all' when there's none or it isn't one of the buttons
+  function filterFromUrl() {
+    const platform = new URL(location.href).searchParams.get('platform')
+    return platform && buttons.some((button) => button.dataset.filter === platform) ? platform : 'all'
+  }
+
+  // Show the cards for one platform ('all' for every card)
   function apply(filter: string) {
     let shown = 0
     cards.forEach((card) => {
@@ -86,35 +92,42 @@ const filters = [
     buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)))
     if (status)
       status.textContent = `Showing ${shown} case ${shown === 1 ? 'study' : 'studies'}${filter === 'all' ? '' : ` built with ${filter}`}`
+  }
 
-    const url = new URL(location.href)
-    if (filter === 'all') url.searchParams.delete('platform')
-    else url.searchParams.set('platform', filter)
-    history.replaceState(null, '', url)
+  // Cards glide to their new places where view transitions are supported
+  function show(filter: string) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!document.startViewTransition || reduce) return apply(filter)
+    // Name every card for this transition only (a name each), then clear them
+    const name = (on: boolean) =>
+      cards.forEach((card, i) => {
+        card.style.viewTransitionName = on ? `case-${i}` : ''
+        card.style.viewTransitionClass = on ? 'move' : ''
+      })
+    name(true)
+    document.startViewTransition(() => apply(filter)).finished.finally(() => name(false))
   }
 
   if (bar && cards.length > 0) {
     bar.classList.replace('hidden', 'flex')
 
+    // Each choice is a step in the history, so Back returns to the previous filter, and the URL can be shared
     buttons.forEach((button) =>
       button.addEventListener('click', () => {
         const filter = button.dataset.filter ?? 'all'
-        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-        // Cards glide to their new places where view transitions are supported
-        if (!document.startViewTransition || reduce) return apply(filter)
-        // Name every card for this transition only (a name each), then clear them
-        const name = (on: boolean) =>
-          cards.forEach((card, i) => {
-            card.style.viewTransitionName = on ? `case-${i}` : ''
-            card.style.viewTransitionClass = on ? 'move' : ''
-          })
-        name(true)
-        document.startViewTransition(() => apply(filter)).finished.finally(() => name(false))
+        if (filter === filterFromUrl()) return
+        const url = new URL(location.href)
+        if (filter === 'all') url.searchParams.delete('platform')
+        else url.searchParams.set('platform', filter)
+        history.pushState(null, '', url)
+        show(filter)
       }),
     )
+    // Back and Forward switch instantly: a view transition started during a history step can stall in Chrome
+    // (after returning from a case study, its update never ran and the page kept the old filter)
+    window.addEventListener('popstate', () => apply(filterFromUrl()))
 
     // A shared link like ?platform=Webflow opens filtered
-    const initial = new URL(location.href).searchParams.get('platform')
-    if (initial && buttons.some((button) => button.dataset.filter === initial)) apply(initial)
+    if (filterFromUrl() !== 'all') apply(filterFromUrl())
   }
 </script>
