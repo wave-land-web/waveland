@@ -172,6 +172,13 @@
   }
 }
 
+/* A shaped image: rounded corners and a soft shadow, for screenshots and photos shown on their own.
+   Images are plain by default, so logos, framed images and anything clipped by a parent don't have to undo it. */
+@utility media {
+  border-radius: var(--radius-media);
+  @apply drop-shadow-2xl;
+}
+
 /* Layout gaps, one per job:
    stack: a heading and the text under it. gap-split: between columns. Small internals (icons, meta lines) use the spacing scale. */
 @utility stack {
@@ -344,10 +351,6 @@
   svg,
   video {
     @apply block w-full h-auto object-cover;
-  }
-
-  img {
-    @apply rounded-media drop-shadow-2xl;
   }
 
   svg:not(svg[data-icon='title']) {
