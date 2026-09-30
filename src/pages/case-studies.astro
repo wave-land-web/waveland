@@ -40,12 +40,13 @@ const filters = [
   />
 
   <main>
-    <!-- Filters are buttons, so they only show once the script that runs them is here (see below) -->
+    <!-- Filters are buttons, so they only show once the script that runs them is here (see below). They rise in one after another, after the header. -->
     <div id="case-study-filters" role="group" aria-label="Filter case studies by platform" class="hidden flex-wrap gap-3 mb-12">
-      {filters.map(([value, label, count]) => (
+      {filters.map(([value, label, count], i) => (
         <button
           type="button"
-          class="btn btn-toggle text-label px-4 py-2"
+          class="btn btn-toggle text-label px-4 py-2 hero-in"
+          style={`--i: ${i + 1}`}
           data-filter={value}
           aria-pressed={value === 'all' ? 'true' : 'false'}
         >
