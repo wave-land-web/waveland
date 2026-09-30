@@ -16,13 +16,14 @@ The site runs at http://localhost:4321, and Sanity Studio at http://localhost:43
 
 ## Commands
 
-| Command           | What it does                                                         |
-| ----------------- | -------------------------------------------------------------------- |
-| `npm run dev`     | Start the dev server (`npx astro dev stop` stops it)                 |
-| `npm run build`   | Type-check, then build to `dist/`                                    |
-| `npm run preview` | Serve the build locally                                              |
-| `npm run lint`    | Check the code with ESLint                                           |
-| `npm run format`  | Format everything with Prettier (`npm run format:check` only checks) |
+| Command           | What it does                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| `npm run dev`     | Start the dev server (`npx astro dev stop` stops it)                                       |
+| `npm run build`   | Type-check, then build to `dist/`                                                          |
+| `npm run preview` | Serve the build locally                                                                    |
+| `npm run lint`    | Check the code with ESLint                                                                 |
+| `npm run format`  | Format everything with Prettier (`npm run format:check` only checks)                       |
+| `npm run typegen` | Regenerate Sanity types after changing the schema or a query (`src/sanity/lib/queries.ts`) |
 
 Check styling changes on a build or the Netlify deploy preview, not only the dev server. Production CSS loads in a different order.
 
@@ -34,7 +35,7 @@ Check styling changes on a build or the Netlify deploy preview, not only the dev
   - `layout/`: navigation, footer, page header and the logo marquee.
   - `portable-text/`: how Sanity body content renders.
   - `ui/`: small shared pieces (links, pills, CTAs, images).
-- `src/sanity/`: Studio schema, structure, queries and image URLs. Case study order is set in Studio (Case Study Order), and the first one is featured.
+- `src/sanity/`: Studio schema, structure, queries and image URLs. Every GROQ query lives in `lib/queries.ts`, and its result type in the generated `sanity.types.ts`. Case study order is set in Studio (Case Study Order), and the first one is featured.
 - `src/assets/logos/`: marquee logos. Add the SVG here and its slug and name to the list in `src/components/layout/Marquee.astro`; logos are sized to equal visual weight.
 - `src/lib/site.ts`: shared values (email, Calendly link).
 - `src/lib/data/testimonials.ts`: homepage testimonials.

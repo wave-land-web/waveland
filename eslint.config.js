@@ -4,7 +4,7 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist/', '.astro/', '.netlify/', 'node_modules/', 'public/'] },
+  { ignores: ['dist/', '.astro/', '.netlify/', 'node_modules/', 'public/', 'src/sanity/sanity.types.ts'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
