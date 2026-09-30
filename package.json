@@ -9,7 +9,8 @@
     "astro": "astro",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typegen": "sanity schema extract --path schema.json --enforce-required-fields && sanity typegen generate"
   },
   "dependencies": {
     "@astrojs/netlify": "^8.2.6",
@@ -25,6 +26,7 @@
     "astro": "^7.3.5",
     "astro-icon": "^1.2.0",
     "astro-portabletext": "^1.0.1",
+    "groq": "^6.17.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-is": "^19.3.0",

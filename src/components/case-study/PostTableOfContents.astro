@@ -1,17 +1,17 @@
 ---
-import type { SanityDocument } from '@sanity/client'
+import type { BlockContent } from '../../sanity/sanity.types'
 import { blockText, headingId } from '../../lib/text'
 
 interface Props {
-  post: SanityDocument
+  post: { body: BlockContent }
 }
 
 const { post } = Astro.props
 
 // Retrieve + format heading data for anchor links and table of contents
-const headings: { id: string; text: string }[] = post.body
-  .filter((block: SanityDocument) => block.style === 'h2')
-  .map((heading: SanityDocument) => {
+const headings = post.body
+  .filter((block) => block._type === 'block' && block.style === 'h2')
+  .map((heading) => {
     const text = blockText(heading)
     return { id: headingId(text), text }
   })

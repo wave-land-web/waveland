@@ -1,5 +1,4 @@
 ---
-import type { SanityDocument } from '@sanity/client'
 import { sanityClient } from 'sanity:client'
 import ClosingCTA from '../components/ui/ClosingCTA.astro'
 import CaseStudyCard from '../components/case-study/CaseStudyCard.astro'
@@ -7,23 +6,10 @@ import PageHeader from '../components/layout/PageHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/layout/Marquee.astro'
 import { platformFamily } from '../lib/text'
+import { CASE_STUDIES_QUERY } from '../sanity/lib/queries'
 
 // Fetch all case studies, plus the order set in Studio (Case Study Order)
-const { caseStudies, order } = (await sanityClient.fetch(
-  `{
-    "caseStudies": *[_type == "case-study"] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      mainImage,
-      publishedAt,
-      description,
-      platform,
-      workedWith,
-    },
-    "order": *[_id == "case-study-order"][0].caseStudies[]._ref,
-  }`,
-)) as { caseStudies: SanityDocument[]; order: string[] | null }
+const { caseStudies, order } = await sanityClient.fetch(CASE_STUDIES_QUERY)
 
 // Ordered ones first, in the Studio order; the rest after them, newest first (the query's order)
 const rank = new Map((order ?? []).map((id, i) => [id, i]))

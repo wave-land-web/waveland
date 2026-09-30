@@ -8,8 +8,9 @@ import { structure } from './src/sanity/structure'
 export default defineConfig({
   name: 'default',
   title: 'Wave Land',
-  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
-  dataset: import.meta.env.PUBLIC_SANITY_DATASET,
+  // From .env when Astro runs the Studio; the Sanity CLI (typegen) doesn't load it, so fall back to the same public values
+  projectId: import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? 'uuas57um',
+  dataset: import.meta.env?.PUBLIC_SANITY_DATASET ?? 'production',
   plugins: [structureTool({ structure }), visionTool(), codeInput()],
   schema: {
     ...schema,

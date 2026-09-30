@@ -1,5 +1,4 @@
 ---
-import type { SanityDocument } from '@sanity/client'
 import Link from '../../components/ui/Link.tsx'
 import ClosingCTA from '../../components/ui/ClosingCTA.astro'
 import PortableText from '../../components/portable-text/PortableText.astro'
@@ -7,41 +6,22 @@ import CaseStudyHeader from '../../components/case-study/CaseStudyHeader.astro'
 import CaseStudyLightbox from '../../components/case-study/CaseStudyLightbox.astro'
 import PostTableOfContents from '../../components/case-study/PostTableOfContents.astro'
 import Layout from '../../layouts/Layout.astro'
-import { loadQuery } from '../../sanity/lib/load-query'
+import { sanityClient } from 'sanity:client'
+import { CASE_STUDY_PAGES_QUERY } from '../../sanity/lib/queries'
+import type { CASE_STUDY_PAGES_QUERY_RESULT } from '../../sanity/sanity.types'
 import { urlForImage } from '../../sanity/lib/urlForImage'
 
+// Every case study comes back in one query at build time, and each page gets its own as a prop
 export async function getStaticPaths() {
-  const { data: allCaseStudies } = await loadQuery<SanityDocument[]>({
-    query: `*[_type == "case-study"] | order(publishedAt asc)`,
-  })
-
-  return allCaseStudies.map((caseStudy) => {
-    return {
-      params: {
-        slug: caseStudy.slug.current,
-      },
-    }
-  })
+  const caseStudies = await sanityClient.fetch(CASE_STUDY_PAGES_QUERY)
+  return caseStudies.map((caseStudy) => ({ params: { slug: caseStudy.slug.current }, props: { caseStudy } }))
 }
 
-// Get page data and props
-const { params } = Astro
+interface Props {
+  caseStudy: CASE_STUDY_PAGES_QUERY_RESULT[number]
+}
 
-// Load the current post
-const { data: currentCaseStudy } = await loadQuery<SanityDocument>({
-  query: `*[_type == "case-study" && slug.current == $slug][0] {
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    description,
-    services,
-    body,
-    liveUrl,
-    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
-  }`,
-  params,
-})
+const { caseStudy: currentCaseStudy } = Astro.props
 
 // Share image for link previews: a 1200×630 crop of the cover, the shape Slack and LinkedIn show
 const imageUrl = urlForImage(currentCaseStudy.mainImage).width(1200).height(630).fit('crop').format('jpg').quality(80).url()
@@ -84,8 +64,8 @@ const schema = [
     minutesRead={currentCaseStudy.estimatedReadingTime}
     image={currentCaseStudy.mainImage}
     imageAlt={currentCaseStudy.mainImage.alt}
-    services={currentCaseStudy.services}
-    liveUrl={currentCaseStudy.liveUrl}
+    services={currentCaseStudy.services ?? []}
+    liveUrl={currentCaseStudy.liveUrl ?? undefined}
   />
 
   <main>
