@@ -23,13 +23,20 @@ const { title, text, caseStudyUrl, linkText, image, imageAlt, color, class: clas
 const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green: waveThree }
 ---
 
-<!-- --accent is the row's color: the title, and the card's border, wave and link on hover (always on, below md) -->
+<!-- --accent is the row's color: the title, and the card's border, wave and link on hover. Phones can't hover, so below md
+     the card lights up while it crosses the middle of the screen instead (data-lit, set by the script below). -->
 <div class:list={['section-split items-center lsa', className]} style={`--accent: var(--color-${color})`}>
-  <div class:list={['font-header', { 'lg:order-2': isReversed }]}>
+  <!-- Below md the description drops to h4 size, to keep each row about a screen tall.
+       The text is tappable too (an empty overlay link). Keyboards and screen readers use the card's link, so it isn't announced twice. -->
+  <div class:list={['relative font-header', { 'lg:order-2': isReversed }]}>
     <h2 class="text-(--accent)">{title}</h2>
-    <p class="h2">{text}</p>
+    <p class="h2 max-md:text-h4">{text}</p>
+    <a href={caseStudyUrl} tabindex="-1" aria-hidden="true" class="absolute inset-0"></a>
   </div>
-  <article class="text-container p-0 h-96 group hocus-within:border-(--accent) max-md:border-(--accent)">
+  <article
+    data-project-card
+    class="text-container p-0 h-96 group hocus-within:border-(--accent) max-md:duration-(--duration-move) max-md:data-lit:border-(--accent)"
+  >
     <a href={caseStudyUrl} class="block w-full h-full rounded-media">
       <!-- Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp -->
       <Image
@@ -44,16 +51,28 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
       <!-- The wave is a mask over the text color, so it still changes color on hover -->
       <span
         aria-hidden="true"
-        class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:text-(--accent)"
+        class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:duration-(--duration-move) max-md:group-data-lit:text-(--accent)"
         style={`--wave: url(${waves[color]})`}
       ></span>
-      <p class="link-arrow font-header text-label absolute bottom-0 p-4 transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:text-(--accent)">
+      <p class="link-arrow font-header text-label absolute bottom-0 p-4 transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:duration-(--duration-move) max-md:group-data-lit:text-(--accent)">
         {linkText}
         <ArrowIcon />
       </p>
     </a>
   </article>
 </div>
+
+<script>
+  // Light the card crossing the middle fifth of the screen, one at a time (the styles only use it below md)
+  const cards = document.querySelectorAll<HTMLElement>('[data-project-card]')
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.target.toggleAttribute('data-lit', entry.isIntersecting)),
+      { rootMargin: '-40% 0px -40% 0px' },
+    )
+    cards.forEach((card) => observer.observe(card))
+  }
+</script>
 
 <style>
   .wave {
