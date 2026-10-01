@@ -1,0 +1,330 @@
+---
+import AppWindowIcon from '../../assets/app-window.svg'
+import ChartColumnIcon from '../../assets/chart-column.svg'
+import InfinityIcon from '../../assets/infinity.svg'
+import SunsetTwoIcon from '../../assets/sunset-2.svg'
+import Pill from './Pill.astro'
+
+/**
+ * How a Project Runs: four steps beside a sticky figure, a 3:2 Lissajous curve. Each of the first three steps draws a third of
+ * it in that step's service color, and the figure closes at Handoff. After launch, the three colors keep circling it.
+ * The step list works like the case study table of contents: it marks the step being read, and a click lines the step's
+ * title up with the section title.
+ */
+
+// Full class names, so Tailwind finds them. marker and label: the step list's colors on hover and for the current step.
+const services = {
+  Strategy: {
+    text: 'text-orange',
+    border: 'border-orange',
+    marker: 'group-hocus:bg-orange group-aria-[current=step]:bg-orange',
+    label: 'group-hocus:text-orange group-aria-[current=step]:text-orange',
+  },
+  Development: {
+    text: 'text-purple',
+    border: 'border-purple',
+    marker: 'group-hocus:bg-purple group-aria-[current=step]:bg-purple',
+    label: 'group-hocus:text-purple group-aria-[current=step]:text-purple',
+  },
+  Partnership: {
+    text: 'text-green',
+    border: 'border-green',
+    marker: 'group-hocus:bg-green group-aria-[current=step]:bg-green',
+    label: 'group-hocus:text-green group-aria-[current=step]:text-green',
+  },
+}
+type Service = keyof typeof services
+
+const steps: { id: string; title: string; services: Service[]; Icon: typeof AppWindowIcon; text: string }[] = [
+  {
+    id: 'discovery-and-scope',
+    title: 'Discovery and Scope',
+    services: ['Strategy'],
+    Icon: ChartColumnIcon,
+    text: 'A short call with you and your client about the brand, the content and who will update the site. Then a scope outline and an estimate, so you know the number before any work starts.',
+  },
+  {
+    id: 'the-build',
+    title: 'The Build',
+    services: ['Development'],
+    Icon: AppWindowIcon,
+    text: 'Usually 4 to 8 weeks, from your team’s files, on your client’s platform. Fast, accessible and ready for search.',
+  },
+  {
+    id: 'handoff',
+    title: 'Handoff',
+    services: ['Partnership'],
+    Icon: SunsetTwoIcon,
+    text: 'A walkthrough and a guide your client’s team keeps, so they can update the site without me. The code, content and accounts go to whoever we agreed.',
+  },
+  {
+    id: 'after-launch',
+    title: 'After Launch',
+    services: ['Strategy', 'Development', 'Partnership'],
+    Icon: InfinityIcon,
+    text: 'Maintenance, updates and support as the site grows, hourly or on a monthly retainer with rollover hours.',
+  },
+]
+
+// The figure: x = sin(3t + π/2), y = sin(2t). path(a, b) traces it from fraction a to fraction b of the way round.
+const point = (t: number) => [100 * Math.sin(3 * t + Math.PI / 2), 100 * Math.sin(2 * t)]
+function path(a: number, b: number) {
+  const n = Math.round(360 * (b - a))
+  return Array.from({ length: n + 1 }, (_, i) => {
+    const [x, y] = point((a + ((b - a) * i) / n) * Math.PI * 2)
+    return `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`
+  }).join('')
+}
+const full = path(0, 1) + 'Z'
+const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((service, i) => ({
+  service,
+  d: path(i / 3, (i + 1) / 3),
+}))
+---
+
+<section id="about" data-step="-1" class="process">
+  <div class="section-split">
+    <!-- Below lg the two wrappers step aside (contents), so the figure can follow the steps instead of sitting above them -->
+    <div class="h-full max-lg:contents">
+      <div data-process-sticky class="lg:sticky lg:top-sticky flex flex-col gap-6 md:gap-8 max-lg:contents">
+        <div class="stack">
+          <h2 data-process-title>How a Project Runs</h2>
+          <p class="text-lightGrey text-prose max-w-[42ch]">
+            Every project starts with the client, not the platform. From the first call to long after launch, you’re covered.
+          </p>
+        </div>
+
+        <div class="text-container max-lg:order-last lsa">
+          <nav aria-label="Project steps" class="hidden lg:block p-0 m-0 max-w-none">
+            <ol class="flex flex-col gap-2">
+              {steps.map((step) => (
+                <li class="font-header">
+                  <!-- The same marker as the case study table of contents: the line grows inside a fixed slot -->
+                  <a href={`#${step.id}`} data-step-link={step.id} class="group grid grid-cols-[2.5rem_1fr] gap-x-3">
+                    <span aria-hidden="true" class="label h-[1lh] flex items-center">
+                      <span class="h-0.5 w-full flex gap-0.5 origin-left scale-x-50 transition-[scale] duration-(--transition) ease-in-out group-hocus:scale-x-100 group-aria-[current=step]:scale-x-100">
+                        {step.services.map((service) => (
+                          <span
+                            class:list={[
+                              'flex-1 rounded-control bg-grey transition-colors duration-(--transition) ease-in-out',
+                              services[service].marker,
+                            ]}
+                          />
+                        ))}
+                      </span>
+                    </span>
+                    <span
+                      class:list={[
+                        'text-label text-grey transition-colors duration-(--transition) ease-in-out',
+                        step.services.length === 1
+                          ? services[step.services[0]].label
+                          : 'group-hocus:text-white group-aria-[current=step]:text-white',
+                      ]}
+                    >
+                      {step.title}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          <svg viewBox="-112 -112 224 224" aria-hidden="true" class="process-figure mx-auto overflow-visible">
+            <path d={full} class="stroke-darkGrey" fill="none" stroke-width="0.8" stroke-dasharray="2 3" />
+            {thirds.map(({ service, d }) => (
+              <path
+                d={d}
+                pathLength="1"
+                data-third
+                class:list={['process-third', services[service].text]}
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            ))}
+            {thirds.map(({ service }, i) => (
+              <path
+                d={full}
+                pathLength="300"
+                class:list={['process-trace', services[service].text]}
+                style={`--i: ${i}`}
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-dasharray="70 230"
+              />
+            ))}
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- The last step is as tall as the sticky column plus its own top padding (--process-column, set by the script), so the
+         column is still in place when its title reaches the section title -->
+    <ol class="flex flex-col">
+      {steps.map((step, i) => (
+        <li
+          id={step.id}
+          data-step-item
+          tabindex="-1"
+          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey first:border-t-0 first:pt-0 outline-none"
+          style={`--i: ${i}`}
+        >
+          <div class="flex flex-col gap-4 max-w-[42ch]">
+            <div class="flex items-center gap-4">
+              <step.Icon
+                class:list={[
+                  'shrink-0 w-8 md:w-10 h-auto stroke-2',
+                  step.services.length === 1 ? services[step.services[0]].text : 'text-white',
+                ]}
+              />
+              <h3 data-step-title class:list={['h4', step.services.length === 1 ? services[step.services[0]].text : 'text-white']}>
+                {step.title}
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {step.services.map((service) => (
+                <Pill text={service} size="small" class={`${services[service].border} ${services[service].text}`} />
+              ))}
+            </div>
+            <p class="text-lightGrey text-prose">{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process-figure {
+    /* Shrinks on short screens so the whole sticky column fits beside the steps */
+    width: clamp(10rem, calc(100svh - 36rem), 18rem);
+  }
+
+  /* A third draws once its step is reached (data-on, set by the script) */
+  .process-third {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition:
+      stroke-dashoffset var(--duration-reveal) var(--ease-reveal),
+      opacity var(--duration-reveal) var(--ease-reveal);
+  }
+
+  .process-third[data-on] {
+    stroke-dashoffset: 0;
+  }
+
+  /* After launch: the three colors circle the closed figure, a third of the way apart, over the dimmed thirds */
+  .process-trace {
+    opacity: 0;
+    transition: opacity var(--duration-reveal) var(--ease-reveal);
+  }
+
+  .process[data-step='3'] .process-third {
+    opacity: 0.3;
+  }
+
+  .process[data-step='3'] .process-trace {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .process-trace {
+      animation: process-trace 14s linear infinite;
+      animation-delay: calc(var(--i) * -14s / 3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process-third,
+    .process-trace {
+      transition: none;
+    }
+
+    /* Without the motion, the closed figure stays in its three colors */
+    .process[data-step='3'] .process-third {
+      opacity: 1;
+    }
+
+    .process[data-step='3'] .process-trace {
+      opacity: 0;
+    }
+  }
+
+  @keyframes process-trace {
+    to {
+      stroke-dashoffset: -300;
+    }
+  }
+</style>
+
+<script>
+  import { alignWith, firstLineMiddle } from '../../lib/align'
+
+  const section = document.querySelector<HTMLElement>('section.process')
+  const sticky = section?.querySelector<HTMLElement>('[data-process-sticky]')
+  const links = [...(section?.querySelectorAll<HTMLAnchorElement>('[data-step-link]') ?? [])]
+  const items = [...(section?.querySelectorAll<HTMLElement>('[data-step-item]') ?? [])]
+  const thirds = [...(section?.querySelectorAll<SVGPathElement>('[data-third]') ?? [])]
+  const sectionTitle = section?.querySelector('[data-process-title]')
+
+  // The steps only sit beside a sticky column from lg up; on smaller screens the figure shows whole above them
+  const lg = matchMedia('(min-width: 1024px)')
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)')
+  const title = (item: HTMLElement) => item.querySelector('[data-step-title]') ?? item
+
+  // Step titles line up with the section title on their baselines (about 0.35em below the middle of the line in Poppins),
+  // since the two are different sizes
+  const fontSize = (el: Element) => parseFloat(getComputedStyle(el).fontSize)
+  const baseline = (el: Element) => firstLineMiddle(el) + 0.35 * fontSize(el)
+
+  // The step being read: the last one whose title has reached the section title
+  let frame = 0
+  let current = -2
+  function update() {
+    frame = 0
+    const step = lg.matches
+      ? items.findLastIndex((item) => sectionTitle && baseline(title(item)) <= baseline(sectionTitle) + 2)
+      : items.length - 1
+    if (step === current || !section) return
+    current = step
+    section.dataset.step = String(step)
+    links.forEach((link, i) => (i === step ? link.setAttribute('aria-current', 'step') : link.removeAttribute('aria-current')))
+    // Thirds newly drawn follow one another round the figure; one third per step, all three from Handoff on
+    let delay = 0
+    thirds.forEach((third, i) => {
+      const on = i <= step
+      if (on && !third.hasAttribute('data-on')) {
+        third.style.transitionDelay = `${delay}ms`
+        delay += reduce.matches ? 0 : 400
+      } else third.style.transitionDelay = ''
+      third.toggleAttribute('data-on', on)
+    })
+  }
+
+  links.forEach((link, i) => {
+    link.addEventListener('click', (event) => {
+      if (!sticky || !sectionTitle || !lg.matches) return
+      event.preventDefault()
+      const stepTitle = title(items[i])
+      // A step not revealed yet (lsa) still sits 1rem low; line up where it will land
+      const reveal = -(parseFloat(getComputedStyle(items[i]).translate.split(' ')[1]) || 0)
+      const baselines = 0.35 * (fontSize(stepTitle) - fontSize(sectionTitle))
+      alignWith(stepTitle, sectionTitle, sticky, reduce.matches ? 'instant' : 'smooth', reveal + baselines)
+      history.pushState(null, '', link.hash)
+      items[i].focus({ preventScroll: true })
+    })
+  })
+
+  if (section) {
+    if (sticky) new ResizeObserver(() => section.style.setProperty('--process-column', `${sticky.offsetHeight}px`)).observe(sticky)
+    window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true })
+    lg.addEventListener('change', update)
+    // A step's reveal moves its title without a scroll
+    items.forEach((item) => item.addEventListener('transitionend', update))
+    update()
+  }
+</script>
