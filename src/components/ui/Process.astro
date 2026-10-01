@@ -62,7 +62,7 @@ const steps: { id: string; title: string; services: Service[]; Icon: typeof AppW
     title: 'After Launch',
     services: ['Strategy', 'Development', 'Partnership'],
     Icon: InfinityIcon,
-    text: 'All three keep going: maintenance, updates and advice as the site grows, hourly or on a monthly retainer with rollover hours.',
+    text: 'Maintenance, updates and support as the site grows, hourly or on a monthly retainer with rollover hours.',
   },
 ]
 
@@ -84,16 +84,17 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
 
 <section id="about" data-step="-1" class="process">
   <div class="section-split">
-    <div class="h-full">
-      <div data-process-sticky class="lg:sticky lg:top-sticky flex flex-col gap-6 md:gap-8">
+    <!-- Below lg the two wrappers step aside (contents), so the figure can follow the steps instead of sitting above them -->
+    <div class="h-full max-lg:contents">
+      <div data-process-sticky class="lg:sticky lg:top-sticky flex flex-col gap-6 md:gap-8 max-lg:contents">
         <div class="stack">
           <h2 data-process-title>How a Project Runs</h2>
           <p class="text-lightGrey text-prose max-w-[42ch]">
-            Every project starts with the client, not the platform. Four steps from the first call to the years after launch.
+            Every project starts with the client, not the platform. From the first call to long after launch, you’re covered.
           </p>
         </div>
 
-        <div class="text-container">
+        <div class="text-container max-lg:order-last lsa">
           <nav aria-label="Project steps" class="hidden lg:block p-0 m-0 max-w-none">
             <ol class="flex flex-col gap-2">
               {steps.map((step) => (
@@ -161,14 +162,15 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
       </div>
     </div>
 
-    <!-- The last step is at least a screen tall, so the sticky column is still in place when its title reaches the section title -->
+    <!-- The last step is as tall as the sticky column plus its own top padding (--process-column, set by the script), so the
+         column is still in place when its title reaches the section title -->
     <ol class="flex flex-col">
       {steps.map((step, i) => (
         <li
           id={step.id}
           data-step-item
           tabindex="-1"
-          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(100svh-var(--spacing-sticky))] border-t border-dashed border-darkGrey first:border-t-0 first:pt-0 outline-none"
+          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey first:border-t-0 first:pt-0 outline-none"
           style={`--i: ${i}`}
         >
           <div class="flex flex-col gap-4 max-w-[42ch]">
@@ -199,7 +201,7 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
 <style>
   .process-figure {
     /* Shrinks on short screens so the whole sticky column fits beside the steps */
-    width: clamp(10rem, calc(100svh - 34rem), 18rem);
+    width: clamp(10rem, calc(100svh - 36rem), 18rem);
   }
 
   /* A third draws once its step is reached (data-on, set by the script) */
@@ -318,6 +320,7 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
   })
 
   if (section) {
+    if (sticky) new ResizeObserver(() => section.style.setProperty('--process-column', `${sticky.offsetHeight}px`)).observe(sticky)
     window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true })
     lg.addEventListener('change', update)
     // A step's reveal moves its title without a scroll
