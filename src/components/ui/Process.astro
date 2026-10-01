@@ -87,7 +87,9 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
     <!-- Below lg the two wrappers step aside (contents), so the figure can follow the steps instead of sitting above them -->
     <div class="h-full max-lg:contents">
       <div data-process-sticky class="lg:sticky lg:top-sticky flex flex-col gap-6 md:gap-8 max-lg:contents">
-        <div class="stack">
+        <!-- Below lg the steps follow straight on, so the header gets the same space above the first step's rule as each step
+             has below its own (py-8, py-12 from md) -->
+        <div class="stack max-lg:mb-2 md:max-lg:mb-4">
           <h2 data-process-title>How a Project Runs</h2>
           <p class="text-lightGrey text-prose max-w-[42ch]">
             Every project starts with the client, not the platform. From the first call to long after launch, you’re covered.
@@ -170,7 +172,7 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
           id={step.id}
           data-step-item
           tabindex="-1"
-          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey first:border-t-0 first:pt-0 outline-none"
+          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey lg:first:border-t-0 lg:first:pt-0 outline-none"
           style={`--i: ${i}`}
         >
           <div class="flex flex-col gap-4 max-w-[42ch]">
