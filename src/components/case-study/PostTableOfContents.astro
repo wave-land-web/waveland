@@ -44,6 +44,8 @@ const headings = post.body
 </div>
 
 <script>
+  import { alignWith } from '../../lib/align'
+
   const toc = document.querySelector<HTMLElement>('#case-study-table-of-contents')
   const links = [...document.querySelectorAll<HTMLAnchorElement>('#case-study-table-of-contents a[data-section-id]')]
   const headings = links
@@ -53,9 +55,6 @@ const headings = post.body
   // The table of contents only sticks beside the article from md up; on phones it sits above it
   const md = matchMedia('(min-width: 768px)')
   const isSticky = () => toc !== null && md.matches
-
-  // Where a line of text sits: the middle of its first line
-  const firstLineMiddle = (el: Element) => el.getBoundingClientRect().top + parseFloat(getComputedStyle(el).lineHeight) / 2
 
   // Highlight the section being read: the last heading scrolled above the table of contents
   // (or above 30% of the screen, when it isn't sticky)
@@ -80,11 +79,7 @@ const headings = post.body
   function align(heading: HTMLElement, behavior: ScrollBehavior) {
     const link = links.find((l) => l.dataset.sectionId === heading.id)
     if (!link || !toc) return
-    // Where the link will sit once the table of contents is stuck (it may not be yet, near the top of the page)
-    const label = link.lastElementChild ?? link
-    const stuckTop = parseFloat(getComputedStyle(toc).top)
-    const labelWhenStuck = stuckTop + (firstLineMiddle(label) - toc.getBoundingClientRect().top)
-    window.scrollTo({ top: window.scrollY + firstLineMiddle(heading) - labelWhenStuck, behavior })
+    alignWith(heading, link.lastElementChild ?? link, toc, behavior)
   }
 
   // Hashes come back percent-encoded (curly apostrophes, accents), ids don't

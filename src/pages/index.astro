@@ -1,9 +1,6 @@
 ---
 import { CALENDLY_URL } from '../lib/site'
-import AppWindowIcon from '../assets/app-window.svg'
-import ChartColumnIcon from '../assets/chart-column.svg'
 import jtbiImage from '../assets/jtbi-mobile.webp'
-import SunsetTwoIcon from '../assets/sunset-2.svg'
 import supervoidImage from '../assets/supervoid.webp'
 import tssImage from '../assets/tss-mobile.webp'
 import ClosingCTA from '../components/ui/ClosingCTA.astro'
@@ -13,6 +10,7 @@ import Pill from '../components/ui/Pill.astro'
 import TextAndImage from '../components/ui/TextAndImage.astro'
 import TitleLogo from '../components/ui/TitleLogo.astro'
 import Founder from '../components/ui/Founder.astro'
+import Process from '../components/ui/Process.astro'
 import Marquee from '../components/layout/Marquee.astro'
 import Testimonials from '../components/ui/Testimonials.astro'
 import Layout from '../layouts/Layout.astro'
@@ -147,52 +145,7 @@ const faqSchema = {
       </div>
     </section>
 
-    <section id="about">
-      <div class="section-split">
-        <div class="h-full">
-          <div class="sticky top-sticky flex flex-col gap-6">
-            <h2>What I Do</h2>
-            <ul class="grid grid-cols-1 gap-4 md:gap-8">
-              <li class="lsa flex gap-4 items-start">
-                <AppWindowIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-purple" />
-                <div class="flex flex-col gap-1">
-                  <h3 class="h4 text-purple">Development</h3>
-                  <p class="text-grey text-prose">Built from your designs, on the platform your client already uses.</p>
-                </div>
-              </li>
-              <li class="lsa flex gap-4 items-start" style="--i: 1">
-                <ChartColumnIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-orange" />
-                <div class="flex flex-col gap-1">
-                  <h3 class="h4 text-orange">Strategy</h3>
-                  <p class="text-grey text-prose">Platform, CMS and content decisions, made before the build starts.</p>
-                </div>
-              </li>
-              <li class="lsa flex gap-4 items-start" style="--i: 2">
-                <SunsetTwoIcon class="shrink-0 w-8 md:w-10 h-auto stroke-2 text-green" />
-                <div class="flex flex-col gap-1">
-                  <h3 class="h4 text-green">Partnership</h3>
-                  <p class="text-grey text-prose">White-label or alongside your team, from the first call to after launch.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-6 text-container lsa">
-          <p class="h4 py-4">Every project starts with the client, not the platform.</p>
-          <p class="text-lightGrey">Before I write code, I learn the brand, the content, and who will update the site after launch.</p>
-          <p class="text-lightGrey">
-            First comes a discovery call with you and your client. Then I write up a scope outline and an estimate, and we go over it
-            together until all three of us agree on exactly what's being delivered.
-          </p>
-          <p class="text-lightGrey">
-            I write most of the code myself and keep third-party libraries to a minimum, so sites stay fast and are easy to hand off or
-            maintain.
-          </p>
-          <p class="h5 py-4">Fast, accessible sites your client's team can update without me.</p>
-        </div>
-      </div>
-    </section>
+    <Process />
 
     <Founder />
 

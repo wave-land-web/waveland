@@ -236,7 +236,7 @@
   }
 }
 
-/* Two-column homepage sections (What I Do, Founder, What Every Build Includes, Testimonials)
+/* Two-column homepage sections (How a Project Runs, Founder, What Every Build Includes, Testimonials)
    use the same grid as the case study rows (TextAndImage), so every column lines up down the page */
 @utility section-split {
   display: grid;
