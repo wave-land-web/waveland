@@ -22,33 +22,33 @@ const testimonialData = await sanityClient.fetch(TESTIMONIALS_QUERY)
 
 const faqs = [
   {
-    question: 'Do you work white-label?',
-    answer: "Yes. I can work under your agency's name, join client calls as part of your team, or stay behind the scenes.",
+    question: 'Do you work with agencies?',
+    answer:
+      'Yes. I partner with agencies as a white-label developer: building from your designs, joining client calls as part of your team, or staying behind the scenes.',
   },
   {
-    question: 'Can you build from our designs?',
+    question: 'I built my site with AI. Can you work with it?',
     answer:
-      "Yes. I build from your team's Figma files and flag anything that won't hold up in production before it's built. When a project needs design help, I can cover that too.",
+      "Yes. I'll review what you have, keep what works, and fix what doesn't. Sometimes that's a few targeted fixes; sometimes a rebuild is cheaper in the long run. A short call tells you which, with an estimate either way.",
   },
   {
-    question: 'Which platforms do you build on?',
+    question: 'Which platforms do you work on?',
     answer:
-      'Whatever your client already uses. I work in WordPress, Webflow, Shopify, HubSpot, Squarespace, Wix and more. When a project calls for a custom build, my premium option is SanityPress, built on Astro and Sanity.',
+      'Whatever you already use: Webflow, WordPress, Shopify, HubSpot, Squarespace, Wix and more. When a project calls for a custom build, my premium option is SanityPress, built on Astro and Sanity.',
   },
   {
     question: 'What is SanityPress?',
     answer:
-      'My premium CMS setup, built on Sanity. Each client gets a control center shaped around how they actually work. The things they update most come first, pages are built from a kit of flexible blocks, and the system underneath is proven across multiple builds. It costs more up front. In return, your client runs their own site, and it grows with them.',
+      'My premium setup for sites that need to grow. You get a control center shaped around how you actually work: the things you update most come first, and pages are built from a kit of flexible blocks. It costs more up front. In return, you run your own site, and it grows with you.',
   },
   {
     question: "What's included in every build?",
     answer:
-      'Fast load times, accessibility (semantic markup, keyboard support, readable contrast), and SEO (clean metadata, structured data, sitemaps and redirects), so both search engines and AI answer engines can read the site.',
+      'Fast load times, accessibility (semantic markup, keyboard support, readable contrast), and SEO (clean metadata, structured data, sitemaps and redirects), so both search engines and AI answer engines can read your site.',
   },
   {
-    question: 'What does a project cost?',
-    answer:
-      'It depends on the pages, the platform and how much your client will edit. The estimate comes with the scope outline, after the discovery call.',
+    question: 'What does it cost?',
+    answer: 'It depends on the pages, the platform and how much the site will be edited.',
   },
 ]
 
@@ -63,7 +63,7 @@ const faqSchema = {
 }
 ---
 
-<Layout title="Wave Land | Development Partner for Brand Agencies" schema={[faqSchema]}>
+<Layout title="Wave Land | Websites That Work as Well as They Look" schema={[faqSchema]}>
   <header class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12">
     <div>
       <div class="mb-6 hero-in">
@@ -77,10 +77,13 @@ const faqSchema = {
       </div>
     </div>
     <div class="max-w-3xl">
-      <h1 class="h3 max-w-[22ch] mb-4 md:mb-6 text-lightGrey hero-in" style="--i: 4">
-        A development partner for brand agencies.
+      <h1 class="h3 max-w-[22ch] mb-4 text-lightGrey hero-in" style="--i: 4">
+        Websites that work as well as they look.
       </h1>
-      <div class="hero-in" style="--i: 5">
+      <p class="max-w-[48ch] mb-6 md:mb-8 text-grey text-balance hero-in" style="--i: 5">
+        A development partner for creative agencies and the businesses they serve.
+      </p>
+      <div class="hero-in" style="--i: 6">
         <CTA tag="link" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" text="Book a 15-Minute Call" size="large" />
       </div>
     </div>
@@ -134,7 +137,7 @@ const faqSchema = {
     <section id="faq" class="lsa">
       <div class="section-split p-6 md:p-10 lg:p-12 bg-purple/5 rounded-media shadow-md">
         <h2>
-          <span class="text-green">Questions</span> Agencies Ask
+          <span class="text-green">Common</span> Questions
         </h2>
 
         <div>
@@ -163,8 +166,8 @@ const faqSchema = {
 
     <section id="get-started">
       <ClosingCTA
-        title="Looking for a Development Partner?"
-        description="If your agency needs someone to build what you design, I'd like to hear about it."
+        title="Got It 80% There?"
+        description="I'll handle the 20% that matters, whether you built it yourself or AI got you started."
       />
     </section>
   </main>

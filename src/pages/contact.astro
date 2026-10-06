@@ -15,12 +15,12 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
 
 <Layout
   title="Contact | Wave Land"
-  description="Tell me about your project, or book a 15-minute call. I'm Josh Nussbaum, a development partner for brand agencies."
+  description="Tell me about your project, or book a 15-minute call. I'm Josh Nussbaum, a development partner for creative agencies and the businesses they serve."
 >
   <PageHeader
     title="Contact"
     subtitle="Tell Me About Your Project"
-    bodyText="A rough idea is enough to start. If you know the platform or the launch date, include it. I'll reply by email within 48 hours."
+    bodyText="A rough idea is enough to start. I'll reply by email within 48 hours."
   />
 
   <main>
@@ -84,10 +84,18 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
           </div>
 
           <div class="w-full">
-            <label for="company" class={labelClass}>
-              Agency or Company <span class="text-grey">(Optional)</span>
+            <label for="website" class={labelClass}>
+              Current Website <span class="text-grey">(Optional)</span>
             </label>
-            <input type="text" name="company" id="company" autocomplete="organization" class={fieldClass} />
+            <input
+              type="text"
+              inputmode="url"
+              name="website"
+              id="website"
+              autocomplete="url"
+              placeholder="example.com"
+              class={fieldClass}
+            />
           </div>
         </div>
 
@@ -139,15 +147,8 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         </div>
 
         <div>
-          <label for="website" class={labelClass}>
-            Current Website <span class="text-grey">(Optional)</span>
-          </label>
-          <input type="text" inputmode="url" name="website" id="website" autocomplete="url" placeholder="example.com" class={fieldClass} />
-        </div>
-
-        <div>
           <label for="message" class={labelClass}>
-            What Are You Building?
+            What Are You Working On?
           </label>
           <textarea
             name="message"
