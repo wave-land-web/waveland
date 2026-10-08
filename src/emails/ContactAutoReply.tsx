@@ -1,5 +1,4 @@
 import { Body, Button, Container, Head, Html, Img, Link, Preview, Section, Text } from '@react-email/components'
-import { CALENDLY_URL } from '../lib/site'
 
 // The reply someone gets right after sending the contact form. It's sent through Resend from /api/contact.
 // It borrows the site's look: dark blue, the purple wordmark, and the dashed card the site puts quotes and the
@@ -50,8 +49,9 @@ export default function ContactAutoReply({ firstName }: Props) {
             <Text style={paragraph}>Thanks for reaching out! I read every message myself and reply within 48 hours.</Text>
             <Text style={paragraph}>Feel free to grab a free 15-minute call if it's easier to talk.</Text>
 
+            {/* Through /call (public/_redirects), not straight to Calendly: links on the sending domain are less likely to trip spam filters */}
             <Button
-              href={CALENDLY_URL}
+              href={`${site}/call`}
               style={{
                 backgroundColor: colors.text,
                 color: colors.background,

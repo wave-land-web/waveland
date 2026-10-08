@@ -6,3 +6,6 @@
 
 # The share image was renamed so link previews refetch it
 /images/og-image.jpg    /images/og-image-v2.jpg    301
+
+# Short link to the 15-minute call, used in the contact auto-reply so its links stay on wavelandweb.com
+/call    https://calendly.com/wavelandweb/15-min-call    302
