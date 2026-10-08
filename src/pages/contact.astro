@@ -185,6 +185,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
   // /api/contact sends people back here with ?error when a message didn't go through
   const errors: Record<string, string> = {
     missing: 'Please fill in your name, email, who you are and your message.',
+    email: 'Please check your email address. It should look like you@example.com.',
     send: `Your message didn't send. Please try again, or email me at ${EMAIL}.`,
   }
   const error = new URL(location.href).searchParams.get('error')
@@ -201,7 +202,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
   })
 
   if (error && form && box) {
-    box.textContent = errors[error] ?? errors.send
+    box.textContent = Object.hasOwn(errors, error) ? errors[error] : errors.send
     box.classList.remove('hidden')
     try {
       const draft: Record<string, string> = JSON.parse(sessionStorage.getItem(key) ?? '{}')
