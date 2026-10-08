@@ -22,19 +22,19 @@ const testimonialData = await sanityClient.fetch(TESTIMONIALS_QUERY)
 
 const faqs = [
   {
-    question: 'Do you work with agencies?',
-    answer:
-      'Yes. I partner with agencies as a white-label developer: building from your designs, joining client calls as part of your team, or staying behind the scenes.',
-  },
-  {
     question: 'I built my site with AI. Can you work with it?',
     answer:
-      "Yes. I'll review what you have, keep what works, and fix what doesn't. Sometimes that's a few targeted fixes; sometimes a rebuild is cheaper in the long run. A short call tells you which, with an estimate either way.",
+      "Yes. I'll review what you have, keep what works, and fix what doesn't. Sometimes that's a few targeted fixes; sometimes a rebuild is cheaper in the long run. After a short call and a look at what you have, I'll tell you which, with a fixed price either way.",
   },
   {
     question: 'Which platforms do you work on?',
     answer:
       'Whatever you already use: Webflow, WordPress, Shopify, HubSpot, Squarespace, Wix and more. When a project calls for a custom build, my premium option is SanityPress, built on Astro and Sanity.',
+  },
+  {
+    question: 'Do you work with agencies?',
+    answer:
+      'Yes. I partner with agencies as a white-label developer: building from your designs, joining client calls as part of your team, or staying behind the scenes.',
   },
   {
     question: 'What is SanityPress?',
@@ -48,7 +48,7 @@ const faqs = [
   },
   {
     question: 'What does it cost?',
-    answer: 'It depends on the pages, the platform and how much the site will be edited.',
+    answer: 'New builds get a fixed price up front, based on the pages, the platform and how much the site will be edited.',
   },
 ]
 
@@ -64,7 +64,8 @@ const faqSchema = {
 ---
 
 <Layout title="Wave Land | Websites That Work as Well as They Look" schema={[faqSchema]}>
-  <header class="h-[80svh] md:h-[calc(100dvh-3rem)] max-h-[1200px] pt-[var(--nav-height)] flex flex-col justify-between gap-12">
+  <!-- A minimum, not a fixed height: on short screens the hero grows and pushes the logos down instead of overlapping them -->
+  <header class="min-h-[80svh] md:min-h-[min(calc(100dvh-3rem),1200px)] pt-[var(--nav-height)] flex flex-col justify-between gap-12">
     <div>
       <div class="mb-6 hero-in">
         <TitleLogo />
@@ -81,7 +82,7 @@ const faqSchema = {
         Websites that work as well as they look.
       </h1>
       <p class="max-w-[48ch] mb-6 md:mb-8 text-grey text-balance hero-in" style="--i: 5">
-        A development partner for creative agencies and the businesses they serve.
+        A development partner for growing businesses, and the creative agencies that build for them.
       </p>
       <div class="hero-in" style="--i: 6">
         <CTA tag="link" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" text="Book a 15-Minute Call" size="large" />
