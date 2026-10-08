@@ -34,7 +34,7 @@ const required = ['first-name', 'email', 'role', 'message']
 // Give up on a slow service before the function itself times out, so the sender still gets a page
 const timeout = () => AbortSignal.timeout(8000)
 
-async function sendToHubSpot(data: Record<string, string>, request: Request, ipAddress: string) {
+async function sendToHubSpot(data: Record<string, string>, ipAddress: string) {
   const portalId = process.env.HUBSPOT_PORTAL_ID
   const formId = process.env.HUBSPOT_FORM_ID
   if (!portalId || !formId) throw new Error('HubSpot isn’t configured: set HUBSPOT_PORTAL_ID and HUBSPOT_FORM_ID')
@@ -52,7 +52,8 @@ async function sendToHubSpot(data: Record<string, string>, request: Request, ipA
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       fields,
-      context: { pageUri: new URL('/contact/', request.url).href, pageName: 'Contact | Wave Land', ipAddress },
+      // Always the live address: HubSpot quarantines submissions from domains it doesn't know, like deploy previews
+      context: { pageUri: new URL('/contact/', import.meta.env.SITE).href, pageName: 'Contact | Wave Land', ipAddress },
     }),
     signal: timeout(),
   })
@@ -91,7 +92,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   // The browser checks these too; this catches anything that skips the form
   if (required.some((name) => !data[name])) return redirect('/contact/?error=missing', 303)
 
-  const [hubspot, netlify] = await Promise.allSettled([sendToHubSpot(data, request, clientAddress), saveToNetlify(data, request)])
+  const [hubspot, netlify] = await Promise.allSettled([sendToHubSpot(data, clientAddress), saveToNetlify(data, request)])
   for (const result of [hubspot, netlify]) if (result.status === 'rejected') console.error(String(result.reason))
 
   // Either copy is enough to follow up on, so the sender only sees an error when both failed
