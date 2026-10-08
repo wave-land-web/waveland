@@ -25,15 +25,11 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
 
   <main>
     <section class="pt-0 text-center hero-in" style="--i: 1">
-      <form
-        method="POST"
-        name="contactForm"
-        action="/success/"
-        class="max-w-copy m-auto flex flex-col gap-6"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-      >
-        <!-- Honeypot: hidden from people, bots fill it and Netlify drops the submission -->
+      <!-- Posts to /api/contact, which sends it to HubSpot (with a backup copy in Netlify Forms) and redirects to /success/, or back here with ?error -->
+      <form method="POST" name="contactForm" action="/api/contact" class="max-w-copy m-auto flex flex-col gap-6">
+        <!-- Shown by the script below when the API sends someone back with ?error -->
+        <p id="form-error" role="alert" class="hidden text-orange text-left"></p>
+        <!-- Honeypot: hidden from people; bots fill it and /api/contact quietly drops the submission -->
         <p class="hidden" aria-hidden="true">
           <label>
             Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" />
@@ -182,3 +178,43 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
     <Marquee />
   </main>
 </Layout>
+
+<script>
+  import { EMAIL } from '../lib/site'
+
+  // /api/contact sends people back here with ?error when a message didn't go through
+  const errors: Record<string, string> = {
+    missing: 'Please fill in your name, email, who you are and your message.',
+    send: `Your message didn't send. Please try again, or email me at ${EMAIL}.`,
+  }
+  const error = new URL(location.href).searchParams.get('error')
+  const form = document.querySelector<HTMLFormElement>('form[name="contactForm"]')
+  const box = document.getElementById('form-error')
+  const key = 'contact-draft'
+
+  // What they typed is kept for this tab only, so an error never means typing a long message again
+  form?.addEventListener('submit', () => {
+    const draft = Object.fromEntries([...new FormData(form)].filter(([name]) => name !== 'bot-field'))
+    try {
+      sessionStorage.setItem(key, JSON.stringify(draft))
+    } catch {}
+  })
+
+  if (error && form && box) {
+    box.textContent = errors[error] ?? errors.send
+    box.classList.remove('hidden')
+    try {
+      const draft: Record<string, string> = JSON.parse(sessionStorage.getItem(key) ?? '{}')
+      for (const [name, value] of Object.entries(draft)) {
+        const field = form.elements.namedItem(name)
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement)
+          field.value = value
+      }
+    } catch {}
+  } else {
+    // A fresh visit (or after a message went through) starts empty
+    try {
+      sessionStorage.removeItem(key)
+    } catch {}
+  }
+</script>

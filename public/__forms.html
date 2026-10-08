@@ -1,0 +1,23 @@
+<!doctype html>
+<!-- Never shown to anyone. Netlify Forms reads this at deploy to know the contact form's fields, so /api/contact can
+     save a backup copy of each message here. Keep the field names in step with src/pages/contact.astro. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <form name="contactForm" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="first-name" />
+      <input name="last-name" />
+      <input name="email" type="email" />
+      <input name="role" />
+      <input name="website" />
+      <input name="budget" />
+      <input name="timeline" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
