@@ -1,14 +1,18 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
+import { render } from '@react-email/components'
+import { Resend } from 'resend'
+import ContactAutoReply from '../../emails/ContactAutoReply'
 
 /**
  * The contact form posts here. Each message goes two places at once:
- * - HubSpot, which notifies Josh, sends the auto-reply with the Calendly link, and keeps the contact
+ * - HubSpot, which notifies Josh and keeps the contact
  * - Netlify Forms, as a backup copy, through the hidden form in public/__forms.html
+ * Once either has it, Resend sends the sender a reply with the Calendly link (src/emails/ContactAutoReply.tsx).
  * The sender lands on /success/ if either one took it, or back on the form with an error if neither did.
  *
- * Env (Netlify, functions scope): HUBSPOT_PORTAL_ID, HUBSPOT_FORM_ID
+ * Env (Netlify, functions scope): HUBSPOT_PORTAL_ID, HUBSPOT_FORM_ID, RESEND_API_KEY
  */
 
 // "I'm Reaching Out As" → the Lead Type contact property, for routing agencies and businesses separately
@@ -75,6 +79,20 @@ async function saveToNetlify(data: Record<string, string>, request: Request) {
   if (!response.ok) throw new Error(`Netlify Forms refused the backup copy (${response.status})`)
 }
 
+// Sent from Josh's own address, so a reply lands in his inbox
+async function sendAutoReply(data: Record<string, string>) {
+  if (!process.env.RESEND_API_KEY) throw new Error('Resend isn’t configured: set RESEND_API_KEY')
+  const email = ContactAutoReply({ firstName: data['first-name'] })
+  const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({
+    from: 'Josh Nussbaum <josh@wavelandweb.com>',
+    to: data.email,
+    subject: 'Got your message',
+    html: await render(email),
+    text: await render(email, { plainText: true }),
+  })
+  if (error) throw new Error(`Resend refused the auto-reply (${error.name})`)
+}
+
 export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   let data: Record<string, string>
   try {
@@ -97,5 +115,8 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
 
   // Either copy is enough to follow up on, so the sender only sees an error when both failed
   if (hubspot.status === 'rejected' && netlify.status === 'rejected') return redirect('/contact/?error=send', 303)
+
+  // The message is safe by now, so a failed auto-reply is only logged; the sender still sees the success page
+  await sendAutoReply(data).catch((error) => console.error(String(error)))
   return redirect('/success/', 303)
 }
