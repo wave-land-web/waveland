@@ -173,7 +173,7 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
           id={step.id}
           data-step-item
           tabindex="-1"
-          class="lsa py-8 md:py-12 lg:min-h-[50svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey lg:first:border-t-0 lg:first:pt-0 outline-none"
+          class="lsa py-8 md:py-12 lg:min-h-[40svh] lg:last:min-h-[calc(var(--process-column,100svh)+3rem)] border-t border-dashed border-darkGrey lg:first:border-t-0 lg:first:pt-0 outline-none"
           style={`--i: ${i}`}
         >
           <div class="flex flex-col gap-4 max-w-[42ch]">
@@ -265,7 +265,7 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
 </style>
 
 <script>
-  import { alignWith, firstLineMiddle } from '../../lib/align'
+  import { alignWith } from '../../lib/align'
 
   const section = document.querySelector<HTMLElement>('section.process')
   const sticky = section?.querySelector<HTMLElement>('[data-process-sticky]')
@@ -279,19 +279,26 @@ const thirds = (['Strategy', 'Development', 'Partnership'] as Service[]).map((se
   const reduce = matchMedia('(prefers-reduced-motion: reduce)')
   const title = (item: HTMLElement) => item.querySelector('[data-step-title]') ?? item
 
-  // Step titles line up with the section title on their baselines (about 0.35em below the middle of the line in Poppins),
-  // since the two are different sizes
+  // A clicked step's title lines up with the section title on their baselines (about 0.35em below the middle of the line in
+  // Poppins), since the two are different sizes
   const fontSize = (el: Element) => parseFloat(getComputedStyle(el).fontSize)
-  const baseline = (el: Element) => firstLineMiddle(el) + 0.35 * fontSize(el)
 
-  // The step being read: the last one whose title has reached the section title
+  // The step being read: the first one whose text is still below the top of the section title. The next step takes over as
+  // soon as the one before it has scrolled past, so the active step is always the top one in view. Nothing is active until
+  // the first step reaches the section title. Clicking a step lines its title up with the section title (below), which
+  // leaves the step before it already past.
+  const top = (el: Element) => el.getBoundingClientRect().top
+  const textBottom = (item: Element) => (item.firstElementChild ?? item).getBoundingClientRect().bottom
+  function reading(line: number) {
+    if (!items.length || top(items[0]) > line + 2) return -1
+    const i = items.findIndex((item) => textBottom(item) > line)
+    return i === -1 ? items.length - 1 : i
+  }
   let frame = 0
   let current = -2
   function update() {
     frame = 0
-    const step = lg.matches
-      ? items.findLastIndex((item) => sectionTitle && baseline(title(item)) <= baseline(sectionTitle) + 2)
-      : items.length - 1
+    const step = lg.matches && sectionTitle ? reading(top(sectionTitle)) : items.length - 1
     if (step === current || !section) return
     current = step
     section.dataset.step = String(step)
