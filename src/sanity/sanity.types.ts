@@ -61,6 +61,7 @@ export type CaseStudy = {
   _updatedAt: string
   _rev: string
   title: string
+  shortName?: string
   description: string
   seo?: {
     title?: string
@@ -290,9 +291,10 @@ export type CASE_STUDIES_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: CASE_STUDY_PAGES_QUERY
-// Query: *[_type == "case-study" && defined(slug.current)] {  title,  slug,  mainImage,  publishedAt,  description,  seo,  services,  body,  liveUrl,  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)}
+// Query: *[_type == "case-study" && defined(slug.current)] {  title,  shortName,  slug,  mainImage,  publishedAt,  description,  seo,  services,  body,  liveUrl,  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)}
 export type CASE_STUDY_PAGES_QUERY_RESULT = Array<{
   title: string
+  shortName: string | null
   slug: Slug
   mainImage: {
     asset?: SanityImageAssetReference
@@ -328,7 +330,7 @@ export type TESTIMONIALS_QUERY_RESULT = Array<{
 declare global {
   interface SanityQueries {
     '{\n  "caseStudies": *[_type == "case-study"] | order(publishedAt desc) {\n    _id,\n    title,\n    slug,\n    mainImage,\n    publishedAt,\n    description,\n    platform,\n    workedWith,\n  },\n  "order": *[_id == "case-study-order"][0].caseStudies[]._ref,\n}': CASE_STUDIES_QUERY_RESULT
-    '*[_type == "case-study" && defined(slug.current)] {\n  title,\n  slug,\n  mainImage,\n  publishedAt,\n  description,\n  seo,\n  services,\n  body,\n  liveUrl,\n  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)\n}': CASE_STUDY_PAGES_QUERY_RESULT
+    '*[_type == "case-study" && defined(slug.current)] {\n  title,\n  shortName,\n  slug,\n  mainImage,\n  publishedAt,\n  description,\n  seo,\n  services,\n  body,\n  liveUrl,\n  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180)\n}': CASE_STUDY_PAGES_QUERY_RESULT
     '*[_type == "testimonial"] | order(order asc) {\n  _id,\n  quote,\n  citation,\n  link,\n}': TESTIMONIALS_QUERY_RESULT
   }
 }

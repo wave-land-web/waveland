@@ -14,6 +14,12 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Please add a title'),
     }),
     defineField({
+      name: 'shortName',
+      title: 'Short Name',
+      type: 'string',
+      description: 'Optional. Replaces the title in the table of contents, for example "BGD" for Big Giant Donut',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'string',

@@ -20,6 +20,7 @@ export const CASE_STUDIES_QUERY = defineQuery(`{
 // Every case study page, fetched once at build time and handed to each page (getStaticPaths)
 export const CASE_STUDY_PAGES_QUERY = defineQuery(`*[_type == "case-study" && defined(slug.current)] {
   title,
+  shortName,
   slug,
   mainImage,
   publishedAt,
