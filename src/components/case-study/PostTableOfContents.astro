@@ -3,17 +3,19 @@ import type { BlockContent } from '../../sanity/sanity.types'
 import { blockText, headingId } from '../../lib/text'
 
 interface Props {
-  post: { body: BlockContent }
+  post: { title: string; shortName: string | null; body: BlockContent }
 }
 
 const { post } = Astro.props
 
-// Retrieve + format heading data for anchor links and table of contents
+// Retrieve + format heading data for anchor links and table of contents.
+// A long client name is swapped for its short name here only, so the headings on the page stay in full.
 const headings = post.body
   .filter((block) => block._type === 'block' && block.style === 'h2')
   .map((heading) => {
     const text = blockText(heading)
-    return { id: headingId(text), text }
+    const label = post.shortName ? text.replaceAll(post.title, post.shortName) : text
+    return { id: headingId(text), text: label }
   })
 ---
 
