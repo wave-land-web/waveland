@@ -17,6 +17,7 @@ import { sanityClient } from 'sanity:client'
 import { TESTIMONIALS_QUERY } from '../sanity/lib/queries'
 
 // Homepage FAQ. Also sent to search and AI answer engines as FAQPage structured data.
+// Answers can hold [text](url) links: they render as links on the page and as plain text in the structured data.
 // Client quotes for the carousel, edited in Studio (Testimonials)
 const testimonialData = await sanityClient.fetch(TESTIMONIALS_QUERY)
 
@@ -29,7 +30,7 @@ const faqs = [
   {
     question: 'Which platforms do you work on?',
     answer:
-      'Whatever you already use: Webflow, WordPress, Shopify, HubSpot, Squarespace, Wix and more. When a project calls for a custom build, my premium option is SanityPress, built on Astro and Sanity.',
+      'Whatever you already use: Webflow, WordPress, Shopify, HubSpot, Squarespace, Wix and more. When a site needs to grow past a template, I build it on [Astro](https://astro.build) and [Sanity](https://www.sanity.io).',
   },
   {
     question: 'Do you work with agencies?',
@@ -37,9 +38,9 @@ const faqs = [
       'Yes. I partner with agencies as a white-label developer: building from your designs, joining client calls as part of your team, or staying behind the scenes.',
   },
   {
-    question: 'What is SanityPress?',
+    question: 'What if my site needs to grow?',
     answer:
-      'My premium setup for sites that need to grow. You get a control center shaped around how you actually work: the things you update most come first, and pages are built from a kit of flexible blocks. It costs more up front. In return, you run your own site, and it grows with you.',
+      "I plan for growth by default. On custom builds, I start with a set of sections designed around your brand, so every new page fits, whether you make it or I do. Bigger additions, like a store, don't mean starting over. For these builds I use [Astro](https://astro.build) and [Sanity](https://www.sanity.io). Both are built to scale.",
   },
   {
     question: "What's included in every build?",
@@ -52,13 +53,23 @@ const faqs = [
   },
 ]
 
+const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
+const plainText = (answer: string) => answer.replace(linkPattern, '$1')
+// split() with the two capture groups returns text, link text, url, text, … in that order
+const answerParts = (answer: string) =>
+  answer.split(linkPattern).reduce<{ text: string; href?: string }[]>((parts, piece, i, all) => {
+    if (i % 3 === 0) parts.push({ text: piece })
+    else if (i % 3 === 1) parts.push({ text: piece, href: all[i + 1] })
+    return parts
+  }, [])
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faqs.map(({ question, answer }) => ({
     '@type': 'Question',
     name: question,
-    acceptedAnswer: { '@type': 'Answer', text: answer },
+    acceptedAnswer: { '@type': 'Answer', text: plainText(answer) },
   })),
 }
 ---
@@ -149,7 +160,17 @@ const faqSchema = {
                 <summary class="flex justify-between gap-4 group-open:text-purple group-open:font-semibold group-hover:text-purple transition duration-(--transition) cursor-pointer">
                   {faq.question}
                 </summary>
-                <p class="py-4 text-lightGrey text-prose">{faq.answer}</p>
+                <p class="py-4 text-lightGrey text-prose">
+                  {answerParts(faq.answer).map(({ text, href }) =>
+                    href ? (
+                      // On one line: whitespace around the text would be underlined as part of the link
+                      // prettier-ignore
+                      <a href={href} target="_blank" rel="noopener noreferrer" class="text-purple underline decoration-1 underline-offset-4 hover:text-grey transition-colors duration-(--transition)">{text}</a>
+                    ) : (
+                      text
+                    ),
+                  )}
+                </p>
               </details>
             ))
           }
