@@ -24,7 +24,7 @@ const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
 ---
 
 <article class:list={['lsa', featured && 'lg:col-span-2']} data-platforms={platformTags(caseStudy.platform).join(' ')}>
-  <!-- The whole card is the link; the title turns purple and the image zooms when it's hovered or focused -->
+  {/* The whole card is the link; the title turns purple and the image zooms when it's hovered or focused */}
   <a
     href={`/case-studies/${caseStudy.slug.current}/`}
     class:list={[
@@ -32,7 +32,7 @@ const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter
       featured && 'lg:grid lg:grid-cols-[7fr_5fr] lg:items-center lg:gap-12',
     ]}
   >
-    <!-- The image scales inside this frame, so it never grows past the card or its focus outline -->
+    {/* The image scales inside this frame, so it never grows past the card or its focus outline */}
     <div class="overflow-hidden rounded-media">
       <SanityImage
         image={caseStudy.mainImage}

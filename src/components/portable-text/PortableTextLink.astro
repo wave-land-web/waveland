@@ -8,6 +8,6 @@ const siteHost = new URL(Astro.site ?? 'https://wavelandweb.com').host
 const isExternal = URL.canParse(href) && /^https?:$/.test(new URL(href).protocol) && new URL(href).host !== siteHost
 ---
 
-<!-- On one line: whitespace around the slot would be underlined as part of the link -->
-<!-- prettier-ignore -->
+{/* On one line: whitespace around the slot would be underlined as part of the link */}
+{/* prettier-ignore */}
 <a href={href} {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })} {...attrs}><slot /></a>

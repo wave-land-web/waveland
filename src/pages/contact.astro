@@ -25,11 +25,11 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
 
   <main>
     <section class="pt-0 text-center hero-in" style="--i: 1">
-      <!-- Posts to /api/contact, which sends it to HubSpot (with a backup copy in Netlify Forms) and redirects to /success/, or back here with ?error -->
+      {/* Posts to /api/contact, which sends it to HubSpot (with a backup copy in Netlify Forms) and redirects to /success/, or back here with ?error */}
       <form method="POST" name="contactForm" action="/api/contact" class="max-w-copy m-auto flex flex-col gap-6">
-        <!-- Shown by the script below when the API sends someone back with ?error -->
+        {/* Shown by the script below when the API sends someone back with ?error */}
         <p id="form-error" role="alert" class="hidden text-orange text-left"></p>
-        <!-- Honeypot: hidden from people; bots fill it and /api/contact quietly drops the submission -->
+        {/* Honeypot: hidden from people; bots fill it and /api/contact quietly drops the submission */}
         <p class="hidden" aria-hidden="true">
           <label>
             Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" />
