@@ -52,14 +52,14 @@ const business = {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Scroll animations only hide content once JavaScript is running -->
+    {/* Scroll animations only hide content once JavaScript is running */}
     <script is:inline>
       document.documentElement.classList.add('lsa-on')
     </script>
-    <!-- Pages crossfade by view transition (global.css). Runs before the first frame of a page reached that way:
-         scroll reveals already on screen show at once, so they don't fade in a second time after the crossfade -->
+    {/* Pages crossfade by view transition (global.css). Runs before the first frame of a page reached that way:
+         scroll reveals already on screen show at once, so they don't fade in a second time after the crossfade.
+         revealOnScreen is shared with the reveal script at the end of the page */}
     <script is:inline>
-      // Shared with the reveal script at the end of the page
       function revealOnScreen() {
         document.querySelectorAll('.lsa').forEach((el) => {
           if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
@@ -91,7 +91,7 @@ const business = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
-    <!-- Every share image is 1200×630, the size link previews expect -->
+    {/* Every share image is 1200×630, the size link previews expect */}
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -104,7 +104,7 @@ const business = {
     <meta name="twitter:image" content={socialImageURL} />
 
     <!-- Preload Fonts -->
-    <!-- Italics load when a page uses them; only the upright weights are preloaded -->
+    {/* Italics load when a page uses them; only the upright weights are preloaded */}
     <Font cssVariable="--font-monaspace" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-poppins" preload />
 
@@ -113,7 +113,7 @@ const business = {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- #101828 is --color-darkBlue (gray-900); meta tags can't read CSS variables -->
+    {/* #101828 is --color-darkBlue (gray-900); meta tags can't read CSS variables */}
     <meta name="msapplication-TileColor" content="#101828" />
     <meta name="theme-color" content="#101828" />
   </head>
@@ -126,29 +126,26 @@ const business = {
       Skip to Content
     </a>
     <Navigation />
-    <!-- Skip link target, just below the fixed nav -->
+    {/* Skip link target, just below the fixed nav */}
     <div id="content" tabindex="-1" class="outline-none"></div>
     <slot />
     <Footer />
 
-    <script is:inline data-astro-rerun>
-      /**
-       * Reveal `lsa` elements once, as they scroll into view (see the animation notes in global.css)
-       */
+    {/* Reveal `lsa` elements once, as they scroll into view (see the animation notes in global.css). Arriving by view
+         transition, anything already on screen shows at once. Without IntersectionObserver everything shows rather than
+         staying hidden. Each element triggers as soon as its top passes 90% of the viewport, however tall it is. */}
+    <script is:inline>
       function handleAnimations() {
         const elements = document.querySelectorAll('.lsa')
         if (elements.length === 0) return
 
-        // Arriving by view transition: anything parsed after the transition started, and already on screen, shows at once
         if (document.documentElement.classList.contains('vt-arrival')) revealOnScreen()
 
-        // Without IntersectionObserver, show everything rather than leave it hidden
         if (!('IntersectionObserver' in window)) {
           elements.forEach((el) => el.classList.add('active'))
           return
         }
 
-        // Trigger as soon as an element's top passes 90% of the viewport, however tall it is
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {

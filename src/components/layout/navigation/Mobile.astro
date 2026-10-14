@@ -44,80 +44,37 @@ import SocialIcons from '../../ui/SocialIcons.astro'
   </ul>
 </div>
 
-<script is:inline data-astro-rerun>
-  // Grab elements
-  const body = document.querySelector('body')
+{/* While the menu is open, the page behind it is inert, so it can't be focused or read by screen readers. Esc closes it. */}
+<script is:inline>
   const menu = document.querySelector('#menu')
   const menuIconOpen = document.querySelector('[data-icon="tabler:menu"]')
   const menuIconClose = document.querySelector('[data-icon="tabler:x"]')
   const menuText = document.querySelector('#menu span')
   const mobileNavOverlay = document.querySelector('#mobile-nav-overlay')
   const mobileNavItems = document.querySelectorAll('#mobile-nav-items a')
-  let overlayDisplayed = false
+  let menuOpen = false
 
-  /**
-   * Update the menu text and icons based on the overlay state
-   */
-  function handleContentUpdate() {
-    if (overlayDisplayed) {
-      menuText.textContent = 'CLOSE'
-      menuIconOpen?.classList.add('hidden')
-      menuIconClose?.classList.remove('hidden')
-    } else {
-      menuText.textContent = 'MENU'
-      menuIconOpen?.classList.remove('hidden')
-      menuIconClose?.classList.add('hidden')
-    }
+  function setMenuOpen(open) {
+    menuOpen = open
+    mobileNavOverlay?.classList.toggle('hidden', !open)
+    mobileNavOverlay?.classList.toggle('flex', open)
+    menu?.setAttribute('aria-expanded', `${open}`)
+    document.querySelectorAll('body > :not(nav)').forEach((el) => (el.inert = open))
+    menuText.textContent = open ? 'CLOSE' : 'MENU'
+    menuIconOpen?.classList.toggle('hidden', open)
+    menuIconClose?.classList.toggle('hidden', !open)
   }
 
-  /**
-   * Handle the mobile navigation click event
-   */
-  function handleMobileNavigationOnClick() {
-    overlayDisplayed = !overlayDisplayed
-
-    body?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
-    mobileNavOverlay?.classList.toggle('hidden')
-    mobileNavOverlay?.classList.toggle('flex')
-    menu?.setAttribute('aria-expanded', `${overlayDisplayed}`)
-    setPageInert(overlayDisplayed)
-
-    handleContentUpdate()
-  }
-
-  /**
-   * While the menu is open, the page behind it can't be focused or read by screen readers
-   */
-  function setPageInert(inert) {
-    document.querySelectorAll('body > :not(nav)').forEach((el) => (el.inert = inert))
-  }
-
-  /**
-   * Handle the mobile navigation resize event
-   */
-  function handleMobileNavigationOnResize() {
-    if (window.innerWidth >= 768) {
-      overlayDisplayed = false
-
-      body?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
-      mobileNavOverlay?.classList.add('hidden')
-      menu?.setAttribute('aria-expanded', `${overlayDisplayed}`)
-      setPageInert(false)
-
-      handleContentUpdate()
-    }
-  }
-
-  // Accessibility
-  body?.addEventListener('keyup', (event) => {
-    if (event.code === 'Escape' && overlayDisplayed) {
-      handleMobileNavigationOnClick()
+  document.body.addEventListener('keyup', (event) => {
+    if (event.code === 'Escape' && menuOpen) {
+      setMenuOpen(false)
       menu?.focus()
     }
   })
 
-  // Event listeners
-  menu?.addEventListener('click', handleMobileNavigationOnClick)
-  window.addEventListener('resize', handleMobileNavigationOnResize)
-  mobileNavItems.forEach((item) => item.addEventListener('click', handleMobileNavigationOnClick))
+  menu?.addEventListener('click', () => setMenuOpen(!menuOpen))
+  window.addEventListener('resize', () => {
+    if (menuOpen && window.innerWidth >= 768) setMenuOpen(false)
+  })
+  mobileNavItems.forEach((item) => item.addEventListener('click', () => setMenuOpen(false)))
 </script>

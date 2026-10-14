@@ -11,7 +11,7 @@ Setup, commands, the folder layout and the design system are all in [README.md](
 - **Commit messages:** `(type): what changed, in plain words`, for example `(fix): …`, `(feature): …`, `(copy): …`, `(style): …`, `(docs): …`. Keep PR descriptions short and plain.
 - **No AI attribution** in commits, PRs or code comments.
 - **Check styling on a production build** (`npm run build`, then serve `dist`) or the deploy preview, not only `astro dev`. Production CSS loads in a different order.
-- **Comments** explain why, in plain sentences, matching the existing density. Shared values (email, Calendly link) live in `src/lib/site.ts`.
+- **Comments** explain why, in plain sentences, matching the existing density. In templates, write them as `{/* */}` so they don't ship. A comment that renders as `<!-- -->` is a short section label only, like `<!-- SEO -->`, and `is:inline` scripts carry no comments. Shared values (email, Calendly link) live in `src/lib/site.ts`.
 
 ## Copy on the site
 

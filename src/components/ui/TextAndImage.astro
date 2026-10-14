@@ -23,15 +23,15 @@ const { title, text, caseStudyUrl, linkText, image, imageAlt, color, class: clas
 const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green: waveThree }
 ---
 
-<!-- --accent is the row's color: the title, and the card's border, wave and link on hover. Phones can't hover, so below md
-     the card lights up while it crosses the middle of the screen instead (data-lit, set by the script below). -->
+{/* --accent is the row's color: the title, and the card's border, wave and link on hover. Phones can't hover, so below md
+     the card lights up while it crosses the middle of the screen instead (data-lit, set by the script below). */}
 <div class:list={['section-split items-center lsa', className]} style={`--accent: var(--color-${color})`}>
-  <!-- Below md the description drops to h4 size, to keep each row about a screen tall.
-       The text is tappable too (an empty overlay link). Keyboards and screen readers use the card's link, so it isn't announced twice. -->
+  {/* Below md the description drops to h4 size, to keep each row about a screen tall.
+       The text is tappable too (an empty overlay link). Keyboards and screen readers use the card's link, so it isn't announced twice. */}
   <div class:list={['relative font-header', { 'lg:order-2': isReversed }]}>
     <h2 class="text-(--accent)">{title}</h2>
     <p class="h2 max-md:text-h4">{text}</p>
-    <!-- The label is never read (aria-hidden); it only gives the empty link a name, which the dev toolbar audit asks for -->
+    {/* The label is never read (aria-hidden); it only gives the empty link a name, which the dev toolbar audit asks for */}
     <a href={caseStudyUrl} tabindex="-1" aria-hidden="true" aria-label={linkText} class="absolute inset-0"></a>
   </div>
   <article
@@ -39,7 +39,7 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
     class="text-container p-0 h-96 group hocus-within:border-(--accent) max-md:duration-(--duration-move) max-md:data-lit:border-(--accent)"
   >
     <a href={caseStudyUrl} class="block w-full h-full rounded-media">
-      <!-- Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp -->
+      {/* Shown at 144px; sizes asks for 1.5x that so the small screenshot text stays crisp */}
       <Image
         src={image}
         alt={imageAlt}
@@ -49,7 +49,7 @@ const waves: Record<string, string> = { purple: waveOne, orange: waveTwo, green:
         quality={90}
         class="media absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-36 z-10"
       />
-      <!-- The wave is a mask over the text color, so it still changes color on hover -->
+      {/* The wave is a mask over the text color, so it still changes color on hover */}
       <span
         aria-hidden="true"
         class="wave absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-72 bg-current text-darkGrey transition-colors duration-(--transition) group-hocus:text-(--accent) max-md:duration-(--duration-move) max-md:group-data-lit:text-(--accent)"
