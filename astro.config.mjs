@@ -3,8 +3,9 @@ import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import sanity from '@sanity/astro'
 import tailwindcss from '@tailwindcss/vite'
+import { fonts, iconOptions } from '@wave-land-web/design/config'
 import icon from 'astro-icon'
-import { defineConfig, fontProviders } from 'astro/config'
+import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -39,13 +40,8 @@ export default defineConfig({
       // Keep utility pages out of the sitemap
       filter: (page) => !/\/(success|unsubscribed)\/$/.test(page),
     }),
-    icon({
-      // Keep the logo SVGs' prefixed IDs; SVGO's default renames them to "a", "b"... which collide
-      // when several logos share a page
-      svgoOptions: {
-        plugins: [{ name: 'preset-default', params: { overrides: { cleanupIds: false } } }],
-      },
-    }),
+    // The logo and wordmark live in the design package, with the SVGO settings that keep their IDs from colliding
+    icon(iconOptions),
     sanity({
       projectId: 'uuas57um',
       dataset: 'production',
@@ -61,59 +57,6 @@ export default defineConfig({
   },
   // Astro 7 defaults to JSX-style whitespace; keep the HTML output it had before
   compressHTML: true,
-  // SEE: https://docs.astro.build/en/guides/fonts/
-  fonts: [
-    {
-      provider: fontProviders.local(),
-      name: 'Monaspace Argon Var',
-      cssVariable: '--font-monaspace',
-      options: {
-        variants: [
-          {
-            src: ['./src/assets/fonts/monaspace-argon-var-extra-light.woff2', './src/assets/fonts/monaspace-argon-var-extra-light.woff'],
-            weight: 400,
-            style: 'normal',
-          },
-          {
-            // SemiBold, instanced from the same Monaspace Argon v1.200 variable font and subset to the same characters.
-            // It answers every weight from 600 up (font-semibold, font-bold, <strong>), so the browser never fakes bold.
-            src: ['./src/assets/fonts/monaspace-argon-var-semibold.woff2', './src/assets/fonts/monaspace-argon-var-semibold.woff'],
-            weight: '600 900',
-            style: 'normal',
-          },
-          // Italics, instanced the same way at the font's own slant (-11°), so the browser never fakes italic either
-          {
-            src: [
-              './src/assets/fonts/monaspace-argon-var-extra-light-italic.woff2',
-              './src/assets/fonts/monaspace-argon-var-extra-light-italic.woff',
-            ],
-            weight: 400,
-            style: 'italic',
-          },
-          {
-            src: [
-              './src/assets/fonts/monaspace-argon-var-semibold-italic.woff2',
-              './src/assets/fonts/monaspace-argon-var-semibold-italic.woff',
-            ],
-            weight: '600 900',
-            style: 'italic',
-          },
-        ],
-      },
-    },
-    {
-      provider: fontProviders.local(),
-      name: 'Poppins Regular',
-      cssVariable: '--font-poppins',
-      options: {
-        variants: [
-          {
-            src: ['./src/assets/fonts/poppins-regular.woff2', './src/assets/fonts/poppins-regular.woff'],
-            weight: 400,
-            style: 'normal',
-          },
-        ],
-      },
-    },
-  ],
+  // Monaspace and Poppins, from the design package; Layout.astro loads them with <Font>
+  fonts,
 })

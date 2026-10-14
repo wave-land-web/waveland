@@ -2,7 +2,7 @@
 
 This repo is public. Keep business strategy, pricing, client terms and anything private out of it, including this file. Put working notes and drafts in `docs/content/`, which is gitignored.
 
-Setup, commands, the folder layout and the design system are all in [README.md](README.md). Read it first.
+Setup, commands and the folder layout are in [README.md](README.md). The design system rules are in the design package's README (`node_modules/@wave-land-web/design/README.md`). Read both first.
 
 ## Working here
 
