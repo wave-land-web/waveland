@@ -16,9 +16,9 @@ const { caseStudy, priority = false, featured = false } = Astro.props
 
 // Who the work was for: agency work (for or alongside one) or a client of my own
 const workedWithLabels: Record<string, string> = {
-  'for-agency': 'Agency',
-  'with-agency': 'Agency',
-  direct: 'Client',
+  'for-agency': 'Agency Partner',
+  'with-agency': 'Agency Partner',
+  direct: 'Direct',
 }
 const tags = [caseStudy.platform, workedWithLabels[caseStudy.workedWith]].filter(Boolean)
 ---

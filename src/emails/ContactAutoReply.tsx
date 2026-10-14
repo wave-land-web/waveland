@@ -28,7 +28,7 @@ export default function ContactAutoReply({ firstName }: Props) {
         <meta name="color-scheme" content="light dark" />
         <meta name="supported-color-schemes" content="light dark" />
       </Head>
-      <Preview>Thanks for reaching out. I'll reply within 48 hours.</Preview>
+      <Preview>I’ll reply within 48 hours. If it’s easier to talk, book a call.</Preview>
       <Body style={{ backgroundColor: colors.background, margin: 0, padding: '48px 0', fontFamily: sans }}>
         <Container style={{ maxWidth: 560, padding: '0 20px' }}>
           <Link href={`${site}/`}>
@@ -46,8 +46,8 @@ export default function ContactAutoReply({ firstName }: Props) {
             }}
           >
             <Text style={{ ...paragraph, color: colors.text, marginTop: 0 }}>Hi {firstName},</Text>
-            <Text style={paragraph}>Thanks for reaching out! I read every message myself and reply within 48 hours.</Text>
-            <Text style={paragraph}>Feel free to grab a free 15-minute call if it's easier to talk.</Text>
+            <Text style={paragraph}>Thanks for reaching out. I read every message myself and reply within 48 hours.</Text>
+            <Text style={paragraph}>If it’s easier to talk, pick a time that works for you.</Text>
 
             {/* Through /call (public/_redirects), not straight to Calendly: links on the sending domain are less likely to trip spam filters */}
             <Button
@@ -65,7 +65,7 @@ export default function ContactAutoReply({ firstName }: Props) {
               Book a 15-Minute Call
             </Button>
 
-            <Text style={paragraph}>Excited to hear more about what you're working on.</Text>
+            <Text style={paragraph}>Talk soon,</Text>
             <Text style={{ ...paragraph, color: colors.text, marginBottom: 0 }}>Josh, Wave Land</Text>
           </Section>
 
@@ -78,7 +78,7 @@ export default function ContactAutoReply({ firstName }: Props) {
               Case Studies
             </Link>
           </Text>
-          <Text style={small}>You're getting this because you sent a message on the site. Reply to this email to reach me directly.</Text>
+          <Text style={small}>You’re getting this because you sent a message on the site. Reply to this email to reach me directly.</Text>
         </Container>
       </Body>
     </Html>

@@ -15,12 +15,12 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
 
 <Layout
   title="Contact | Wave Land"
-  description="Tell me about your project, or book a 15-minute call. I'm Josh Nussbaum, a development partner for growing businesses and creative agencies."
+  description="Tell me about your project, or book a 15-minute call. I’m Josh Nussbaum, a development partner for growing businesses and creative agencies."
 >
   <PageHeader
     title="Contact"
     subtitle="Tell Me About Your Project"
-    bodyText="A rough idea is enough to start. I'll reply by email within 48 hours."
+    bodyText="A rough idea is enough to start. I’ll reply by email within 48 hours."
   />
 
   <main>
@@ -60,7 +60,7 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
         <div class="w-full flex flex-col md:flex-row gap-6 md:gap-4 justify-between">
           <div class="w-full">
             <label for="role" class={labelClass}>
-              I'm Reaching Out As
+              I’m Reaching Out As
             </label>
             <div class="relative">
               <select name="role" id="role" required class={selectClass}>
@@ -184,9 +184,9 @@ const selectClass = `${fieldClass} appearance-none pr-10 text-left cursor-pointe
 
   // /api/contact sends people back here with ?error when a message didn't go through
   const errors: Record<string, string> = {
-    missing: 'Please fill in your name, email, who you are and your message.',
+    missing: 'Please fill in your first name, email, and message, and choose who you’re reaching out as.',
     email: 'Please check your email address. It should look like you@example.com.',
-    send: `Your message didn't send. Please try again, or email me at ${EMAIL}.`,
+    send: `Your message didn’t send, but what you wrote is still here. Try again, or email me at ${EMAIL}.`,
   }
   const error = new URL(location.href).searchParams.get('error')
   const form = document.querySelector<HTMLFormElement>('form[name="contactForm"]')
