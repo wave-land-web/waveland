@@ -1,8 +1,8 @@
 ---
 import { CALENDLY_URL } from '../lib/site'
-import jtbiImage from '../assets/jtbi-mobile.webp'
+import bgdImage from '../assets/bgd-mobile.webp'
+import lsomImage from '../assets/lsom-mobile.webp'
 import supervoidImage from '../assets/supervoid.webp'
-import tssImage from '../assets/tss-mobile.webp'
 import ClosingCTA from '../components/ui/ClosingCTA.astro'
 import CTA from '../components/ui/CTA'
 import Link from '../components/ui/Link.tsx'
@@ -25,12 +25,12 @@ const faqs = [
   {
     question: 'I built my site with AI. Can you work with it?',
     answer:
-      "Yes. I'll review what you have, keep what works, and fix what doesn't. Sometimes that's a few targeted fixes; sometimes a rebuild is cheaper in the long run. After a short call and a look at what you have, I'll tell you which, with a fixed price either way.",
+      "Yes. I’ll review what you have, keep what works, and fix what doesn’t. Sometimes that’s a few targeted fixes; sometimes a rebuild is cheaper in the long run. After a short call, I’ll tell you which, with a fixed price either way.",
   },
   {
     question: 'Which platforms do you work on?',
     answer:
-      'Whatever you already use: Webflow, WordPress, Shopify, HubSpot, Squarespace, Wix and more. When a site needs to grow past a template, I build it on [Astro](https://astro.build) and [Sanity](https://www.sanity.io).',
+      'For custom builds, I use [Astro](https://astro.build) and [Sanity](https://www.sanity.io). Both are built to scale. I also work on the platform you know best, like Webflow, WordPress, Shopify, HubSpot, Squarespace, or Wix.',
   },
   {
     question: 'Do you work with agencies?',
@@ -40,16 +40,17 @@ const faqs = [
   {
     question: 'What if my site needs to grow?',
     answer:
-      "I plan for growth by default. On custom builds, I start with a set of sections designed around your brand, so every new page fits, whether you make it or I do. Bigger additions, like a store, don't mean starting over. For these builds I use [Astro](https://astro.build) and [Sanity](https://www.sanity.io). Both are built to scale.",
+      "I plan for growth by default. On custom builds, I start with a set of sections designed around your brand, so every new page fits, whether you make it or I do. Bigger additions, like a store, don’t mean starting over.",
   },
   {
-    question: "What's included in every build?",
+    question: "What’s included in every build?",
     answer:
-      'Fast load times, accessibility (semantic markup, keyboard support, readable contrast), and SEO (clean metadata, structured data, sitemaps and redirects), so both search engines and AI answer engines can read your site.',
+      'Every site loads fast, works with a keyboard and a screen reader, and is set up so search engines and AI answer engines can read it.',
   },
   {
     question: 'What does it cost?',
-    answer: 'New builds get a fixed price up front, based on the pages, the platform and how much the site will be edited.',
+    answer:
+      'Every new build gets a fixed price up front, based on how big it is and what it needs to do. Ongoing support is priced separately (monthly or as needed).',
   },
 ]
 
@@ -106,33 +107,33 @@ const faqSchema = {
   <main>
     <section id="introduction">
       <TextAndImage
-        title="JTB Imaginative."
-        text="An Astro and Sanity portfolio for a brand developer with total content freedom."
-        caseStudyUrl="/case-studies/jtb-imaginative/"
-        linkText="JTB Imaginative case study"
-        image={jtbiImage}
-        imageAlt="JTB Imaginative website on a phone"
-        color="purple"
-        class="py-section"
-      />
-      <TextAndImage
-        title="The Story Shack."
-        text="A Webflow site for a creative studio that runs itself."
-        caseStudyUrl="/case-studies/the-story-shack/"
-        linkText="The Story Shack case study"
-        image={tssImage}
-        isReversed={true}
-        imageAlt="The Story Shack's Work page on a phone"
-        color="orange"
-        class="py-section"
-      />
-      <TextAndImage
         title="Supervoid."
-        text="A video-first Astro site for a studio that designs stage shows for touring artists."
+        text="A portfolio that feels like the stage shows it sells."
         caseStudyUrl="/case-studies/supervoid/"
         linkText="Supervoid case study"
         image={supervoidImage}
         imageAlt="Supervoid website on a phone"
+        color="purple"
+        class="py-section"
+      />
+      <TextAndImage
+        title="Big Giant Donut."
+        text="A launch site for a new product with 40 years behind it, built to grow."
+        caseStudyUrl="/case-studies/big-giant-donut/"
+        linkText="Big Giant Donut case study"
+        image={bgdImage}
+        isReversed={true}
+        imageAlt="Big Giant Donut website on a phone"
+        color="orange"
+        class="py-section"
+      />
+      <TextAndImage
+        title="Lymphatic Specialists of Madison."
+        text="An accessible clinic site that supports patients from their first search to their first visit."
+        caseStudyUrl="/case-studies/lymphatic-specialists-of-madison/"
+        linkText="LSOM case study"
+        image={lsomImage}
+        imageAlt="Lymphatic Specialists of Madison website on a phone"
         color="green"
         class="py-section"
       />
@@ -188,8 +189,8 @@ const faqSchema = {
 
     <section id="get-started">
       <ClosingCTA
-        title="Got It 80% There?"
-        description="I'll handle the 20% that matters, whether you built it yourself or AI got you started."
+        title="Wherever You’re Starting From"
+        description="Whether it’s a new build or one that’s halfway there, I’ll close the gap and get your site ready to launch."
       />
     </section>
   </main>

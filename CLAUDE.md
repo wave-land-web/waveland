@@ -18,6 +18,10 @@ Setup, commands, the folder layout and the design system are all in [README.md](
 - First person ("I"), plain, warm, direct. No em dashes, and no exclamation points outside client quotes.
 - The brand is "Wave Land", never "Wave Land Web". Say "creative agencies", never "brand agencies".
 - The audience is growing businesses first and creative agencies second.
+- No em dashes doesn't mean colons everywhere. Restructure the sentence, and keep a colon only for a list or a payoff. Use serial commas and curly apostrophes.
+- A short aside in parentheses now and then is part of the voice (a few per page at most). Lists of technical details in parentheses are not.
+- Say "AI" only where it names the visitor's real situation, never as a selling point.
+- In any list of platforms, Astro and Sanity come first, by name. Never say "SanityPress".
 - No prices or price ranges anywhere on the site.
 - Propose copy changes before making them.
 - Case study copy lives in Sanity, not in this repo. Edits are saved as drafts and published only when Josh says so.
