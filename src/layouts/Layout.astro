@@ -1,4 +1,5 @@
 ---
+import Motion from '@wave-land-web/design/components/Motion.astro'
 import Footer from '../components/layout/Footer.astro'
 import Navigation from '../components/layout/navigation/Navigation.astro'
 import '../styles/global.css'
@@ -52,27 +53,8 @@ const business = {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {/* Scroll animations only hide content once JavaScript is running */}
-    <script is:inline>
-      document.documentElement.classList.add('lsa-on')
-    </script>
-    {/* Pages crossfade by view transition (global.css). Runs before the first frame of a page reached that way:
-         scroll reveals already on screen show at once, so they don't fade in a second time after the crossfade.
-         revealOnScreen is shared with the reveal script at the end of the page */}
-    <script is:inline>
-      function revealOnScreen() {
-        document.querySelectorAll('.lsa').forEach((el) => {
-          if (el.getBoundingClientRect().top < innerHeight) el.classList.add('active')
-        })
-      }
-      window.addEventListener('pagereveal', (event) => {
-        if (!event.viewTransition) return
-        const root = document.documentElement
-        root.classList.add('vt-arrival')
-        revealOnScreen()
-        event.viewTransition.finished.finally(() => root.classList.remove('vt-arrival'))
-      })
-    </script>
+    {/* Scroll reveals and page transitions (the design package's motion.css). Runs before the first frame. */}
+    <Motion />
     <!-- SEO -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -130,37 +112,5 @@ const business = {
     <div id="content" tabindex="-1" class="outline-none"></div>
     <slot />
     <Footer />
-
-    {/* Reveal `lsa` elements once, as they scroll into view (see the animation notes in global.css). Arriving by view
-         transition, anything already on screen shows at once. Without IntersectionObserver everything shows rather than
-         staying hidden. Each element triggers as soon as its top passes 90% of the viewport, however tall it is. */}
-    <script is:inline>
-      function handleAnimations() {
-        const elements = document.querySelectorAll('.lsa')
-        if (elements.length === 0) return
-
-        if (document.documentElement.classList.contains('vt-arrival')) revealOnScreen()
-
-        if (!('IntersectionObserver' in window)) {
-          elements.forEach((el) => el.classList.add('active'))
-          return
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return
-              entry.target.classList.add('active')
-              observer.unobserve(entry.target)
-            })
-          },
-          { rootMargin: '0px 0px -10% 0px' },
-        )
-
-        elements.forEach((el) => observer.observe(el))
-      }
-
-      document.addEventListener('DOMContentLoaded', handleAnimations)
-    </script>
   </body>
 </html>
