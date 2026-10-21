@@ -24,7 +24,7 @@
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.16.0",
     "@tailwindcss/vite": "^4.3.3",
-    "@wave-land-web/design": "github:wave-land-web/design#v1.0.0",
+    "@wave-land-web/design": "github:wave-land-web/design#v1.1.0",
     "astro": "^7.3.5",
     "astro-icon": "^1.2.0",
     "astro-portabletext": "^1.0.1",
