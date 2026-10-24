@@ -13,9 +13,10 @@
     "typegen": "sanity schema extract --path schema.json --enforce-required-fields --force && sanity typegen generate"
   },
   "dependencies": {
-    "@astrojs/netlify": "^8.2.6",
+    "@astrojs/netlify": "^8.2.10",
     "@astrojs/react": "^7.0.0",
     "@astrojs/sitemap": "^3.7.4",
+    "@netlify/blobs": "^11.1.6",
     "@react-email/components": "^1.0.12",
     "@sanity/astro": "^3.5.1",
     "@sanity/client": "^7.27.0",
